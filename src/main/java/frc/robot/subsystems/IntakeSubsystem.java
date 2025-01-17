@@ -35,13 +35,14 @@ public class IntakeSubsystem extends SubsystemBase {
         leaderMotor.set(speed);
     }
 
-    public void Intake() {
+    public void Move(boolean inverted) {
         if(timer.hasElapsed(Intake.INTAKE_TIME)){
             leaderMotor.stopMotor();
             OI.IS_INTAKING = false;
         }
         else{
-            leaderMotor.set(Intake.INTAKE_SPEED);
+            if(inverted){leaderMotor.set(-Intake.INTAKE_SPEED);}
+            else{leaderMotor.set(Intake.INTAKE_SPEED);}    
         }
     }
 
