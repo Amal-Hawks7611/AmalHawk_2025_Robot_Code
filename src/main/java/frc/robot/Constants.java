@@ -69,11 +69,14 @@ public final class Constants {
         //TODO Encoder Values Wİll Be Updated
         public static final double ELEVATOR_START_VALUE = 0; //Generally True
         public static final double ELEVATOR_END_VALUE = 450;
+        public static final double ELEVATOR_SOURCE_VALUE = 100;
+        public static final double ELEVATOR_PROCESSOR_VALUE = 150;
         public static final double ELEVATOR_REEFSCAPE_VALUE = 200;
         public static final double ELEVATOR_L1_VALUE = 250;
         public static final double ELEVATOR_L2_VALUE = 300;
         public static final double ELEVATOR_L3_VALUE = 350;
         public static final double ELEVATOR_L4_VALUE = 400;
+        public static final double ELEVATOR_NET_VALUE = 450;
         public static final int ELEVATOR_LEADER_MOTOR_PORT = 0;
         public static final int ELEVATOR_FOLLOWER_MOTOR_PORT = 1;
 
@@ -96,11 +99,12 @@ public final class Constants {
     public static class IntakeMover {
         public static final int LEADER_MOTOR_PORT = 0;
         public static final int FOLLOWER_MOTOR_PORT = 1;
-
+        public static final double INTAKE_MOVER_SPEED = 0.5;
         //TODO Encoder Values Will Be Updated
         public static final double INTAKE_PROCESSOR_VALUE = 50;
         public static final double INTAKE_SOURCE_VALUE = 100;
         public static final double INTAKE_ALGEA_VALUE = 150;
+        public static final double INTAKE_REEFSCAPE_VALUE = 100;
         public static final double INTAKE_CORAL_VALUE = 200;
         public static final double INTAKE_L4_VALUE = 350;
         public static final double INTAKE_NET_VALUE = 400;

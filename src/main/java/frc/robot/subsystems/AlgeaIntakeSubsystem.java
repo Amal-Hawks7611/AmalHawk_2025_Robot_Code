@@ -36,13 +36,14 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
         leaderMotor.set(speed);
     }
 
-    public void Intake() {
+    public void Intake(boolean inverted) {
         if(timer.hasElapsed(AlgeaIntake.INTAKE_TIME)){
             leaderMotor.stopMotor();
             OI.IS_ALGEA_INTAKING = false;
         }
         else{
-            leaderMotor.set(AlgeaIntake.INTAKE_SPEED);
+            if(inverted){leaderMotor.set(-AlgeaIntake.INTAKE_SPEED);}
+            else{leaderMotor.set(AlgeaIntake.INTAKE_SPEED);}
         }
     }
 

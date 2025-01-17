@@ -31,10 +31,6 @@ public class IntakeSubsystem extends SubsystemBase {
         leaderMotor.setPosition(0);
     }
 
-    public void manualControl(double speed) {
-        leaderMotor.set(speed);
-    }
-
     public void Move(boolean inverted) {
         if(timer.hasElapsed(Intake.INTAKE_TIME)){
             leaderMotor.stopMotor();
