@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.OI;
 import frc.robot.subsystems.AlgeaIntakeSubsystem;
 
-public class Intake extends Command {
+public class AlgeaIntake extends Command {
     public final AlgeaIntakeSubsystem intakeSubsystem;
 
-    public Intake(AlgeaIntakeSubsystem intakeSubsystem) {
+    public AlgeaIntake(AlgeaIntakeSubsystem intakeSubsystem) {
         this.intakeSubsystem = intakeSubsystem;
         addRequirements(intakeSubsystem);
     }

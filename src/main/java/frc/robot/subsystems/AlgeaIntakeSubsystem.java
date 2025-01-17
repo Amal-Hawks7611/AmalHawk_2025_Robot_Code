@@ -42,7 +42,7 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
             OI.IS_ALGEA_INTAKING = false;
         }
         else{
-            if(inverted){leaderMotor.set(-AlgeaIntake.INTAKE_SPEED);}
+            if(inverted){leaderMotor.set(-AlgeaIntake.OUTTAKE_SPEED);}
             else{leaderMotor.set(AlgeaIntake.INTAKE_SPEED);}
         }
     }
