@@ -54,7 +54,7 @@ public final class Constants {
         public static final int BACK_RIGHT_CANCODER = 12;    
     }
 
-    public static final class LedSubsystem{
+    public static final class LedSubsystem {
         public static final int LED_PWM_PORT = 0;
         public static final int LED_LENGTH = 60; //Default
         public static final LEDPattern RED_ALLIANCE_COLOR = LEDPattern.solid(Color.kRed);
@@ -65,7 +65,7 @@ public final class Constants {
         public static final LEDPattern BREATHE_COLOR = LEDPattern.solid(Color.kWhite);
     }
 
-    public static final class Elevator{
+    public static final class Elevator {
         //TODO Encoder Values Wİll Be Updated
         public static final double ELEVATOR_START_VALUE = 0; //Generally True
         public static final double ELEVATOR_END_VALUE = 450;
@@ -73,9 +73,37 @@ public final class Constants {
         public static final double ELEVATOR_L1_VALUE = 250;
         public static final double ELEVATOR_L2_VALUE = 300;
         public static final double ELEVATOR_L3_VALUE = 350;
+        public static final double ELEVATOR_L4_VALUE = 400;
         public static final int ELEVATOR_LEADER_MOTOR_PORT = 0;
         public static final int ELEVATOR_FOLLOWER_MOTOR_PORT = 1;
 
+    }
+
+    public static class Intake {
+        //Intake Motor Port
+        public static final int LEADER_MOTOR_PORT = 0;
+        public static final double INTAKE_TIME = 2.0;
+        public static final double INTAKE_SPEED = 0.5;
+    }
+
+    public static class AlgeaIntake {
+        //Intake Motor Port
+        public static final int LEADER_MOTOR_PORT = 0;
+        public static final double INTAKE_TIME = 2.0;
+        public static final double INTAKE_SPEED = 0.5;
+    }
+
+    public static class IntakeMover {
+        public static final int LEADER_MOTOR_PORT = 0;
+        public static final int FOLLOWER_MOTOR_PORT = 1;
+
+        //TODO Encoder Values Will Be Updated
+        public static final double INTAKE_PROCESSOR_VALUE = 50;
+        public static final double INTAKE_SOURCE_VALUE = 100;
+        public static final double INTAKE_ALGEA_VALUE = 150;
+        public static final double INTAKE_CORAL_VALUE = 200;
+        public static final double INTAKE_L4_VALUE = 350;
+        public static final double INTAKE_NET_VALUE = 400;
     }
 
     public static final class OI {
@@ -85,6 +113,9 @@ public final class Constants {
         public static boolean IS_TEST = false;
         public static boolean IS_PROCESSING = false;
         public static boolean IS_PID_ENDED = false;
+        public static boolean IS_INTAKE_MOVING = false;
         public static boolean IS_SWERVE_FOCUSED = false;
+        public static boolean IS_INTAKING = false;
+        public static boolean IS_ALGEA_INTAKING = false;
     }
 }

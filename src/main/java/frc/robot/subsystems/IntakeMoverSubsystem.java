@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import frc.robot.Constants.Elevator;
+import frc.robot.Constants.IntakeMover;
 import frc.robot.Constants.OI;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -10,16 +10,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 
-public class ElevatorSubsystem extends SubsystemBase {
+public class IntakeMoverSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     public TalonFX followerMotor;
 
     private StatusSignal<Angle> leaderMotorPosition;
     private StatusSignal<Angle> followerMotorPosition;
 
-    public ElevatorSubsystem() {
-        leaderMotor = new TalonFX(Elevator.ELEVATOR_LEADER_MOTOR_PORT);
-        followerMotor = new TalonFX(Elevator.ELEVATOR_FOLLOWER_MOTOR_PORT);
+    public IntakeMoverSubsystem() {
+        leaderMotor = new TalonFX(IntakeMover.LEADER_MOTOR_PORT);
+        followerMotor = new TalonFX(IntakeMover.FOLLOWER_MOTOR_PORT);
         leaderMotorPosition = leaderMotor.getPosition();
         followerMotorPosition = followerMotor.getPosition();
 
@@ -44,13 +44,12 @@ public class ElevatorSubsystem extends SubsystemBase {
         followerMotor.set(speed);
     }
 
-    public void OcalPID(double speed, double setpoint) {
-        if (!OI.IS_PID_ENDED) {
+    public void MoveIT(double speed, double setpoint) {
+        if (OI.IS_INTAKE_MOVING) {
             double leaderPosition = getLeaderMotorEncoder();
-
-            if (isWithinTolerance(leaderPosition, Elevator.ELEVATOR_END_VALUE) || isWithinTolerance(leaderPosition, Elevator.ELEVATOR_START_VALUE) || isWithinTolerance(leaderPosition, setpoint)) {
+            if (isWithinTolerance(leaderPosition, setpoint)) {
                 stopMotors();
-                OI.IS_PID_ENDED = true;
+                OI.IS_INTAKE_MOVING = false;
             } else {
                 if(leaderPosition > setpoint){
                     leaderMotor.set(-speed);
@@ -75,8 +74,8 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     @Override
     public void periodic(){
-        SmartDashboard.putBoolean("IsElevatorProcessing", OI.IS_PROCESSING);
-        SmartDashboard.putNumber("Elevator Leader Motor Value", getLeaderMotorEncoder());
-        SmartDashboard.putNumber("Elevator Follower Motor Encoder", getFollowerMotorEncoder());
+        SmartDashboard.putBoolean("IsIntakeMoving", OI.IS_INTAKE_MOVING);
+        SmartDashboard.putNumber("Intake Mover Leader Motor Value", getLeaderMotorEncoder());
+        SmartDashboard.putNumber("Intake Mover Follower Motor Encoder", getFollowerMotorEncoder());
     }
 }
