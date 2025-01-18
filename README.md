@@ -11,7 +11,7 @@
  - Score Algea to Processor
 
 ### Extra Feautures:
-
+ - Uses Swerve Mk4i with Kraken x60 motors with Talon FX motor controllers.
  - Easy to Tune. Everything is Running From Constants
  - All Subsystems can Easily Controlled.
  - Easy Pathmaking with Sequential Command Groups.
