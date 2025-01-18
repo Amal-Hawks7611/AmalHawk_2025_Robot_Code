@@ -1,11 +1,8 @@
 package frc.robot;
 
-import java.security.PublicKey;
-
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.pathplanner.lib.config.PIDConstants;
-
 
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
