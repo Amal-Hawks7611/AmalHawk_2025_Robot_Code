@@ -1,12 +1,5 @@
 package frc.robot;
 
-import frc.robot.subsystems.AlgeaIntakeSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.IntakeMoverSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.StatusLED;
-import frc.robot.subsystems.SwerveSubsystem;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
@@ -18,14 +11,38 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OI;
 import frc.robot.commands.AlgeaIntake.AlgeaIntake;
 import frc.robot.commands.AlgeaIntake.AlgeaOuttake;
-import frc.robot.commands.Elevator.*;
+import frc.robot.commands.Elevator.e_algea;
+import frc.robot.commands.Elevator.e_level1;
+import frc.robot.commands.Elevator.e_level2;
+import frc.robot.commands.Elevator.e_level3;
+import frc.robot.commands.Elevator.e_level4;
+import frc.robot.commands.Elevator.e_movedown;
+import frc.robot.commands.Elevator.e_moveup;
+import frc.robot.commands.Elevator.e_net;
+import frc.robot.commands.Elevator.e_processor;
+import frc.robot.commands.Elevator.e_reefscape;
+import frc.robot.commands.Elevator.e_source;
 import frc.robot.commands.Intake.Intake;
 import frc.robot.commands.Intake.Outtake;
-import frc.robot.commands.IntakeMover.*;
+import frc.robot.commands.IntakeMover.algea;
+import frc.robot.commands.IntakeMover.korel;
+import frc.robot.commands.IntakeMover.l4;
+import frc.robot.commands.IntakeMover.movedown;
+import frc.robot.commands.IntakeMover.moveup;
+import frc.robot.commands.IntakeMover.net;
+import frc.robot.commands.IntakeMover.processor;
+import frc.robot.commands.IntakeMover.reefscape;
+import frc.robot.commands.IntakeMover.source;
 import frc.robot.commands.Led.LEDStateCycler;
 import frc.robot.commands.Swerve.LimelightAimCommand;
 import frc.robot.commands.Trajectory.AutonPath;
 import frc.robot.commands.Trajectory.FollowTrajectoryCommand;
+import frc.robot.subsystems.AlgeaIntakeSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.IntakeMoverSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.StatusLED;
+import frc.robot.subsystems.SwerveSubsystem;
 
 public class RobotContainer {
     private final SendableChooser<Command> autoChooser;

@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.security.PublicKey;
+
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.pathplanner.lib.config.PIDConstants;
@@ -9,6 +11,25 @@ import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
 
 public final class Constants {
+
+    public boolean isSIM(){
+        return BuildConstants.currentMode == Mode.SIM;
+    }
+
+    public static enum Mode {
+        REAL, SIM, REPLAY
+    }
+
+    public static final class BuildConstants {
+        //TODO: Update these values every bloody time you build the robot
+        public static final Mode currentMode = Mode.REAL;
+        public static final String MAVEN_NAME = "2025-robot";
+        public static final String BUILD_DATE = "2025-01-18";
+        public static final String GIT_SHA = "Idunno";
+        public static final String GIT_DATE = "2025-01-18"; //What kind of date is this? Who even uses this format?
+        public static final String GIT_BRANCH = "Advantage-Kit";
+    }
+
     public static final class Swerve {
         public static final double WHEELBASE = 0.58; 
         public static final double TRACKWIDTH = 0.58; 
