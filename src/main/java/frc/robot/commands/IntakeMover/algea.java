@@ -32,7 +32,6 @@ public class algea extends Command {
     @Override
     public void end(boolean interrupted) {
         intakeMoverSubsystem.leaderMotor.stopMotor();
-        intakeMoverSubsystem.followerMotor.stopMotor();
     }
 
     @Override

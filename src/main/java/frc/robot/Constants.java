@@ -21,9 +21,9 @@ public final class Constants {
         @SuppressWarnings("removal")
         public static final Object CANCODER_CONFIG = new CANCoderConfiguration();
 
-        public static final PIDConstants TRANSLATION_PID = new PIDConstants(5.0,0.0,0.0); // TODO: Tune PID values
-        public static final PIDConstants ROTATION_PID = new PIDConstants(5.0,0.0,0.0); // TODO: Tune PID values
-        public static final double FEMBOY_KADIR = 0.5;
+        public static final PIDConstants TRANSLATION_PID = new PIDConstants(4.0,0.0,0.0); // TODO: Tune PID values
+        public static final PIDConstants ROTATION_PID = new PIDConstants(4.0,0.0,0.0); // TODO: Tune PID values
+        public static final double LIMELIGHT_ALIGN_KP = 0.5;
 
         //TODO Offsets Will Be Entered
         public static final double FRONT_LEFT_MODULE_DRIVE_OFFSET = 0.0;  
@@ -92,8 +92,8 @@ public final class Constants {
     }
 
     public static class AlgeaIntake {
-        //Intake Motor Port
-        public static final int LEADER_MOTOR_PORT = 0;
+        //Algea Intake Motor Port
+        public static final int LEADER_MOTOR_PORT = 0; //Shoud Be Same With Intake
         public static final double INTAKE_TIME = 2.0;
         public static final double INTAKE_SPEED = 0.5;
     public static final double OUTTAKE_SPEED = 0.3;
@@ -101,7 +101,6 @@ public final class Constants {
 
     public static class IntakeMover {
         public static final int LEADER_MOTOR_PORT = 0;
-        public static final int FOLLOWER_MOTOR_PORT = 1;
         public static final double INTAKE_MOVER_SPEED = 0.5;
         //TODO Encoder Values Will Be Updated
         public static final double INTAKE_PROCESSOR_VALUE = 50;

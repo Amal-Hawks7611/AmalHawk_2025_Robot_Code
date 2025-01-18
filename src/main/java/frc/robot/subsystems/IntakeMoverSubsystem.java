@@ -12,16 +12,11 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 public class IntakeMoverSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
-    public TalonFX followerMotor;
-
     private StatusSignal<Angle> leaderMotorPosition;
-    private StatusSignal<Angle> followerMotorPosition;
 
     public IntakeMoverSubsystem() {
         leaderMotor = new TalonFX(IntakeMover.LEADER_MOTOR_PORT);
-        followerMotor = new TalonFX(IntakeMover.FOLLOWER_MOTOR_PORT);
         leaderMotorPosition = leaderMotor.getPosition();
-        followerMotorPosition = followerMotor.getPosition();
 
         resetEncoders();
     }
@@ -30,18 +25,12 @@ public class IntakeMoverSubsystem extends SubsystemBase {
         return leaderMotorPosition.refresh().getValueAsDouble();
     }
 
-    public double getFollowerMotorEncoder() {
-        return followerMotorPosition.refresh().getValueAsDouble();
-    }
-
     public void resetEncoders() {
         leaderMotor.setPosition(0);
-        followerMotor.setPosition(0);
     }
 
     public void manualControl(double speed) {
         leaderMotor.set(speed);
-        followerMotor.set(speed);
     }
 
     public void MoveIT(double speed, double setpoint) {
@@ -53,11 +42,9 @@ public class IntakeMoverSubsystem extends SubsystemBase {
             } else {
                 if(leaderPosition > setpoint){
                     leaderMotor.set(-speed);
-                    followerMotor.set(-speed);
                 }
                 else{
                     leaderMotor.set(speed);
-                    followerMotor.set(speed);
                 }
             }
         }
@@ -69,13 +56,11 @@ public class IntakeMoverSubsystem extends SubsystemBase {
 
     private void stopMotors() {
         leaderMotor.stopMotor();
-        followerMotor.stopMotor();
     }
 
     @Override
     public void periodic(){
         SmartDashboard.putBoolean("IsIntakeMoving", OI.IS_INTAKE_MOVING);
         SmartDashboard.putNumber("Intake Mover Leader Motor Value", getLeaderMotorEncoder());
-        SmartDashboard.putNumber("Intake Mover Follower Motor Encoder", getFollowerMotorEncoder());
     }
 }
