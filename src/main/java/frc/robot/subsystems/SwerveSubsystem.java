@@ -10,6 +10,7 @@ import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.studica.frc.AHRS;
 
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -36,7 +37,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public AHRS gyro;
     public static final SwerveDriveKinematics kinematics;
     private final SwerveDriveOdometry odometry;
-
+    private final SwerveDrivePoseEstimator poseEstimator;
 
     //TODO Kinematics Wİll Be Entered
     static {
@@ -47,8 +48,6 @@ public class SwerveSubsystem extends SubsystemBase {
             new Translation2d(-0.3, -0.3) 
         );
     }
-
-
 
     public SwerveSubsystem() {
         gyro = new AHRS(AHRS.NavXComType.kMXP_SPI);
@@ -84,6 +83,8 @@ public class SwerveSubsystem extends SubsystemBase {
                 backRight.getPosition()
             }
         );
+
+        poseEstimator = new SwerveDrivePoseEstimator(kinematics, gyro.getRotation2d(), new SwerveModulePosition[]{frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(), backRight.getPosition()}, getPose());
 
         //TODO Pathplanner Update
         RobotConfig config;
@@ -198,7 +199,7 @@ public class SwerveSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         double currentYaw = -gyro.getYaw();
-
+        poseEstimator.update(gyro.getRotation2d(), new SwerveModulePosition[]{frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(), backRight.getPosition()});
         odometry.update(
             Rotation2d.fromDegrees(currentYaw),
             new SwerveModulePosition[] {
@@ -208,8 +209,6 @@ public class SwerveSubsystem extends SubsystemBase {
                 backRight.getPosition()
             }
         );
-
-
 
         SmartDashboard.putString("Odometry Pose", odometry.getPoseMeters().toString());
         SmartDashboard.putNumber("Gyro Yaw", currentYaw);

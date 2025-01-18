@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -21,7 +22,13 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
   }
-
+  @Override
+  public void robotInit() 
+  {
+    for (int port = 5800; port <= 5809; port++) {
+      PortForwarder.add(port, "limelight.local",port);
+    }
+  }
   @Override
   public void disabledInit() {}
 
