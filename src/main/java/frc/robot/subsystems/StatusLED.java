@@ -1,10 +1,15 @@
 package frc.robot.subsystems;
 
+import java.util.logging.Logger;
+
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
+
+//Disco lights for the robot.
+// Cool AF.
 
 public class StatusLED extends SubsystemBase {
     private AddressableLED led;
@@ -65,6 +70,9 @@ public class StatusLED extends SubsystemBase {
 
     @Override
     public void periodic() {
+        Logger.getGlobal().info("StatusLED periodic");
+        Logger.getGlobal().info("IS_PROCESSING: " + OI.IS_PROCESSING);
+        Logger.getGlobal().info("IS_SWERVE_FOCUSED: " + OI.IS_SWERVE_FOCUSED);
         checkForProcess();
     }
 }

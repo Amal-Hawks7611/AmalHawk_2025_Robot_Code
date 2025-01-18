@@ -15,6 +15,7 @@
  - Easy to Tune. Everything is Running From Constants
  - All Subsystems can Easily Controlled.
  - Easy Pathmaking with Sequential Command Groups.
+ - Uses a lot of logging. A LOT.
  
  ### Control Assignment(Will Be Changed)
  

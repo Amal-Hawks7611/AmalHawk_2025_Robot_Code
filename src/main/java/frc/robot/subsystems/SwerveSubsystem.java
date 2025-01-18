@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import org.littletonrobotics.junction.Logger;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -84,8 +85,13 @@ public class SwerveSubsystem extends SubsystemBase {
                 backRight.getPosition()
             }
         );
+        // Unsure if this will work.
+        Logger.recordOutput("Odometry FL", frontLeft.getPosition());
+        Logger.recordOutput("Odometry FR", frontRight.getPosition());
+        Logger.recordOutput("Odometry BL", backLeft.getPosition());
+        Logger.recordOutput("Odometry BR", backRight.getPosition());
 
-        //TODO Pathplanner Update
+        //TODO Pathplanner Update.
         RobotConfig config;
         try{
             config = RobotConfig.fromGUISettings();
@@ -114,6 +120,7 @@ public class SwerveSubsystem extends SubsystemBase {
             },
             this
             );
+        
     }
 
     //TODO Not Sure
@@ -130,6 +137,10 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putString("FR Desired State", swerveModuleStates[1].toString());
         SmartDashboard.putString("BL Desired State", swerveModuleStates[2].toString());
         SmartDashboard.putString("BR Desired State", swerveModuleStates[3].toString());
+        Logger.recordOutput("FL Desired State", swerveModuleStates[0].toString());
+        Logger.recordOutput("FR Desired State", swerveModuleStates[1].toString());
+        Logger.recordOutput("BL Desired State", swerveModuleStates[2].toString());
+        Logger.recordOutput("BR Desired State", swerveModuleStates[3].toString());
     }
 
     private ChassisSpeeds getRobotRelativeSpeeds() {
@@ -137,6 +148,12 @@ public class SwerveSubsystem extends SubsystemBase {
         SwerveModuleState frontRightState = frontRight.getState();
         SwerveModuleState backLeftState = backLeft.getState();
         SwerveModuleState backRightState = backRight.getState();
+
+        Logger.recordOutput("FL State", frontLeftState);
+        Logger.recordOutput("FR State", frontRightState);
+        Logger.recordOutput("BL State", backLeftState);
+        Logger.recordOutput("BR State", backRightState);
+
         return kinematics.toChassisSpeeds(
             frontLeftState,
             frontRightState,
@@ -154,6 +171,13 @@ public class SwerveSubsystem extends SubsystemBase {
             SmartDashboard.putNumber("Drive/Rotation Speed", rot);
             SmartDashboard.putBoolean("Drive/Field Relative", fieldRelative);
             SmartDashboard.putNumber("Drive/Gyro Yaw", currentYaw);
+
+            //I wonder if this is too much logging. DON'T CARE.
+            Logger.recordOutput("Drive/X Speed", xSpeed);
+            Logger.recordOutput("Drive/Y Speed", ySpeed);
+            Logger.recordOutput("Drive/Rotation Speed", rot);
+            Logger.recordOutput("Drive/Field Relative", fieldRelative);
+            Logger.recordOutput("Drive/Gyro Yaw", currentYaw);
 
             ChassisSpeeds speeds = fieldRelative
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(
@@ -181,16 +205,20 @@ public class SwerveSubsystem extends SubsystemBase {
         double targetingAngularVelocity = LimelightHelpers.getTX("limelight") * Swerve.FEMBOY_KADIR;
         targetingAngularVelocity *= kMaxAngularSpeed;
         targetingAngularVelocity *= -1.0;
+        Logger.recordOutput("Targeting Angular Velocity", targetingAngularVelocity);
         return targetingAngularVelocity;
     }
 
-    //THIS SHIT TOOK MY WHOLE NIGHT
+    // THIS SH*T TOOK MY WHOLE NIGHT.
     private SwerveModuleState applySecondOrderKinematics(SwerveModuleState state) {
         double vmx = state.speedMetersPerSecond * Math.cos(state.angle.getRadians());
         double vmy = state.speedMetersPerSecond * Math.sin(state.angle.getRadians());
 
         double correctedSpeed = Math.sqrt(vmx * vmx + vmy * vmy);
         double correctedAngle = Math.atan2(vmy, vmx);
+
+        Logger.recordOutput("Corrected Speed", correctedSpeed);
+        Logger.recordOutput("Corrected Angle", correctedAngle);
 
         return new SwerveModuleState(correctedSpeed, new Rotation2d(correctedAngle));
     }
@@ -217,11 +245,19 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putString("FR Position", frontRight.getPosition().toString());
         SmartDashboard.putString("BL Position", backLeft.getPosition().toString());
         SmartDashboard.putString("BR Position", backRight.getPosition().toString());
+
+        Logger.recordOutput("Odometry Pose", odometry.getPoseMeters());
+        Logger.recordOutput("Gyro Yaw", currentYaw);
+        Logger.recordOutput("FL Position", frontLeft.getPosition());
+        Logger.recordOutput("FR Position", frontRight.getPosition());
+        Logger.recordOutput("BL Position", backLeft.getPosition());
+        Logger.recordOutput("BR Position", backRight.getPosition());
     }
 
 
 
     public Pose2d getPose() {
+        Logger.recordOutput("Odometry Pose", odometry.getPoseMeters());
         return odometry.getPoseMeters();
     }
 

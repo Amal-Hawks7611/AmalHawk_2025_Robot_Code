@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -43,7 +45,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         leaderMotor.set(speed);
         followerMotor.set(speed);
     }
-
+    // Egoistic Method Name.
     public void OcalPID(double speed, double setpoint) {
         if (!OI.IS_PID_ENDED) {
             double leaderPosition = getLeaderMotorEncoder();
@@ -78,5 +80,9 @@ public class ElevatorSubsystem extends SubsystemBase {
         SmartDashboard.putBoolean("IsElevatorProcessing", OI.IS_PROCESSING);
         SmartDashboard.putNumber("Elevator Leader Motor Value", getLeaderMotorEncoder());
         SmartDashboard.putNumber("Elevator Follower Motor Encoder", getFollowerMotorEncoder());
+
+        Logger.recordOutput("Is Elevator Processing", Boolean.toString(OI.IS_PROCESSING).getBytes());
+        Logger.recordOutput("Elevator Leader Motor Value", Double.toString(getLeaderMotorEncoder()).getBytes());
+        Logger.recordOutput("Elevator Follower Motor Encoder", Double.toString(getFollowerMotorEncoder()).getBytes());
     }
 }

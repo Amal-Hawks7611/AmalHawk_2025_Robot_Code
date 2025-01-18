@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -77,5 +79,9 @@ public class IntakeMoverSubsystem extends SubsystemBase {
         SmartDashboard.putBoolean("IsIntakeMoving", OI.IS_INTAKE_MOVING);
         SmartDashboard.putNumber("Intake Mover Leader Motor Value", getLeaderMotorEncoder());
         SmartDashboard.putNumber("Intake Mover Follower Motor Encoder", getFollowerMotorEncoder());
+
+        Logger.recordOutput("Is Intake Moving", Boolean.toString(OI.IS_INTAKE_MOVING).getBytes());
+        Logger.recordOutput("Intake Mover Leader Motor Value", Double.toString(getLeaderMotorEncoder()).getBytes());
+        Logger.recordOutput("Intake Mover Follower Motor Encoder", Double.toString(getFollowerMotorEncoder()).getBytes());
     }
 }

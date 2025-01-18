@@ -7,10 +7,12 @@ package frc.robot;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
+import org.littletonrobotics.junction.inputs.LoggableInputs;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.BuildConstants;
@@ -21,6 +23,11 @@ public class Robot extends LoggedRobot {
   private final RobotContainer m_robotContainer;
 
   public Robot() {
+    // Storage... I will fill you up, break you apart, splay the logs of this robot's profane form
+    // across your digital innards! I will fill you up until the very Sparks (MAX) cry for mercy!
+    // My logs SHALL RELISH ENDING YOU... HERE AND NOW!
+    Logger.recordOutput("Swerve Pose", DriverStation.getAlliance().map(alliance -> alliance.name()).orElse("Unknown"));
+    Logger.recordMetadata("EventName", DriverStation.getEventName());
     Logger.recordMetadata("ProjectName", BuildConstants.MAVEN_NAME);
     Logger.recordMetadata("BuildDate", BuildConstants.BUILD_DATE);
     Logger.recordMetadata("GitSHA", BuildConstants.GIT_SHA);
@@ -54,6 +61,10 @@ public class Robot extends LoggedRobot {
 
   @Override
   public void robotPeriodic() {
+    // Not sure what this logs, but why not?
+    Logger.recordOutput("Location of the Drivers", Integer.toString(DriverStation.getLocation().orElse(-1)).getBytes());
+    Logger.getTimestamp();
+    Logger.recordOutput("Time", Double.toString(DriverStation.getMatchTime()).getBytes());
     CommandScheduler.getInstance().run();
   }
 

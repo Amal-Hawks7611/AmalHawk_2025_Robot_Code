@@ -17,7 +17,6 @@ public class Intake extends Command {
         intakeSubsystem.timer.reset();
         intakeSubsystem.timer.start();
         OI.IS_INTAKING = true;
-
     }
 
     @Override

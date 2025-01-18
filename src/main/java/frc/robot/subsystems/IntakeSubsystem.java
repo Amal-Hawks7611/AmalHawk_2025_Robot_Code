@@ -7,6 +7,8 @@ import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -19,6 +21,8 @@ public class IntakeSubsystem extends SubsystemBase {
     public IntakeSubsystem() {
         leaderMotor = new TalonFX(Intake.LEADER_MOTOR_PORT);
         leaderMotorPosition = leaderMotor.getPosition();
+        
+        Logger.recordOutput("Intake Leader Motor Position", Double.toString(leaderMotorPosition.refresh().getValueAsDouble()).getBytes());
 
         resetEncoders();
     }
@@ -46,5 +50,7 @@ public class IntakeSubsystem extends SubsystemBase {
     public void periodic(){
         SmartDashboard.putBoolean("IsIntaking", OI.IS_INTAKING);
         SmartDashboard.putNumber("Intake Leader Motor Value", getLeaderMotorEncoder());
+
+        Logger.recordOutput("Is Intaking", Boolean.toString(OI.IS_INTAKING).getBytes());
     }
 }
