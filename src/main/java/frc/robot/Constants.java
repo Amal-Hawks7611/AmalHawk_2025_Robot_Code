@@ -77,7 +77,8 @@ public final class Constants {
         public static final double ELEVATOR_L3_VALUE = 350;
         public static final double ELEVATOR_L4_VALUE = 400;
         public static final double ELEVATOR_NET_VALUE = 450;
-        public static final double ELEVATOR_ALGEA_VALUE = 220;
+        public static final double ELEVATOR_ALGEA_VALUE_DOWN = 220;
+        public static final double ELEVATOR_ALGEA_VALUE_MIDDLE = 240;
         public static final int ELEVATOR_LEADER_MOTOR_PORT = 0;
         public static final int ELEVATOR_FOLLOWER_MOTOR_PORT = 1;
 
@@ -96,7 +97,7 @@ public final class Constants {
         public static final int LEADER_MOTOR_PORT = 0; //Shoud Be Same With Intake
         public static final double INTAKE_TIME = 2.0;
         public static final double INTAKE_SPEED = 0.5;
-    public static final double OUTTAKE_SPEED = 0.3;
+        public static final double OUTTAKE_SPEED = 0.3;
     }
 
     public static class IntakeMover {
