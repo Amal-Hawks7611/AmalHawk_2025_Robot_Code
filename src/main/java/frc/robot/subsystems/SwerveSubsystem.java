@@ -37,7 +37,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public AHRS gyro;
     public static final SwerveDriveKinematics kinematics;
     private final SwerveDriveOdometry odometry;
-    private final SwerveDrivePoseEstimator poseEstimator;
+    public final SwerveDrivePoseEstimator poseEstimator;
 
     //TODO Kinematics Wİll Be Entered
     static {
