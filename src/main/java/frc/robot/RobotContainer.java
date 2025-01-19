@@ -29,7 +29,7 @@ import frc.robot.commands.Trajectory.FollowTrajectoryCommand;
 
 public class RobotContainer {
     private final SendableChooser<Command> autoChooser;
-    private final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+    public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
     private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
     public final IntakeMoverSubsystem intakeMoverSubsystem = new IntakeMoverSubsystem();
     public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
@@ -51,7 +51,8 @@ public class RobotContainer {
     public final e_processor e_processor;
     public final e_net e_net;
     public final e_level4 e_l4;
-    public final e_algea e_algea;
+    public final e_algea e_algea_middle;
+    public final e_algea e_algea_down;
 
     public final source im_source;
     public final processor im_processor;
@@ -72,7 +73,8 @@ public class RobotContainer {
     public final LEDStateCycler led_cycle;
     public final LimelightAimCommand limelight_focus;
 
-    public final Command intakeAlgea;
+    public final Command intakeAlgeaMiddle;
+    public final Command intakeAlgeaDown;
     public final Command getSource;
     public final Command AlgeaProcessor;
     public final Command AlgeaNet;
@@ -88,7 +90,8 @@ public class RobotContainer {
         elevator_up = new e_moveup(elevatorSubsystem);
         e_reefscape = new e_reefscape(elevatorSubsystem);
         e_processor = new e_processor(elevatorSubsystem);
-        e_algea = new e_algea(elevatorSubsystem);
+        e_algea_middle = new e_algea(elevatorSubsystem,true);
+        e_algea_down = new e_algea(elevatorSubsystem,true);
         e_source = new e_source(elevatorSubsystem);
         e_net = new e_net(elevatorSubsystem);
         e_l1 = new e_level1(elevatorSubsystem);
@@ -116,7 +119,8 @@ public class RobotContainer {
         limelight_focus = new LimelightAimCommand(swerveSubsystem);
 
         //TODO ALL THE TORTURE ENDS HERE
-        intakeAlgea = new SequentialCommandGroup(new e_algea(elevatorSubsystem), new algea(intakeMoverSubsystem), new AlgeaIntake(algeaIntakeSubsystem));
+        intakeAlgeaMiddle = new SequentialCommandGroup(new e_algea(elevatorSubsystem,true), new algea(intakeMoverSubsystem), new AlgeaIntake(algeaIntakeSubsystem));
+        intakeAlgeaDown = new SequentialCommandGroup(new e_algea(elevatorSubsystem,false), new algea(intakeMoverSubsystem), new AlgeaIntake(algeaIntakeSubsystem));
         getSource = new SequentialCommandGroup(new e_source(elevatorSubsystem), new source(intakeMoverSubsystem), new Intake(intakeSubsystem));
     
         AlgeaNet = new SequentialCommandGroup(new e_net(elevatorSubsystem), new net(intakeMoverSubsystem), new AlgeaOuttake(algeaIntakeSubsystem));
@@ -141,7 +145,8 @@ public class RobotContainer {
         SmartDashboard.putData("Auto Chooser", autoChooser);
 
         //Add Commands to the PathPlanner
-        NamedCommands.registerCommand("intakeAlgea", intakeAlgea);
+        NamedCommands.registerCommand("intakeAlgeaMiddle", intakeAlgeaMiddle);
+        NamedCommands.registerCommand("intakeAlgeaDown", intakeAlgeaDown);
         NamedCommands.registerCommand("getSource", getSource);
 
         NamedCommands.registerCommand("AlgeaNet", AlgeaNet);
@@ -166,7 +171,7 @@ public class RobotContainer {
         driverController.y().onTrue(Coral_l4);
         driverController.povDown().onTrue(Coral_reefscape);
         driverController.povLeft().onTrue(getSource);
-        driverController.povRight().onTrue(intakeAlgea);
+        driverController.povRight().onTrue(intakeAlgeaMiddle);
         driverController.povUp().onTrue(AlgeaNet);
     }
 
