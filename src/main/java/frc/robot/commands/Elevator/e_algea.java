@@ -7,9 +7,10 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 public class e_algea extends Command {
     public final ElevatorSubsystem elevatorSubsystem;
-
-    public e_algea(ElevatorSubsystem elevatroSubsystem) {
+    public final boolean ismiddle;
+    public e_algea(ElevatorSubsystem elevatroSubsystem, boolean ismiddle) {
         this.elevatorSubsystem = elevatroSubsystem;
+        this.ismiddle = ismiddle;
         addRequirements(elevatorSubsystem);
     }
 
@@ -22,7 +23,9 @@ public class e_algea extends Command {
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGEA_VALUE);
+            if(ismiddle){
+                elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGEA_VALUE_MIDDLE);
+            }else{elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGEA_VALUE_DOWN);}
         }
         else{
             this.end(false);

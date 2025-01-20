@@ -45,7 +45,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         leaderMotor.set(speed);
         followerMotor.set(speed);
     }
-    // Egoistic Method Name.
+    
     public void OcalPID(double speed, double setpoint) {
         if (!OI.IS_PID_ENDED) {
             double leaderPosition = getLeaderMotorEncoder();

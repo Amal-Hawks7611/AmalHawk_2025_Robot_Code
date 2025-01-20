@@ -11,6 +11,7 @@ import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.studica.frc.AHRS;
 
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -37,9 +38,10 @@ public class SwerveSubsystem extends SubsystemBase {
     public AHRS gyro;
     public static final SwerveDriveKinematics kinematics;
     private final SwerveDriveOdometry odometry;
+    public final SwerveDrivePoseEstimator poseEstimator;
 
 
-    //TODO Kinematics Wİll Be Entered
+    //TODO Kinematics Will Be Entered
     static {
         kinematics = new SwerveDriveKinematics(
             new Translation2d(0.3, 0.3), 
@@ -85,6 +87,9 @@ public class SwerveSubsystem extends SubsystemBase {
                 backRight.getPosition()
             }
         );
+
+        poseEstimator = new SwerveDrivePoseEstimator(kinematics, gyro.getRotation2d(), new SwerveModulePosition[]{frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(), backRight.getPosition()}, getPose());
+
         // Unsure if this will work.
         Logger.recordOutput("Odometry FL", frontLeft.getPosition());
         Logger.recordOutput("Odometry FR", frontRight.getPosition());
@@ -137,6 +142,7 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putString("FR Desired State", swerveModuleStates[1].toString());
         SmartDashboard.putString("BL Desired State", swerveModuleStates[2].toString());
         SmartDashboard.putString("BR Desired State", swerveModuleStates[3].toString());
+        
         Logger.recordOutput("FL Desired State", swerveModuleStates[0].toString());
         Logger.recordOutput("FR Desired State", swerveModuleStates[1].toString());
         Logger.recordOutput("BL Desired State", swerveModuleStates[2].toString());

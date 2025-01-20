@@ -56,15 +56,27 @@ public class StatusLED extends SubsystemBase {
         led.start();
     }
 
+    public void setIntake() {
+        if (led == null || buffer == null) {
+            System.err.println("LED or buffer is not initialized!");
+            return;
+        }
+        LedSubsystem.INTAKE_COLOR.applyTo(buffer);
+        led.setData(buffer);
+        led.start();
+    }
+
     public void checkForProcess() {
 		if(!OI.IS_TEST){
-			if (OI.IS_PROCESSING) {
+			if (OI.IS_PROCESSING || OI.IS_INTAKE_MOVING) {
 				setProcess();
 			} else if (OI.IS_SWERVE_FOCUSED) {
 				setFocus();
-			} else {
+			} else if (OI.IS_INTAKING || OI.IS_ALGEA_INTAKING){
+                setIntake();
+            }else {
 				setDefault();
-			}
+            }
 		}
     }
 
