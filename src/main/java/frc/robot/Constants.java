@@ -113,8 +113,10 @@ public final class Constants {
 
     public static class Colormatcher {
         public static final I2C.Port i2cport = I2C.Port.kOnboard;
+        //TODO Coral Color Will Be Entered
         public static final Color kCoralTarget = new Color();
     }
+
     public static final class OI {
         //General Robot Constants
         public static final int DRIVER_CONTROLLER_PORT = 0;
