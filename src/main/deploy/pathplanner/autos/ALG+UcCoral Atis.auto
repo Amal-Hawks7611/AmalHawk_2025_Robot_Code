@@ -1,0 +1,85 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "StarttanAlg"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "intakeAlgeaMiddle"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "AlgdenCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Coral_l4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CoraldanKaynak"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "getSource"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "KaynaktanCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Coral_l3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CoraldanKaynak"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "getSource"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "KaynaktanCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Coral_l2"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
