@@ -14,8 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.Constants.OI;
+import frc.robot.Constants.Controlls;
+import frc.robot.Constants.EnabledParts;
+import frc.robot.Constants.Swerve;
 import frc.robot.commands.AlgeaIntake.AlgeaIntake;
 import frc.robot.commands.AlgeaIntake.AlgeaOuttake;
 import frc.robot.commands.Elevator.*;
@@ -35,8 +36,6 @@ public class RobotContainer {
     public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public final AlgeaIntakeSubsystem algeaIntakeSubsystem = new AlgeaIntakeSubsystem();
     public final StatusLED ledSubsystem = new StatusLED();
-
-    public final CommandXboxController driverController = new CommandXboxController(OI.DRIVER_CONTROLLER_PORT);
 
     public final AutonPath otonom_path = new AutonPath();
     public final FollowTrajectoryCommand otonom = new FollowTrajectoryCommand(swerveSubsystem);
@@ -87,8 +86,8 @@ public class RobotContainer {
         elevator_down = new e_movedown(elevatorSubsystem);
         elevator_up = new e_moveup(elevatorSubsystem);
         e_processor = new e_processor(elevatorSubsystem);
-        e_algea_middle = new e_algea(elevatorSubsystem,true);
-        e_algea_down = new e_algea(elevatorSubsystem,true);
+        e_algea_middle = new e_algea(elevatorSubsystem, true);
+        e_algea_down = new e_algea(elevatorSubsystem, true);
         e_source = new e_source(elevatorSubsystem);
         e_net = new e_net(elevatorSubsystem);
         e_l1 = new e_level1(elevatorSubsystem);
@@ -115,32 +114,42 @@ public class RobotContainer {
         led_cycle = new LEDStateCycler(ledSubsystem);
         limelight_focus = new LimelightAimCommand(swerveSubsystem);
 
-        //TODO ALL THE TORTURE ENDS HERE
-        intakeAlgeaMiddle = new SequentialCommandGroup(new e_algea(elevatorSubsystem,true), new algea(intakeMoverSubsystem), new AlgeaIntake(algeaIntakeSubsystem));
-        intakeAlgeaDown = new SequentialCommandGroup(new e_algea(elevatorSubsystem,false), new algea(intakeMoverSubsystem), new AlgeaIntake(algeaIntakeSubsystem));
-        getSource = new SequentialCommandGroup(new e_source(elevatorSubsystem), new source(intakeMoverSubsystem), new Intake(intakeSubsystem));
-    
-        AlgeaNet = new SequentialCommandGroup(new e_net(elevatorSubsystem), new net(intakeMoverSubsystem), new AlgeaOuttake(algeaIntakeSubsystem));
-        AlgeaProcessor = new SequentialCommandGroup(new e_processor(elevatorSubsystem), new processor(intakeMoverSubsystem), new AlgeaOuttake(algeaIntakeSubsystem));
-    
-        Coral_l1 = new SequentialCommandGroup(new e_level1(elevatorSubsystem), new reefscape(intakeMoverSubsystem), new Outtake(intakeSubsystem));
-        Coral_l2 = new SequentialCommandGroup(new e_level2(elevatorSubsystem), new korel(intakeMoverSubsystem), new Outtake(intakeSubsystem));
-        Coral_l3 = new SequentialCommandGroup(new e_level3(elevatorSubsystem), new korel(intakeMoverSubsystem), new Outtake(intakeSubsystem));
-        Coral_l4 = new SequentialCommandGroup(new e_level4(elevatorSubsystem), new l4(intakeMoverSubsystem), new Outtake(intakeSubsystem));
+        // TODO ALL THE TORTURE ENDS HERE
+        intakeAlgeaMiddle = new SequentialCommandGroup(new e_algea(elevatorSubsystem, true),
+                new algea(intakeMoverSubsystem), new AlgeaIntake(algeaIntakeSubsystem));
+        intakeAlgeaDown = new SequentialCommandGroup(new e_algea(elevatorSubsystem, false),
+                new algea(intakeMoverSubsystem), new AlgeaIntake(algeaIntakeSubsystem));
+        getSource = new SequentialCommandGroup(new e_source(elevatorSubsystem), new source(intakeMoverSubsystem),
+                new Intake(intakeSubsystem));
+
+        AlgeaNet = new SequentialCommandGroup(new e_net(elevatorSubsystem), new net(intakeMoverSubsystem),
+                new AlgeaOuttake(algeaIntakeSubsystem));
+        AlgeaProcessor = new SequentialCommandGroup(new e_processor(elevatorSubsystem),
+                new processor(intakeMoverSubsystem), new AlgeaOuttake(algeaIntakeSubsystem));
+
+        Coral_l1 = new SequentialCommandGroup(new e_level1(elevatorSubsystem), new reefscape(intakeMoverSubsystem),
+                new Outtake(intakeSubsystem));
+        Coral_l2 = new SequentialCommandGroup(new e_level2(elevatorSubsystem), new korel(intakeMoverSubsystem),
+                new Outtake(intakeSubsystem));
+        Coral_l3 = new SequentialCommandGroup(new e_level3(elevatorSubsystem), new korel(intakeMoverSubsystem),
+                new Outtake(intakeSubsystem));
+        Coral_l4 = new SequentialCommandGroup(new e_level4(elevatorSubsystem), new l4(intakeMoverSubsystem),
+                new Outtake(intakeSubsystem));
 
         configureButtonBindings();
-
-        Command drive_command = swerveSubsystem.drive(
-        driverController.getLeftY(),
-        driverController.getLeftX(),
-        driverController.getRawAxis(2),
-        false);
-        swerveSubsystem.setDefaultCommand(drive_command);
+        if (EnabledParts.IS_SWERVE_ENABLED) {
+            Command drive_command = swerveSubsystem.drive(
+                    Controlls.DRIVER_CONTROLLER.getLeftY(),
+                    Controlls.DRIVER_CONTROLLER.getLeftX(),
+                    Controlls.DRIVER_CONTROLLER.getRawAxis(2),
+                    Swerve.IS_FIELD_RELATIVE);
+            swerveSubsystem.setDefaultCommand(drive_command);
+        }
 
         autoChooser = AutoBuilder.buildAutoChooser();
         SmartDashboard.putData("Auto Chooser", autoChooser);
 
-        //Add Commands to the PathPlanner
+        // Add Commands to the PathPlanner
         NamedCommands.registerCommand("intakeAlgeaMiddle", intakeAlgeaMiddle);
         NamedCommands.registerCommand("intakeAlgeaDown", intakeAlgeaDown);
         NamedCommands.registerCommand("getSource", getSource);
@@ -156,21 +165,20 @@ public class RobotContainer {
     }
 
     private void configureButtonBindings() {
-        driverController.leftTrigger().whileTrue(elevator_down);
-        driverController.rightTrigger().whileTrue(elevator_up);
-        driverController.leftBumper().whileTrue(im_movedown);
-        driverController.rightBumper().whileTrue(im_moveup);
+        Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
+        Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
+        Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
+        Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
 
+        Controlls.ALGEA_PROCESSOR.onTrue(AlgeaProcessor);
+        Controlls.ALGEA_INTAKE_MIDDLE.onTrue(intakeAlgeaMiddle);
+        Controlls.ALGEA_INTAKE_DOWN.onTrue(intakeAlgeaDown);
+        Controlls.ALGEA_NET.onTrue(AlgeaNet);
 
-        driverController.a().onTrue(AlgeaProcessor);
-        driverController.x().onTrue(intakeAlgeaMiddle);
-        driverController.b().onTrue(intakeAlgeaDown);
-        driverController.y().onTrue(AlgeaNet);
-
-        driverController.povDown().onTrue(Coral_l3);
-        driverController.povLeft().onTrue(Coral_l4);
-        driverController.povRight().onTrue(Coral_l2);
-        driverController.povUp().onTrue(Coral_l1);
+        Controlls.L4.onTrue(Coral_l4);
+        Controlls.L3.onTrue(Coral_l3);
+        Controlls.L2.onTrue(Coral_l2);
+        Controlls.L1.onTrue(Coral_l1);
     }
 
     public Command getAutonomousCommand() {

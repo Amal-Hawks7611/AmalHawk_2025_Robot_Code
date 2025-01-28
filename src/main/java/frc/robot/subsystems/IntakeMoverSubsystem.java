@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.IntakeMover;
 import frc.robot.Constants.OI;
 
@@ -34,24 +35,29 @@ public class IntakeMoverSubsystem extends SubsystemBase {
     }
 
     public void MoveIT(double speed, double setpoint) {
-        if (OI.IS_INTAKE_MOVING) {
-            double leaderPosition = getLeaderMotorEncoder();
-            if (isWithinTolerance(leaderPosition, setpoint)) {
-                stopMotors();
-                OI.IS_INTAKE_MOVING = false;
-            } else {
-                if(leaderPosition > setpoint){
-                    leaderMotor.set(-speed);
-                }
-                else{
-                    leaderMotor.set(speed);
+        if(EnabledParts.IS_INTAKE_MOVER_ENABLED){
+            if (OI.IS_INTAKE_MOVING) {
+                double leaderPosition = getLeaderMotorEncoder();
+                if (isWithinTolerance(leaderPosition, setpoint)) {
+                    stopMotors();
+                    OI.IS_INTAKE_MOVING = false;
+                } else {
+                    if(leaderPosition > setpoint){
+                        leaderMotor.set(-speed);
+                    }
+                    else{
+                        leaderMotor.set(speed);
+                    }
                 }
             }
+        }
+        else{
+            OI.IS_INTAKE_MOVING = false;
         }
     }
 
     private boolean isWithinTolerance(double value, double target) {
-        return value >= target - 0.06 && value <= target + 0.06;
+        return value >= target - IntakeMover.OCAL_PID_TOLERANCE_VALUE && value <= target + IntakeMover.OCAL_PID_TOLERANCE_VALUE;
     }
 
     private void stopMotors() {

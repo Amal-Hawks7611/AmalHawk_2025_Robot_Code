@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants.Elevator;
+import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.OI;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -45,27 +46,32 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     public void OcalPID(double speed, double setpoint) {
-        if (!OI.IS_PID_ENDED) {
-            double leaderPosition = getLeaderMotorEncoder();
+        if (EnabledParts.IS_ELEVATOR_ENABLED) {
+            if (!OI.IS_PID_ENDED) {
+                double leaderPosition = getLeaderMotorEncoder();
 
-            if (isWithinTolerance(leaderPosition, Elevator.ELEVATOR_END_VALUE) || isWithinTolerance(leaderPosition, Elevator.ELEVATOR_START_VALUE) || isWithinTolerance(leaderPosition, setpoint)) {
-                stopMotors();
-                OI.IS_PID_ENDED = true;
-            } else {
-                if(leaderPosition > setpoint){
-                    leaderMotor.set(-speed);
-                    followerMotor.set(-speed);
-                }
-                else{
-                    leaderMotor.set(speed);
-                    followerMotor.set(speed);
+                if (isWithinTolerance(leaderPosition, Elevator.ELEVATOR_END_VALUE)
+                        || isWithinTolerance(leaderPosition, Elevator.ELEVATOR_START_VALUE)
+                        || isWithinTolerance(leaderPosition, setpoint)) {
+                    stopMotors();
+                    OI.IS_PID_ENDED = true;
+                } else {
+                    if (leaderPosition > setpoint) {
+                        leaderMotor.set(-speed);
+                        followerMotor.set(-speed);
+                    } else {
+                        leaderMotor.set(speed);
+                        followerMotor.set(speed);
+                    }
                 }
             }
+        } else {
+            OI.IS_PID_ENDED = true;
         }
     }
 
     private boolean isWithinTolerance(double value, double target) {
-        return value >= target - 0.06 && value <= target + 0.06;
+        return value >= target - Elevator.OCAL_PID_TOLERANCE_VALUE && value <= target + Elevator.OCAL_PID_TOLERANCE_VALUE;
     }
 
     private void stopMotors() {
@@ -74,7 +80,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     @Override
-    public void periodic(){
+    public void periodic() {
         SmartDashboard.putBoolean("IsElevatorProcessing", OI.IS_PROCESSING);
         SmartDashboard.putNumber("Elevator Leader Motor Value", getLeaderMotorEncoder());
         SmartDashboard.putNumber("Elevator Follower Motor Encoder", getFollowerMotorEncoder());

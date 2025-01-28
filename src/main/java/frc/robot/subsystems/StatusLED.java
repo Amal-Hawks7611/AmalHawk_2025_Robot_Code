@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
 
@@ -12,10 +13,12 @@ public class StatusLED extends SubsystemBase {
 
     public StatusLED() {
         try {
-            led = new AddressableLED(LedSubsystem.LED_PWM_PORT); 
-            buffer = new AddressableLEDBuffer(LedSubsystem.LED_LENGTH);
-            led.setLength(buffer.getLength());
-            led.setData(buffer);
+            if (EnabledParts.IS_LED_ENABLED) {
+                led = new AddressableLED(LedSubsystem.LED_PWM_PORT);
+                buffer = new AddressableLEDBuffer(LedSubsystem.LED_LENGTH);
+                led.setLength(buffer.getLength());
+                led.setData(buffer);
+            }
         } catch (Exception e) {
             System.err.println("Failed to initialize StatusLED: " + e.getMessage());
         }
@@ -62,17 +65,17 @@ public class StatusLED extends SubsystemBase {
     }
 
     public void checkForProcess() {
-		if(!OI.IS_TEST){
-			if (OI.IS_PROCESSING || OI.IS_INTAKE_MOVING) {
-				setProcess();
-			} else if (OI.IS_SWERVE_FOCUSED) {
-				setFocus();
-			} else if (OI.IS_INTAKING || OI.IS_ALGEA_INTAKING){
+        if (!OI.IS_TEST) {
+            if (OI.IS_PROCESSING || OI.IS_INTAKE_MOVING) {
+                setProcess();
+            } else if (OI.IS_SWERVE_FOCUSED) {
+                setFocus();
+            } else if (OI.IS_INTAKING || OI.IS_ALGEA_INTAKING) {
                 setIntake();
-            }else {
-				setDefault();
+            } else {
+                setDefault();
             }
-		}
+        }
     }
 
     @Override
