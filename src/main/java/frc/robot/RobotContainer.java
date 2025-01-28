@@ -174,6 +174,8 @@ public class RobotContainer {
         Controlls.ALGEA_INTAKE_MIDDLE.onTrue(intakeAlgeaMiddle);
         Controlls.ALGEA_INTAKE_DOWN.onTrue(intakeAlgeaDown);
         Controlls.ALGEA_NET.onTrue(AlgeaNet);
+        
+        Controlls.GET_SOURCE.onTrue(getSource);
 
         Controlls.L4.onTrue(Coral_l4);
         Controlls.L3.onTrue(Coral_l3);
