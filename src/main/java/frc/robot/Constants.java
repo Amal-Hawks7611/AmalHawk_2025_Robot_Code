@@ -115,9 +115,8 @@ public final class Constants {
     }
 
     public static class Colormatcher {
-        // TODO Coral Color Will Be Entered
         public static final I2C.Port I2C_PORT = I2C.Port.kOnboard;
-        public static final Color CORAL_TARGET = new Color();
+        public static final Color CORAL_TARGET = new Color(224,223,221);
     }
 
     public static class Controlls {
