@@ -39,13 +39,12 @@ public class SwerveSubsystem extends SubsystemBase {
     private final SwerveDriveOdometry odometry;
     public final SwerveDrivePoseEstimator poseEstimator;
 
-    //TODO Kinematics Wİll Be Entered
     static {
         kinematics = new SwerveDriveKinematics(
-            new Translation2d(0.3, 0.3), 
-            new Translation2d(0.3, -0.3),
-            new Translation2d(-0.3, 0.3), 
-            new Translation2d(-0.3, -0.3) 
+            new Translation2d(0.3683, 0.3683), 
+            new Translation2d(0.3683, -0.3683),
+            new Translation2d(-0.3683, 0.3683), 
+            new Translation2d(-0.3683, -0.3683) 
         );
     }
 
