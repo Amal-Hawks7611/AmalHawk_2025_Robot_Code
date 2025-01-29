@@ -53,23 +53,19 @@ public class SwerveSubsystem extends SubsystemBase {
 
         frontLeft = new SwerveModule(
             SwervePorts.FRONT_LEFT_DRIVE_MOTOR, SwervePorts.FRONT_LEFT_STEER_MOTOR,
-            SwervePorts.FRONT_LEFT_CANCODER,
-            Swerve.FRONT_LEFT_MODULE_DRIVE_OFFSET, Swerve.FRONT_LEFT_MODULE_STEER_OFFSET
+            SwervePorts.FRONT_LEFT_CANCODER, Swerve.FRONT_LEFT_MODULE_STEER_OFFSET
         );
         frontRight = new SwerveModule(
             SwervePorts.FRONT_RIGHT_DRIVE_MOTOR, SwervePorts.FRONT_RIGHT_STEER_MOTOR,
-            SwervePorts.FRONT_RIGHT_CANCODER,
-            Swerve.FRONT_RIGHT_MODULE_DRIVE_OFFSET, Swerve.FRONT_RIGHT_MODULE_STEER_OFFSET
+            SwervePorts.FRONT_RIGHT_CANCODER, Swerve.FRONT_RIGHT_MODULE_STEER_OFFSET
         );
         backLeft = new SwerveModule(
             SwervePorts.BACK_LEFT_DRIVE_MOTOR, SwervePorts.BACK_LEFT_STEER_MOTOR,
-            SwervePorts.BACK_LEFT_CANCODER,
-            Swerve.BACK_LEFT_MODULE_DRIVE_OFFSET, Swerve.BACK_LEFT_MODULE_STEER_OFFSET
+            SwervePorts.BACK_LEFT_CANCODER, Swerve.BACK_LEFT_MODULE_STEER_OFFSET
         );
         backRight = new SwerveModule(
             SwervePorts.BACK_RIGHT_DRIVE_MOTOR, SwervePorts.BACK_RIGHT_STEER_MOTOR,
-            SwervePorts.BACK_RIGHT_CANCODER,
-            Swerve.BACK_RIGHT_MODULE_DRIVE_OFFSET, Swerve.BACK_RIGHT_MODULE_STEER_OFFSET
+            SwervePorts.BACK_RIGHT_CANCODER, Swerve.BACK_RIGHT_MODULE_STEER_OFFSET
         );
 
         odometry = new SwerveDriveOdometry(
@@ -248,11 +244,10 @@ class SwerveModule {
     private final TalonFX steerMotor;
     private final CoreCANcoder steerEncoder;
     @SuppressWarnings("unused")
-    private final double driveEncoderOffset;
     private final double steerEncoderOffset;
 
 
-    public SwerveModule(int driveMotorPort, int steerMotorPort, int steerEncoderPort, double driveEncoderOffset, double steerEncoderOffset) {
+    public SwerveModule(int driveMotorPort, int steerMotorPort, int steerEncoderPort, double steerEncoderOffset) {
         driveMotor = new TalonFX(driveMotorPort);
         steerMotor = new TalonFX(steerMotorPort);
         steerEncoder = new CoreCANcoder(steerEncoderPort);
@@ -265,7 +260,19 @@ class SwerveModule {
         steerMotor.getConfigurator().apply(steerMotorConfig);
         steerEncoder.getConfigurator().apply(steerEncoderConfig);
 
-        this.driveEncoderOffset = driveEncoderOffset;
+        steerEncoderConfig.MagnetSensor.MagnetOffset = steerEncoderOffset;
+        steerEncoder.getConfigurator().apply(steerEncoderConfig);
+
+        driveMotorConfig.Slot0.kP = Swerve.DRIVE_MOTOR_KP;
+        driveMotorConfig.Slot0.kI = Swerve.DRIVE_MOTOR_KI;
+        driveMotorConfig.Slot0.kD = Swerve.DRIVE_MOTOR_KD;
+
+        steerMotorConfig.Slot0.kP = Swerve.STEER_MOTOR_KP;
+        steerMotorConfig.Slot0.kI = Swerve.STEER_MOTOR_KI;
+        steerMotorConfig.Slot0.kD = Swerve.STEER_MOTOR_KD;
+
+        driveMotor.getConfigurator().apply(driveMotorConfig);
+        steerMotor.getConfigurator().apply(steerMotorConfig);
         this.steerEncoderOffset = steerEncoderOffset;
     }
 
@@ -273,7 +280,7 @@ class SwerveModule {
 
     public SwerveModuleState getState() {
         double adjustedDriveRate = driveMotor.getVelocity().getValueAsDouble() * Swerve.DRIVE_ENCODER_VELOCITY_CONVERSION;
-        double adjustedSteerAngle = steerEncoder.getPosition().getValueAsDouble() - steerEncoderOffset;
+        double adjustedSteerAngle = steerEncoder.getPosition().getValueAsDouble();
 
         return new SwerveModuleState(
             adjustedDriveRate,
@@ -286,7 +293,7 @@ class SwerveModule {
 
     public SwerveModulePosition getPosition() {
         double adjustedDriveDistance = driveMotor.getPosition().getValueAsDouble() * Swerve.DRIVE_ENCODER_POSITION_CONVERSION;
-        double adjustedSteerAngle = steerEncoder.getPosition().getValueAsDouble() - steerEncoderOffset;
+        double adjustedSteerAngle = steerEncoder.getPosition().getValueAsDouble();
 
         return new SwerveModulePosition(
             adjustedDriveDistance,
@@ -309,7 +316,7 @@ class SwerveModule {
         }
 
         driveMotor.set(desiredState.speedMetersPerSecond / Swerve.MAX_SPEED_METERS_PER_SECOND);
-        steerMotor.set(desiredState.angle.getDegrees() + steerEncoderOffset);
+        steerMotor.set(desiredState.angle.getDegrees());
     }
 
 }

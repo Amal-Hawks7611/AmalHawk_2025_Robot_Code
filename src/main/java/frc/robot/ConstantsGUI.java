@@ -195,13 +195,9 @@ public class ConstantsGUI {
         JTextField elevatorSpeedField = addTextFieldWithLabel(settingsFrame, "Elevator Speed:", String.valueOf(Constants.OI.ELEVATOR_SPEED));
     
         // Offsets
-        JTextField frontLeftModuleDriveOffsetField = addTextFieldWithLabel(settingsFrame, "Front Left Module Drive Offset:", String.valueOf(Constants.Swerve.FRONT_LEFT_MODULE_DRIVE_OFFSET));
         JTextField frontLeftModuleSteerOffsetField = addTextFieldWithLabel(settingsFrame, "Front Left Module Steer Offset:", String.valueOf(Constants.Swerve.FRONT_LEFT_MODULE_STEER_OFFSET));
-        JTextField frontRightModuleDriveOffsetField = addTextFieldWithLabel(settingsFrame, "Front Right Module Drive Offset:", String.valueOf(Constants.Swerve.FRONT_RIGHT_MODULE_DRIVE_OFFSET));
         JTextField frontRightModuleSteerOffsetField = addTextFieldWithLabel(settingsFrame, "Front Right Module Steer Offset:", String.valueOf(Constants.Swerve.FRONT_RIGHT_MODULE_STEER_OFFSET));
-        JTextField backLeftModuleDriveOffsetField = addTextFieldWithLabel(settingsFrame, "Back Left Module Drive Offset:", String.valueOf(Constants.Swerve.BACK_LEFT_MODULE_DRIVE_OFFSET));
         JTextField backLeftModuleSteerOffsetField = addTextFieldWithLabel(settingsFrame, "Back Left Module Steer Offset:", String.valueOf(Constants.Swerve.BACK_LEFT_MODULE_STEER_OFFSET));
-        JTextField backRightModuleDriveOffsetField = addTextFieldWithLabel(settingsFrame, "Back Right Module Drive Offset:", String.valueOf(Constants.Swerve.BACK_RIGHT_MODULE_DRIVE_OFFSET));
         JTextField backRightModuleSteerOffsetField = addTextFieldWithLabel(settingsFrame, "Back Right Module Steer Offset:", String.valueOf(Constants.Swerve.BACK_RIGHT_MODULE_STEER_OFFSET));
     
         // Save button
@@ -221,11 +217,7 @@ public class ConstantsGUI {
                                    frontLeftCANCoderField, frontRightCANCoderField, backLeftCANCoderField, backRightCANCoderField,
                                    ledPWMPortField, ledLengthField, elevatorLeaderMotorPortField, elevatorFollowerMotorPortField,
                                    intakeLeaderMotorPortField, intakeSpeedField, outtakeSpeedField, intakeMoverSpeedField,
-                                   driverControllerPortField, elevatorSpeedField,
-                                   frontLeftModuleDriveOffsetField, frontLeftModuleSteerOffsetField,
-                                   frontRightModuleDriveOffsetField, frontRightModuleSteerOffsetField,
-                                   backLeftModuleDriveOffsetField, backLeftModuleSteerOffsetField,
-                                   backRightModuleDriveOffsetField, backRightModuleSteerOffsetField);
+                                   driverControllerPortField, elevatorSpeedField, frontLeftModuleSteerOffsetField, frontRightModuleSteerOffsetField, backLeftModuleSteerOffsetField,backRightModuleSteerOffsetField, backRightModuleSteerOffsetField, backRightModuleSteerOffsetField, backRightModuleSteerOffsetField, backRightModuleSteerOffsetField);
             }
         });
     
@@ -297,13 +289,9 @@ public class ConstantsGUI {
             Constants.OI.ELEVATOR_SPEED = Double.parseDouble(elevatorSpeedField.getText());
     
             // Update offsets
-            Constants.Swerve.FRONT_LEFT_MODULE_DRIVE_OFFSET = Double.parseDouble(frontLeftModuleDriveOffsetField.getText());
             Constants.Swerve.FRONT_LEFT_MODULE_STEER_OFFSET = Double.parseDouble(frontLeftModuleSteerOffsetField.getText());
-            Constants.Swerve.FRONT_RIGHT_MODULE_DRIVE_OFFSET = Double.parseDouble(frontRightModuleDriveOffsetField.getText());
             Constants.Swerve.FRONT_RIGHT_MODULE_STEER_OFFSET = Double.parseDouble(frontRightModuleSteerOffsetField.getText());
-            Constants.Swerve.BACK_LEFT_MODULE_DRIVE_OFFSET = Double.parseDouble(backLeftModuleDriveOffsetField.getText());
             Constants.Swerve.BACK_LEFT_MODULE_STEER_OFFSET = Double.parseDouble(backLeftModuleSteerOffsetField.getText());
-            Constants.Swerve.BACK_RIGHT_MODULE_DRIVE_OFFSET = Double.parseDouble(backRightModuleDriveOffsetField.getText());
             Constants.Swerve.BACK_RIGHT_MODULE_STEER_OFFSET = Double.parseDouble(backRightModuleSteerOffsetField.getText());
     
             JOptionPane.showMessageDialog(null, "Settings saved successfully!");

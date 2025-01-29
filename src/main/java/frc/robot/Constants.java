@@ -1,7 +1,5 @@
 package frc.robot;
 
-import com.ctre.phoenix.sensors.CANCoderConfiguration;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.pathplanner.lib.config.PIDConstants;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -14,28 +12,30 @@ public final class Constants {
     public static final class Swerve {
         public static double WHEELBASE = 0.58;
         public static double TRACKWIDTH = 0.58;
-        public static double MAX_SPEED_METERS_PER_SECOND = 3.0;
-        public static double DRIVE_ENCODER_POSITION_CONVERSION = 0.0001; // TODO: Verify conversion factor for position
-        public static double DRIVE_ENCODER_VELOCITY_CONVERSION = 0.0001; // TODO: Verify conversion factor for velocity
+        public static double MAX_SPEED_METERS_PER_SECOND = 5;
+        public static double DRIVE_ENCODER_POSITION_CONVERSION = 0.0000237;
+        public static double DRIVE_ENCODER_VELOCITY_CONVERSION = 0.000237;
 
         // Motor configuration
-        public static Object TALON_CONFIG = new TalonFXConfiguration();
-        @SuppressWarnings("removal")
-        public static Object CANCODER_CONFIG = new CANCoderConfiguration();
-        public static PIDConstants TRANSLATION_PID = new PIDConstants(4.0, 0.0, 0.0); // TODO: Tune PID values
-        public static PIDConstants ROTATION_PID = new PIDConstants(4.0, 0.0, 0.0); // TODO: Tune PID values
+        public static PIDConstants TRANSLATION_PID = new PIDConstants(3.0, 0.0, 0.0); // TODO: Tune PID values
+        public static PIDConstants ROTATION_PID = new PIDConstants(3.0, 0.0, 0.0); // TODO: Tune PID values
         public static double LIMELIGHT_ALIGN_KP = 0.5;
         public static boolean IS_FIELD_RELATIVE = true;
 
         // TODO Offsets Will Be Entered
-        public static double FRONT_LEFT_MODULE_DRIVE_OFFSET = 0.0;
         public static double FRONT_LEFT_MODULE_STEER_OFFSET = 0.0;
-        public static double FRONT_RIGHT_MODULE_DRIVE_OFFSET = 0.0;
         public static double FRONT_RIGHT_MODULE_STEER_OFFSET = 0.0;
-        public static double BACK_LEFT_MODULE_DRIVE_OFFSET = 0.0;
         public static double BACK_LEFT_MODULE_STEER_OFFSET = 0.0;
-        public static double BACK_RIGHT_MODULE_DRIVE_OFFSET = 0.0;
         public static double BACK_RIGHT_MODULE_STEER_OFFSET = 0.0;
+
+        //Motor PID Configs
+        public static double DRIVE_MOTOR_KP = 0.6;
+        public static double DRIVE_MOTOR_KI = 0.0;
+        public static double DRIVE_MOTOR_KD = 0.01;
+
+        public static double STEER_MOTOR_KP = 0.6;
+        public static double STEER_MOTOR_KI = 0.0;
+        public static double STEER_MOTOR_KD = 0.01;
     }
 
     public static final class SwervePorts {
