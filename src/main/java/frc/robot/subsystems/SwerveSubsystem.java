@@ -177,7 +177,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public double CalculateLimelightAim(){
-        double kMaxAngularSpeed = Swerve.MAX_SPEED_METERS_PER_SECOND / Math.hypot(0.3, 0.3);//TODO Kinematics Will Be Entered
+        double kMaxAngularSpeed = Swerve.MAX_SPEED_METERS_PER_SECOND / Math.hypot(0.3683, 0.3683);
         double targetingAngularVelocity = LimelightHelpers.getTX("limelight") * Swerve.LIMELIGHT_ALIGN_KP;
         targetingAngularVelocity *= kMaxAngularSpeed;
         targetingAngularVelocity *= -1.0;
