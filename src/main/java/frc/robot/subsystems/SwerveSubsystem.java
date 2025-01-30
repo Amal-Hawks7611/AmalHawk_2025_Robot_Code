@@ -27,7 +27,8 @@ import frc.robot.Constants.Swerve;
 import frc.robot.Constants.SwervePorts;
 import frc.robot.LimelightHelpers;
 
-
+//WARNING: CHANGING THIS CODE DURING THE COMPETITION WILL LEAD TO BAD RESULTS!
+//WELLCOME TO THE HELL!!!
 public class SwerveSubsystem extends SubsystemBase {
 
     private final SwerveModule frontLeft;
@@ -51,6 +52,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public SwerveSubsystem() {
         gyro = new AHRS(AHRS.NavXComType.kMXP_SPI);
 
+        //Define The Modules
         frontLeft = new SwerveModule(
             SwervePorts.FRONT_LEFT_DRIVE_MOTOR, SwervePorts.FRONT_LEFT_STEER_MOTOR,
             SwervePorts.FRONT_LEFT_CANCODER, Swerve.FRONT_LEFT_MODULE_STEER_OFFSET
@@ -68,6 +70,7 @@ public class SwerveSubsystem extends SubsystemBase {
             SwervePorts.BACK_RIGHT_CANCODER, Swerve.BACK_RIGHT_MODULE_STEER_OFFSET
         );
 
+        //Define The Odometry And Pose Estimator
         odometry = new SwerveDriveOdometry(
             kinematics, 
             Rotation2d.fromDegrees(gyro.getYaw()), 
@@ -80,6 +83,8 @@ public class SwerveSubsystem extends SubsystemBase {
         );
 
         poseEstimator = new SwerveDrivePoseEstimator(kinematics, gyro.getRotation2d(), new SwerveModulePosition[]{frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(), backRight.getPosition()}, getPose());
+        
+        //PathPlanner Configuration
         RobotConfig config;
         try{
             config = RobotConfig.fromGUISettings();
@@ -110,10 +115,14 @@ public class SwerveSubsystem extends SubsystemBase {
             );
     }
 
+    //Easier Drive Method - Use This If You Want To Use Trajectory
+    //IF YOU'RE LOOKING FOR AN ERROR, IT'S NOT HERE!!!
     public void driveRobotRelative(ChassisSpeeds speeds) {
+        //Turn Speed, Given By PathPlanner, To The Kinematics
         SwerveModuleState[] swerveModuleStates = kinematics.toSwerveModuleStates(speeds);
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, 3.0);
 
+        //This Manipulates The Speed And Robot Angle
         frontLeft.setDesiredState(applySecondOrderKinematics(swerveModuleStates[0]));
         frontRight.setDesiredState(applySecondOrderKinematics(swerveModuleStates[1]));
         backLeft.setDesiredState(applySecondOrderKinematics(swerveModuleStates[2]));
@@ -138,6 +147,10 @@ public class SwerveSubsystem extends SubsystemBase {
         );
     }
 
+    //TELE-OP Drive: We drive the robot with the input from the controller.
+    //These inputs do not show where the robot will go, but at what speed it will go.
+    //So, your swerve is still active even your axis is 0.
+    //DON'T TUCH IF YOU DON'T KNOW WHAT TO DO!!!(IF YOU'RE NOT OCAL)
     public Command drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
         return run(() -> {
             double currentYaw = -gyro.getYaw();
@@ -166,9 +179,9 @@ public class SwerveSubsystem extends SubsystemBase {
             SmartDashboard.putString("BL Desired State", swerveModuleStates[2].toString());
             SmartDashboard.putString("BR Desired State", swerveModuleStates[3].toString());
         });
-
     }
 
+    //Just a regular limelight focus, except the maxAngularSpeed (Calculating this took an hour),
     public double CalculateLimelightAim(){
         double kMaxAngularSpeed = Swerve.MAX_SPEED_METERS_PER_SECOND / Math.hypot(0.3683, 0.3683);
         double targetingAngularVelocity = LimelightHelpers.getTX("limelight") * Swerve.LIMELIGHT_ALIGN_KP;
@@ -177,7 +190,7 @@ public class SwerveSubsystem extends SubsystemBase {
         return targetingAngularVelocity;
     }
 
-    //THIS WORK IF ART TOOK MY WHOLE NIGHT
+    //THIS WORK OF ART TOOK MY WHOLE NIGHT
     private SwerveModuleState applySecondOrderKinematics(SwerveModuleState state) {
         double vmx = state.speedMetersPerSecond * Math.cos(state.angle.getRadians());
         double vmy = state.speedMetersPerSecond * Math.sin(state.angle.getRadians());
@@ -190,6 +203,8 @@ public class SwerveSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+
+        //There'is not a big thing. Just update the NavX Heading and posings.
         double currentYaw = -gyro.getYaw();
         poseEstimator.update(gyro.getRotation2d(), new SwerveModulePosition[]{frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(), backRight.getPosition()});
         odometry.update(
@@ -211,12 +226,10 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
 
-
+    //No need to explain
     public Pose2d getPose() {
         return odometry.getPoseMeters();
     }
-
-
 
     public void resetOdometry(Pose2d pose) {
         odometry.resetPosition(
@@ -229,13 +242,12 @@ public class SwerveSubsystem extends SubsystemBase {
             },
             pose
         );
-
     }
-
 }
 
 
-
+//I used Only WPILib so, i defined SwerveModules by myself.
+//BOYCOTT YAGSL!!!
 class SwerveModule {
     private final TalonFX driveMotor;
     private final TalonFX steerMotor;
@@ -245,6 +257,7 @@ class SwerveModule {
 
 
     public SwerveModule(int driveMotorPort, int steerMotorPort, int steerEncoderPort, double steerEncoderOffset) {
+        //Initialize motors and CANCoder
         driveMotor = new TalonFX(driveMotorPort);
         steerMotor = new TalonFX(steerMotorPort);
         steerEncoder = new CoreCANcoder(steerEncoderPort);
@@ -257,6 +270,7 @@ class SwerveModule {
         steerMotor.getConfigurator().apply(steerMotorConfig);
         steerEncoder.getConfigurator().apply(steerEncoderConfig);
 
+        //Kadir's Nightmare
         steerEncoderConfig.MagnetSensor.MagnetOffset = steerEncoderOffset;
         steerEncoder.getConfigurator().apply(steerEncoderConfig);
 
@@ -276,6 +290,8 @@ class SwerveModule {
 
 
     public SwerveModuleState getState() {
+        //Fun part(Manipulting the encoder)
+        //You can easlily call the speeds and rotation.
         double adjustedDriveRate = driveMotor.getVelocity().getValueAsDouble() * Swerve.DRIVE_ENCODER_VELOCITY_CONVERSION;
         double adjustedSteerAngle = steerEncoder.getPosition().getValueAsDouble();
 
@@ -289,6 +305,7 @@ class SwerveModule {
 
 
     public SwerveModulePosition getPosition() {
+        //You Can Get Translation2d and Rotation2d values.
         double adjustedDriveDistance = driveMotor.getPosition().getValueAsDouble() * Swerve.DRIVE_ENCODER_POSITION_CONVERSION;
         double adjustedSteerAngle = steerEncoder.getPosition().getValueAsDouble();
 
@@ -302,9 +319,12 @@ class SwerveModule {
 
 
     public void setDesiredState(SwerveModuleState desiredState) {
+        //This part is the part that runs the robot
+        //DON'T TOUCH IT IF YOU DON'T KNOW WHAT TO DO!!
         Rotation2d currentAngle = getState().angle;
         double deltaAngle = desiredState.angle.minus(currentAngle).getRadians();
 
+        //This part added for "Going Crazy" protection
         if (Math.abs(deltaAngle) > Math.PI / 2) {
             desiredState = new SwerveModuleState(
                 -desiredState.speedMetersPerSecond,

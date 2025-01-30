@@ -25,6 +25,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
+    //Limelight Megatag2 Localization
     try {
       int[] validIDs = {3,4};
       LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
@@ -56,6 +58,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() 
   {
+    //Limelight Local Port Brute Because Of FMS Connections
     for (int port = 5800; port <= 5809; port++) {
       PortForwarder.add(port, "limelight.local",port);
     }

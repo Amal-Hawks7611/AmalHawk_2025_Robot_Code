@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+//ELEVATOR CODE. USED OCALPID INSTEAD OF WPILIB CONTROLL SYSTEMS(FEETFORWARD,CLOSE-LOOP) THAT MAKES NON-SENSE.
 public class ElevatorSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     public TalonFX followerMotor;
@@ -23,7 +24,6 @@ public class ElevatorSubsystem extends SubsystemBase {
         followerMotor = new TalonFX(Elevator.ELEVATOR_FOLLOWER_MOTOR_PORT);
         leaderMotorPosition = leaderMotor.getPosition();
         followerMotorPosition = followerMotor.getPosition();
-
         resetEncoders();
     }
 
@@ -45,6 +45,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         followerMotor.set(speed);
     }
 
+    //Different to the pid, ocalpid controlls distance instead of speed. Because TalonFX already controlls speed
     public void OcalPID(double speed, double setpoint) {
         if (EnabledParts.IS_ELEVATOR_ENABLED) {
             if (!OI.IS_PID_ENDED) {

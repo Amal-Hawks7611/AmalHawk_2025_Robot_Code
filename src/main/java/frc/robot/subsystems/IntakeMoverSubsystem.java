@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+//INTAKE MOVER SUBSYSTEM INTAGRATED WITH OCALPID, IT WILL BE JUST GONE TO THE SPECIFIC ENCODER VALUE OR MOVED MANUALLY.
 public class IntakeMoverSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     private StatusSignal<Angle> leaderMotorPosition;
@@ -18,7 +19,6 @@ public class IntakeMoverSubsystem extends SubsystemBase {
     public IntakeMoverSubsystem() {
         leaderMotor = new TalonFX(IntakeMover.LEADER_MOTOR_PORT);
         leaderMotorPosition = leaderMotor.getPosition();
-
         resetEncoders();
     }
 
@@ -34,6 +34,7 @@ public class IntakeMoverSubsystem extends SubsystemBase {
         leaderMotor.set(speed);
     }
 
+    //OCALPID
     public void MoveIT(double speed, double setpoint) {
         if(EnabledParts.IS_INTAKE_MOVER_ENABLED){
             if (OI.IS_INTAKE_MOVING) {
@@ -55,7 +56,7 @@ public class IntakeMoverSubsystem extends SubsystemBase {
             OI.IS_INTAKE_MOVING = false;
         }
     }
-
+    
     private boolean isWithinTolerance(double value, double target) {
         return value >= target - IntakeMover.OCAL_PID_TOLERANCE_VALUE && value <= target + IntakeMover.OCAL_PID_TOLERANCE_VALUE;
     }

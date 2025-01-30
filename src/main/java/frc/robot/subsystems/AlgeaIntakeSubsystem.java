@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+//SAME WITH THE INTAKE. JUST ADDED FOR SPEED CONTROLLING.
+//I USED TIMER FOR ALGEA. BEACUSE WE CAN'T DETECT ALGEA WITH COLOR SENSOR!!!
 public class AlgeaIntakeSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     private StatusSignal<Angle> leaderMotorPosition;
@@ -37,7 +39,7 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
     }
 
     public void Intake() {
-        if(ColorMatcherSubsystem.CheckColor()){
+        if(timer.hasElapsed(1.5)){
             leaderMotor.stopMotor();
             OI.IS_ALGEA_INTAKING = false;
         }
@@ -47,7 +49,7 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
     }
 
     public void Shoot(){
-        if(!ColorMatcherSubsystem.CheckColor()){
+        if(timer.hasElapsed(1.5)){
             leaderMotor.stopMotor();
             OI.IS_ALGEA_INTAKING = false;
         }
@@ -59,6 +61,6 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
     @Override
     public void periodic(){
         SmartDashboard.putBoolean("IsIntaking", OI.IS_ALGEA_INTAKING);
-        SmartDashboard.putNumber("Intake Leader Motor Value", getLeaderMotorEncoder());
+        SmartDashboard.putNumber("Algea Intake Leader Motor Value", getLeaderMotorEncoder());
     }
 }

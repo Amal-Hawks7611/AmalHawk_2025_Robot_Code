@@ -15,6 +15,8 @@ public class AlgeaIntake extends Command {
 
     @Override
     public void initialize() {
+        intakeSubsystem.timer.reset();
+        intakeSubsystem.timer.start();
         System.out.println("Algea Intaking Ininialized");
         OI.IS_ALGEA_INTAKING = true;  
     }
@@ -30,6 +32,8 @@ public class AlgeaIntake extends Command {
 
     @Override
     public void end(boolean interrupted) {
+        intakeSubsystem.timer.stop();
+        intakeSubsystem.timer.reset();
         intakeSubsystem.leaderMotor.stopMotor();
         OI.IS_ALGEA_INTAKING = false;
     }

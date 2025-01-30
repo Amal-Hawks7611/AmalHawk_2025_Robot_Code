@@ -11,6 +11,7 @@ public class StatusLED extends SubsystemBase {
     private AddressableLED led;
     private AddressableLEDBuffer buffer;
 
+    //NOTHING SPECIAL, JUST A LED CODE INTAGRATED WITH CONSTANTS
     public StatusLED() {
         try {
             if (EnabledParts.IS_LED_ENABLED) {
