@@ -80,8 +80,6 @@ public class SwerveSubsystem extends SubsystemBase {
         );
 
         poseEstimator = new SwerveDrivePoseEstimator(kinematics, gyro.getRotation2d(), new SwerveModulePosition[]{frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(), backRight.getPosition()}, getPose());
-
-        //TODO Pathplanner Update
         RobotConfig config;
         try{
             config = RobotConfig.fromGUISettings();
@@ -112,7 +110,6 @@ public class SwerveSubsystem extends SubsystemBase {
             );
     }
 
-    //TODO Not Sure
     public void driveRobotRelative(ChassisSpeeds speeds) {
         SwerveModuleState[] swerveModuleStates = kinematics.toSwerveModuleStates(speeds);
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, 3.0);
@@ -180,7 +177,7 @@ public class SwerveSubsystem extends SubsystemBase {
         return targetingAngularVelocity;
     }
 
-    //THIS SHIT TOOK MY WHOLE NIGHT
+    //THIS WORK IF ART TOOK MY WHOLE NIGHT
     private SwerveModuleState applySecondOrderKinematics(SwerveModuleState state) {
         double vmx = state.speedMetersPerSecond * Math.cos(state.angle.getRadians());
         double vmy = state.speedMetersPerSecond * Math.sin(state.angle.getRadians());
