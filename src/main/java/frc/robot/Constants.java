@@ -20,7 +20,7 @@ public final class Constants {
         public static PIDConstants TRANSLATION_PID = new PIDConstants(3.0, 0.0, 0.0); // TODO: Tune PID values
         public static PIDConstants ROTATION_PID = new PIDConstants(3.0, 0.0, 0.0); // TODO: Tune PID values
         public static double LIMELIGHT_ALIGN_KP = 0.5;
-        public static boolean IS_FIELD_RELATIVE = true;
+        public static boolean IS_FIELD_RELATIVE = false;
 
         // TODO Offsets Will Be Entered
         public static double FRONT_LEFT_MODULE_STEER_OFFSET = 0.0;
@@ -140,12 +140,12 @@ public final class Constants {
 
     public static class EnabledParts {
         // Hope Not To Use...
-        public static boolean IS_LED_ENABLED = true;
-        public static boolean IS_COLOR_SENSOR_ENABLED = true;
-        public static boolean IS_INTAKE_ENABLED = true;
-        public static boolean IS_ALGEA_INTAKE_ENABLED = true;
-        public static boolean IS_INTAKE_MOVER_ENABLED = true;
-        public static boolean IS_ELEVATOR_ENABLED = true;
+        public static boolean IS_LED_ENABLED = false;
+        public static boolean IS_COLOR_SENSOR_ENABLED = false;
+        public static boolean IS_INTAKE_ENABLED = false;
+        public static boolean IS_ALGEA_INTAKE_ENABLED = false;
+        public static boolean IS_INTAKE_MOVER_ENABLED = false;
+        public static boolean IS_ELEVATOR_ENABLED = false;
         public static boolean IS_SWERVE_ENABLED = true;
     }
 
