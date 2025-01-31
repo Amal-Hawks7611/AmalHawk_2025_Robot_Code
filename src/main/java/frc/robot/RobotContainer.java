@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Controlls;
 import frc.robot.Constants.EnabledParts;
-import frc.robot.Constants.Swerve;
 import frc.robot.commands.AlgeaIntake.AlgeaIntake;
 import frc.robot.commands.AlgeaIntake.AlgeaOuttake;
 import frc.robot.commands.Elevator.*;
@@ -158,11 +157,7 @@ public class RobotContainer {
 
                 //Set Swerve Tele-Op Drive
                 if (EnabledParts.IS_SWERVE_ENABLED) {
-                        Command drive_command = swerveSubsystem.drive(
-                                        Controlls.DRIVER_CONTROLLER.getLeftY(),
-                                        Controlls.DRIVER_CONTROLLER.getLeftX(),
-                                        Controlls.DRIVER_CONTROLLER.getRightX(),
-                                        Swerve.IS_FIELD_RELATIVE);
+                        Command drive_command = swerveSubsystem.driveteleop();
                         swerveSubsystem.setDefaultCommand(drive_command);
                 }
 

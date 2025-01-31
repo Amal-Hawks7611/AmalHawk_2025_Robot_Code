@@ -39,6 +39,6 @@ public class e_level1 extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return OI.IS_PID_ENDED;
     }
 }

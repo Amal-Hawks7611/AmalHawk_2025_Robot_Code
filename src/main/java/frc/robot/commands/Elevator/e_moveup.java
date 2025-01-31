@@ -34,6 +34,6 @@ public class e_moveup extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return OI.IS_PID_ENDED;
     }
 }

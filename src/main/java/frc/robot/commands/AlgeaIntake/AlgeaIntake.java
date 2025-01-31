@@ -40,6 +40,6 @@ public class AlgeaIntake extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return !OI.IS_ALGEA_INTAKING;
     }
 }

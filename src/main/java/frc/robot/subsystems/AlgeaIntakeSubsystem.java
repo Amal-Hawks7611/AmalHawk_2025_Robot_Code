@@ -60,7 +60,7 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
 
     @Override
     public void periodic(){
-        SmartDashboard.putBoolean("IsIntaking", OI.IS_ALGEA_INTAKING);
+        SmartDashboard.putBoolean("IsAlgIntaking", OI.IS_ALGEA_INTAKING);
         SmartDashboard.putNumber("Algea Intake Leader Motor Value", getLeaderMotorEncoder());
     }
 }

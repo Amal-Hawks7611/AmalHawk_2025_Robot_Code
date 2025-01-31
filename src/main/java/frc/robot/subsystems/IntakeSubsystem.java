@@ -33,7 +33,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void Move() {
-        if(ColorMatcherSubsystem.CheckColor()){
+        if(timer.hasElapsed(1.5)){
             leaderMotor.stopMotor();
             OI.IS_INTAKING = false;
         }
@@ -42,7 +42,7 @@ public class IntakeSubsystem extends SubsystemBase {
         }}
     
     public void Shoot(){
-        if(!ColorMatcherSubsystem.CheckColor()){
+        if(timer.hasElapsed(1.5)){
             leaderMotor.stopMotor();
             OI.IS_INTAKING = false;
         }
@@ -52,7 +52,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     @Override
     public void periodic(){
-        SmartDashboard.putBoolean("IsIntaking", OI.IS_INTAKING);
+        SmartDashboard.putBoolean("IsCoralIntaking", OI.IS_INTAKING);
         SmartDashboard.putNumber("Intake Leader Motor Value", getLeaderMotorEncoder());
     }
 }

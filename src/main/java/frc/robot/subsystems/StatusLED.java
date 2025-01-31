@@ -55,6 +55,16 @@ public class StatusLED extends SubsystemBase {
         led.start();
     }
 
+    public void setAlgeaIntake() {
+        if (led == null || buffer == null) {
+            System.err.println("LED or buffer is not initialized!");
+            return;
+        }
+        LedSubsystem.ALGEA_INTAKE_COLOR.applyTo(buffer);
+        led.setData(buffer);
+        led.start();
+    }
+
     public void setIntake() {
         if (led == null || buffer == null) {
             System.err.println("LED or buffer is not initialized!");
@@ -71,8 +81,10 @@ public class StatusLED extends SubsystemBase {
                 setProcess();
             } else if (OI.IS_SWERVE_FOCUSED) {
                 setFocus();
-            } else if (OI.IS_INTAKING || OI.IS_ALGEA_INTAKING) {
+            } else if (OI.IS_INTAKING) {
                 setIntake();
+            } else if(OI.IS_ALGEA_INTAKING){
+                setAlgeaIntake();
             } else {
                 setDefault();
             }

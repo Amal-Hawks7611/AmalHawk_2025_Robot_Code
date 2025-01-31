@@ -6,6 +6,7 @@ import frc.robot.Constants.OI;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix6.StatusSignal;
@@ -16,14 +17,19 @@ public class IntakeMoverSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     private StatusSignal<Angle> leaderMotorPosition;
 
+    public double simEncoder;
+
     public IntakeMoverSubsystem() {
         leaderMotor = new TalonFX(IntakeMover.LEADER_MOTOR_PORT);
         leaderMotorPosition = leaderMotor.getPosition();
+        simEncoder = 0;
         resetEncoders();
     }
 
     public double getLeaderMotorEncoder() {
-        return leaderMotorPosition.refresh().getValueAsDouble();
+        if(RobotBase.isSimulation()){return simEncoder;}
+        else{return leaderMotorPosition.refresh().getValueAsDouble();}
+        
     }
 
     public void resetEncoders() {
@@ -32,6 +38,7 @@ public class IntakeMoverSubsystem extends SubsystemBase {
 
     public void manualControl(double speed) {
         leaderMotor.set(speed);
+        simEncoder+=speed;
     }
 
     //OCALPID
@@ -45,9 +52,11 @@ public class IntakeMoverSubsystem extends SubsystemBase {
                 } else {
                     if(leaderPosition > setpoint){
                         leaderMotor.set(-speed);
+                        simEncoder-=speed;
                     }
                     else{
                         leaderMotor.set(speed);
+                        simEncoder+=speed;
                     }
                 }
             }

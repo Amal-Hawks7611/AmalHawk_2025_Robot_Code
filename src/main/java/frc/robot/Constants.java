@@ -63,6 +63,7 @@ public final class Constants {
         public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(Color.kPurple);
         public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(Color.kGreen);
         public static LEDPattern INTAKE_COLOR = LEDPattern.solid(Color.kYellow);
+        public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(Color.kAqua);
         public static LEDPattern BREATHE_COLOR = LEDPattern.solid(Color.kWhite);
     }
 
@@ -106,13 +107,13 @@ public final class Constants {
         public static double OCAL_PID_TOLERANCE_VALUE = 5;
 
         // TODO Encoder Values Will Be Updated
-        public static double INTAKE_PROCESSOR_VALUE = 50;
-        public static double INTAKE_SOURCE_VALUE = 100;
-        public static double INTAKE_ALGEA_VALUE = 150;
-        public static double INTAKE_REEFSCAPE_VALUE = 100;
-        public static double INTAKE_CORAL_VALUE = 200;
-        public static double INTAKE_L4_VALUE = 350;
-        public static double INTAKE_NET_VALUE = 400;
+        public static double INTAKE_PROCESSOR_VALUE = 30;
+        public static double INTAKE_SOURCE_VALUE = 30;
+        public static double INTAKE_ALGEA_VALUE = 30;
+        public static double INTAKE_REEFSCAPE_VALUE = 20;
+        public static double INTAKE_CORAL_VALUE = 30;
+        public static double INTAKE_L4_VALUE = 60;
+        public static double INTAKE_NET_VALUE = 50;
     }
 
     public static class Colormatcher {

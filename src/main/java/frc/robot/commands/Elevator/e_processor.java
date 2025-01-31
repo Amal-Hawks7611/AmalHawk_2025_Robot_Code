@@ -36,10 +36,11 @@ public class e_processor extends Command {
         elevatorSubsystem.followerMotor.stopMotor();
         OI.IS_PID_ENDED = false;
         OI.IS_PROCESSING = false;
+        System.out.println(OI.IS_PID_ENDED);
     }
 
     @Override
     public boolean isFinished() {
-        return false;
+        return OI.IS_PID_ENDED;
     }
 }

@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.Controlls;
 import frc.robot.Constants.Swerve;
 import frc.robot.Constants.SwervePorts;
 import frc.robot.LimelightHelpers;
@@ -173,6 +174,41 @@ public class SwerveSubsystem extends SubsystemBase {
             frontRight.setDesiredState(applySecondOrderKinematics(swerveModuleStates[1]));
             backLeft.setDesiredState(applySecondOrderKinematics(swerveModuleStates[2]));
             backRight.setDesiredState(applySecondOrderKinematics(swerveModuleStates[3]));
+
+            SmartDashboard.putString("FL Desired State", swerveModuleStates[0].toString());
+            SmartDashboard.putString("FR Desired State", swerveModuleStates[1].toString());
+            SmartDashboard.putString("BL Desired State", swerveModuleStates[2].toString());
+            SmartDashboard.putString("BR Desired State", swerveModuleStates[3].toString());
+        });
+    }
+
+    public Command driveteleop() {
+        return run(() -> {
+            double xSpeed = Controlls.DRIVER_CONTROLLER.getLeftX()*3 ;
+            double ySpeed = Controlls.DRIVER_CONTROLLER.getLeftY()*3;
+            double rot = Controlls.DRIVER_CONTROLLER.getRawAxis(3)*3;
+
+            boolean fieldRelative = Swerve.IS_FIELD_RELATIVE;
+            double currentYaw = -gyro.getYaw();
+
+            SmartDashboard.putNumber("Drive/X Speed", xSpeed);
+            SmartDashboard.putNumber("Drive/Y Speed", ySpeed);
+            SmartDashboard.putNumber("Drive/Rotation Speed", rot);
+            SmartDashboard.putBoolean("Drive/Field Relative", fieldRelative);
+            SmartDashboard.putNumber("Drive/Gyro Yaw", currentYaw);
+
+            ChassisSpeeds speeds = fieldRelative
+                ? ChassisSpeeds.fromFieldRelativeSpeeds(
+                      xSpeed, ySpeed, rot, Rotation2d.fromDegrees(currentYaw))
+                : new ChassisSpeeds(xSpeed, ySpeed, rot);
+
+            var swerveModuleStates = kinematics.toSwerveModuleStates(speeds);
+            SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, 3.0);
+
+            frontLeft.setDesiredState(swerveModuleStates[0]);
+            frontRight.setDesiredState(swerveModuleStates[1]);
+            backLeft.setDesiredState(swerveModuleStates[2]);
+            backRight.setDesiredState(swerveModuleStates[3]);
 
             SmartDashboard.putString("FL Desired State", swerveModuleStates[0].toString());
             SmartDashboard.putString("FR Desired State", swerveModuleStates[1].toString());

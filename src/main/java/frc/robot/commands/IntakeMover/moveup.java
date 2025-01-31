@@ -23,7 +23,6 @@ public class moveup extends Command {
     public void execute() {
         if(OI.IS_INTAKE_MOVING){
             intakeMoverSubsystem.manualControl(IntakeMover.INTAKE_MOVER_SPEED);
-            System.out.println(OI.IS_INTAKE_MOVING);
         }
         else{
             this.end(false);

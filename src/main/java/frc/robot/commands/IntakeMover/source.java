@@ -21,7 +21,7 @@ public class source extends Command {
 
     @Override
     public void execute() {
-        if(!OI.IS_INTAKE_MOVING){
+        if(OI.IS_INTAKE_MOVING){
             intakeMoverSubsystem.MoveIT(IntakeMover.INTAKE_MOVER_SPEED, IntakeMover.INTAKE_SOURCE_VALUE);
         }
         else{
@@ -36,6 +36,6 @@ public class source extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return !OI.IS_INTAKE_MOVING;
     }
 }
