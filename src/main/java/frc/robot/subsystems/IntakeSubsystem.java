@@ -47,7 +47,7 @@ public class IntakeSubsystem extends SubsystemBase {
             OI.IS_INTAKING = false;
         }
         else{
-            leaderMotor.set(-Intake.OUTTAKE_SPEED);
+            leaderMotor.set(Intake.OUTTAKE_SPEED);
         }
     }
     @Override
