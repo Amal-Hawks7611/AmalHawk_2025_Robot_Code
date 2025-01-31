@@ -15,14 +15,15 @@ public class moveup extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("Intake Is Moving Down Manually");
+        System.out.println("Intake Is Moving Up Manually");
         OI.IS_INTAKE_MOVING = true;
     }
 
     @Override
     public void execute() {
-        if(!OI.IS_INTAKE_MOVING){
+        if(OI.IS_INTAKE_MOVING){
             intakeMoverSubsystem.manualControl(IntakeMover.INTAKE_MOVER_SPEED);
+            System.out.println(OI.IS_INTAKE_MOVING);
         }
         else{
             this.end(false);
@@ -32,6 +33,7 @@ public class moveup extends Command {
     @Override
     public void end(boolean interrupted) {
         intakeMoverSubsystem.leaderMotor.stopMotor();
+        OI.IS_INTAKE_MOVING = false;
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 //ALL ROBOT SETTINGS ARE DEFINED HERE. IF YOU DON'T KNOW WHAT YOU ARE DOING, DON'T TOUCH ANYTHING!!
@@ -121,17 +121,17 @@ public final class Constants {
     }
 
     public static class Controlls {
-        public static CommandXboxController DRIVER_CONTROLLER = new CommandXboxController(
-                OI.DRIVER_CONTROLLER_PORT);
-
-        public static Trigger ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.rightTrigger();
-        public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.leftTrigger();
-        public static Trigger INTAKE_MOVE_UP = DRIVER_CONTROLLER.rightBumper();
-        public static Trigger INTAKE_MOVE_DOWN = DRIVER_CONTROLLER.leftBumper();
-        public static Trigger ALGEA_PROCESSOR = DRIVER_CONTROLLER.a();
-        public static Trigger ALGEA_INTAKE_MIDDLE = DRIVER_CONTROLLER.x();
-        public static Trigger ALGEA_INTAKE_DOWN = DRIVER_CONTROLLER.b();
-        public static Trigger ALGEA_NET = DRIVER_CONTROLLER.y();
+        public static CommandPS5Controller DRIVER_CONTROLLER = new CommandPS5Controller(OI.DRIVER_CONTROLLER_PORT);
+              
+        //For TEU
+        public static Trigger ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.R2();
+        public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.L2();
+        public static Trigger INTAKE_MOVE_UP = DRIVER_CONTROLLER.R1();
+        public static Trigger INTAKE_MOVE_DOWN = DRIVER_CONTROLLER.L1();
+        public static Trigger ALGEA_PROCESSOR = DRIVER_CONTROLLER.cross();
+        public static Trigger ALGEA_INTAKE_MIDDLE = DRIVER_CONTROLLER.square();
+        public static Trigger ALGEA_INTAKE_DOWN = DRIVER_CONTROLLER.circle();
+        public static Trigger ALGEA_NET = DRIVER_CONTROLLER.triangle();
         public static Trigger L1 = DRIVER_CONTROLLER.povDown();
         public static Trigger L2 = DRIVER_CONTROLLER.povLeft();
         public static Trigger L3 = DRIVER_CONTROLLER.povUp();
@@ -141,12 +141,12 @@ public final class Constants {
 
     public static class EnabledParts {
         // Hope Not To Use...
-        public static boolean IS_LED_ENABLED = false;
-        public static boolean IS_COLOR_SENSOR_ENABLED = false;
-        public static boolean IS_INTAKE_ENABLED = false;
-        public static boolean IS_ALGEA_INTAKE_ENABLED = false;
-        public static boolean IS_INTAKE_MOVER_ENABLED = false;
-        public static boolean IS_ELEVATOR_ENABLED = false;
+        public static boolean IS_LED_ENABLED = true;
+        public static boolean IS_COLOR_SENSOR_ENABLED = true;
+        public static boolean IS_INTAKE_ENABLED = true;
+        public static boolean IS_ALGEA_INTAKE_ENABLED = true;
+        public static boolean IS_INTAKE_MOVER_ENABLED = true;
+        public static boolean IS_ELEVATOR_ENABLED = true;
         public static boolean IS_SWERVE_ENABLED = true;
     }
 

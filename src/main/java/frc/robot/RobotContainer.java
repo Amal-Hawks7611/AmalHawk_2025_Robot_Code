@@ -161,7 +161,7 @@ public class RobotContainer {
                         Command drive_command = swerveSubsystem.drive(
                                         Controlls.DRIVER_CONTROLLER.getLeftY(),
                                         Controlls.DRIVER_CONTROLLER.getLeftX(),
-                                        Controlls.DRIVER_CONTROLLER.getRawAxis(2),
+                                        Controlls.DRIVER_CONTROLLER.getRightX(),
                                         Swerve.IS_FIELD_RELATIVE);
                         swerveSubsystem.setDefaultCommand(drive_command);
                 }

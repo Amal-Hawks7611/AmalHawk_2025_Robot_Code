@@ -21,7 +21,7 @@ public class movedown extends Command {
 
     @Override
     public void execute() {
-        if(!OI.IS_INTAKE_MOVING){
+        if(OI.IS_INTAKE_MOVING){
             intakeMoverSubsystem.manualControl(-IntakeMover.INTAKE_MOVER_SPEED);
         }
         else{
@@ -32,6 +32,7 @@ public class movedown extends Command {
     @Override
     public void end(boolean interrupted) {
         intakeMoverSubsystem.leaderMotor.stopMotor();
+        OI.IS_INTAKE_MOVING = false;
     }
 
     @Override
