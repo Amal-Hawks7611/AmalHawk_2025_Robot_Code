@@ -31,43 +31,35 @@
 
 - Easy Pathmaking with Sequential Command Groups.
 
-##  Control Assignment(Will Be Changed)
+##  Control Assignment(Can Be Changed From Constants)
 
 ### Controller
 
 **Manual Controll**
-- **Sticks** = SwerveDrive
 
+- **Sticks** = SwerveDrive
 - **L2** = Move Elevator Down Manually (For Tuning)
 - **R2** = Move Elevator Up Manually (For Tuning)
 - **L1** = Move Intake Down
 - **R1** = Move Intake Up
 
 **Algea Controll**
-- **A** = Processor
 
+- **A** = Processor
 - **Y** = Net
 
 **Intake Controll**
 
-- **PovUp** = Algea Intake From Up Level
-
-- **PovDown** = Algea Intake From Down Level
-
-- **PovLeft** = Coral Intake From Source
-
-- **PovRight** = Led Disco Mode!
-
-**Logitech 3D Joystick(As A Second Controller)**
-**Manual Controll**
-- **Y axis** = Move Elevator
+- **B** = Algea Intake From Up Level
+- **X** = Algea Intake From Down Level
+- **B10** = Coral Intake From Source
 
 **Score Controll**
-- **B7** = L1
-- **B8** = L2
-- **B9** = L3
-- **B10** = L4
-- **B11** = Reset NavX
+
+- **PovDown** = L1
+- **PovLeft** = L2
+- **PovUp** = L3
+- **PovDown** = L4
 
 ## Code Structure
 ### Subsystems
