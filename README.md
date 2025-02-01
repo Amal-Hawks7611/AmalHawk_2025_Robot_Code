@@ -107,6 +107,8 @@
 ### 📝 Original Path:
 
 ![Original Path](https://i.ibb.co/NnGpsJMm/image.png)
+---
+
 ### ✨ Modified Path:
 
 ![ModifiedPath](https://i.ibb.co/fVVF3bSX/image.png)
