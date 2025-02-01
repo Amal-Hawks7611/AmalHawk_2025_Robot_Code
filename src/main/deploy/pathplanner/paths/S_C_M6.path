@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.242,
-        "y": 7.059
+        "x": 1.11,
+        "y": 6.984
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.7574697276016389,
-        "y": 7.405488653762543
+        "x": 1.811113932793261,
+        "y": 6.545678940623317
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.672,
-        "y": 5.164
+        "x": 3.99,
+        "y": 5.23
       },
       "prevControl": {
-        "x": 3.8296865784195395,
-        "y": 4.939740853551353
+        "x": 3.149660899126406,
+        "y": 5.757429854976297
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,10 +45,10 @@
     "rotation": -59.99999999999999
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Sourceden_Donus_Kombinasyonlari",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 124.02
+    "rotation": -52.901
   },
   "useDefaultConstraints": true
 }

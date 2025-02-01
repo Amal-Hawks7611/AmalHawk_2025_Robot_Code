@@ -1,83 +1,115 @@
 
-#  AMAL HAWKS 2025 ROBOT CODE
+# 🐦️ AMAL HAWKS 2025 ROBOT CODE
 
-  
 
-#  What Can It Do?
+## 🚀 What Can It Do?
 
-##  Commdand Groups:
+### 📌 Command Groups:
 
-  
+- Intake **Coral** from Source
+- Intake **Algae** from Reefscape (Up and Down Levels)
+- Score **Coral** to **L1, L2, L3, L4**
+- Score **Algae** to **Net**
+- Score **Algae** to **Processor**
 
-- Intake Coral From Source
+### 🔧 Extra Features:
 
-- Intake Algea From Reefscape Up And Down Levels
+- **Easy to Tune** – Everything runs from **Constants**
+- **Fully Controllable** – All subsystems can be easily controlled
+- **Simple Pathmaking** – Uses **Sequential Command Groups** for ease of use
 
-- Score Coral to L1, L2, L3 , L4
+---
 
-- Score Algea to Net
+# 🎮 TELE-OP
 
-- Score Algea to Processor
+### 🎛 Controller Mapping
 
-  
+#### **Manual Control**
+- 🎮 **Left Stick / Right Stick** → **Swerve Drive**
+- 🎮 **L2** → Move Elevator **Down** (Manual Tuning)
+- 🎮 **R2** → Move Elevator **Up** (Manual Tuning)
+- 🎮 **L1** → Move **Intake Down**
+- 🎮 **R1** → Move **Intake Up**
 
-##  Extra Feautures:
+#### **Algae Control**
+- 🎮 **A** → Score to **Processor**
+- 🎮 **Y** → Score to **Net**
 
-  
+#### **Intake Control**
+- 🎮 **B** → Intake **Algae (Upper Level)**
+- 🎮 **X** → Intake **Algae (Lower Level)**
+- 🎮 **B10** → Intake **Coral from Source**
 
-- Easy to Tune. Everything is Running From Constants
+#### **Scoring Control**
+- 🎮 **PovDown** → Score to **L1**
+- 🎮 **PovLeft** → Score to **L2**
+- 🎮 **PovUp** → Score to **L3**
+- 🎮 **PovRight** → Score to **L4**
 
-- All Subsystems can Easily Controlled.
+---
 
-- Easy Pathmaking with Sequential Command Groups.
+# 📂 Code Structure
 
-##  Control Assignment(Can Be Changed From Constants)
+## **🛠 Subsystems**
 
-### Controller
+### 🔹 **SwerveSubsystem**
+- Uses **WPILib kinematics algorithm**
+- Enhanced autonomous stability and speed using **Second Order Kinematics**
+- Implements **odometry, pose estimation, and SwerveStates** for perfect **autonomous movement** and **smooth tele-op**
 
-**Manual Controll**
+### 🔹 **StatusLED**
+- Uses **AddressableLED** and **LedBuffer** system
+- Displays **Limelight Focus, Intake Status, Processing Status**
 
-- **Sticks** = SwerveDrive
-- **L2** = Move Elevator Down Manually (For Tuning)
-- **R2** = Move Elevator Up Manually (For Tuning)
-- **L1** = Move Intake Down
-- **R1** = Move Intake Up
+### 🔹 **ElevatorSubsystem**
+- Powered by **two Kraken X60 motors**
+- Uses a custom PID system called **OcalPID**, designed around motor **position** instead of speed
+- Optimized for Kraken's **high encoder resolution**
 
-**Algea Controll**
+### 🔹 **IntakeMoverSubsystem**
+- Similar in function to **ElevatorSubsystem**
 
-- **A** = Processor
-- **Y** = Net
+### 🔹 **IntakeSubsystem**
+- A regular **intake** but with enhanced control features
+- Allows tuning of **Intake Time, Intake Speed, and Outtake Speed**
 
-**Intake Controll**
+### 🔹 **AlgaeIntakeSubsystem**
+- Identical to **IntakeSubsystem**, but optimized for **Algae intake**
 
-- **B** = Algea Intake From Up Level
-- **X** = Algea Intake From Down Level
-- **B10** = Coral Intake From Source
+---
 
-**Score Controll**
+# 🤖 Autonomous Mode
 
-- **PovDown** = L1
-- **PovLeft** = L2
-- **PovUp** = L3
-- **PovDown** = L4
+### 🔄 **Dynamic Planning**
+- Allows last-minute adjustments before a match
+- Prevents collisions by adapting slot assignments
+- Each **coral slot** is numbered, enabling flexible path planning
 
-## Code Structure
-### Subsystems
+## **📌 How It Works**
 
-- **SwerveSubsystem:**
-Used only WPILib kinematics algorithm. Enhanced autonomous stability and speed manipulated with advanced kinematics equation called **Second Order Kinematics.** Used **odometry, pose estimating and SwerveStates** for perfect autonomous and smooth tele-op.
+1. **Coral Slots & Paths**
+   - Each **coral slot (L1, L2, L3, etc.)** is pre-defined
+   - Paths are designed with placeholders for easy reassignment
 
-- **StatusLED**
- Used AdressableLED and LedBuffer system. It's capable of showing **Limelight Focus, Intake Situation, Process Situation**
+2. **Collision Avoidance**
+   - If an alliance partner is targeting the same slot, reassigning slots prevents overlap
+   - Example: Changing `M3 → M4` avoids conflicts
 
-- **ElevatorSubsystem**
-Used two KrakenX60 motors. I've created a special PIDControll system called **OcalPID** based on motor position instead of motor speed. My point of creating that was kraken's perfect encoder resolution.
+3. **Last-Minute Adjustments**
+   - Select which corals to fill before the match
+   - Modifying a command in `SequentialGroup` dynamically changes the firing location
+   - Example: Changing `L3 → L4` redirects the coral to `L4`
 
-- **IntakeMoverSubsystem**
-There isn't any big difference from **ElevatorSubsystem.**
+---
 
-- **IntakeSubsystem**
-Just a regular intake but it's more controllable. You can controll: **IntakeTime, intakeSpeed and outtakeSpeed**
+## **💻 Example Code Adjustment**
 
-- **AlgeaIntakeSubsystem**
-Same code with IntakeSubsystem but **made for algea intake constants.**
+### 📝 Original Path:
+
+![Original Path](https://i.ibb.co/NnGpsJMm/image.png)
+### ✨ Modified Path:
+
+![ModifiedPath](https://i.ibb.co/fVVF3bSX/image.png)
+---
+
+🔥 **Amal Hawks 2025 is ready to dominate the competition!** 🚀

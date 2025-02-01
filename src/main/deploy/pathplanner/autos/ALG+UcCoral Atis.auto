@@ -7,73 +7,187 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StarttanAlg"
+            "pathName": "SAG_B_M_M3"
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "intakeAlgeaMiddle"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "AlgdenCoral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Coral_l4"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "CoraldanKaynak"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "getSource"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eAlgeaMiddle"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imAlgea"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "aIntake"
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "KaynaktanCoral"
+            "pathName": "A_C_M3"
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Coral_l3"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eL3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imCoral"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "cOuttake"
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "CoraldanKaynak"
+            "pathName": "C_S_M3"
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "getSource"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eSource"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imSource"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "cIntake"
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "KaynaktanCoral"
+            "pathName": "S_C_M3"
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Coral_l2"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eL3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imCoral"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "cOuttake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "C_S_M3"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eSource"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imSource"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "cIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S_C_M4"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "cOuttake"
+                }
+              }
+            ]
           }
         }
       ]

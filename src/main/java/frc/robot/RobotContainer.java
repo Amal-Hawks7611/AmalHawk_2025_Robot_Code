@@ -81,12 +81,37 @@ public class RobotContainer {
         public final Command Coral_l4;
 
         public RobotContainer() {
+                // Add Commands to the PathPlanner
+                NamedCommands.registerCommand("eProcessor", new e_processor(elevatorSubsystem));
+                NamedCommands.registerCommand("eAlgeaMiddle", new e_algea(elevatorSubsystem, true));
+                NamedCommands.registerCommand("eAlgeaDown", new e_algea(elevatorSubsystem, false));
+                NamedCommands.registerCommand("eSource", new e_source(elevatorSubsystem));
+                NamedCommands.registerCommand("eNet", new e_net(elevatorSubsystem));
+                NamedCommands.registerCommand("eL1", new e_level1(elevatorSubsystem));
+                NamedCommands.registerCommand("eL2", new e_level2(elevatorSubsystem));
+                NamedCommands.registerCommand("eL3", new e_level3(elevatorSubsystem));
+                NamedCommands.registerCommand("eL4", new e_level4(elevatorSubsystem));
+
+                NamedCommands.registerCommand("imProcessor", new processor(intakeMoverSubsystem));
+                NamedCommands.registerCommand("imSource", new source(intakeMoverSubsystem));
+                NamedCommands.registerCommand("imReefscape", new reefscape(intakeMoverSubsystem));
+                NamedCommands.registerCommand("imAlgea", new algea(intakeMoverSubsystem));
+                NamedCommands.registerCommand("imCoral", new korel(intakeMoverSubsystem));
+                NamedCommands.registerCommand("imL4", new l4(intakeMoverSubsystem));
+                NamedCommands.registerCommand("imNet", new net(intakeMoverSubsystem));
+
+                NamedCommands.registerCommand("aIntake", new AlgeaIntake(algeaIntakeSubsystem));
+                NamedCommands.registerCommand("aOuttake", new AlgeaOuttake(algeaIntakeSubsystem));
+
+                NamedCommands.registerCommand("cIntake", new Intake(intakeSubsystem));
+                NamedCommands.registerCommand("cOuttake", new Outtake(intakeSubsystem));
+
                 //Definate Commands
                 elevator_down = new e_movedown(elevatorSubsystem);
                 elevator_up = new e_moveup(elevatorSubsystem);
                 e_processor = new e_processor(elevatorSubsystem);
                 e_algea_middle = new e_algea(elevatorSubsystem, true);
-                e_algea_down = new e_algea(elevatorSubsystem, true);
+                e_algea_down = new e_algea(elevatorSubsystem, false);
                 e_source = new e_source(elevatorSubsystem);
                 e_net = new e_net(elevatorSubsystem);
                 e_l1 = new e_level1(elevatorSubsystem);
@@ -164,20 +189,6 @@ public class RobotContainer {
                 //PathPlanner Autonomous Chooser
                 autoChooser = AutoBuilder.buildAutoChooser();
                 SmartDashboard.putData("Auto Chooser", autoChooser);
-
-                // Add Commands to the PathPlanner
-                NamedCommands.registerCommand("intakeAlgeaMiddle", intakeAlgeaMiddle);
-                NamedCommands.registerCommand("intakeAlgeaDown", intakeAlgeaDown);
-                NamedCommands.registerCommand("getSource", getSource);
-
-                NamedCommands.registerCommand("AlgeaNet", AlgeaNet);
-                NamedCommands.registerCommand("AlgeaProcessor", AlgeaProcessor);
-
-                NamedCommands.registerCommand("Coral_l1", Coral_l1);
-                NamedCommands.registerCommand("Coral_l2", Coral_l2);
-                NamedCommands.registerCommand("Coral_l3", Coral_l3);
-                NamedCommands.registerCommand("Coral_l4", Coral_l4);
-
         }
 
         private void configureButtonBindings() {

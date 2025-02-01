@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.672,
-        "y": 5.164
+        "x": 5.009,
+        "y": 2.751
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5252290491996026,
-        "y": 5.592790022574043
+        "x": 5.557041435747409,
+        "y": 2.9956922450416816
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.242,
-        "y": 7.059
+        "x": 1.329,
+        "y": 0.829
       },
       "prevControl": {
-        "x": 2.5795462710688044,
-        "y": 5.794598627639042
+        "x": 1.0852945033264418,
+        "y": 0.773253871066285
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 124.02
+    "rotation": 52.901
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Source_Gidis_Kombinasyonları",
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": -59.99999999999999
+    "velocity": 0,
+    "rotation": 119.99999999999999
   },
   "useDefaultConstraints": true
 }

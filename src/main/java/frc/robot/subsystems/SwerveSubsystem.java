@@ -121,7 +121,7 @@ public class SwerveSubsystem extends SubsystemBase {
     public void driveRobotRelative(ChassisSpeeds speeds) {
         //Turn Speed, Given By PathPlanner, To The Kinematics
         SwerveModuleState[] swerveModuleStates = kinematics.toSwerveModuleStates(speeds);
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, 3.0);
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Swerve.MAX_SPEED_METERS_PER_SECOND);
 
         //This Manipulates The Speed And Robot Angle
         frontLeft.setDesiredState(applySecondOrderKinematics(swerveModuleStates[0]));
@@ -168,7 +168,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 : new ChassisSpeeds(xSpeed, ySpeed, rot);
 
             var swerveModuleStates = kinematics.toSwerveModuleStates(speeds);
-            SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, 3.0);
+            SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Swerve.MAX_SPEED_METERS_PER_SECOND);
 
             frontLeft.setDesiredState(applySecondOrderKinematics(swerveModuleStates[0]));
             frontRight.setDesiredState(applySecondOrderKinematics(swerveModuleStates[1]));
@@ -184,9 +184,9 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public Command driveteleop() {
         return run(() -> {
-            double xSpeed = Controlls.DRIVER_CONTROLLER.getLeftX()*3 ;
-            double ySpeed = Controlls.DRIVER_CONTROLLER.getLeftY()*3;
-            double rot = Controlls.DRIVER_CONTROLLER.getRawAxis(3)*3;
+            double xSpeed = Controlls.DRIVER_CONTROLLER.getLeftX()* Swerve.MAX_SPEED_METERS_PER_SECOND;
+            double ySpeed = Controlls.DRIVER_CONTROLLER.getLeftY()* Swerve.MAX_SPEED_METERS_PER_SECOND;
+            double rot = Controlls.DRIVER_CONTROLLER.getRawAxis(3)* Swerve.MAX_SPEED_METERS_PER_SECOND;
 
             boolean fieldRelative = Swerve.IS_FIELD_RELATIVE;
             double currentYaw = -gyro.getYaw();
@@ -203,7 +203,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 : new ChassisSpeeds(xSpeed, ySpeed, rot);
 
             var swerveModuleStates = kinematics.toSwerveModuleStates(speeds);
-            SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, 3.0);
+            SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Swerve.MAX_SPEED_METERS_PER_SECOND);
 
             frontLeft.setDesiredState(swerveModuleStates[0]);
             frontRight.setDesiredState(swerveModuleStates[1]);

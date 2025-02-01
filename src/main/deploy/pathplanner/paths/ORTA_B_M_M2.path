@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.8,
-        "y": 5.3
+        "x": 7.566,
+        "y": 3.989
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.031928063693545,
-        "y": 5.20667597698683
+        "x": 7.905374292617234,
+        "y": 4.285985739723273
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.672,
-        "y": 5.164
+        "x": 5.8557153031632705,
+        "y": 4.0100027574075225
       },
       "prevControl": {
-        "x": 3.408264571798022,
-        "y": 5.256640887932297
+        "x": 5.515517540393863,
+        "y": 3.9774385853579663
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -58.99286471352882
+    "rotation": 180.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Baslangic_Kombinasyonlari",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -59.99999999999999
+    "rotation": -0.0
   },
   "useDefaultConstraints": true
 }
