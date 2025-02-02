@@ -29,7 +29,8 @@ import frc.robot.commands.Trajectory.FollowTrajectoryCommand;
 
 public class RobotContainer {
         private final SendableChooser<Command> autoChooser;
-        public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+        public final Controlls controls = new Controlls();
+        public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem(controls);
         private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
         public final IntakeMoverSubsystem intakeMoverSubsystem = new IntakeMoverSubsystem();
         public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
