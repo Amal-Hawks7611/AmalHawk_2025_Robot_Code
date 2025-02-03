@@ -40,7 +40,6 @@ public class SwerveSubsystem extends SubsystemBase {
     public static final SwerveDriveKinematics kinematics;
     private final SwerveDriveOdometry odometry;
     public final SwerveDrivePoseEstimator poseEstimator;
-    private final Controlls controls;
 
     static {
         kinematics = new SwerveDriveKinematics(
@@ -51,9 +50,8 @@ public class SwerveSubsystem extends SubsystemBase {
         );
     }
 
-    public SwerveSubsystem(Controlls controls) {
+    public SwerveSubsystem() {
         gyro = new AHRS(AHRS.NavXComType.kMXP_SPI);
-        this.controls = controls;
 
         //Define The Modules
         frontLeft = new SwerveModule(
@@ -186,9 +184,9 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public Command driveteleop() {
         return run(() -> {
-            double xSpeed = controls.getLeftX()* Swerve.MAX_SPEED_METERS_PER_SECOND;
-            double ySpeed = controls.getLeftY()* Swerve.MAX_SPEED_METERS_PER_SECOND;
-            double rot = controls.getRawAxis(3)* Swerve.MAX_SPEED_METERS_PER_SECOND;
+            double xSpeed = Controlls.DRIVER_CONTROLLER.getLeftX()* Swerve.MAX_SPEED_METERS_PER_SECOND;
+            double ySpeed = Controlls.DRIVER_CONTROLLER.getLeftY()* Swerve.MAX_SPEED_METERS_PER_SECOND;
+            double rot = Controlls.DRIVER_CONTROLLER.getRawAxis(Controlls.SWERVE_RIGHT_X_AXIS)* Swerve.MAX_SPEED_METERS_PER_SECOND;
 
             boolean fieldRelative = Swerve.IS_FIELD_RELATIVE;
             double currentYaw = -gyro.getYaw();

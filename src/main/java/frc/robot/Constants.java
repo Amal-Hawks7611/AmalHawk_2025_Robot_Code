@@ -5,8 +5,6 @@ import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
-import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -124,104 +122,34 @@ public final class Constants {
     }
 
     public static class Controlls {
-        // For TEU
-        public static final boolean PS5 = false;
-        public static final boolean Xbox = true;
+        public static CommandXboxController DRIVER_CONTROLLER = new CommandXboxController(OI.DRIVER_CONTROLLER_PORT);
+              
+        //For TEU
+        public static Trigger ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.rightTrigger();
+        public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.leftTrigger();
+        public static Trigger INTAKE_MOVE_UP = DRIVER_CONTROLLER.rightBumper();
+        public static Trigger INTAKE_MOVE_DOWN = DRIVER_CONTROLLER.leftBumper();
+        public static Trigger ALGEA_PROCESSOR = DRIVER_CONTROLLER.a();
+        public static Trigger ALGEA_INTAKE_MIDDLE = DRIVER_CONTROLLER.x();
+        public static Trigger ALGEA_INTAKE_DOWN = DRIVER_CONTROLLER.b();
+        public static Trigger ALGEA_NET = DRIVER_CONTROLLER.y();
+        public static Trigger L1 = DRIVER_CONTROLLER.povDown();
+        public static Trigger L2 = DRIVER_CONTROLLER.povLeft();
+        public static Trigger L3 = DRIVER_CONTROLLER.povUp();
+        public static Trigger L4 = DRIVER_CONTROLLER.povRight();
+        public static Trigger GET_SOURCE = DRIVER_CONTROLLER.button(9);
+        public static int SWERVE_RIGHT_X_AXIS = 2;
+    }
 
-        public static Trigger ELEVATOR_MANUAL_UP;
-        public static Trigger ELEVATOR_MANUAL_DOWN;
-        public static Trigger INTAKE_MOVE_UP;
-        public static Trigger INTAKE_MOVE_DOWN;
-        public static Trigger ALGEA_PROCESSOR;
-        public static Trigger ALGEA_INTAKE_MIDDLE;
-        public static Trigger ALGEA_INTAKE_DOWN;
-        public static Trigger ALGEA_NET;
-        public static Trigger L1;
-        public static Trigger L2;
-        public static Trigger L3;
-        public static Trigger L4;
-        public static Trigger GET_SOURCE;
-
-        public CommandGenericHID DRIVER_CONTROLLER;
-
-        public Controlls() {
-            if (!OI.DRIVER_CONTROLLER_TYPE) {
-                final CommandPS5Controller DRIVER_CONTROLLER = new CommandPS5Controller(OI.DRIVER_CONTROLLER_PORT);
-                this.DRIVER_CONTROLLER = DRIVER_CONTROLLER;
-
-                ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.R2();
-                ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.L2();
-                INTAKE_MOVE_UP = DRIVER_CONTROLLER.R1();
-                INTAKE_MOVE_DOWN = DRIVER_CONTROLLER.L1();
-                ALGEA_PROCESSOR = DRIVER_CONTROLLER.cross();
-                ALGEA_INTAKE_MIDDLE = DRIVER_CONTROLLER.square();
-                ALGEA_INTAKE_DOWN = DRIVER_CONTROLLER.circle();
-                ALGEA_NET = DRIVER_CONTROLLER.triangle();
-                L1 = DRIVER_CONTROLLER.povDown();
-                L2 = DRIVER_CONTROLLER.povLeft();
-                L3 = DRIVER_CONTROLLER.povUp();
-                L4 = DRIVER_CONTROLLER.povRight();
-                GET_SOURCE = DRIVER_CONTROLLER.button(10);
-            }
-            if (OI.DRIVER_CONTROLLER_TYPE) {
-                final CommandXboxController DRIVER_CONTROLLER = new CommandXboxController(OI.DRIVER_CONTROLLER_PORT);
-                this.DRIVER_CONTROLLER = DRIVER_CONTROLLER;
-
-                ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.rightTrigger();
-                ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.leftTrigger();
-                INTAKE_MOVE_UP = DRIVER_CONTROLLER.rightBumper();
-                INTAKE_MOVE_DOWN = DRIVER_CONTROLLER.leftBumper();
-                ALGEA_PROCESSOR = DRIVER_CONTROLLER.a();
-                ALGEA_INTAKE_MIDDLE = DRIVER_CONTROLLER.x();
-                ALGEA_INTAKE_DOWN = DRIVER_CONTROLLER.b();
-                ALGEA_NET = DRIVER_CONTROLLER.y();
-                L1 = DRIVER_CONTROLLER.povDown();
-                L2 = DRIVER_CONTROLLER.povLeft();
-                L3 = DRIVER_CONTROLLER.povUp();
-                L4 = DRIVER_CONTROLLER.povRight();
-                GET_SOURCE = DRIVER_CONTROLLER.button(10);
-            }
-        }
-        
-        public double getLeftX() {
-            if (DRIVER_CONTROLLER instanceof CommandXboxController) {
-                return ((CommandXboxController)DRIVER_CONTROLLER).getLeftX();
-            } else {
-                return ((CommandPS5Controller)DRIVER_CONTROLLER).getLeftX();
-            }
-        }
-
-        public double getLeftY() {
-            if (DRIVER_CONTROLLER instanceof CommandXboxController) {
-                return ((CommandXboxController)DRIVER_CONTROLLER).getLeftY();
-            } else {
-                return ((CommandPS5Controller)DRIVER_CONTROLLER).getLeftY();
-            }
-        }
-
-        public double getRightX() {
-            if (DRIVER_CONTROLLER instanceof CommandXboxController) {
-                return ((CommandXboxController)DRIVER_CONTROLLER).getRightX();
-            } else {
-                return ((CommandPS5Controller)DRIVER_CONTROLLER).getRightX();
-            }
-        }
-
-        public double getRightY() {
-            if (DRIVER_CONTROLLER instanceof CommandXboxController) {
-                return ((CommandXboxController)DRIVER_CONTROLLER).getRightY();
-            } else {
-                return ((CommandPS5Controller)DRIVER_CONTROLLER).getRightY();
-            }
-        }
-
-        public double getRawAxis(int axis) {
-            if (DRIVER_CONTROLLER instanceof CommandXboxController) {
-                return ((CommandXboxController)DRIVER_CONTROLLER).getRawAxis(axis);
-            } else {
-                return ((CommandPS5Controller)DRIVER_CONTROLLER).getRawAxis(axis);
-            }
-        }
+    public static class Test_Controlls {
+        public static Trigger ELEVATOR_MANUAL_UP = Controlls.DRIVER_CONTROLLER.rightTrigger();
+        public static Trigger ELEVATOR_MANUAL_DOWN = Controlls.DRIVER_CONTROLLER.leftTrigger();
+        public static Trigger INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.rightBumper();
+        public static Trigger INTAKE_MOVE_DOWN = Controlls.DRIVER_CONTROLLER.leftBumper();
+        public static Trigger ALGEA_INTAKE = Controlls.DRIVER_CONTROLLER.x();
+        public static Trigger ALGEA_OUTTAKE = Controlls.DRIVER_CONTROLLER.b();
+        public static Trigger CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();
+        public static Trigger CORAL_OUTTAKE = Controlls.DRIVER_CONTROLLER.povRight();
     }
 
     public static class EnabledParts {
@@ -238,7 +166,6 @@ public final class Constants {
     public static final class OI {
         // General Robot Constants
         public static int DRIVER_CONTROLLER_PORT = 0;
-        public static boolean DRIVER_CONTROLLER_TYPE = Controlls.PS5;
         public static double ELEVATOR_SPEED = 0.5;
         public static boolean IS_TEST = false;
         public static boolean IS_PROCESSING = false;

@@ -15,7 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Controlls;
+import frc.robot.Constants.Test_Controlls;
 import frc.robot.Constants.EnabledParts;
+import frc.robot.Constants.OI;
 import frc.robot.commands.AlgeaIntake.AlgeaIntake;
 import frc.robot.commands.AlgeaIntake.AlgeaOuttake;
 import frc.robot.commands.Elevator.*;
@@ -29,8 +31,7 @@ import frc.robot.commands.Trajectory.FollowTrajectoryCommand;
 
 public class RobotContainer {
         private final SendableChooser<Command> autoChooser;
-        public final Controlls controls = new Controlls();
-        public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem(controls);
+        public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
         private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
         public final IntakeMoverSubsystem intakeMoverSubsystem = new IntakeMoverSubsystem();
         public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
@@ -193,22 +194,37 @@ public class RobotContainer {
         }
 
         private void configureButtonBindings() {
-                Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
-                Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
-                Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
-                Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
+                //Configure Button Bindings For Test And TeleOp Modes
+                if(OI.IS_TEST){
+                        Test_Controlls.ALGEA_INTAKE.onTrue(a_intake);
+                        Test_Controlls.ALGEA_OUTTAKE.onTrue(a_outtake);
 
-                Controlls.ALGEA_PROCESSOR.onTrue(AlgeaProcessor);
-                Controlls.ALGEA_INTAKE_MIDDLE.onTrue(intakeAlgeaMiddle);
-                Controlls.ALGEA_INTAKE_DOWN.onTrue(intakeAlgeaDown);
-                Controlls.ALGEA_NET.onTrue(AlgeaNet);
+                        Test_Controlls.CORAL_INTAKE.onTrue(c_intake);
+                        Test_Controlls.CORAL_OUTTAKE.onTrue(c_outtake);
 
-                Controlls.GET_SOURCE.onTrue(getSource);
+                        Test_Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
+                        Test_Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
 
-                Controlls.L4.onTrue(Coral_l4);
-                Controlls.L3.onTrue(Coral_l3);
-                Controlls.L2.onTrue(Coral_l2);
-                Controlls.L1.onTrue(Coral_l1);
+                        Test_Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
+                        Test_Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
+                }else{                
+                        Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
+                        Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
+                        Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
+                        Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
+
+                        Controlls.ALGEA_PROCESSOR.onTrue(AlgeaProcessor);
+                        Controlls.ALGEA_INTAKE_MIDDLE.onTrue(intakeAlgeaMiddle);
+                        Controlls.ALGEA_INTAKE_DOWN.onTrue(intakeAlgeaDown);
+                        Controlls.ALGEA_NET.onTrue(AlgeaNet);
+
+                        Controlls.GET_SOURCE.onTrue(getSource);
+
+                        Controlls.L4.onTrue(Coral_l4);
+                        Controlls.L3.onTrue(Coral_l3);
+                        Controlls.L2.onTrue(Coral_l2);
+                        Controlls.L1.onTrue(Coral_l1);
+                }
         }
 
         public Command getAutonomousCommand() {

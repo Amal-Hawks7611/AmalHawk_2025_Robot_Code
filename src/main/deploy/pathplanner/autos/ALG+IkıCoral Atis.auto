@@ -1,0 +1,137 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SAG_B_M_M3"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eAlgeaMiddle"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imAlgea"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "aIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "A_C_M3"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eL3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imCoral"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "cOuttake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "C_S_M3"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eSource"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imSource"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "cIntake"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S_C_M3"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "eL3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imCoral"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "cOuttake"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
