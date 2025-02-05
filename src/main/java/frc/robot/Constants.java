@@ -89,20 +89,20 @@ public final class Constants {
 
     public static class Intake {
         // Intake Motor Port
-        public static int LEADER_MOTOR_PORT = 0;
+        public static int INTAKE_LEADER_MOTOR_PORT = 2;
         public static double INTAKE_SPEED = 0.5;
         public static double OUTTAKE_SPEED = 0.3;
     }
 
     public static class AlgeaIntake {
         // Algea Intake Motor Port
-        public static int LEADER_MOTOR_PORT = 0; // Shoud Be Same With Intake
+        public static int ALGEA_LEADER_MOTOR_PORT = 3; // Shoud Be Same With Intake
         public static double INTAKE_SPEED = 0.5;
         public static double OUTTAKE_SPEED = 0.3;
     }
 
     public static class IntakeMover {
-        public static int LEADER_MOTOR_PORT = 0;
+        public static int IM_LEADER_MOTOR_PORT = 4;
         public static double INTAKE_MOVER_SPEED = 0.5;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.5;
 
@@ -140,15 +140,15 @@ public final class Constants {
     }
 
     public static class Test_Controlls {
-        public static Trigger ELEVATOR_MANUAL_UP = Controlls.DRIVER_CONTROLLER.rightTrigger();
-        public static Trigger ELEVATOR_MANUAL_DOWN = Controlls.DRIVER_CONTROLLER.leftTrigger();
-        public static Trigger INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.rightBumper();
-        public static Trigger INTAKE_MOVE_DOWN = Controlls.DRIVER_CONTROLLER.leftBumper();
-        public static Trigger ELEVATOR_ZERO = Controlls.DRIVER_CONTROLLER.y();
-        public static Trigger ALGEA_INTAKE = Controlls.DRIVER_CONTROLLER.x();
-        public static Trigger ALGEA_OUTTAKE = Controlls.DRIVER_CONTROLLER.b();
-        public static Trigger CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();
-        public static Trigger CORAL_OUTTAKE = Controlls.DRIVER_CONTROLLER.povRight();
+        public static Trigger T_ELEVATOR_MANUAL_UP = Controlls.DRIVER_CONTROLLER.rightTrigger();
+        public static Trigger T_ELEVATOR_MANUAL_DOWN = Controlls.DRIVER_CONTROLLER.leftTrigger();
+        public static Trigger T_INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.rightBumper();
+        public static Trigger T_INTAKE_MOVE_DOWN = Controlls.DRIVER_CONTROLLER.leftBumper();
+        public static Trigger T_ELEVATOR_ZERO = Controlls.DRIVER_CONTROLLER.y();
+        public static Trigger T_ALGEA_INTAKE = Controlls.DRIVER_CONTROLLER.x();
+        public static Trigger T_ALGEA_OUTTAKE = Controlls.DRIVER_CONTROLLER.b();
+        public static Trigger T_CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();
+        public static Trigger T_CORAL_OUTTAKE = Controlls.DRIVER_CONTROLLER.povRight();
     }
 
     public static class EnabledParts {

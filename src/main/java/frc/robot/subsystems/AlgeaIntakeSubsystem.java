@@ -20,7 +20,7 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
     public Timer timer = new Timer();
 
     public AlgeaIntakeSubsystem() {
-        leaderMotor = new TalonFX(AlgeaIntake.LEADER_MOTOR_PORT);
+        leaderMotor = new TalonFX(AlgeaIntake.ALGEA_LEADER_MOTOR_PORT);
         leaderMotorPosition = leaderMotor.getPosition();
 
         resetEncoders();

@@ -188,19 +188,19 @@ public class RobotContainer {
         private void configureButtonBindings() {
                 //Configure Button Bindings For Test And TeleOp Modes
                 if(OI.IS_TEST){
-                        Test_Controlls.ALGEA_INTAKE.onTrue(a_intake);
-                        Test_Controlls.ALGEA_OUTTAKE.onTrue(a_outtake);
+                        Test_Controlls.T_ALGEA_INTAKE.onTrue(a_intake);
+                        Test_Controlls.T_ALGEA_OUTTAKE.onTrue(a_outtake);
 
-                        Test_Controlls.CORAL_INTAKE.onTrue(c_intake);
-                        Test_Controlls.CORAL_OUTTAKE.onTrue(c_outtake);
+                        Test_Controlls.T_CORAL_INTAKE.onTrue(c_intake);
+                        Test_Controlls.T_CORAL_OUTTAKE.onTrue(c_outtake);
 
-                        Test_Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
-                        Test_Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
+                        Test_Controlls.T_ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
+                        Test_Controlls.T_ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
 
-                        Test_Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
-                        Test_Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
+                        Test_Controlls.T_INTAKE_MOVE_DOWN.whileTrue(im_movedown);
+                        Test_Controlls.T_INTAKE_MOVE_UP.whileTrue(im_moveup);
 
-                        Test_Controlls.ELEVATOR_ZERO.onTrue(e_tozero);
+                        Test_Controlls.T_ELEVATOR_ZERO.onTrue(e_tozero);
                 }else{                
                         Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
                         Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
