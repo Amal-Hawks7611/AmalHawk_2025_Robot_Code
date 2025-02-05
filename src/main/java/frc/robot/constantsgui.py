@@ -1,5 +1,6 @@
 import re
 import tkinter as tk
+import os
 from tkinter import ttk, messagebox
 
 # Düzenlenecek sabitler (anahtarlar) ve hangi sekmede yer aldıkları:
@@ -62,9 +63,9 @@ CONTROLS_KEYS = {
     "L4": "Controlls",
     "GET_SOURCE": "Controlls"
 }
-
-CONSTANTS_FILE = "src/main/java/frc/robot/Constants.java"
-
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+CONSTANTS_FILE = os.getcwd() + "/Constants.java"
 
 def load_file(filename):
     with open(filename, "r", encoding="utf-8") as f:
