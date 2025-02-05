@@ -43,12 +43,12 @@ public class RobotContainer {
 
         public final e_movedown elevator_down;
         public final e_moveup elevator_up;
+        public final e_tozeroo e_tozero;
         public final e_level1 e_l1;
         public final e_level2 e_l2;
         public final e_level3 e_l3;
         public final e_source e_source;
         public final e_processor e_processor;
-        public final e_net e_net;
         public final e_level4 e_l4;
         public final e_algea e_algea_middle;
         public final e_algea e_algea_down;
@@ -59,7 +59,6 @@ public class RobotContainer {
         public final algea im_algea;
         public final korel im_coral;
         public final l4 im_l4;
-        public final net im_net;
         public final movedown im_movedown;
         public final moveup im_moveup;
 
@@ -76,7 +75,6 @@ public class RobotContainer {
         public final Command intakeAlgeaDown;
         public final Command getSource;
         public final Command AlgeaProcessor;
-        public final Command AlgeaNet;
         public final Command Coral_l1;
         public final Command Coral_l2;
         public final Command Coral_l3;
@@ -88,7 +86,7 @@ public class RobotContainer {
                 NamedCommands.registerCommand("eAlgeaMiddle", new e_algea(elevatorSubsystem, true));
                 NamedCommands.registerCommand("eAlgeaDown", new e_algea(elevatorSubsystem, false));
                 NamedCommands.registerCommand("eSource", new e_source(elevatorSubsystem));
-                NamedCommands.registerCommand("eNet", new e_net(elevatorSubsystem));
+                NamedCommands.registerCommand("eToZero", new e_tozeroo(elevatorSubsystem));
                 NamedCommands.registerCommand("eL1", new e_level1(elevatorSubsystem));
                 NamedCommands.registerCommand("eL2", new e_level2(elevatorSubsystem));
                 NamedCommands.registerCommand("eL3", new e_level3(elevatorSubsystem));
@@ -100,7 +98,6 @@ public class RobotContainer {
                 NamedCommands.registerCommand("imAlgea", new algea(intakeMoverSubsystem));
                 NamedCommands.registerCommand("imCoral", new korel(intakeMoverSubsystem));
                 NamedCommands.registerCommand("imL4", new l4(intakeMoverSubsystem));
-                NamedCommands.registerCommand("imNet", new net(intakeMoverSubsystem));
 
                 NamedCommands.registerCommand("aIntake", new AlgeaIntake(algeaIntakeSubsystem));
                 NamedCommands.registerCommand("aOuttake", new AlgeaOuttake(algeaIntakeSubsystem));
@@ -115,7 +112,7 @@ public class RobotContainer {
                 e_algea_middle = new e_algea(elevatorSubsystem, true);
                 e_algea_down = new e_algea(elevatorSubsystem, false);
                 e_source = new e_source(elevatorSubsystem);
-                e_net = new e_net(elevatorSubsystem);
+                e_tozero = new e_tozeroo(elevatorSubsystem);
                 e_l1 = new e_level1(elevatorSubsystem);
                 e_l2 = new e_level2(elevatorSubsystem);
                 e_l3 = new e_level3(elevatorSubsystem);
@@ -127,7 +124,6 @@ public class RobotContainer {
                 im_algea = new algea(intakeMoverSubsystem);
                 im_coral = new korel(intakeMoverSubsystem);
                 im_l4 = new l4(intakeMoverSubsystem);
-                im_net = new net(intakeMoverSubsystem);
                 im_moveup = new moveup(intakeMoverSubsystem);
                 im_movedown = new movedown(intakeMoverSubsystem);
 
@@ -154,10 +150,6 @@ public class RobotContainer {
                                 new source(intakeMoverSubsystem),
                                 new Intake(intakeSubsystem));
 
-                AlgeaNet = new SequentialCommandGroup(
-                                new e_net(elevatorSubsystem), 
-                                new net(intakeMoverSubsystem),
-                                new AlgeaOuttake(algeaIntakeSubsystem));
                 AlgeaProcessor = new SequentialCommandGroup(
                                 new e_processor(elevatorSubsystem),
                                 new processor(intakeMoverSubsystem), 
@@ -213,10 +205,12 @@ public class RobotContainer {
                         Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
                         Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
 
+                        Controlls.ELEVATOR_ZERO.onTrue(e_tozero);
+
+
                         Controlls.ALGEA_PROCESSOR.onTrue(AlgeaProcessor);
                         Controlls.ALGEA_INTAKE_MIDDLE.onTrue(intakeAlgeaMiddle);
                         Controlls.ALGEA_INTAKE_DOWN.onTrue(intakeAlgeaDown);
-                        Controlls.ALGEA_NET.onTrue(AlgeaNet);
 
                         Controlls.GET_SOURCE.onTrue(getSource);
 

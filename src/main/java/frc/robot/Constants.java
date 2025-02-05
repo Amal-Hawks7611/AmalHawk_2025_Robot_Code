@@ -78,7 +78,6 @@ public final class Constants {
         public static double ELEVATOR_L2_VALUE = 300;
         public static double ELEVATOR_L3_VALUE = 350;
         public static double ELEVATOR_L4_VALUE = 400;
-        public static double ELEVATOR_NET_VALUE = 450;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 220;
         public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 240;
         public static int ELEVATOR_LEADER_MOTOR_PORT = 0;
@@ -104,7 +103,7 @@ public final class Constants {
     public static class IntakeMover {
         public static int LEADER_MOTOR_PORT = 0;
         public static double INTAKE_MOVER_SPEED = 0.5;
-        public static double OCAL_PID_TOLERANCE_VALUE = 5;
+        public static double OCAL_PID_TOLERANCE_VALUE = 0.5;
 
         // TODO Encoder Values Will Be Updated
         public static double INTAKE_PROCESSOR_VALUE = 30;
@@ -113,7 +112,6 @@ public final class Constants {
         public static double INTAKE_REEFSCAPE_VALUE = 20;
         public static double INTAKE_CORAL_VALUE = 30;
         public static double INTAKE_L4_VALUE = 60;
-        public static double INTAKE_NET_VALUE = 50;
     }
 
     public static class Colormatcher {
@@ -132,12 +130,12 @@ public final class Constants {
         public static Trigger ALGEA_PROCESSOR = DRIVER_CONTROLLER.a();
         public static Trigger ALGEA_INTAKE_MIDDLE = DRIVER_CONTROLLER.x();
         public static Trigger ALGEA_INTAKE_DOWN = DRIVER_CONTROLLER.b();
-        public static Trigger ALGEA_NET = DRIVER_CONTROLLER.y();
+        public static Trigger ELEVATOR_ZERO = DRIVER_CONTROLLER.y();
         public static Trigger L1 = DRIVER_CONTROLLER.povDown();
         public static Trigger L2 = DRIVER_CONTROLLER.povLeft();
         public static Trigger L3 = DRIVER_CONTROLLER.povUp();
         public static Trigger L4 = DRIVER_CONTROLLER.povRight();
-        public static Trigger GET_SOURCE = DRIVER_CONTROLLER.button(9);
+        public static Trigger GET_SOURCE = DRIVER_CONTROLLER.button(4);
         public static int SWERVE_RIGHT_X_AXIS = 2;
     }
 

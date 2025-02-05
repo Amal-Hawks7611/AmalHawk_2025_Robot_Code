@@ -5,17 +5,17 @@ import frc.robot.Constants.Elevator;
 import frc.robot.Constants.OI;
 import frc.robot.subsystems.ElevatorSubsystem;
 
-public class e_net extends Command {
+public class e_tozeroo extends Command {
     public final ElevatorSubsystem elevatorSubsystem;
 
-    public e_net(ElevatorSubsystem elevatroSubsystem) {
+    public e_tozeroo(ElevatorSubsystem elevatroSubsystem) {
         this.elevatorSubsystem = elevatroSubsystem;
         addRequirements(elevatorSubsystem);
     }
 
     @Override
     public void initialize() {
-        System.out.println("Elevator Is Moving To The Net");
+        System.out.println("Elevator Is Moving To The Zero");
         OI.IS_PROCESSING = true;
 
     }
@@ -23,7 +23,7 @@ public class e_net extends Command {
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_NET_VALUE);
+            elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_START_VALUE);
         }
         else{
             this.end(false);
