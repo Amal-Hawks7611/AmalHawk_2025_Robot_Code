@@ -140,37 +140,37 @@ public class RobotContainer {
                 intakeAlgeaMiddle = new SequentialCommandGroup(
                                 new e_algea(elevatorSubsystem, true),
                                 new algea(intakeMoverSubsystem), 
-                                new AlgeaIntake(algeaIntakeSubsystem));
+                                new AlgeaIntake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
                 intakeAlgeaDown = new SequentialCommandGroup(
                                 new e_algea(elevatorSubsystem, false),
                                 new algea(intakeMoverSubsystem), 
-                                new AlgeaIntake(algeaIntakeSubsystem));
+                                new AlgeaIntake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
                 getSource = new SequentialCommandGroup(
                                 new e_source(elevatorSubsystem),
                                 new source(intakeMoverSubsystem),
-                                new Intake(intakeSubsystem));
+                                new Intake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
 
                 AlgeaProcessor = new SequentialCommandGroup(
                                 new e_processor(elevatorSubsystem),
                                 new processor(intakeMoverSubsystem), 
-                                new AlgeaOuttake(algeaIntakeSubsystem));
+                                new AlgeaOuttake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
 
                 Coral_l1 = new SequentialCommandGroup(
                                 new e_level1(elevatorSubsystem),
                                 new reefscape(intakeMoverSubsystem),
-                                new Outtake(intakeSubsystem));
+                                new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
                 Coral_l2 = new SequentialCommandGroup(
                                 new e_level2(elevatorSubsystem), 
                                 new korel(intakeMoverSubsystem),
-                                new Outtake(intakeSubsystem));
+                                new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
                 Coral_l3 = new SequentialCommandGroup(
                                 new e_level3(elevatorSubsystem), 
                                 new korel(intakeMoverSubsystem),
-                                new Outtake(intakeSubsystem));
+                                new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
                 Coral_l4 = new SequentialCommandGroup(
                                 new e_level4(elevatorSubsystem), 
                                 new l4(intakeMoverSubsystem),
-                                new Outtake(intakeSubsystem));
+                                new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
 
                 configureButtonBindings();
 
@@ -199,14 +199,13 @@ public class RobotContainer {
 
                         Test_Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
                         Test_Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
+
+                        Test_Controlls.ELEVATOR_ZERO.onTrue(e_tozero);
                 }else{                
                         Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
                         Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
                         Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
                         Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
-
-                        Controlls.ELEVATOR_ZERO.onTrue(e_tozero);
-
 
                         Controlls.ALGEA_PROCESSOR.onTrue(AlgeaProcessor);
                         Controlls.ALGEA_INTAKE_MIDDLE.onTrue(intakeAlgeaMiddle);

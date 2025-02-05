@@ -74,6 +74,7 @@ public final class Constants {
         public static double ELEVATOR_SOURCE_VALUE = 100;
         public static double ELEVATOR_PROCESSOR_VALUE = 150;
         public static double ELEVATOR_REEFSCAPE_VALUE = 200;
+        public static double ELEVATOR_TOZERO_VALUE = 50;
         public static double ELEVATOR_L1_VALUE = 250;
         public static double ELEVATOR_L2_VALUE = 300;
         public static double ELEVATOR_L3_VALUE = 350;
@@ -130,12 +131,11 @@ public final class Constants {
         public static Trigger ALGEA_PROCESSOR = DRIVER_CONTROLLER.a();
         public static Trigger ALGEA_INTAKE_MIDDLE = DRIVER_CONTROLLER.x();
         public static Trigger ALGEA_INTAKE_DOWN = DRIVER_CONTROLLER.b();
-        public static Trigger ELEVATOR_ZERO = DRIVER_CONTROLLER.y();
         public static Trigger L1 = DRIVER_CONTROLLER.povDown();
         public static Trigger L2 = DRIVER_CONTROLLER.povLeft();
         public static Trigger L3 = DRIVER_CONTROLLER.povUp();
         public static Trigger L4 = DRIVER_CONTROLLER.povRight();
-        public static Trigger GET_SOURCE = DRIVER_CONTROLLER.button(4);
+        public static Trigger GET_SOURCE = DRIVER_CONTROLLER.y();
         public static int SWERVE_RIGHT_X_AXIS = 2;
     }
 
@@ -144,6 +144,7 @@ public final class Constants {
         public static Trigger ELEVATOR_MANUAL_DOWN = Controlls.DRIVER_CONTROLLER.leftTrigger();
         public static Trigger INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.rightBumper();
         public static Trigger INTAKE_MOVE_DOWN = Controlls.DRIVER_CONTROLLER.leftBumper();
+        public static Trigger ELEVATOR_ZERO = Controlls.DRIVER_CONTROLLER.y();
         public static Trigger ALGEA_INTAKE = Controlls.DRIVER_CONTROLLER.x();
         public static Trigger ALGEA_OUTTAKE = Controlls.DRIVER_CONTROLLER.b();
         public static Trigger CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();

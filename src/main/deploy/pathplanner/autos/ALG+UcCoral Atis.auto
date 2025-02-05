@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "SAG_B_M_M3"
@@ -33,6 +39,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
           }
         },
         {
@@ -67,6 +79,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "C_S_M3"
@@ -95,6 +113,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
           }
         },
         {
@@ -129,6 +153,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "C_S_M3"
@@ -160,6 +190,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "S_C_M4"
@@ -188,6 +224,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
           }
         }
       ]

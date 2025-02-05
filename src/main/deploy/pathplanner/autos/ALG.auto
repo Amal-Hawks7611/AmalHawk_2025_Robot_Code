@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "ORTA_B_M_M1"
@@ -33,6 +39,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
           }
         }
       ]
