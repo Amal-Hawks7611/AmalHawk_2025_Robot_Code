@@ -33,12 +33,11 @@
 
 #### **Algae Control**
 - 🎮 **A** → Score to **Processor**
-- 🎮 **Y** → Score to **Net**
 
 #### **Intake Control**
 - 🎮 **B** → Intake **Algae (Upper Level)**
 - 🎮 **X** → Intake **Algae (Lower Level)**
-- 🎮 **B10** → Intake **Coral from Source**
+- 🎮 **Y** → Intake **Coral from Source**
 
 #### **Scoring Control**
 - 🎮 **PovDown** → Score to **L1**
