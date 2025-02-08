@@ -3,7 +3,6 @@ package frc.robot;
 import com.pathplanner.lib.config.PIDConstants;
 
 import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -56,19 +55,13 @@ public final class Constants {
     }
 
     public static final class LedSubsystem {
-        public static int LED_PWM_PORT = 0;
-        public static int LED_LENGTH = 60; // Default
-        public static LEDPattern RED_ALLIANCE_COLOR = LEDPattern.solid(Color.kRed);
-        public static LEDPattern BLUE_ALLIANCE_COLOR = LEDPattern.solid(Color.kBlue);
-        public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(Color.kPurple);
-        public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(Color.kGreen);
-        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(Color.kYellow);
-        public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(Color.kAqua);
-        public static LEDPattern BREATHE_COLOR = LEDPattern.solid(Color.kWhite);
+        public static int PWM_RED = 3;
+        public static int PWM_BLUE = 4;
+        public static int PWM_GREEN = 5;
     }
 
     public static final class Elevator {
-        // TODO Encoder Values Wİll Be Updated
+        // TODO Encoder Values WÄ°ll Be Updated
         public static double ELEVATOR_START_VALUE = 0; // Generally True
         public static double ELEVATOR_END_VALUE = 450;
         public static double ELEVATOR_SOURCE_VALUE = 100;
@@ -144,11 +137,12 @@ public final class Constants {
         public static Trigger T_ELEVATOR_MANUAL_DOWN = Controlls.DRIVER_CONTROLLER.leftTrigger();
         public static Trigger T_INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.rightBumper();
         public static Trigger T_INTAKE_MOVE_DOWN = Controlls.DRIVER_CONTROLLER.leftBumper();
-        public static Trigger T_ELEVATOR_ZERO = Controlls.DRIVER_CONTROLLER.y();
+        public static Trigger T_ELEVATOR_ZERO = Controlls.DRIVER_CONTROLLER.a();
         public static Trigger T_ALGEA_INTAKE = Controlls.DRIVER_CONTROLLER.x();
         public static Trigger T_ALGEA_OUTTAKE = Controlls.DRIVER_CONTROLLER.b();
         public static Trigger T_CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();
         public static Trigger T_CORAL_OUTTAKE = Controlls.DRIVER_CONTROLLER.povRight();
+        public static Trigger T_LED_CYCLE = Controlls.DRIVER_CONTROLLER.y();
     }
 
     public static class EnabledParts {
