@@ -179,7 +179,6 @@ public class RobotContainer {
                         Command drive_command = swerveSubsystem.driveteleop();
                         swerveSubsystem.setDefaultCommand(drive_command);
                 }
-
                 //PathPlanner Autonomous Chooser
                 autoChooser = AutoBuilder.buildAutoChooser();
                 SmartDashboard.putData("Auto Chooser", autoChooser);
@@ -201,6 +200,8 @@ public class RobotContainer {
                         Test_Controlls.T_INTAKE_MOVE_UP.whileTrue(im_moveup);
 
                         Test_Controlls.T_ELEVATOR_ZERO.onTrue(e_tozero);
+
+                        Test_Controlls.T_LED_CYCLE.onTrue(led_cycle);
                 }else{                
                         Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
                         Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
