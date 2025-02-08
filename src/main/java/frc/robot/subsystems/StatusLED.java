@@ -1,78 +1,46 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.AddressableLED;
-import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
 
 public class StatusLED extends SubsystemBase {
-    private AddressableLED led;
-    private AddressableLEDBuffer buffer;
+    public PWM RED;
+    public PWM BLUE;
+    public PWM GREEN;
 
     //NOTHING SPECIAL, JUST A LED CODE INTAGRATED WITH CONSTANTS
     public StatusLED() {
-        try {
-            if (EnabledParts.IS_LED_ENABLED) {
-                led = new AddressableLED(LedSubsystem.LED_PWM_PORT);
-                buffer = new AddressableLEDBuffer(LedSubsystem.LED_LENGTH);
-                led.setLength(buffer.getLength());
-                led.setData(buffer);
-            }
-        } catch (Exception e) {
-            System.err.println("Failed to initialize StatusLED: " + e.getMessage());
-        }
+        RED = new PWM(LedSubsystem.PWM_RED);
+        BLUE = new PWM(LedSubsystem.PWM_BLUE);
+        GREEN = new PWM(LedSubsystem.PWM_GREEN);
     }
 
     public void setDefault() {
-        if (led == null || buffer == null) {
-            System.err.println("LED or buffer is not initialized!");
-            return;
-        }
-        LedSubsystem.BREATHE_COLOR.applyTo(buffer);
-        led.setData(buffer);
-        led.start();
+        setColor(1, 1, 1);
     }
 
     public void setProcess() {
-        if (led == null || buffer == null) {
-            System.err.println("LED or buffer is not initialized!");
-            return;
-        }
-        LedSubsystem.ELEVATOR_PROCESS_COLOR.applyTo(buffer);
-        led.setData(buffer);
-        led.start();
+        setColor(1, 0, 0);
     }
 
     public void setFocus() {
-        if (led == null || buffer == null) {
-            System.err.println("LED or buffer is not initialized!");
-            return;
-        }
-        LedSubsystem.TARGET_FOCUS_COLOR.applyTo(buffer);
-        led.setData(buffer);
-        led.start();
+        setColor(0, 0, 1);
     }
 
     public void setAlgeaIntake() {
-        if (led == null || buffer == null) {
-            System.err.println("LED or buffer is not initialized!");
-            return;
-        }
-        LedSubsystem.ALGEA_INTAKE_COLOR.applyTo(buffer);
-        led.setData(buffer);
-        led.start();
+        setColor(0, 1, 1);
     }
 
     public void setIntake() {
-        if (led == null || buffer == null) {
-            System.err.println("LED or buffer is not initialized!");
-            return;
-        }
-        LedSubsystem.INTAKE_COLOR.applyTo(buffer);
-        led.setData(buffer);
-        led.start();
+        setColor(1, 0, 1);
+    }
+
+    public void setColor(int cRED,int cBLUE, int cGREEN){
+        RED.setSpeed(cRED);
+        BLUE.setSpeed(cBLUE);
+        GREEN.setSpeed(cGREEN);
     }
 
     public void checkForProcess() {
