@@ -44,9 +44,13 @@ PORTS_KEYS = {
     # Other ports (int)
     "ELEVATOR_LEADER_MOTOR_PORT": "Elevator",
     "ELEVATOR_FOLLOWER_MOTOR_PORT": "Elevator",
-    "INTAKE_LEADER_MOTOR_PORT": "Intake",          # Intake.LEADER_MOTOR_PORT
+    "INTAKE_LEADER_MOTOR_PORT": "Intake", 
     "ALGEA_LEADER_MOTOR_PORT": "AlgeaIntake",
-    "IM_LEADER_MOTOR_PORT": "IntakeMover"
+    "IM_LEADER_MOTOR_PORT": "IntakeMover",
+    "PWM_RED": "LedSubsystem",
+    "PWM_BLUE": "LedSUbsystem",
+    "PWM_GREEN": "LedSubsystem",
+    "POWER_PORT": "LedSubsystem"
 }
 
 CONTROLS_KEYS = {

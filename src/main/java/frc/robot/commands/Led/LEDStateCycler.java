@@ -3,11 +3,14 @@ package frc.robot.commands.Led;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.StatusLED;
+import java.awt.Color;
 
+
+//SMOOT AF
 public class LEDStateCycler extends Command {
     private final StatusLED statusLED;
     private final Timer timer = new Timer();
-    private int currentState = 0;
+    private final double cycleDuration = 10.0;
 
     public LEDStateCycler(StatusLED statusLED) {
         this.statusLED = statusLED;
@@ -18,37 +21,24 @@ public class LEDStateCycler extends Command {
     public void initialize() {
         timer.reset();
         timer.start();
-        currentState = 0;
     }
 
     @Override
     public void execute() {
-        if (timer.hasElapsed(2.0)) {
-            cycleLEDState();
-            timer.reset();
-            currentState += 1;
-            if(currentState == 3){currentState = 0;}
-        }
-    }
+        double t = timer.get();
+        double hue = (t % cycleDuration) / cycleDuration;
+        int rgb = Color.HSBtoRGB((float) hue, 1.0f, 1.0f);
+        int r = (rgb >> 16) & 0xFF;
+        int g = (rgb >> 8) & 0xFF;
+        int b = rgb & 0xFF;
 
-    private void cycleLEDState() {
-        switch (currentState) {
-            case 0:
-                statusLED.setProcess();
-                break;
-            case 1:
-                statusLED.setFocus(); 
-                break;
-            case 2:
-                statusLED.setDefault();
-                break;
-        }
+        statusLED.setColor(r, g, b);
     }
 
     @Override
     public void end(boolean interrupted) {
-        statusLED.setDefault();
         timer.stop();
+        statusLED.setDefault();
     }
 
     @Override

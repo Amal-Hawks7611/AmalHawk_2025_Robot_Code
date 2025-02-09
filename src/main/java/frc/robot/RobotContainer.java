@@ -222,6 +222,6 @@ public class RobotContainer {
         }
 
         public Command getAutonomousCommand() {
-                return led_cycle;
+                return OI.IS_TEST ? led_cycle : autoChooser.getSelected();
         }
 }
