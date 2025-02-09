@@ -222,6 +222,6 @@ public class RobotContainer {
         }
 
         public Command getAutonomousCommand() {
-                return autoChooser.getSelected();
+                return led_cycle;
         }
 }
