@@ -18,29 +18,29 @@ public class StatusLED extends SubsystemBase {
     }
 
     public void setDefault() {
-        setColor(255, 255, 255);
+        setColor(4096, 4096, 4096);
     }
 
     public void setProcess() {
-        setColor(255, 0, 0);
+        setColor(4096, 0, 0);
     }
 
     public void setFocus() {
-        setColor(0, 0, 255);
+        setColor(0, 0, 4096);
     }
 
     public void setAlgeaIntake() {
-        setColor(0, 255, 255);
+        setColor(0, 4096, 4096);
     }
 
     public void setIntake() {
-        setColor(255, 0, 255);
+        setColor(4096, 0, 4096);
     }
 
     public void setColor(int cRED,int cBLUE, int cGREEN){
-        RED.setRaw(cRED);
-        BLUE.setRaw(cBLUE);
-        GREEN.setRaw(cGREEN);
+        RED.setPulseTimeMicroseconds(cRED);
+        BLUE.setPulseTimeMicroseconds(cBLUE);
+        GREEN.setPulseTimeMicroseconds(cGREEN);
     }
 
     public void checkForProcess() {
