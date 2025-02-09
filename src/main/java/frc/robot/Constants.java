@@ -58,6 +58,7 @@ public final class Constants {
         public static int PWM_RED = 3;
         public static int PWM_BLUE = 4;
         public static int PWM_GREEN = 5;
+        public static int POWER_PORT = 0;
     }
 
     public static final class Elevator {
