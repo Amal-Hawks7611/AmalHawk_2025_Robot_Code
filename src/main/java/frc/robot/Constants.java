@@ -58,14 +58,14 @@ public final class Constants {
         public static int PWM_RED = 3;
         public static int PWM_BLUE = 4;
         public static int PWM_GREEN = 5;
-        public static int POWER_PORT = 0;
+        public static int POWER_DIO_PORT = 0;
     }
 
     // TODO: Update the Rotary Ports
     public static final class RotarySwitch {
-        public static int DT_CHANNEL = 0;
-        public static int CLK_CHANNEL = 1;
-        public static int SW_CHANNEL = 2;
+        public static int DT_CHANNEL = 3;
+        public static int CLK_CHANNEL = 4;
+        public static int SW_CHANNEL = 5;
     }
 
     public static final class Elevator {

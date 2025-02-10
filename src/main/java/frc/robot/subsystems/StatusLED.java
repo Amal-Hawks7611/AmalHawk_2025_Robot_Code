@@ -19,7 +19,7 @@ public class StatusLED extends SubsystemBase {
         green = new PWM(LedSubsystem.PWM_GREEN);
         blue = new PWM(LedSubsystem.PWM_BLUE);
 
-        common = new DigitalOutput(LedSubsystem.POWER_PORT);
+        common = new DigitalOutput(LedSubsystem.POWER_DIO_PORT);
     }
 
     //MATH MOTHAFUKA

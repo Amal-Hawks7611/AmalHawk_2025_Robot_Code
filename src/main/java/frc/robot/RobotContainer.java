@@ -4,11 +4,15 @@ import frc.robot.subsystems.AlgeaIntakeSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeMoverSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.RotarySwitchSubsystem;
 import frc.robot.subsystems.StatusLED;
 import frc.robot.subsystems.SwerveSubsystem;
 
+import java.util.Map;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,6 +33,7 @@ import frc.robot.commands.Swerve.LimelightAimCommand;
 import frc.robot.commands.Trajectory.AutonPath;
 import frc.robot.commands.Trajectory.FollowTrajectoryCommand;
 
+//A COOL ROBOTCONTAINER THAT CONTAINS NAMEDCOMMANDS FOR PATHPLANNER AND COMMAND GROUPS FOR TEU
 public class RobotContainer {
         private final SendableChooser<Command> autoChooser;
         public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
@@ -37,6 +42,7 @@ public class RobotContainer {
         public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
         public final AlgeaIntakeSubsystem algeaIntakeSubsystem = new AlgeaIntakeSubsystem();
         public final StatusLED ledSubsystem = new StatusLED();
+        public final RotarySwitchSubsystem rotarySwitchSubsystem = new RotarySwitchSubsystem();
 
         public final AutonPath otonom_path = new AutonPath();
         public final FollowTrajectoryCommand otonom = new FollowTrajectoryCommand(swerveSubsystem);
@@ -222,6 +228,18 @@ public class RobotContainer {
         }
 
         public Command getAutonomousCommand() {
-                return OI.IS_TEST ? led_cycle : autoChooser.getSelected();
+                if (EnabledParts.IS_ROTARY_SWITCH_ENABLED) {
+                        Map<Integer, String> autoModes = Map.of(
+                                1, "ALG",
+                                2, "ALG+Reef",
+                                3, "ALG+IkiCoralAtis",
+                                4, "ALG+UcCoralAtis"
+                        );
+
+                        String autoName = autoModes.getOrDefault(rotarySwitchSubsystem.getTotalTurns(), "None");
+                        return new PathPlannerAuto(autoName);
+                }else{
+                        return autoChooser.getSelected();
+                }
         }
 }

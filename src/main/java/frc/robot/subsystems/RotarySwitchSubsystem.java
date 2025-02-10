@@ -2,7 +2,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.RotarySwitch;
 
+//ROTARY SWITCH FOR AUTONOMOUS CHOOSING. HELL YEAH!!!
 public class RotarySwitchSubsystem extends SubsystemBase {
     private final DigitalInput dtPin;
     private final DigitalInput clkPin;
@@ -10,10 +12,10 @@ public class RotarySwitchSubsystem extends SubsystemBase {
     private int lastClockState;
     private int totalTurns;
 
-    public RotarySwitchSubsystem(int dtChannel, int clkChannel, int swChannel) {
-        dtPin = new DigitalInput(dtChannel);
-        clkPin = new DigitalInput(clkChannel);
-        swPin = new DigitalInput(swChannel);
+    public RotarySwitchSubsystem() {
+        dtPin = new DigitalInput(RotarySwitch.DT_CHANNEL);
+        clkPin = new DigitalInput(RotarySwitch.CLK_CHANNEL);
+        swPin = new DigitalInput(RotarySwitch.SW_CHANNEL);
         lastClockState = clkPin.get() ? 1 : 0;
         totalTurns = 0;
     }

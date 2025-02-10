@@ -15,7 +15,7 @@ public class source extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("Intake Is Moving To The Reefscape");
+        System.out.println("Intake Is Moving To The Source");
         OI.IS_INTAKE_MOVING = true;
     }
 

@@ -47,10 +47,15 @@ PORTS_KEYS = {
     "INTAKE_LEADER_MOTOR_PORT": "Intake", 
     "ALGEA_LEADER_MOTOR_PORT": "AlgeaIntake",
     "IM_LEADER_MOTOR_PORT": "IntakeMover",
+
+    "POWER_DIO_PORT": "LedSubsystem",
     "PWM_RED": "LedSubsystem",
     "PWM_BLUE": "LedSUbsystem",
     "PWM_GREEN": "LedSubsystem",
-    "POWER_PORT": "LedSubsystem"
+
+    "DT_CHANNEL": "RotarySwitch",
+    "CLK_CHANNEL": "RotarySwitch",
+    "SW_CHANNEL": "RotarySwitch"
 }
 
 CONTROLS_KEYS = {
