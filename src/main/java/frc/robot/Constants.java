@@ -61,8 +61,15 @@ public final class Constants {
         public static int POWER_PORT = 0;
     }
 
+    // TODO: Update the Rotary Ports
+    public static final class RotarySwitch {
+        public static int DT_CHANNEL = 0;
+        public static int CLK_CHANNEL = 1;
+        public static int SW_CHANNEL = 2;
+    }
+
     public static final class Elevator {
-        // TODO Encoder Values WÄ°ll Be Updated
+        // TODO Encoder Values Will Be Updated
         public static double ELEVATOR_START_VALUE = 0; // Generally True
         public static double ELEVATOR_END_VALUE = 450;
         public static double ELEVATOR_SOURCE_VALUE = 100;
@@ -155,6 +162,7 @@ public final class Constants {
         public static boolean IS_INTAKE_MOVER_ENABLED = true;
         public static boolean IS_ELEVATOR_ENABLED = true;
         public static boolean IS_SWERVE_ENABLED = true;
+        public static boolean IS_ROTARY_SWITCH_ENABLED = true; //HELL YEAH
     }
 
     public static final class OI {
