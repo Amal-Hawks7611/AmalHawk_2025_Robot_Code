@@ -28,9 +28,9 @@ public class StatusLED extends SubsystemBase {
         double gDuty = 1.0 - (gValue / 255.0);
         double bDuty = 1.0 - (bValue / 255.0);
 
-        red.setSpeed(rDuty);
-        green.setSpeed(gDuty);
-        blue.setSpeed(bDuty);
+        red.setSpeed(-rDuty);
+        green.setSpeed(-gDuty);
+        blue.setSpeed(-bDuty);
     }
 
     public void setDefault() {
