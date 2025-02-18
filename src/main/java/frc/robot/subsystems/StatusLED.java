@@ -1,67 +1,89 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PWM;
-import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.AddressableLED;
+import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
 
 public class StatusLED extends SubsystemBase {
-    private final PWM red;
-    private final PWM green;
-    private final PWM blue;
+    public AddressableLED led;
+    public AddressableLEDBuffer buffer;
 
-    private final DigitalOutput common;
-
-    //Not Just a regular RGB LED. It's Cool AF!!
+    //NOTHING SPECIAL, JUST A LED CODE INTAGRATED WITH CONSTANTS
     public StatusLED() {
-        red = new PWM(LedSubsystem.PWM_RED);
-        green = new PWM(LedSubsystem.PWM_GREEN);
-        blue = new PWM(LedSubsystem.PWM_BLUE);
-
-        common = new DigitalOutput(LedSubsystem.POWER_DIO_PORT);
-    }
-
-    //MATH MOTHAFUKA
-    public void setColor(int rValue, int gValue, int bValue) {
-        double rDuty = 1.0 - (rValue / 255.0);
-        double gDuty = 1.0 - (gValue / 255.0);
-        double bDuty = 1.0 - (bValue / 255.0);
-
-        red.setSpeed(-rDuty);
-        green.setSpeed(-gDuty);
-        blue.setSpeed(-bDuty);
+        try {
+            if (EnabledParts.IS_LED_ENABLED) {
+                led = new AddressableLED(LedSubsystem.LED_PWM_PORT);
+                buffer = new AddressableLEDBuffer(LedSubsystem.LED_LENGTH);
+                led.setLength(buffer.getLength());
+                led.setData(buffer);
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to initialize StatusLED: " + e.getMessage());
+        }
     }
 
     public void setDefault() {
-        setColor(255, 255, 255);
+        if (led == null || buffer == null) {
+            System.err.println("LED or buffer is not initialized!");
+            return;
+        }
+        LedSubsystem.BREATHE_COLOR.applyTo(buffer);
+        led.setData(buffer);
+        led.start();
     }
 
     public void setProcess() {
-        setColor(255, 0, 0);
+        if (led == null || buffer == null) {
+            System.err.println("LED or buffer is not initialized!");
+            return;
+        }
+        LedSubsystem.ELEVATOR_PROCESS_COLOR.applyTo(buffer);
+        led.setData(buffer);
+        led.start();
     }
 
     public void setFocus() {
-        setColor(0, 0, 255);
+        if (led == null || buffer == null) {
+            System.err.println("LED or buffer is not initialized!");
+            return;
+        }
+        LedSubsystem.TARGET_FOCUS_COLOR.applyTo(buffer);
+        led.setData(buffer);
+        led.start();
     }
 
     public void setAlgeaIntake() {
-        setColor(0, 255, 255);
+        if (led == null || buffer == null) {
+            System.err.println("LED or buffer is not initialized!");
+            return;
+        }
+        LedSubsystem.ALGEA_INTAKE_COLOR.applyTo(buffer);
+        led.setData(buffer);
+        led.start();
     }
 
     public void setIntake() {
-        setColor(255, 0, 255);
+        if (led == null || buffer == null) {
+            System.err.println("LED or buffer is not initialized!");
+            return;
+        }
+        LedSubsystem.INTAKE_COLOR.applyTo(buffer);
+        led.setData(buffer);
+        led.start();
     }
 
     public void checkForProcess() {
-        if (!OI.IS_TEST) {
+        if (!OI.IS_TEST && !OI.IS_LED_CYCLING) {
             if (OI.IS_PROCESSING || OI.IS_INTAKE_MOVING) {
                 setProcess();
             } else if (OI.IS_SWERVE_FOCUSED) {
                 setFocus();
             } else if (OI.IS_INTAKING) {
                 setIntake();
-            } else if (OI.IS_ALGEA_INTAKING) {
+            } else if(OI.IS_ALGEA_INTAKING){
                 setAlgeaIntake();
             } else {
                 setDefault();
@@ -72,6 +94,5 @@ public class StatusLED extends SubsystemBase {
     @Override
     public void periodic() {
         checkForProcess();
-        common.set(false);
     }
 }

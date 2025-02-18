@@ -1,44 +1,45 @@
 package frc.robot.commands.Led;
 
+
+import edu.wpi.first.units.Units;
+import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.OI;
 import frc.robot.subsystems.StatusLED;
-import java.awt.Color;
 
 
 //SMOOT AF
 public class LEDStateCycler extends Command {
     private final StatusLED statusLED;
     private final Timer timer = new Timer();
-    private final double cycleDuration = 10.0;
+    private final LEDPattern m_rainbow = LEDPattern.rainbow(255, 128);
+    private static final Distance kLedSpacing = Units.Meters.of(1 / 120.0);
+    private final LEDPattern m_scrollingRainbow = m_rainbow.scrollAtAbsoluteSpeed(Units.MetersPerSecond.of(1), kLedSpacing);
+
 
     public LEDStateCycler(StatusLED statusLED) {
-        this.statusLED = statusLED;
+        this.statusLED = statusLED; 
         addRequirements(statusLED);
     }
 
     @Override
     public void initialize() {
-        timer.reset();
-        timer.start();
+        OI.IS_LED_CYCLING = true;
     }
 
     @Override
     public void execute() {
-        double t = timer.get();
-        double hue = (t % cycleDuration) / cycleDuration;
-        int rgb = Color.HSBtoRGB((float) hue, 1.0f, 1.0f);
-        int r = (rgb >> 16) & 0xFF;
-        int g = (rgb >> 8) & 0xFF;
-        int b = rgb & 0xFF;
-
-        statusLED.setColor(r, g, b);
+        m_scrollingRainbow.applyTo(statusLED.buffer);
+        statusLED.led.setData(statusLED.buffer);
     }
 
     @Override
     public void end(boolean interrupted) {
         timer.stop();
         statusLED.setDefault();
+        OI.IS_LED_CYCLING = false;
     }
 
     @Override

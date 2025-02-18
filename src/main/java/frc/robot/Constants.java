@@ -3,6 +3,7 @@ package frc.robot;
 import com.pathplanner.lib.config.PIDConstants;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -55,10 +56,15 @@ public final class Constants {
     }
 
     public static final class LedSubsystem {
-        public static int PWM_RED = 3;
-        public static int PWM_BLUE = 4;
-        public static int PWM_GREEN = 5;
-        public static int POWER_DIO_PORT = 0;
+        public static int LED_PWM_PORT = 0;
+        public static int LED_LENGTH = 60; // Default
+        public static LEDPattern RED_ALLIANCE_COLOR = LEDPattern.solid(Color.kRed);
+        public static LEDPattern BLUE_ALLIANCE_COLOR = LEDPattern.solid(Color.kBlue);
+        public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(Color.kPurple);
+        public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(Color.kGreen);
+        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(Color.kYellow);
+        public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(Color.kAqua);
+        public static LEDPattern BREATHE_COLOR = LEDPattern.solid(Color.kWhite);
     }
 
     // TODO: Update the Rotary Ports
@@ -137,6 +143,7 @@ public final class Constants {
         public static Trigger L3 = DRIVER_CONTROLLER.povUp();
         public static Trigger L4 = DRIVER_CONTROLLER.povRight();
         public static Trigger GET_SOURCE = DRIVER_CONTROLLER.y();
+        public static Trigger LED_CYCLE = DRIVER_CONTROLLER.button(9);
         public static int SWERVE_RIGHT_X_AXIS = 2;
     }
 
@@ -176,5 +183,6 @@ public final class Constants {
         public static boolean IS_SWERVE_FOCUSED = false;
         public static boolean IS_INTAKING = false;
         public static boolean IS_ALGEA_INTAKING = false;
+        public static boolean IS_LED_CYCLING = false;
     }
 }

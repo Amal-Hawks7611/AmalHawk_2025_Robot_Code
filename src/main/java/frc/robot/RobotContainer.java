@@ -224,6 +224,8 @@ public class RobotContainer {
                         Controlls.L3.onTrue(Coral_l3);
                         Controlls.L2.onTrue(Coral_l2);
                         Controlls.L1.onTrue(Coral_l1);
+
+                        Controlls.LED_CYCLE.whileTrue(led_cycle);
                 }
         }
 
