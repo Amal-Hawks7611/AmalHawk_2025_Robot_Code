@@ -9,6 +9,8 @@ import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.Controlls;
+import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
 
 public class Robot extends TimedRobot {
@@ -25,6 +27,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
+    if(Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.3 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.6)
+      LedSubsystem.BREATHE_MAGNITUDE = 3;
+    if(Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.6 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.9){
+      LedSubsystem.BREATHE_MAGNITUDE = 2;
+    }
+    if(Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.9){
+      LedSubsystem.BREATHE_MAGNITUDE = 1;
+    }
 
     //Limelight Megatag2 Localization
     try {
@@ -64,10 +75,12 @@ public class Robot extends TimedRobot {
     }
   }
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
   @Override
   public void autonomousInit() {
@@ -75,6 +88,7 @@ public class Robot extends TimedRobot {
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
+      m_robotContainer.led_morse.schedule();
     }
   }
 
@@ -87,6 +101,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     OI.IS_TEST = false;
+    m_robotContainer.configureButtonBindings();
   }
 
   @Override
@@ -97,6 +112,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().cancelAll();
     OI.IS_TEST = true;
     OI.ELEVATOR_SPEED = 0.3;
+    m_robotContainer.configureButtonBindings();
   }
 
   @Override

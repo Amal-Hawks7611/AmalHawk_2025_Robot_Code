@@ -57,7 +57,8 @@ public final class Constants {
 
     public static final class LedSubsystem {
         public static int LED_PWM_PORT = 0;
-        public static int LED_LENGTH = 60; // Default
+        public static int LED_LENGTH = 60;
+        public static int BREATHE_MAGNITUDE = 5;
         public static LEDPattern RED_ALLIANCE_COLOR = LEDPattern.solid(Color.kRed);
         public static LEDPattern BLUE_ALLIANCE_COLOR = LEDPattern.solid(Color.kBlue);
         public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(Color.kPurple);
@@ -158,6 +159,7 @@ public final class Constants {
         public static Trigger T_CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();
         public static Trigger T_CORAL_OUTTAKE = Controlls.DRIVER_CONTROLLER.povRight();
         public static Trigger T_LED_CYCLE = Controlls.DRIVER_CONTROLLER.y();
+        public static Trigger T_LED_MORSE = Controlls.DRIVER_CONTROLLER.button(9);
     }
 
     public static class EnabledParts {
@@ -169,7 +171,7 @@ public final class Constants {
         public static boolean IS_INTAKE_MOVER_ENABLED = true;
         public static boolean IS_ELEVATOR_ENABLED = true;
         public static boolean IS_SWERVE_ENABLED = true;
-        public static boolean IS_ROTARY_SWITCH_ENABLED = true; //HELL YEAH
+        public static boolean IS_ROTARY_SWITCH_ENABLED = false; //HELL YEAH
     }
 
     public static final class OI {
@@ -184,5 +186,6 @@ public final class Constants {
         public static boolean IS_INTAKING = false;
         public static boolean IS_ALGEA_INTAKING = false;
         public static boolean IS_LED_CYCLING = false;
+        public static boolean IS_LED_MORSE_SHOWING = false;
     }
 }
