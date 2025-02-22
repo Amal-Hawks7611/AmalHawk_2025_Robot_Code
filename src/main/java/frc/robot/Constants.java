@@ -76,22 +76,23 @@ public final class Constants {
     }
 
     public static final class Elevator {
-        // TODO Encoder Values Will Be Updated
-        public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = 450;
-        public static double ELEVATOR_SOURCE_VALUE = 100;
-        public static double ELEVATOR_PROCESSOR_VALUE = 150;
-        public static double ELEVATOR_REEFSCAPE_VALUE = 200;
-        public static double ELEVATOR_TOZERO_VALUE = 50;
-        public static double ELEVATOR_L1_VALUE = 250;
-        public static double ELEVATOR_L2_VALUE = 300;
-        public static double ELEVATOR_L3_VALUE = 350;
-        public static double ELEVATOR_L4_VALUE = 400;
-        public static double ELEVATOR_ALGEA_VALUE_DOWN = 220;
-        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 240;
         public static int ELEVATOR_LEADER_MOTOR_PORT = 0;
         public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 1;
-        public static double OCAL_PID_TOLERANCE_VALUE = 5;
+        public static double OCAL_PID_TOLERANCE_VALUE = 4354;
+        public static double ELEVATOR_TICKS_PER_METERS = 439000;
+
+        // TODO Encoder Values Will Be Updated
+        public static double ELEVATOR_START_VALUE = 0; // Generally True
+        public static double ELEVATOR_END_VALUE = ELEVATOR_TICKS_PER_METERS*2;
+        public static double ELEVATOR_SOURCE_VALUE = ELEVATOR_TICKS_PER_METERS*0.95;
+        public static double ELEVATOR_PROCESSOR_VALUE = ELEVATOR_TICKS_PER_METERS*0.18;
+        public static double ELEVATOR_TOZERO_VALUE = ELEVATOR_TICKS_PER_METERS*0.06;
+        public static double ELEVATOR_L1_VALUE = ELEVATOR_TICKS_PER_METERS*0.46;
+        public static double ELEVATOR_L2_VALUE = ELEVATOR_TICKS_PER_METERS*0.81;
+        public static double ELEVATOR_L3_VALUE = ELEVATOR_TICKS_PER_METERS*1.21;
+        public static double ELEVATOR_L4_VALUE = ELEVATOR_TICKS_PER_METERS*1.83;
+        public static double ELEVATOR_ALGEA_VALUE_DOWN = ELEVATOR_TICKS_PER_METERS*0.60;
+        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = ELEVATOR_TICKS_PER_METERS;
 
     }
 
@@ -110,17 +111,18 @@ public final class Constants {
     }
 
     public static class IntakeMover {
+        public static double IM_TICKS_PER_ANGLE = 240.73;
         public static int IM_LEADER_MOTOR_PORT = 4;
         public static double INTAKE_MOVER_SPEED = 0.5;
-        public static double OCAL_PID_TOLERANCE_VALUE = 0.5;
+        public static double OCAL_PID_TOLERANCE_VALUE = 4354;
 
         // TODO Encoder Values Will Be Updated
-        public static double INTAKE_PROCESSOR_VALUE = 30;
-        public static double INTAKE_SOURCE_VALUE = 30;
-        public static double INTAKE_ALGEA_VALUE = 30;
-        public static double INTAKE_REEFSCAPE_VALUE = 20;
-        public static double INTAKE_CORAL_VALUE = 30;
-        public static double INTAKE_L4_VALUE = 60;
+        public static double INTAKE_PROCESSOR_VALUE = IM_TICKS_PER_ANGLE*90;
+        public static double INTAKE_SOURCE_VALUE = IM_TICKS_PER_ANGLE*55;
+        public static double INTAKE_ALGEA_VALUE = IM_TICKS_PER_ANGLE*90;
+        public static double INTAKE_REEFSCAPE_VALUE = IM_TICKS_PER_ANGLE*100;
+        public static double INTAKE_CORAL_VALUE = IM_TICKS_PER_ANGLE*120;
+        public static double INTAKE_L4_VALUE = IM_TICKS_PER_ANGLE*150;
     }
 
     public static class Colormatcher {
