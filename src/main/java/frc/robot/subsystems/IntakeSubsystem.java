@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.Intake;
 import frc.robot.Constants.OI;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,12 +16,14 @@ public class IntakeSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     private StatusSignal<Angle> leaderMotorPosition;
 
+    public ObjectDetectorSubsystem objectDetector;
+
     public Timer timer = new Timer();
 
     public IntakeSubsystem() {
         leaderMotor = new TalonFX(Intake.INTAKE_LEADER_MOTOR_PORT);
         leaderMotorPosition = leaderMotor.getPosition();
-
+        objectDetector = new ObjectDetectorSubsystem();
         resetEncoders();
     }
 
@@ -33,22 +36,46 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void Move() {
-        if(timer.hasElapsed(1.5)){
-            leaderMotor.stopMotor();
-            OI.IS_INTAKING = false;
+        if(!EnabledParts.IS_OBJECT_SENSOR_ENABLED){
+            if(timer.hasElapsed(1.5)){
+                leaderMotor.stopMotor();
+                OI.IS_INTAKING = false;
+            }
+            else{
+                leaderMotor.set(Intake.INTAKE_SPEED);
+            }
         }
         else{
-            leaderMotor.set(Intake.INTAKE_SPEED);   
-        }}
+            if(!objectDetector.CheckObject()){
+                leaderMotor.set(Intake.INTAKE_SPEED);
+            }
+            else{
+                leaderMotor.stopMotor();
+                OI.IS_INTAKING = false;
+            }
+        }
+    }
     
     public void Shoot(){
-        if(timer.hasElapsed(1.5)){
-            leaderMotor.stopMotor();
-            OI.IS_INTAKING = false;
+        if(!EnabledParts.IS_OBJECT_SENSOR_ENABLED){
+            if(timer.hasElapsed(1.5)){
+                leaderMotor.stopMotor();
+                OI.IS_INTAKING = false;
+            }
+            else{
+                leaderMotor.set(Intake.OUTTAKE_SPEED);
+            }
         }
         else{
-            leaderMotor.set(Intake.OUTTAKE_SPEED);
+            if(objectDetector.CheckObject()){
+                leaderMotor.set(Intake.OUTTAKE_SPEED);
+            }
+            else{
+                leaderMotor.stopMotor();
+                OI.IS_INTAKING = false;
+            }
         }
+
     }
     @Override
     public void periodic(){

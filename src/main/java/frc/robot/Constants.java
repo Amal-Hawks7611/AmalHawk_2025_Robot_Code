@@ -2,7 +2,6 @@ package frc.robot;
 
 import com.pathplanner.lib.config.PIDConstants;
 
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -125,9 +124,8 @@ public final class Constants {
         public static double INTAKE_L4_VALUE = IM_TICKS_PER_ANGLE*150;
     }
 
-    public static class Colormatcher {
-        public static final I2C.Port I2C_PORT = I2C.Port.kOnboard;
-        public static final Color CORAL_TARGET = new Color(224,223,221);
+    public static class ObjectDetector {
+        public static final int SENSOR_DIO_PORT = 1;
     }
 
     public static class Controlls {
@@ -167,7 +165,7 @@ public final class Constants {
     public static class EnabledParts {
         // Hope Not To Use...
         public static boolean IS_LED_ENABLED = true;
-        public static boolean IS_COLOR_SENSOR_ENABLED = true;
+        public static boolean IS_OBJECT_SENSOR_ENABLED = true;
         public static boolean IS_INTAKE_ENABLED = true;
         public static boolean IS_ALGEA_INTAKE_ENABLED = true;
         public static boolean IS_INTAKE_MOVER_ENABLED = true;
