@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Controlls;
 import frc.robot.Constants.Test_Controlls;
 import frc.robot.Constants.EnabledParts;
+import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
 import frc.robot.commands.AlgeaIntake.AlgeaIntake;
 import frc.robot.commands.AlgeaIntake.AlgeaOuttake;
@@ -143,7 +144,7 @@ public class RobotContainer {
                 c_outtake = new Outtake(intakeSubsystem);
 
                 led_cycle = new LEDStateCycler(ledSubsystem);
-                led_morse = new LEDMorseScroller(ledSubsystem, 60, "AMAL HAWKS IS THE BEST");
+                led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
                 limelight_focus = new LimelightAimCommand(swerveSubsystem);
 

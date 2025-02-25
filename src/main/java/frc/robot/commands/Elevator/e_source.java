@@ -23,7 +23,7 @@ public class e_source extends Command {
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_SOURCE_VALUE);
+            elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_SOURCE_VALUE);
         }
         else{
             this.end(false);

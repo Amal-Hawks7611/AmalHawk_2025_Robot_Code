@@ -77,22 +77,22 @@ public final class Constants {
     public static final class Elevator {
         public static int ELEVATOR_LEADER_MOTOR_PORT = 0;
         public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 1;
+        public static double ELEVATOR_SPEED = 0.5;
         public static double OCAL_PID_TOLERANCE_VALUE = 4354;
-        public static double ELEVATOR_TICKS_PER_METERS = 439000;
 
         // TODO Encoder Values Will Be Updated
         public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = ELEVATOR_TICKS_PER_METERS*2;
-        public static double ELEVATOR_SOURCE_VALUE = ELEVATOR_TICKS_PER_METERS*0.95;
-        public static double ELEVATOR_PROCESSOR_VALUE = ELEVATOR_TICKS_PER_METERS*0.18;
-        public static double ELEVATOR_TOZERO_VALUE = ELEVATOR_TICKS_PER_METERS*0.06;
-        public static double ELEVATOR_L1_VALUE = ELEVATOR_TICKS_PER_METERS*0.46;
-        public static double ELEVATOR_L2_VALUE = ELEVATOR_TICKS_PER_METERS*0.81;
-        public static double ELEVATOR_L3_VALUE = ELEVATOR_TICKS_PER_METERS*1.21;
-        public static double ELEVATOR_L4_VALUE = ELEVATOR_TICKS_PER_METERS*1.83;
-        public static double ELEVATOR_ALGEA_VALUE_DOWN = ELEVATOR_TICKS_PER_METERS*0.60;
-        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = ELEVATOR_TICKS_PER_METERS;
-
+        public static double ELEVATOR_END_VALUE = 878000;
+        public static double ELEVATOR_SOURCE_VALUE = 417050;
+        public static double ELEVATOR_PROCESSOR_VALUE = 79020;
+        public static double ELEVATOR_TOZERO_VALUE = 26340;
+        public static double ELEVATOR_L1_VALUE = 201940;
+        public static double ELEVATOR_L2_VALUE = 355590;
+        public static double ELEVATOR_L3_VALUE = 531190;
+        public static double ELEVATOR_L4_VALUE = 803370;
+        public static double ELEVATOR_ALGEA_VALUE_DOWN = 263400;
+        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 439000; //Elevator Ticks Per Meters
+ 
     }
 
     public static class Intake {
@@ -110,18 +110,17 @@ public final class Constants {
     }
 
     public static class IntakeMover {
-        public static double IM_TICKS_PER_ANGLE = 240.73;
         public static int IM_LEADER_MOTOR_PORT = 4;
         public static double INTAKE_MOVER_SPEED = 0.5;
         public static double OCAL_PID_TOLERANCE_VALUE = 4354;
 
         // TODO Encoder Values Will Be Updated
-        public static double INTAKE_PROCESSOR_VALUE = IM_TICKS_PER_ANGLE*90;
-        public static double INTAKE_SOURCE_VALUE = IM_TICKS_PER_ANGLE*55;
-        public static double INTAKE_ALGEA_VALUE = IM_TICKS_PER_ANGLE*90;
-        public static double INTAKE_REEFSCAPE_VALUE = IM_TICKS_PER_ANGLE*100;
-        public static double INTAKE_CORAL_VALUE = IM_TICKS_PER_ANGLE*120;
-        public static double INTAKE_L4_VALUE = IM_TICKS_PER_ANGLE*150;
+        public static double INTAKE_PROCESSOR_VALUE = 21665.7;
+        public static double INTAKE_SOURCE_VALUE = 0;
+        public static double INTAKE_ALGEA_VALUE = 21665.7;
+        public static double INTAKE_REEFSCAPE_VALUE = 24073;
+        public static double INTAKE_CORAL_VALUE = 28887.6;
+        public static double INTAKE_L4_VALUE = 36109.5;
     }
 
     public static class ObjectDetector {
@@ -177,7 +176,8 @@ public final class Constants {
     public static final class OI {
         // General Robot Constants
         public static int DRIVER_CONTROLLER_PORT = 0;
-        public static double ELEVATOR_SPEED = 0.5;
+        public static String SWERVE_CANBUS_STRING = "arch";
+        public static String RIO_CANBUS_STRING = "kali";
         public static boolean IS_TEST = false;
         public static boolean IS_PROCESSING = false;
         public static boolean IS_PID_ENDED = false;

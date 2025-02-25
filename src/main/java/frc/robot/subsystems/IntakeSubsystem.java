@@ -21,7 +21,7 @@ public class IntakeSubsystem extends SubsystemBase {
     public Timer timer = new Timer();
 
     public IntakeSubsystem() {
-        leaderMotor = new TalonFX(Intake.INTAKE_LEADER_MOTOR_PORT);
+        leaderMotor = new TalonFX(Intake.INTAKE_LEADER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
         leaderMotorPosition = leaderMotor.getPosition();
         objectDetector = new ObjectDetectorSubsystem();
         resetEncoders();

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Controlls;
+import frc.robot.Constants.Elevator;
 import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
 
@@ -112,7 +113,7 @@ public class Robot extends TimedRobot {
   public void testInit() {
     CommandScheduler.getInstance().cancelAll();
     OI.IS_TEST = true;
-    OI.ELEVATOR_SPEED = 0.3;
+    Elevator.ELEVATOR_SPEED = 0.3;
     m_robotContainer.configureButtonBindings();
   }
 

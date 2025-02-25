@@ -20,7 +20,7 @@ public class IntakeMoverSubsystem extends SubsystemBase {
     public double simEncoder;
 
     public IntakeMoverSubsystem() {
-        leaderMotor = new TalonFX(IntakeMover.IM_LEADER_MOTOR_PORT);
+        leaderMotor = new TalonFX(IntakeMover.IM_LEADER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
         leaderMotorPosition = leaderMotor.getPosition();
         simEncoder = 0;
         resetEncoders();

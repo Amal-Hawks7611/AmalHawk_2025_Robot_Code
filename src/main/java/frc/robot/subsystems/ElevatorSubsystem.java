@@ -21,8 +21,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     private StatusSignal<Angle> followerMotorPosition;
 
     public ElevatorSubsystem() {
-        leaderMotor = new TalonFX(Elevator.ELEVATOR_LEADER_MOTOR_PORT);
-        followerMotor = new TalonFX(Elevator.ELEVATOR_FOLLOWER_MOTOR_PORT);
+        leaderMotor = new TalonFX(Elevator.ELEVATOR_LEADER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
+        followerMotor = new TalonFX(Elevator.ELEVATOR_FOLLOWER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
         leaderMotorPosition = leaderMotor.getPosition();
         followerMotorPosition = followerMotor.getPosition();
         simulationEncoder = 0;

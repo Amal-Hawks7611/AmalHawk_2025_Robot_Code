@@ -1,6 +1,7 @@
 package frc.robot.commands.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.Elevator;
 import frc.robot.Constants.OI;
 import frc.robot.subsystems.ElevatorSubsystem;
 
@@ -21,7 +22,7 @@ public class e_movedown extends Command {
 
     @Override
     public void execute() {
-        elevatorSubsystem.manualControl(-OI.ELEVATOR_SPEED);
+        elevatorSubsystem.manualControl(-Elevator.ELEVATOR_SPEED);
     }
 
     @Override
