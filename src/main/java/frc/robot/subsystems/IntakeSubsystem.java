@@ -35,9 +35,9 @@ public class IntakeSubsystem extends SubsystemBase {
         leaderMotor.setPosition(0);
     }
 
-    public void Move() {
+    public void Intake() {
         if(!EnabledParts.IS_OBJECT_SENSOR_ENABLED){
-            if(timer.hasElapsed(1.5)){
+            if(timer.hasElapsed(Intake.INTAKE_TIME)){
                 leaderMotor.stopMotor();
                 OI.IS_INTAKING = false;
             }
@@ -58,7 +58,7 @@ public class IntakeSubsystem extends SubsystemBase {
     
     public void Shoot(){
         if(!EnabledParts.IS_OBJECT_SENSOR_ENABLED){
-            if(timer.hasElapsed(1.5)){
+            if(timer.hasElapsed(Intake.OUTTAKE_TIME)){
                 leaderMotor.stopMotor();
                 OI.IS_INTAKING = false;
             }

@@ -100,6 +100,8 @@ public final class Constants {
         public static int INTAKE_LEADER_MOTOR_PORT = 2;
         public static double INTAKE_SPEED = 0.5;
         public static double OUTTAKE_SPEED = 0.3;
+        public static double INTAKE_TIME = 0.5;
+        public static double OUTTAKE_TIME = 1;
     }
 
     public static class AlgeaIntake {
@@ -107,6 +109,8 @@ public final class Constants {
         public static int ALGEA_LEADER_MOTOR_PORT = 3; // Shoud Be Same With Intake
         public static double INTAKE_SPEED = 0.5;
         public static double OUTTAKE_SPEED = 0.3;
+        public static double INTAKE_TIME = 0.5;
+        public static double OUTTAKE_TIME = 1;
     }
 
     public static class IntakeMover {
@@ -164,13 +168,13 @@ public final class Constants {
     public static class EnabledParts {
         // Hope Not To Use...
         public static boolean IS_LED_ENABLED = true;
-        public static boolean IS_OBJECT_SENSOR_ENABLED = true;
+        public static boolean IS_OBJECT_SENSOR_ENABLED = false;
         public static boolean IS_INTAKE_ENABLED = true;
         public static boolean IS_ALGEA_INTAKE_ENABLED = true;
         public static boolean IS_INTAKE_MOVER_ENABLED = true;
         public static boolean IS_ELEVATOR_ENABLED = true;
         public static boolean IS_SWERVE_ENABLED = true;
-        public static boolean IS_ROTARY_SWITCH_ENABLED = false; //HELL YEAH
+        public static boolean IS_ROTARY_SWITCH_ENABLED = false;
     }
 
     public static final class OI {

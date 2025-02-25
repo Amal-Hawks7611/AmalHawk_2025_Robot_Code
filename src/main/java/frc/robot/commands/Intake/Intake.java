@@ -24,7 +24,7 @@ public class Intake extends Command {
     @Override
     public void execute() {
         if(EnabledParts.IS_INTAKE_ENABLED){
-            intakeSubsystem.Move();
+            intakeSubsystem.Intake();
             if(!OI.IS_INTAKING){this.end(false);}  
         }
 

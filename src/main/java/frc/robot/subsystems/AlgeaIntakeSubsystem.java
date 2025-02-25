@@ -39,7 +39,7 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
     }
 
     public void Intake() {
-        if(timer.hasElapsed(1.5)){
+        if(timer.hasElapsed(AlgeaIntake.INTAKE_TIME)){
             leaderMotor.stopMotor();
             OI.IS_ALGEA_INTAKING = false;
         }
@@ -49,7 +49,7 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
     }
 
     public void Shoot(){
-        if(timer.hasElapsed(1.5)){
+        if(timer.hasElapsed(AlgeaIntake.OUTTAKE_TIME)){
             leaderMotor.stopMotor();
             OI.IS_ALGEA_INTAKING = false;
         }
