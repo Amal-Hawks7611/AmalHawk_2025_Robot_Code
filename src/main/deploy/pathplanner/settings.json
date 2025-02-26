@@ -1,6 +1,6 @@
 {
-  "robotWidth": 0.737,
-  "robotLength": 0.7366,
+  "robotWidth": 0.918,
+  "robotLength": 0.918,
   "holonomicMode": true,
   "pathFolders": [
     "Alglerden_Mercan_Ortalama",
