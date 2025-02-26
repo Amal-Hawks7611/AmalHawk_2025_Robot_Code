@@ -23,7 +23,7 @@ public class e_processor extends Command {
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_PROCESSOR_VALUE);
+            elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_PROCESSOR_VALUE);
         }
         else{
             this.end(false);

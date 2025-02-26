@@ -20,7 +20,7 @@ public class IntakeMoverSubsystem extends SubsystemBase {
     public double simEncoder;
 
     public IntakeMoverSubsystem() {
-        leaderMotor = new TalonFX(IntakeMover.IM_LEADER_MOTOR_PORT);
+        leaderMotor = new TalonFX(IntakeMover.IM_LEADER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
         leaderMotorPosition = leaderMotor.getPosition();
         simEncoder = 0;
         resetEncoders();
@@ -38,7 +38,7 @@ public class IntakeMoverSubsystem extends SubsystemBase {
 
     public void manualControl(double speed) {
         leaderMotor.set(speed);
-        simEncoder+=speed;
+        simEncoder+=4355;
     }
 
     //OCALPID
@@ -52,11 +52,11 @@ public class IntakeMoverSubsystem extends SubsystemBase {
                 } else {
                     if(leaderPosition > setpoint){
                         leaderMotor.set(-speed);
-                        simEncoder-=speed;
+                        simEncoder-=4355;
                     }
                     else{
                         leaderMotor.set(speed);
-                        simEncoder+=speed;
+                        simEncoder+=4355;
                     }
                 }
             }

@@ -24,8 +24,8 @@ public class e_algea extends Command {
     public void execute() {
         if(!OI.IS_PID_ENDED){
             if(ismiddle){
-                elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGEA_VALUE_MIDDLE);
-            }else{elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGEA_VALUE_DOWN);}
+                elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGEA_VALUE_MIDDLE);
+            }else{elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGEA_VALUE_DOWN);}
         }
         else{
             this.end(false);

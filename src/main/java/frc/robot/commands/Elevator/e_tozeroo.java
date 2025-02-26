@@ -23,7 +23,7 @@ public class e_tozeroo extends Command {
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_TOZERO_VALUE);
+            elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_TOZERO_VALUE);
         }
         else{
             this.end(false);

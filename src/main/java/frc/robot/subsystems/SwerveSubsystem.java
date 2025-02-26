@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Controlls;
+import frc.robot.Constants.OI;
 import frc.robot.Constants.Swerve;
 import frc.robot.Constants.SwervePorts;
 import frc.robot.LimelightHelpers;
@@ -294,9 +295,9 @@ class SwerveModule {
 
     public SwerveModule(int driveMotorPort, int steerMotorPort, int steerEncoderPort, double steerEncoderOffset) {
         //Initialize motors and CANCoder
-        driveMotor = new TalonFX(driveMotorPort);
-        steerMotor = new TalonFX(steerMotorPort);
-        steerEncoder = new CoreCANcoder(steerEncoderPort);
+        driveMotor = new TalonFX(driveMotorPort, OI.SWERVE_CANBUS_STRING);
+        steerMotor = new TalonFX(steerMotorPort, OI.SWERVE_CANBUS_STRING);
+        steerEncoder = new CoreCANcoder(steerEncoderPort, OI.SWERVE_CANBUS_STRING);
 
         TalonFXConfiguration driveMotorConfig = new TalonFXConfiguration();
         TalonFXConfiguration steerMotorConfig = new TalonFXConfiguration();

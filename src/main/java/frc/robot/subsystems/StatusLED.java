@@ -2,10 +2,12 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
+import edu.wpi.first.units.Units;
 
 public class StatusLED extends SubsystemBase {
     public AddressableLED led;
@@ -30,7 +32,8 @@ public class StatusLED extends SubsystemBase {
             System.err.println("LED or buffer is not initialized!");
             return;
         }
-        LedSubsystem.BREATHE_COLOR.applyTo(buffer);
+        LEDPattern pattern = LedSubsystem.BREATHE_COLOR.breathe(Units.Seconds.of(LedSubsystem.BREATHE_MAGNITUDE));
+        pattern.applyTo(buffer);
         led.setData(buffer);
         led.start();
     }
@@ -76,7 +79,7 @@ public class StatusLED extends SubsystemBase {
     }
 
     public void checkForProcess() {
-        if (!OI.IS_TEST && !OI.IS_LED_CYCLING) {
+        if (!OI.IS_LED_CYCLING && !OI.IS_LED_MORSE_SHOWING) {
             if (OI.IS_PROCESSING || OI.IS_INTAKE_MOVING) {
                 setProcess();
             } else if (OI.IS_SWERVE_FOCUSED) {

@@ -21,8 +21,8 @@ public class ElevatorSubsystem extends SubsystemBase {
     private StatusSignal<Angle> followerMotorPosition;
 
     public ElevatorSubsystem() {
-        leaderMotor = new TalonFX(Elevator.ELEVATOR_LEADER_MOTOR_PORT);
-        followerMotor = new TalonFX(Elevator.ELEVATOR_FOLLOWER_MOTOR_PORT);
+        leaderMotor = new TalonFX(Elevator.ELEVATOR_LEADER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
+        followerMotor = new TalonFX(Elevator.ELEVATOR_FOLLOWER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
         leaderMotorPosition = leaderMotor.getPosition();
         followerMotorPosition = followerMotor.getPosition();
         simulationEncoder = 0;
@@ -48,7 +48,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     public void manualControl(double speed) {
         leaderMotor.set(speed);
         followerMotor.set(speed);
-        simulationEncoder+=speed;
+        simulationEncoder+=4355;
     }
 
     //Different to the pid, ocalpid controlls distance instead of speed. Because TalonFX already controlls speed
@@ -56,7 +56,6 @@ public class ElevatorSubsystem extends SubsystemBase {
         if (EnabledParts.IS_ELEVATOR_ENABLED) {
             if (!OI.IS_PID_ENDED) {
                 double leaderPosition = getLeaderMotorEncoder();
-
                 if (isWithinTolerance(leaderPosition, Elevator.ELEVATOR_END_VALUE)
                         || isWithinTolerance(leaderPosition, setpoint)) {
                     stopMotors();
@@ -65,11 +64,11 @@ public class ElevatorSubsystem extends SubsystemBase {
                     if (leaderPosition > setpoint) {
                         leaderMotor.set(-speed);
                         followerMotor.set(-speed);
-                        simulationEncoder -= speed;
+                        simulationEncoder -= 4355;
                     } else {
                         leaderMotor.set(speed);
                         followerMotor.set(speed);
-                        simulationEncoder += speed;
+                        simulationEncoder += 4355;
                     }
                 }
             }

@@ -2,7 +2,6 @@ package frc.robot;
 
 import com.pathplanner.lib.config.PIDConstants;
 
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -57,7 +56,8 @@ public final class Constants {
 
     public static final class LedSubsystem {
         public static int LED_PWM_PORT = 0;
-        public static int LED_LENGTH = 60; // Default
+        public static int LED_LENGTH = 60;
+        public static int BREATHE_MAGNITUDE = 5;
         public static LEDPattern RED_ALLIANCE_COLOR = LEDPattern.solid(Color.kRed);
         public static LEDPattern BLUE_ALLIANCE_COLOR = LEDPattern.solid(Color.kBlue);
         public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(Color.kPurple);
@@ -75,23 +75,24 @@ public final class Constants {
     }
 
     public static final class Elevator {
-        // TODO Encoder Values Will Be Updated
-        public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = 450;
-        public static double ELEVATOR_SOURCE_VALUE = 100;
-        public static double ELEVATOR_PROCESSOR_VALUE = 150;
-        public static double ELEVATOR_REEFSCAPE_VALUE = 200;
-        public static double ELEVATOR_TOZERO_VALUE = 50;
-        public static double ELEVATOR_L1_VALUE = 250;
-        public static double ELEVATOR_L2_VALUE = 300;
-        public static double ELEVATOR_L3_VALUE = 350;
-        public static double ELEVATOR_L4_VALUE = 400;
-        public static double ELEVATOR_ALGEA_VALUE_DOWN = 220;
-        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 240;
         public static int ELEVATOR_LEADER_MOTOR_PORT = 0;
         public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 1;
-        public static double OCAL_PID_TOLERANCE_VALUE = 5;
+        public static double ELEVATOR_SPEED = 0.5;
+        public static double OCAL_PID_TOLERANCE_VALUE = 4354;
 
+        // TODO Encoder Values Will Be Updated
+        public static double ELEVATOR_START_VALUE = 0; // Generally True
+        public static double ELEVATOR_END_VALUE = 878000;
+        public static double ELEVATOR_SOURCE_VALUE = 417050;
+        public static double ELEVATOR_PROCESSOR_VALUE = 79020;
+        public static double ELEVATOR_TOZERO_VALUE = 26340;
+        public static double ELEVATOR_L1_VALUE = 201940;
+        public static double ELEVATOR_L2_VALUE = 355590;
+        public static double ELEVATOR_L3_VALUE = 531190;
+        public static double ELEVATOR_L4_VALUE = 803370;
+        public static double ELEVATOR_ALGEA_VALUE_DOWN = 263400;
+        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 439000; //Elevator Ticks Per Meters
+ 
     }
 
     public static class Intake {
@@ -99,6 +100,8 @@ public final class Constants {
         public static int INTAKE_LEADER_MOTOR_PORT = 2;
         public static double INTAKE_SPEED = 0.5;
         public static double OUTTAKE_SPEED = 0.3;
+        public static double INTAKE_TIME = 0.5;
+        public static double OUTTAKE_TIME = 1;
     }
 
     public static class AlgeaIntake {
@@ -106,25 +109,26 @@ public final class Constants {
         public static int ALGEA_LEADER_MOTOR_PORT = 3; // Shoud Be Same With Intake
         public static double INTAKE_SPEED = 0.5;
         public static double OUTTAKE_SPEED = 0.3;
+        public static double INTAKE_TIME = 0.5;
+        public static double OUTTAKE_TIME = 1;
     }
 
     public static class IntakeMover {
         public static int IM_LEADER_MOTOR_PORT = 4;
         public static double INTAKE_MOVER_SPEED = 0.5;
-        public static double OCAL_PID_TOLERANCE_VALUE = 0.5;
+        public static double OCAL_PID_TOLERANCE_VALUE = 4354;
 
         // TODO Encoder Values Will Be Updated
-        public static double INTAKE_PROCESSOR_VALUE = 30;
-        public static double INTAKE_SOURCE_VALUE = 30;
-        public static double INTAKE_ALGEA_VALUE = 30;
-        public static double INTAKE_REEFSCAPE_VALUE = 20;
-        public static double INTAKE_CORAL_VALUE = 30;
-        public static double INTAKE_L4_VALUE = 60;
+        public static double INTAKE_PROCESSOR_VALUE = 21665.7;
+        public static double INTAKE_SOURCE_VALUE = 0;
+        public static double INTAKE_ALGEA_VALUE = 21665.7;
+        public static double INTAKE_REEFSCAPE_VALUE = 24073;
+        public static double INTAKE_CORAL_VALUE = 28887.6;
+        public static double INTAKE_L4_VALUE = 36109.5;
     }
 
-    public static class Colormatcher {
-        public static final I2C.Port I2C_PORT = I2C.Port.kOnboard;
-        public static final Color CORAL_TARGET = new Color(224,223,221);
+    public static class ObjectDetector {
+        public static final int SENSOR_DIO_PORT = 1;
     }
 
     public static class Controlls {
@@ -158,24 +162,26 @@ public final class Constants {
         public static Trigger T_CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();
         public static Trigger T_CORAL_OUTTAKE = Controlls.DRIVER_CONTROLLER.povRight();
         public static Trigger T_LED_CYCLE = Controlls.DRIVER_CONTROLLER.y();
+        public static Trigger T_LED_MORSE = Controlls.DRIVER_CONTROLLER.button(9);
     }
 
     public static class EnabledParts {
         // Hope Not To Use...
         public static boolean IS_LED_ENABLED = true;
-        public static boolean IS_COLOR_SENSOR_ENABLED = true;
+        public static boolean IS_OBJECT_SENSOR_ENABLED = false;
         public static boolean IS_INTAKE_ENABLED = true;
         public static boolean IS_ALGEA_INTAKE_ENABLED = true;
         public static boolean IS_INTAKE_MOVER_ENABLED = true;
         public static boolean IS_ELEVATOR_ENABLED = true;
         public static boolean IS_SWERVE_ENABLED = true;
-        public static boolean IS_ROTARY_SWITCH_ENABLED = true; //HELL YEAH
+        public static boolean IS_ROTARY_SWITCH_ENABLED = false;
     }
 
     public static final class OI {
         // General Robot Constants
         public static int DRIVER_CONTROLLER_PORT = 0;
-        public static double ELEVATOR_SPEED = 0.5;
+        public static String SWERVE_CANBUS_STRING = "arch";
+        public static String RIO_CANBUS_STRING = "kali";
         public static boolean IS_TEST = false;
         public static boolean IS_PROCESSING = false;
         public static boolean IS_PID_ENDED = false;
@@ -184,5 +190,6 @@ public final class Constants {
         public static boolean IS_INTAKING = false;
         public static boolean IS_ALGEA_INTAKING = false;
         public static boolean IS_LED_CYCLING = false;
+        public static boolean IS_LED_MORSE_SHOWING = false;
     }
 }

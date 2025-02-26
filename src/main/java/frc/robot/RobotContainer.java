@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Controlls;
 import frc.robot.Constants.Test_Controlls;
 import frc.robot.Constants.EnabledParts;
+import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
 import frc.robot.commands.AlgeaIntake.AlgeaIntake;
 import frc.robot.commands.AlgeaIntake.AlgeaOuttake;
@@ -28,6 +29,7 @@ import frc.robot.commands.Elevator.*;
 import frc.robot.commands.Intake.Intake;
 import frc.robot.commands.Intake.Outtake;
 import frc.robot.commands.IntakeMover.*;
+import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
 import frc.robot.commands.Swerve.LimelightAimCommand;
 import frc.robot.commands.Trajectory.AutonPath;
@@ -75,6 +77,8 @@ public class RobotContainer {
         public final Outtake c_outtake;
 
         public final LEDStateCycler led_cycle;
+        public final LEDMorseScroller led_morse;
+
         public final LimelightAimCommand limelight_focus;
 
         public final Command intakeAlgeaMiddle;
@@ -140,6 +144,8 @@ public class RobotContainer {
                 c_outtake = new Outtake(intakeSubsystem);
 
                 led_cycle = new LEDStateCycler(ledSubsystem);
+                led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
+
                 limelight_focus = new LimelightAimCommand(swerveSubsystem);
 
                 //Commands are fully autonomous for driver comfort and easy autonomous integration
@@ -178,8 +184,6 @@ public class RobotContainer {
                                 new l4(intakeMoverSubsystem),
                                 new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
 
-                configureButtonBindings();
-
                 //Set Swerve Tele-Op Drive
                 if (EnabledParts.IS_SWERVE_ENABLED) {
                         Command drive_command = swerveSubsystem.driveteleop();
@@ -190,7 +194,7 @@ public class RobotContainer {
                 SmartDashboard.putData("Auto Chooser", autoChooser);
         }
 
-        private void configureButtonBindings() {
+        public void configureButtonBindings() {
                 //Configure Button Bindings For Test And TeleOp Modes
                 if(OI.IS_TEST){
                         Test_Controlls.T_ALGEA_INTAKE.onTrue(a_intake);
@@ -207,7 +211,8 @@ public class RobotContainer {
 
                         Test_Controlls.T_ELEVATOR_ZERO.onTrue(e_tozero);
 
-                        Test_Controlls.T_LED_CYCLE.onTrue(led_cycle);
+                        Test_Controlls.T_LED_CYCLE.whileTrue(led_cycle);
+                        Test_Controlls.T_LED_MORSE.onTrue(led_morse);
                 }else{                
                         Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
                         Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
@@ -230,7 +235,7 @@ public class RobotContainer {
         }
 
         public Command getAutonomousCommand() {
-                if (EnabledParts.IS_ROTARY_SWITCH_ENABLED) {
+          if (EnabledParts.IS_ROTARY_SWITCH_ENABLED) {
                         Map<Integer, String> autoModes = Map.of(
                                 1, "ALG",
                                 2, "ALG+Reef",

@@ -23,7 +23,7 @@ public class e_level2 extends Command {
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            elevatorSubsystem.OcalPID(OI.ELEVATOR_SPEED, Elevator.ELEVATOR_L2_VALUE);
+            elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_L2_VALUE);
         }
         else{
             this.end(false);
