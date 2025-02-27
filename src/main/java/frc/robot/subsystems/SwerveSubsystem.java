@@ -297,7 +297,7 @@ class SwerveModule {
         //Initialize motors and CANCoder
         driveMotor = new TalonFX(driveMotorPort, OI.SWERVE_CANBUS_STRING);
         steerMotor = new TalonFX(steerMotorPort, OI.SWERVE_CANBUS_STRING);
-        steerEncoder = new CoreCANcoder(steerEncoderPort, OI.SWERVE_CANBUS_STRING);
+        steerEncoder = new CoreCANcoder(steerEncoderPort, OI.RIO_CANBUS_STRING);
 
         TalonFXConfiguration driveMotorConfig = new TalonFXConfiguration();
         TalonFXConfiguration steerMotorConfig = new TalonFXConfiguration();
