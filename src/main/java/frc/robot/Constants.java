@@ -75,8 +75,8 @@ public final class Constants {
     }
 
     public static final class Elevator {
-        public static int ELEVATOR_LEADER_MOTOR_PORT = 0;
-        public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 1;
+        public static int ELEVATOR_LEADER_MOTOR_PORT = 1;
+        public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 2;
         public static double ELEVATOR_SPEED = 0.5;
         public static double OCAL_PID_TOLERANCE_VALUE = 4354;
 
@@ -97,7 +97,7 @@ public final class Constants {
 
     public static class Intake {
         // Intake Motor Port
-        public static int INTAKE_LEADER_MOTOR_PORT = 2;
+        public static int INTAKE_LEADER_MOTOR_PORT = 3;
         public static double INTAKE_SPEED = 0.5;
         public static double OUTTAKE_SPEED = 0.3;
         public static double INTAKE_TIME = 0.5;
