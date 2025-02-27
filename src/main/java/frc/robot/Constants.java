@@ -48,10 +48,10 @@ public final class Constants {
         public static int FRONT_RIGHT_STEER_MOTOR = 6;
         public static int BACK_LEFT_STEER_MOTOR = 7;
         public static int BACK_RIGHT_STEER_MOTOR = 8;
-        public static int FRONT_LEFT_CANCODER = 9;
-        public static int FRONT_RIGHT_CANCODER = 10;
-        public static int BACK_LEFT_CANCODER = 11;
-        public static int BACK_RIGHT_CANCODER = 12;
+        public static int FRONT_LEFT_CANCODER = 5;
+        public static int FRONT_RIGHT_CANCODER = 6;
+        public static int BACK_LEFT_CANCODER = 7;
+        public static int BACK_RIGHT_CANCODER = 8;
     }
 
     public static final class LedSubsystem {
