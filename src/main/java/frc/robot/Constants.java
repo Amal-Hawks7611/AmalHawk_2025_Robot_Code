@@ -167,7 +167,7 @@ public final class Constants {
 
     public static class EnabledParts {
         // Hope Not To Use...
-        public static boolean IS_LED_ENABLED = false;
+        public static boolean IS_LED_ENABLED = true;
         public static boolean IS_OBJECT_SENSOR_ENABLED = false;
         public static boolean IS_INTAKE_ENABLED = true;
         public static boolean IS_ALGEA_INTAKE_ENABLED = true;
