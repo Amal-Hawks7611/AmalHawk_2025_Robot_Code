@@ -113,7 +113,7 @@ public class Robot extends TimedRobot {
   public void testInit() {
     CommandScheduler.getInstance().cancelAll();
     OI.IS_TEST = true;
-    Elevator.ELEVATOR_SPEED = 0.3;
+    Elevator.ELEVATOR_SPEED = 0.2;
     m_robotContainer.configureButtonBindings();
   }
 

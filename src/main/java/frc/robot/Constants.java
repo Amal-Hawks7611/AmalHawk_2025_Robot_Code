@@ -12,7 +12,7 @@ public final class Constants {
     public static final class Swerve {
         public static double WHEELBASE = 0.58;
         public static double TRACKWIDTH = 0.58;
-        public static double MAX_SPEED_METERS_PER_SECOND = 5;
+        public static double MAX_SPEED_METERS_PER_SECOND = 1;
         public static double DRIVE_ENCODER_POSITION_CONVERSION = 0.0000237;
         public static double DRIVE_ENCODER_VELOCITY_CONVERSION = 0.000237;
 
@@ -29,11 +29,11 @@ public final class Constants {
         public static double BACK_RIGHT_MODULE_STEER_OFFSET = 0.0;
 
         //Motor PID Configs
-        public static double DRIVE_MOTOR_KP = 0.6;
+        public static double DRIVE_MOTOR_KP = 0.3;
         public static double DRIVE_MOTOR_KI = 0.0;
         public static double DRIVE_MOTOR_KD = 0.01;
 
-        public static double STEER_MOTOR_KP = 0.6;
+        public static double STEER_MOTOR_KP = 0.3;
         public static double STEER_MOTOR_KI = 0.0;
         public static double STEER_MOTOR_KD = 0.01;
     }

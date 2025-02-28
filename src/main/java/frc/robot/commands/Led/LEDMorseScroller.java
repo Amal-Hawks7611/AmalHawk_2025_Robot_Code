@@ -73,7 +73,7 @@ public class LEDMorseScroller extends Command {
         else if (sym == '-') { list.add(true); list.add(true); list.add(true); }
         if (j < code.length() - 1) list.add(false);
       }
-      if (i < chars.length - 1 && chars[i + 1] != ' ') {
+      if (i < chars.length - 1 && chars[ i + 1] != ' ') {
         for (int j = 0; j < 3; j++) list.add(false);
       }
     }
