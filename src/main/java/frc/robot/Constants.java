@@ -15,13 +15,14 @@ public final class Constants {
     public static final double ROBOT_MASS = 104.72 * 0.453592; // 32lbs * kg per pound
     public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
     public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
-    public static final double MAX_SPEED  = Units.feetToMeters(14.5);
+    public static final double MAX_SPEED  = 4;
     
     public static final class DrivebaseConstants
     {
       public static final double WHEEL_LOCK_TIME = 10;
-      public static final PIDConstants transation = new PIDConstants(5.0,0.0,0.0);
-      public static final PIDConstants angle = new PIDConstants(5.0,0.0,0.0);
+      //FIXME Tune PID Values
+      public static final PIDConstants transation = new PIDConstants(30, 0.0, 0.0);
+      public static final PIDConstants angle = new PIDConstants(30, 0.0, 0.0);
     }
   
     public static class OperatorConstants
@@ -31,52 +32,6 @@ public final class Constants {
       public static final double RIGHT_X_DEADBAND = 0.1;
       public static final double TURN_CONSTANT    = 6;
     }
-
-    public static final class Swerve {
-        public static double WHEELBASE = 0.58;
-        public static double TRACKWIDTH = 0.58;
-        public static double MAX_SPEED_METERS_PER_SECOND = 1;
-        public static double DRIVE_ENCODER_POSITION_CONVERSION = 0.0000237;
-        public static double DRIVE_ENCODER_VELOCITY_CONVERSION = 0.000237;
-
-        // Motor configuration
-        public static PIDConstants TRANSLATION_PID = new PIDConstants(3.0, 0.0, 0.0); // TODO: Tune PID values
-        public static PIDConstants ROTATION_PID = new PIDConstants(0, 0.0, 0.0); // TODO: Tune PID values
-        public static double LIMELIGHT_ALIGN_KP = 0.5;
-        public static boolean IS_FIELD_RELATIVE = false;
-
-        // TODO Offsets Will Be Entered
-        public static double FRONT_LEFT_MODULE_STEER_OFFSET = 0.0;
-        public static double FRONT_RIGHT_MODULE_STEER_OFFSET = 0.0;
-        public static double BACK_LEFT_MODULE_STEER_OFFSET = 0.0;
-        public static double BACK_RIGHT_MODULE_STEER_OFFSET = 0.0;
-
-        //Motor PID Configs
-        public static double DRIVE_MOTOR_KP = 0.3;
-        public static double DRIVE_MOTOR_KI = 0.0;
-        public static double DRIVE_MOTOR_KD = 0.01;
-
-        public static double STEER_MOTOR_KP = 0;
-        public static double STEER_MOTOR_KI = 0.0;
-        public static double STEER_MOTOR_KD = 0;
-    }
-
-    public static final class SwervePorts {
-        // TODO Ports Will Be Entered
-        public static int FRONT_LEFT_DRIVE_MOTOR = 1;
-        public static int FRONT_RIGHT_DRIVE_MOTOR = 2;
-        public static int BACK_LEFT_DRIVE_MOTOR = 3;
-        public static int BACK_RIGHT_DRIVE_MOTOR = 4;
-        public static int FRONT_LEFT_STEER_MOTOR = 5;
-        public static int FRONT_RIGHT_STEER_MOTOR = 6;
-        public static int BACK_LEFT_STEER_MOTOR = 7;
-        public static int BACK_RIGHT_STEER_MOTOR = 8;
-        public static int FRONT_LEFT_CANCODER = 5;
-        public static int FRONT_RIGHT_CANCODER = 6;
-        public static int BACK_LEFT_CANCODER = 7;
-        public static int BACK_RIGHT_CANCODER = 8;
-    }
-
     public static final class LedSubsystem {
         public static int LED_PWM_PORT = 0;
         public static int LED_LENGTH = 60;

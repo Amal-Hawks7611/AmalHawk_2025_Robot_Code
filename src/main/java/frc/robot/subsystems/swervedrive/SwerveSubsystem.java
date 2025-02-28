@@ -8,7 +8,6 @@ import static edu.wpi.first.units.Units.Meter;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.commands.PathfindingCommand;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.pathplanner.lib.path.PathConstraints;
@@ -69,7 +68,41 @@ public class SwerveSubsystem extends SubsystemBase {
         0.1);
     swerveDrive.setModuleEncoderAutoSynchronize(false,
         1);
-    setupPathPlanner();
+    RobotConfig config;
+    try {
+          config = RobotConfig.fromGUISettings();
+          final boolean enableFeedforward = false;
+          AutoBuilder.configure(
+              this::getPose,
+              this::resetOdometry,
+              this::getRobotVelocity,
+              (speedsRobotRelative, moduleFeedForwards) -> {
+                if (enableFeedforward) {
+                  swerveDrive.drive(
+                      speedsRobotRelative,
+                      swerveDrive.kinematics.toSwerveModuleStates(speedsRobotRelative),
+                      moduleFeedForwards.linearForces());
+                } else {
+                  swerveDrive.setChassisSpeeds(speedsRobotRelative);
+                }
+              },
+              new PPHolonomicDriveController(
+                  DrivebaseConstants.transation,
+                  DrivebaseConstants.angle),
+              config,
+              // The robot configuration
+              () -> {
+                var alliance = DriverStation.getAlliance();
+                if (alliance.isPresent()) {
+                  return alliance.get() == DriverStation.Alliance.Red;
+                }
+                return false;
+              },
+              this);
+    
+      } catch (Exception e) {
+          e.printStackTrace();
+        }
   }
 
   public SwerveSubsystem(SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg) {
@@ -87,47 +120,6 @@ public class SwerveSubsystem extends SubsystemBase {
 
   @Override
   public void simulationPeriodic() {
-  }
-
-  public void setupPathPlanner() {
-    RobotConfig config;
-    try {
-      config = RobotConfig.fromGUISettings();
-
-      final boolean enableFeedforward = true;
-      AutoBuilder.configure(
-          this::getPose,
-          this::resetOdometry,
-          this::getRobotVelocity,
-          (speedsRobotRelative, moduleFeedForwards) -> {
-            if (enableFeedforward) {
-              swerveDrive.drive(
-                  speedsRobotRelative,
-                  swerveDrive.kinematics.toSwerveModuleStates(speedsRobotRelative),
-                  moduleFeedForwards.linearForces());
-            } else {
-              swerveDrive.setChassisSpeeds(speedsRobotRelative);
-            }
-          },
-          new PPHolonomicDriveController(
-              DrivebaseConstants.transation,
-              DrivebaseConstants.angle),
-          config,
-          // The robot configuration
-          () -> {
-            var alliance = DriverStation.getAlliance();
-            if (alliance.isPresent()) {
-              return alliance.get() == DriverStation.Alliance.Red;
-            }
-            return false;
-          },
-          this);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    PathfindingCommand.warmupCommand().schedule();
   }
 
   public Command getAutonomousCommand(String pathName) {
