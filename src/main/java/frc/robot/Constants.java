@@ -20,6 +20,8 @@ public final class Constants {
     public static final class DrivebaseConstants
     {
       public static final double WHEEL_LOCK_TIME = 10;
+      public static final PIDConstants transation = new PIDConstants(5.0,0.0,0.0);
+      public static final PIDConstants angle = new PIDConstants(5.0,0.0,0.0);
     }
   
     public static class OperatorConstants
