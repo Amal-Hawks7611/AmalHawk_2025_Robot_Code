@@ -4,10 +4,10 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Controlls;
@@ -20,6 +20,7 @@ public class Robot extends TimedRobot {
   private final RobotContainer m_robotContainer;
   public static boolean doRejectUpdate;
   public static boolean isErrorWritten;
+  public Timer disabledTimer;
   public Robot() {
     m_robotContainer = new RobotContainer();
     doRejectUpdate = false;
@@ -38,35 +39,6 @@ public class Robot extends TimedRobot {
     if(Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.9){
       LedSubsystem.BREATHE_MAGNITUDE = 1;
     }
-
-    //Limelight Megatag2 Localization
-    try {
-      int[] validIDs = {3,4};
-      LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
-      LimelightHelpers.SetRobotOrientation("limelight", m_robotContainer.swerveSubsystem.poseEstimator.getEstimatedPosition().getRotation().getDegrees(), 0, 0, 0, 0, 0);
-      LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
-      if(Math.abs(m_robotContainer.swerveSubsystem.gyro.getRate()) > 720)
-      {
-        doRejectUpdate = true;
-      }
-      if(mt2.tagCount == 0)
-      {
-        doRejectUpdate = true;
-      }
-      if(!doRejectUpdate)
-      {
-        m_robotContainer.swerveSubsystem.poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
-        m_robotContainer.swerveSubsystem.poseEstimator.addVisionMeasurement(
-            mt2.pose,
-            mt2.timestampSeconds);
-      }
-    } catch (Exception e) {
-      if(!isErrorWritten){
-        System.out.println("Limelight Bulunamadı!");
-        isErrorWritten = true;
-      }
-
-    }
   }
   @Override
   public void robotInit() 
@@ -75,19 +47,29 @@ public class Robot extends TimedRobot {
     for (int port = 5800; port <= 5809; port++) {
       PortForwarder.add(port, "limelight.local",port);
     }
+    disabledTimer = new Timer();
   }
   @Override
   public void disabledInit() {
+    m_robotContainer.setMotorBrake(true);
+    disabledTimer.reset();
+    disabledTimer.start();
   }
 
   @Override
   public void disabledPeriodic() {
+    if (disabledTimer.hasElapsed(Constants.DrivebaseConstants.WHEEL_LOCK_TIME))
+    {
+      m_robotContainer.setMotorBrake(false);
+      disabledTimer.stop();
+      disabledTimer.reset();
+    }
   }
 
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    m_robotContainer.setMotorBrake(true);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
       m_robotContainer.led_morse.schedule();

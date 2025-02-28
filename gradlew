@@ -63,7 +63,7 @@
 #       You can find Gradle at https://github.com/gradle/gradle/.
 #
 ##############################################################################
-
+# AHMET KADIR LOVES BOYS
 # Attempt to set APP_HOME
 
 # Resolve links: $0 may be a link

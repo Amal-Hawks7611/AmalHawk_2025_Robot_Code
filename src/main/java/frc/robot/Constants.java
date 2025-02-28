@@ -2,13 +2,34 @@ package frc.robot;
 
 import com.pathplanner.lib.config.PIDConstants;
 
+import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import swervelib.math.Matter;
 
 //ALL ROBOT SETTINGS ARE DEFINED HERE. IF YOU DON'T KNOW WHAT YOU ARE DOING, DON'T TOUCH ANYTHING!!
 public final class Constants {
+    public static final double ROBOT_MASS = 104.72 * 0.453592; // 32lbs * kg per pound
+    public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
+    public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
+    public static final double MAX_SPEED  = Units.feetToMeters(14.5);
+    
+    public static final class DrivebaseConstants
+    {
+      public static final double WHEEL_LOCK_TIME = 10;
+    }
+  
+    public static class OperatorConstants
+    {
+      public static final double DEADBAND        = 0.1;
+      public static final double LEFT_Y_DEADBAND = 0.1;
+      public static final double RIGHT_X_DEADBAND = 0.1;
+      public static final double TURN_CONSTANT    = 6;
+    }
+
     public static final class Swerve {
         public static double WHEELBASE = 0.58;
         public static double TRACKWIDTH = 0.58;
@@ -18,7 +39,7 @@ public final class Constants {
 
         // Motor configuration
         public static PIDConstants TRANSLATION_PID = new PIDConstants(3.0, 0.0, 0.0); // TODO: Tune PID values
-        public static PIDConstants ROTATION_PID = new PIDConstants(3.0, 0.0, 0.0); // TODO: Tune PID values
+        public static PIDConstants ROTATION_PID = new PIDConstants(0, 0.0, 0.0); // TODO: Tune PID values
         public static double LIMELIGHT_ALIGN_KP = 0.5;
         public static boolean IS_FIELD_RELATIVE = false;
 
@@ -33,9 +54,9 @@ public final class Constants {
         public static double DRIVE_MOTOR_KI = 0.0;
         public static double DRIVE_MOTOR_KD = 0.01;
 
-        public static double STEER_MOTOR_KP = 0.3;
+        public static double STEER_MOTOR_KP = 0;
         public static double STEER_MOTOR_KI = 0.0;
-        public static double STEER_MOTOR_KD = 0.01;
+        public static double STEER_MOTOR_KD = 0;
     }
 
     public static final class SwervePorts {
@@ -78,11 +99,11 @@ public final class Constants {
         public static int ELEVATOR_LEADER_MOTOR_PORT = 1;
         public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 2;
         public static double ELEVATOR_SPEED = 0.2;
+        public static double ELEVATOR_STATIC_VOLTS = 0.3;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
-
         // TODO Encoder Values Will Be Updated
         public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = 13;
+        public static double ELEVATOR_END_VALUE = 32.8;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
         public static double ELEVATOR_TOZERO_VALUE = 6;
@@ -98,8 +119,8 @@ public final class Constants {
     public static class Intake {
         // Intake Motor Port
         public static int INTAKE_LEADER_MOTOR_PORT = 3;
-        public static double INTAKE_SPEED = 0.2;
-        public static double OUTTAKE_SPEED = 0.2;
+        public static double INTAKE_SPEED = 0.4;
+        public static double OUTTAKE_SPEED = 0.4;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
     }
@@ -107,8 +128,8 @@ public final class Constants {
     public static class AlgeaIntake {
         // Algea Intake Motor Port
         public static int ALGEA_LEADER_MOTOR_PORT = 3; // Shoud Be Same With Intake
-        public static double INTAKE_SPEED = 0.2;
-        public static double OUTTAKE_SPEED = 0.2;
+        public static double INTAKE_SPEED = 0.4;
+        public static double OUTTAKE_SPEED = 0.4;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
     }
@@ -117,13 +138,14 @@ public final class Constants {
         public static int IM_LEADER_MOTOR_PORT = 4;
         public static double INTAKE_MOVER_SPEED = 0.2;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
+        public static double IM_STATIC_VOLTAGE = 0.08;
 
         // TODO Encoder Values Will Be Updated
         public static double INTAKE_PROCESSOR_VALUE = 24.2;
         public static double INTAKE_SOURCE_VALUE = 0;
         public static double INTAKE_ALGEA_VALUE = 24.2;
         public static double INTAKE_REEFSCAPE_VALUE = 2.5;
-        public static double INTAKE_CORAL_VALUE = 4;
+        public static double INTAKE_CORAL_VALUE = 3.7;
         public static double INTAKE_L4_VALUE = 4.3;
     }
 
@@ -173,7 +195,7 @@ public final class Constants {
         public static boolean IS_ALGEA_INTAKE_ENABLED = true;
         public static boolean IS_INTAKE_MOVER_ENABLED = true;
         public static boolean IS_ELEVATOR_ENABLED = true;
-        public static boolean IS_SWERVE_ENABLED = false;
+        public static boolean IS_SWERVE_ENABLED = true;
         public static boolean IS_ROTARY_SWITCH_ENABLED = false;
     }
 

@@ -6,18 +6,23 @@ import frc.robot.subsystems.IntakeMoverSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.RotarySwitchSubsystem;
 import frc.robot.subsystems.StatusLED;
-import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.swervedrive.SwerveSubsystem;
+import swervelib.SwerveInputStream;
 
+import java.io.File;
 import java.util.Map;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controlls;
 import frc.robot.Constants.Test_Controlls;
 import frc.robot.Constants.EnabledParts;
@@ -31,14 +36,12 @@ import frc.robot.commands.Intake.Outtake;
 import frc.robot.commands.IntakeMover.*;
 import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
-import frc.robot.commands.Swerve.LimelightAimCommand;
 import frc.robot.commands.Trajectory.AutonPath;
-import frc.robot.commands.Trajectory.FollowTrajectoryCommand;
 
 //A COOL ROBOTCONTAINER THAT CONTAINS NAMEDCOMMANDS FOR PATHPLANNER AND COMMAND GROUPS FOR TEU
 public class RobotContainer {
         private final SendableChooser<Command> autoChooser;
-        public final SwerveSubsystem swerveSubsystem = new SwerveSubsystem();
+        private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),"swerve"));
         private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
         public final IntakeMoverSubsystem intakeMoverSubsystem = new IntakeMoverSubsystem();
         public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
@@ -47,8 +50,7 @@ public class RobotContainer {
         public final RotarySwitchSubsystem rotarySwitchSubsystem = new RotarySwitchSubsystem();
 
         public final AutonPath otonom_path = new AutonPath();
-        public final FollowTrajectoryCommand otonom = new FollowTrajectoryCommand(swerveSubsystem);
-
+        public CommandXboxController driverXbox = Controlls.DRIVER_CONTROLLER;
         public final e_movedown elevator_down;
         public final e_moveup elevator_up;
         public final e_tozeroo e_tozero;
@@ -79,8 +81,6 @@ public class RobotContainer {
         public final LEDStateCycler led_cycle;
         public final LEDMorseScroller led_morse;
 
-        public final LimelightAimCommand limelight_focus;
-
         public final Command intakeAlgeaMiddle;
         public final Command intakeAlgeaDown;
         public final Command getSource;
@@ -90,7 +90,49 @@ public class RobotContainer {
         public final Command Coral_l3;
         public final Command Coral_l4;
 
+        SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
+        () -> driverXbox.getLeftY() * -1,
+        () -> driverXbox.getLeftX() * -1)
+    .withControllerRotationAxis(driverXbox::getRightX)
+    .deadband(Constants.OperatorConstants.DEADBAND)
+    .scaleTranslation(0.8)
+    .allianceRelativeControl(true);
+
+        SwerveInputStream driveDirectAngle = driveAngularVelocity.copy().withControllerHeadingAxis(driverXbox::getRightX,
+                                     driverXbox::getRightY)
+   .headingWhile(true);
+        SwerveInputStream driveRobotOriented = driveAngularVelocity.copy().robotRelative(true)
+     .allianceRelativeControl(false);
+
+        SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
+                () -> -driverXbox.getLeftY(),
+                () -> -driverXbox.getLeftX())
+            .withControllerRotationAxis(() -> driverXbox.getRawAxis(
+                2))
+            .deadband(Constants.OperatorConstants.DEADBAND)
+            .scaleTranslation(0.8)
+            .allianceRelativeControl(true);
+        SwerveInputStream driveDirectAngleKeyboard     = driveAngularVelocityKeyboard.copy()
+                       .withControllerHeadingAxis(() ->
+                                                      Math.sin(
+                                                          driverXbox.getRawAxis(
+                                                              2) *
+                                                          Math.PI) *
+                                                      (Math.PI *
+                                                       2),
+                                                  () ->
+                                                      Math.cos(
+                                                          driverXbox.getRawAxis(
+                                                              2) *
+                                                          Math.PI) *
+                                                      (Math.PI *
+                                                       2))
+                       .headingWhile(true);
+
+
         public RobotContainer() {
+                DriverStation.silenceJoystickConnectionWarning(true);
+
                 // Add Commands to the PathPlanner
                 NamedCommands.registerCommand("eProcessor", new e_processor(elevatorSubsystem));
                 NamedCommands.registerCommand("eAlgeaMiddle", new e_algea(elevatorSubsystem, true));
@@ -146,8 +188,6 @@ public class RobotContainer {
                 led_cycle = new LEDStateCycler(ledSubsystem);
                 led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
-                limelight_focus = new LimelightAimCommand(swerveSubsystem);
-
                 //Commands are fully autonomous for driver comfort and easy autonomous integration
                 intakeAlgeaMiddle = new SequentialCommandGroup(
                                 new algea(intakeMoverSubsystem),
@@ -186,14 +226,17 @@ public class RobotContainer {
                                 new e_level4(elevatorSubsystem),
                                 new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
 
-                //Set Swerve Tele-Op Drive
-                if (EnabledParts.IS_SWERVE_ENABLED) {
-                        Command drive_command = swerveSubsystem.driveteleop();
-                        swerveSubsystem.setDefaultCommand(drive_command);
-                }
                 //PathPlanner Autonomous Chooser
                 autoChooser = AutoBuilder.buildAutoChooser();
                 SmartDashboard.putData("Auto Chooser", autoChooser);
+                configureBindings();
+        }
+
+        private void configureBindings()
+        {
+        if(EnabledParts.IS_SWERVE_ENABLED){
+          Command driveRobotOrientedAngularVelocity  = drivebase.driveFieldOriented(driveAngularVelocity);
+              drivebase.setDefaultCommand(driveRobotOrientedAngularVelocity);}
         }
 
         public void configureButtonBindings() {
@@ -251,4 +294,9 @@ public class RobotContainer {
                         return autoChooser.getSelected();
                 }
         }
+        
+        public void setMotorBrake(boolean brake)
+        {
+    drivebase.setMotorBrake(brake);
+}
 }
