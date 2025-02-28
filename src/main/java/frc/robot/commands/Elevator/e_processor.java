@@ -34,7 +34,7 @@ public class e_processor extends Command {
     public void end(boolean interrupted) {
         elevatorSubsystem.leaderMotor.stopMotor();
         elevatorSubsystem.followerMotor.stopMotor();
-        OI.IS_PID_ENDED = false;
+        OI.IS_PID_ENDED = true;
         OI.IS_PROCESSING = false;
         System.out.println(OI.IS_PID_ENDED);
     }

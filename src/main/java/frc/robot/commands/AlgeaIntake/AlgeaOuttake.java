@@ -28,7 +28,6 @@ public class AlgeaOuttake extends Command {
             intakeSubsystem.Shoot();
             if(!OI.IS_ALGEA_INTAKING){this.end(false);} 
         }
-
     }
 
     @Override

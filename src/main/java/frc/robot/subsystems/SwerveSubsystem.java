@@ -123,7 +123,6 @@ public class SwerveSubsystem extends SubsystemBase {
         //Turn Speed, Given By PathPlanner, To The Kinematics
         SwerveModuleState[] swerveModuleStates = kinematics.toSwerveModuleStates(speeds);
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Swerve.MAX_SPEED_METERS_PER_SECOND);
-
         //This Manipulates The Speed And Robot Angle
         frontLeft.setDesiredState(applySecondOrderKinematics(swerveModuleStates[0]));
         frontRight.setDesiredState(applySecondOrderKinematics(swerveModuleStates[1]));
@@ -185,8 +184,8 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public Command driveteleop() {
         return run(() -> {
-            double xSpeed = Controlls.DRIVER_CONTROLLER.getLeftX()* Swerve.MAX_SPEED_METERS_PER_SECOND;
-            double ySpeed = Controlls.DRIVER_CONTROLLER.getLeftY()* Swerve.MAX_SPEED_METERS_PER_SECOND;
+            double xSpeed = Controlls.DRIVER_CONTROLLER.getRawAxis(0)* Swerve.MAX_SPEED_METERS_PER_SECOND;
+            double ySpeed = Controlls.DRIVER_CONTROLLER.getRawAxis(1)* Swerve.MAX_SPEED_METERS_PER_SECOND;
             double rot = Controlls.DRIVER_CONTROLLER.getRawAxis(Controlls.SWERVE_RIGHT_X_AXIS)* Swerve.MAX_SPEED_METERS_PER_SECOND;
 
             boolean fieldRelative = Swerve.IS_FIELD_RELATIVE;

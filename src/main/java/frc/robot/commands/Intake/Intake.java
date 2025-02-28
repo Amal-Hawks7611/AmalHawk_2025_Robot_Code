@@ -27,7 +27,6 @@ public class Intake extends Command {
             intakeSubsystem.Intake();
             if(!OI.IS_INTAKING){this.end(false);}  
         }
-
     }
 
     @Override

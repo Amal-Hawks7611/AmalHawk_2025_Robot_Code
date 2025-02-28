@@ -27,7 +27,6 @@ public class Outtake extends Command {
             intakeSubsystem.Shoot();
             if(!OI.IS_INTAKING){this.end(false);}
         }
-
     }
 
     @Override

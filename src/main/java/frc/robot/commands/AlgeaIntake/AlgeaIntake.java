@@ -27,7 +27,6 @@ public class AlgeaIntake extends Command {
             intakeSubsystem.Intake();
             if(!OI.IS_ALGEA_INTAKING){this.end(false);}  
         }
-
     }
 
     @Override

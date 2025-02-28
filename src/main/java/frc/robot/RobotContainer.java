@@ -150,38 +150,40 @@ public class RobotContainer {
 
                 //Commands are fully autonomous for driver comfort and easy autonomous integration
                 intakeAlgeaMiddle = new SequentialCommandGroup(
-                                new e_algea(elevatorSubsystem, true),
-                                new algea(intakeMoverSubsystem), 
+                                new algea(intakeMoverSubsystem),
+                                new e_algea(elevatorSubsystem, true), 
                                 new AlgeaIntake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
+
                 intakeAlgeaDown = new SequentialCommandGroup(
-                                new e_algea(elevatorSubsystem, false),
-                                new algea(intakeMoverSubsystem), 
+                                new algea(intakeMoverSubsystem),
+                                new e_algea(elevatorSubsystem, false), 
                                 new AlgeaIntake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
+
                 getSource = new SequentialCommandGroup(
-                                new e_source(elevatorSubsystem),
                                 new source(intakeMoverSubsystem),
+                                new e_source(elevatorSubsystem),
                                 new Intake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
 
                 AlgeaProcessor = new SequentialCommandGroup(
-                                new e_processor(elevatorSubsystem),
-                                new processor(intakeMoverSubsystem), 
+                                new processor(intakeMoverSubsystem),
+                                new e_processor(elevatorSubsystem), 
                                 new AlgeaOuttake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
 
                 Coral_l1 = new SequentialCommandGroup(
-                                new e_level1(elevatorSubsystem),
                                 new reefscape(intakeMoverSubsystem),
+                                new e_level1(elevatorSubsystem),
                                 new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
                 Coral_l2 = new SequentialCommandGroup(
-                                new e_level2(elevatorSubsystem), 
-                                new korel(intakeMoverSubsystem),
+                                new korel(intakeMoverSubsystem), 
+                                new e_level2(elevatorSubsystem),
                                 new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
                 Coral_l3 = new SequentialCommandGroup(
-                                new e_level3(elevatorSubsystem), 
-                                new korel(intakeMoverSubsystem),
+                                new korel(intakeMoverSubsystem), 
+                                new e_level3(elevatorSubsystem),
                                 new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
                 Coral_l4 = new SequentialCommandGroup(
-                                new e_level4(elevatorSubsystem), 
-                                new l4(intakeMoverSubsystem),
+                                new l4(intakeMoverSubsystem), 
+                                new e_level4(elevatorSubsystem),
                                 new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
 
                 //Set Swerve Tele-Op Drive

@@ -55,11 +55,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     public void OcalPID(double speed, double setpoint) {
         if (EnabledParts.IS_ELEVATOR_ENABLED) {
             if (!OI.IS_PID_ENDED) {
+                System.out.println("PID Running");
                 double leaderPosition = getLeaderMotorEncoder();
                 if (isWithinTolerance(leaderPosition, Elevator.ELEVATOR_END_VALUE)
                         || isWithinTolerance(leaderPosition, setpoint)) {
-                    stopMotors();
-                    OI.IS_PID_ENDED = true;
+                        stopMotors();
+                        OI.IS_PID_ENDED = true;
                 } else {
                     if (leaderPosition > setpoint) {
                         leaderMotor.set(-speed);
@@ -71,6 +72,8 @@ public class ElevatorSubsystem extends SubsystemBase {
                         simulationEncoder += 4355;
                     }
                 }
+            }else{
+                Elevator.ELEVATOR_SPEED = 0.2;
             }
         } else {
             OI.IS_PID_ENDED = true;
@@ -88,6 +91,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("Elevator Speed",Elevator.ELEVATOR_SPEED);
         SmartDashboard.putBoolean("IsElevatorProcessing", OI.IS_PROCESSING);
         SmartDashboard.putNumber("Elevator Leader Motor Value", getLeaderMotorEncoder());
         SmartDashboard.putNumber("Elevator Follower Motor Encoder", getFollowerMotorEncoder());
