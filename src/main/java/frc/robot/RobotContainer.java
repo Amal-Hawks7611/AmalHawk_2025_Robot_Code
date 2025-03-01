@@ -235,7 +235,7 @@ public class RobotContainer {
         private void configureBindings()
         {
         if(EnabledParts.IS_SWERVE_ENABLED){
-          Command driveRobotOrientedAngularVelocity  = drivebase.driveFieldOriented(driveAngularVelocity);
+          Command driveRobotOrientedAngularVelocity  = drivebase.driveFieldOriented(driveAngularVelocityKeyboard);
               drivebase.setDefaultCommand(driveRobotOrientedAngularVelocity);}
         }
 

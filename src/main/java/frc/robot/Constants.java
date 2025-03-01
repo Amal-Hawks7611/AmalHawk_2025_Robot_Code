@@ -116,7 +116,7 @@ public final class Constants {
         //For TEU
         public static Trigger ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.button(8);
         public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.button(7);
-        public static Trigger INTAKE_MOVE_UP = DRIVER_CONTROLLER.button(10);
+        public static Trigger INTAKE_MOVE_UP = DRIVER_CONTROLLER.button(6);
         public static Trigger INTAKE_MOVE_DOWN = DRIVER_CONTROLLER.button(5);
         public static Trigger ALGEA_PROCESSOR = DRIVER_CONTROLLER.button(2);
         public static Trigger ALGEA_INTAKE_MIDDLE = DRIVER_CONTROLLER.button(1);
@@ -133,7 +133,7 @@ public final class Constants {
     public static class Test_Controlls {
         public static Trigger T_ELEVATOR_MANUAL_UP = Controlls.DRIVER_CONTROLLER.button(8);
         public static Trigger T_ELEVATOR_MANUAL_DOWN = Controlls.DRIVER_CONTROLLER.button(7);
-        public static Trigger T_INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.button(10);
+        public static Trigger T_INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.button(6);
         public static Trigger T_INTAKE_MOVE_DOWN = Controlls.DRIVER_CONTROLLER.button(5);
         public static Trigger T_ELEVATOR_ZERO = Controlls.DRIVER_CONTROLLER.button(2);
         public static Trigger T_ALGEA_INTAKE = Controlls.DRIVER_CONTROLLER.button(1);
