@@ -95,7 +95,8 @@ public final class Constants {
         public static int IM_LEADER_MOTOR_PORT = 4;
         public static double INTAKE_MOVER_SPEED = 0.2;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
-        public static double IM_STATIC_VOLTAGE = 0.08;
+        public static double IM_STATIC_VOLTAGE = 0.15;
+        public static double IM_ALGEA_STATIC = 0.25;
 
         // TODO Encoder Values Will Be Updated
         public static double INTAKE_PROCESSOR_VALUE = 24.2;
@@ -148,12 +149,13 @@ public final class Constants {
         // Hope Not To Use...
         public static boolean IS_LED_ENABLED = true;
         public static boolean IS_OBJECT_SENSOR_ENABLED = false;
-        public static boolean IS_INTAKE_ENABLED = true;
+        public static boolean IS_IM_STATIC_VOLTAGEKE_ENABLED = true;
         public static boolean IS_ALGEA_INTAKE_ENABLED = true;
         public static boolean IS_INTAKE_MOVER_ENABLED = true;
         public static boolean IS_ELEVATOR_ENABLED = true;
         public static boolean IS_SWERVE_ENABLED = true;
         public static boolean IS_ROTARY_SWITCH_ENABLED = false;
+        public static boolean IS_INTAKE_ENABLED = true;
     }
 
     public static final class OI {
