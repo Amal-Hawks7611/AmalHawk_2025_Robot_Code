@@ -30,7 +30,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-
     if(Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.3 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.6)
       LedSubsystem.BREATHE_MAGNITUDE = 3;
     if(Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.6 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.9){
@@ -42,7 +41,15 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void robotInit() 
-  {
+  {   
+    if(DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
+      int[] validIDs = {6,7,8,9,10,11};
+      LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
+    }
+    else{
+      int[] validIDs = {17,18,19,20,21,22};
+      LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
+    }
     //Limelight Local Port Brute Because Of FMS Connections
     for (int port = 5800; port <= 5809; port++) {
       PortForwarder.add(port, "limelight.local",port);

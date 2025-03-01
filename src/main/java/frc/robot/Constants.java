@@ -16,6 +16,8 @@ public final class Constants {
     public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
     public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
     public static final double MAX_SPEED  = 3;
+    public static final double LIMELIGHT_KP = 0.5;
+    public static final double LIMELIGHT_DRIVE_TIME = 0.2;
     
     public static final class DrivebaseConstants
     {
@@ -75,6 +77,7 @@ public final class Constants {
 
     public static class Intake {
         // Intake Motor Port
+        public static double INTAKE_REVERSE_VOLT = 0.03;
         public static int INTAKE_LEADER_MOTOR_PORT = 3;
         public static double INTAKE_SPEED = 0.25;
         public static double OUTTAKE_SPEED = 0.25;
@@ -98,6 +101,7 @@ public final class Constants {
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         public static double IM_STATIC_VOLTAGE = 0.15;
         public static double IM_ALGEA_STATIC = 0.25;
+        public static double IM_CORAL_STATIC = 0.3;
 
         // TODO Encoder Values Will Be Updated
         public static double INTAKE_PROCESSOR_VALUE = 24.2;
@@ -144,6 +148,7 @@ public final class Constants {
         public static Trigger T_CORAL_OUTTAKE = Controlls.DRIVER_CONTROLLER.povRight();
         public static Trigger T_LED_CYCLE = Controlls.DRIVER_CONTROLLER.button(4);
         public static Trigger T_LED_MORSE = Controlls.DRIVER_CONTROLLER.button(9);
+        public static Trigger T_INTAKE_MOVE_L1 = Controlls.DRIVER_CONTROLLER.povUp();
     }
 
     public static class EnabledParts {

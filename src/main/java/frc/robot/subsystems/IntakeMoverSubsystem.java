@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.RobotContainer;
 import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.IntakeMover;
 import frc.robot.Constants.OI;
@@ -16,7 +17,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 public class IntakeMoverSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     private StatusSignal<Angle> leaderMotorPosition;
-
+    public RobotContainer container;
     public double simEncoder;
 
     public IntakeMoverSubsystem() {
@@ -79,7 +80,6 @@ public class IntakeMoverSubsystem extends SubsystemBase {
         if(!OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() > 9){leaderMotor.setVoltage(-IntakeMover.IM_STATIC_VOLTAGE);}
         if(!OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() < 9){leaderMotor.setVoltage(IntakeMover.IM_STATIC_VOLTAGE);}
         if(!OI.IS_INTAKE_MOVING && OI.IS_ALGEA_INTAKING){leaderMotor.setVoltage(-IntakeMover.IM_ALGEA_STATIC);}
-        
         SmartDashboard.putBoolean("IsIntakeMoving", OI.IS_INTAKE_MOVING);
         SmartDashboard.putNumber("Intake Mover Leader Motor Value", getLeaderMotorEncoder());
     }

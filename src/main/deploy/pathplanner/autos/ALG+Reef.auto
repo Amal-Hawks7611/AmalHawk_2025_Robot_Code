@@ -23,13 +23,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "eAlgeaMiddle"
+                  "name": "imAlgea"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "imAlgea"
+                  "name": "eAlgeaMiddle"
                 }
               },
               {
@@ -60,13 +60,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "eL1"
+                  "name": "imCoral"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "imCoral"
+                  "name": "eL1"
                 }
               },
               {

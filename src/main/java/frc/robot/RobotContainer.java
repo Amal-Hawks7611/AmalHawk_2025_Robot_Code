@@ -239,7 +239,7 @@ public class RobotContainer {
         if(EnabledParts.IS_SWERVE_ENABLED){
           Command driveRobotOrientedAngularVelocity  = drivebase.driveFieldOriented(driveAngularVelocityKeyboard);
               drivebase.setDefaultCommand(driveRobotOrientedAngularVelocity);}
-            if(DriverStation.getAlliance().get() == Alliance.Blue){
+           if(DriverStation.getAlliance().get() == Alliance.Blue){
                 LedSubsystem.BREATHE_COLOR = LEDPattern.solid(Color.kDarkBlue);
             }
         }
@@ -259,7 +259,8 @@ public class RobotContainer {
                         Test_Controlls.T_INTAKE_MOVE_DOWN.whileTrue(im_movedown);
                         Test_Controlls.T_INTAKE_MOVE_UP.whileTrue(im_moveup);
 
-                        Test_Controlls.T_ELEVATOR_ZERO.onTrue(e_tozero);
+                        Test_Controlls.T_INTAKE_MOVE_L1.onTrue(im_coral);
+                        Test_Controlls.T_ELEVATOR_ZERO.onTrue(e_l1);
 
                         Test_Controlls.T_LED_CYCLE.whileTrue(led_cycle);
                         Test_Controlls.T_LED_MORSE.onTrue(led_morse);
