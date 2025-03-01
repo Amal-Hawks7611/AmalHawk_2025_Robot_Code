@@ -20,10 +20,11 @@ public class IntakeMoverSubsystem extends SubsystemBase {
     public RobotContainer container;
     public double simEncoder;
 
-    public IntakeMoverSubsystem() {
+    public IntakeMoverSubsystem(RobotContainer container) {
         leaderMotor = new TalonFX(IntakeMover.IM_LEADER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
         leaderMotorPosition = leaderMotor.getPosition();
         simEncoder = 0;
+        this.container = container;
         resetEncoders();
     }
 
@@ -80,6 +81,7 @@ public class IntakeMoverSubsystem extends SubsystemBase {
         if(!OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() > 9){leaderMotor.setVoltage(-IntakeMover.IM_STATIC_VOLTAGE);}
         if(!OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() < 9){leaderMotor.setVoltage(IntakeMover.IM_STATIC_VOLTAGE);}
         if(!OI.IS_INTAKE_MOVING && OI.IS_ALGEA_INTAKING){leaderMotor.setVoltage(-IntakeMover.IM_ALGEA_STATIC);}
+        if(!OI.IS_INTAKING && container.objectDetector.CheckObject()){leaderMotor.setVoltage(-IntakeMover.IM_CORAL_STATIC);}
         SmartDashboard.putBoolean("IsIntakeMoving", OI.IS_INTAKE_MOVING);
         SmartDashboard.putNumber("Intake Mover Leader Motor Value", getLeaderMotorEncoder());
     }

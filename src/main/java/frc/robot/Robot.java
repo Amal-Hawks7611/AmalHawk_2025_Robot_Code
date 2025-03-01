@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() 
   {   
+   if(!RobotBase.isSimulation()) {
     if(DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
       int[] validIDs = {6,7,8,9,10,11};
       LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
@@ -49,7 +51,7 @@ public class Robot extends TimedRobot {
     else{
       int[] validIDs = {17,18,19,20,21,22};
       LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
-    }
+    }}
     //Limelight Local Port Brute Because Of FMS Connections
     for (int port = 5800; port <= 5809; port++) {
       PortForwarder.add(port, "limelight.local",port);

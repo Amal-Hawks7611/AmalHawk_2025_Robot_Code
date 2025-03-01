@@ -30,7 +30,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
 import frc.robot.Constants;
 import frc.robot.Constants.DrivebaseConstants;
-import frc.robot.LimelightHelpers;
 
 import java.io.File;
 import java.io.IOException;
@@ -137,14 +136,6 @@ public class SwerveSubsystem extends SubsystemBase {
         constraints,
         edu.wpi.first.units.Units.MetersPerSecond.of(0));
   }
-
-    public double CalculateLimelightAim(){
-        double kMaxAngularSpeed = Constants.MAX_SPEED / Math.hypot(0.3683, 0.3683);
-        double targetingAngularVelocity = LimelightHelpers.getTX("limelight") * Constants.LIMELIGHT_KP;
-        targetingAngularVelocity *= kMaxAngularSpeed;
-        targetingAngularVelocity *= -1.0;
-        return targetingAngularVelocity;
-    }
 
   private Command driveWithSetpointGenerator(Supplier<ChassisSpeeds> robotRelativeChassisSpeed)
       throws IOException, ParseException {

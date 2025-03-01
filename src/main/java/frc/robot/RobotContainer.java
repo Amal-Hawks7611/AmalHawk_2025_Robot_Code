@@ -4,6 +4,7 @@ import frc.robot.subsystems.AlgeaIntakeSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeMoverSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ObjectDetectorSubsystem;
 import frc.robot.subsystems.RotarySwitchSubsystem;
 import frc.robot.subsystems.StatusLED;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
@@ -19,6 +20,7 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.LEDPattern;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -46,8 +48,9 @@ public class RobotContainer {
         private final SendableChooser<Command> autoChooser;
         private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),"swerve"));
         private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-        public final IntakeMoverSubsystem intakeMoverSubsystem = new IntakeMoverSubsystem();
-        public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+        public final ObjectDetectorSubsystem objectDetector = new ObjectDetectorSubsystem();
+        public final IntakeMoverSubsystem intakeMoverSubsystem = new IntakeMoverSubsystem(this);
+        public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem(this);
         public final AlgeaIntakeSubsystem algeaIntakeSubsystem = new AlgeaIntakeSubsystem();
         public final StatusLED ledSubsystem = new StatusLED();
         public final RotarySwitchSubsystem rotarySwitchSubsystem = new RotarySwitchSubsystem();
@@ -239,9 +242,10 @@ public class RobotContainer {
         if(EnabledParts.IS_SWERVE_ENABLED){
           Command driveRobotOrientedAngularVelocity  = drivebase.driveFieldOriented(driveAngularVelocityKeyboard);
               drivebase.setDefaultCommand(driveRobotOrientedAngularVelocity);}
-           if(DriverStation.getAlliance().get() == Alliance.Blue){
+           if(!RobotBase.isSimulation()){
+            if(DriverStation.getAlliance().get() == Alliance.Blue){
                 LedSubsystem.BREATHE_COLOR = LEDPattern.solid(Color.kDarkBlue);
-            }
+            }}
         }
 
         public void configureButtonBindings() {

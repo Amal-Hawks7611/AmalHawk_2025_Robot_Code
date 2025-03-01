@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.RobotContainer;
 import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.Intake;
 import frc.robot.Constants.OI;
@@ -15,15 +16,14 @@ import com.ctre.phoenix6.hardware.TalonFX;
 public class IntakeSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     private StatusSignal<Angle> leaderMotorPosition;
-
-    public ObjectDetectorSubsystem objectDetector;
+    public RobotContainer container;
 
     public Timer timer = new Timer();
 
-    public IntakeSubsystem() {
+    public IntakeSubsystem(RobotContainer container) {
         leaderMotor = new TalonFX(Intake.INTAKE_LEADER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
         leaderMotorPosition = leaderMotor.getPosition();
-        objectDetector = new ObjectDetectorSubsystem();
+        this.container = container;
         resetEncoders();
     }
 
@@ -46,7 +46,7 @@ public class IntakeSubsystem extends SubsystemBase {
             }
         }
         else{
-            if(!objectDetector.CheckObject()){
+            if(!container.objectDetector.CheckObject()){
                 leaderMotor.set(-Intake.INTAKE_SPEED);
             }
             else{
@@ -67,7 +67,7 @@ public class IntakeSubsystem extends SubsystemBase {
             }
         }
         else{
-            if(objectDetector.CheckObject()){
+            if(container.objectDetector.CheckObject()){
                 leaderMotor.set(-Intake.OUTTAKE_SPEED);
             }
             else{
@@ -79,6 +79,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     @Override
     public void periodic(){
+        if(!OI.IS_INTAKING && container.objectDetector.CheckObject()){leaderMotor.setVoltage(Intake.INTAKE_REVERSE_VOLT);}
         SmartDashboard.putBoolean("IsCoralIntaking", OI.IS_INTAKING);
         SmartDashboard.putNumber("Intake Leader Motor Value", getLeaderMotorEncoder());
     }
