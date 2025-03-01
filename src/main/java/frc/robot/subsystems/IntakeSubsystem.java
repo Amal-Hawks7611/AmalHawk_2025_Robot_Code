@@ -42,12 +42,12 @@ public class IntakeSubsystem extends SubsystemBase {
                 OI.IS_INTAKING = false;
             }
             else{
-                leaderMotor.set(Intake.INTAKE_SPEED);
+                leaderMotor.set(-Intake.INTAKE_SPEED);
             }
         }
         else{
             if(!objectDetector.CheckObject()){
-                leaderMotor.set(Intake.INTAKE_SPEED);
+                leaderMotor.set(-Intake.INTAKE_SPEED);
             }
             else{
                 leaderMotor.stopMotor();
@@ -58,17 +58,17 @@ public class IntakeSubsystem extends SubsystemBase {
     
     public void Shoot(){
         if(!EnabledParts.IS_OBJECT_SENSOR_ENABLED){
-            if(timer.hasElapsed(Intake.OUTTAKE_TIME)){
+            if(timer.hasElapsed(-Intake.OUTTAKE_TIME)){
                 leaderMotor.stopMotor();
                 OI.IS_INTAKING = false;
             }
             else{
-                leaderMotor.set(Intake.OUTTAKE_SPEED);
+                leaderMotor.set(-Intake.OUTTAKE_SPEED);
             }
         }
         else{
             if(objectDetector.CheckObject()){
-                leaderMotor.set(Intake.OUTTAKE_SPEED);
+                leaderMotor.set(-Intake.OUTTAKE_SPEED);
             }
             else{
                 leaderMotor.stopMotor();

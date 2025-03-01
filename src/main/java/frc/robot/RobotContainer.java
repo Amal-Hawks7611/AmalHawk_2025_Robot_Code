@@ -18,8 +18,11 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.LEDPattern;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -48,7 +51,6 @@ public class RobotContainer {
         public final AlgeaIntakeSubsystem algeaIntakeSubsystem = new AlgeaIntakeSubsystem();
         public final StatusLED ledSubsystem = new StatusLED();
         public final RotarySwitchSubsystem rotarySwitchSubsystem = new RotarySwitchSubsystem();
-
         public final AutonPath otonom_path = new AutonPath();
         public CommandXboxController driverXbox = Controlls.DRIVER_CONTROLLER;
         public final e_movedown elevator_down;
@@ -105,10 +107,10 @@ public class RobotContainer {
      .allianceRelativeControl(false);
 
         SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                () -> -driverXbox.getLeftY(),
-                () -> -driverXbox.getLeftX())
+                () -> -driverXbox.getLeftY()*0.8,
+                () -> -driverXbox.getLeftX()*0.8)
             .withControllerRotationAxis(() -> driverXbox.getRawAxis(
-                2))
+                2)*0.5)
             .deadband(Constants.OperatorConstants.DEADBAND)
             .scaleTranslation(0.8)
             .allianceRelativeControl(true);
@@ -237,6 +239,9 @@ public class RobotContainer {
         if(EnabledParts.IS_SWERVE_ENABLED){
           Command driveRobotOrientedAngularVelocity  = drivebase.driveFieldOriented(driveAngularVelocityKeyboard);
               drivebase.setDefaultCommand(driveRobotOrientedAngularVelocity);}
+            if(DriverStation.getAlliance().get() == Alliance.Blue){
+                LedSubsystem.BREATHE_COLOR = LEDPattern.solid(Color.kDarkBlue);
+            }
         }
 
         public void configureButtonBindings() {

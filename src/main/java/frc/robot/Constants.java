@@ -12,17 +12,17 @@ import swervelib.math.Matter;
 
 //ALL ROBOT SETTINGS ARE DEFINED HERE. IF YOU DON'T KNOW WHAT YOU ARE DOING, DON'T TOUCH ANYTHING!!
 public final class Constants {
-    public static final double ROBOT_MASS = 104.72 * 0.453592; // 32lbs * kg per pound
+    public static final double ROBOT_MASS = 104.72 * 0.453592;
     public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
     public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
-    public static final double MAX_SPEED  = 4;
+    public static final double MAX_SPEED  = 3;
     
     public static final class DrivebaseConstants
     {
       public static final double WHEEL_LOCK_TIME = 10;
       //FIXME Tune PID Values
-      public static final PIDConstants transation = new PIDConstants(30, 0.0, 0.0);
-      public static final PIDConstants angle = new PIDConstants(30, 0.0, 0.0);
+      public static final PIDConstants transation = new PIDConstants(0.8, 0.0, 0.0);
+      public static final PIDConstants angle = new PIDConstants(0.2, 0.0, 0.0);
     }
   
     public static class OperatorConstants
@@ -34,7 +34,7 @@ public final class Constants {
     }
     public static final class LedSubsystem {
         public static int LED_PWM_PORT = 0;
-        public static int LED_LENGTH = 60;
+        public static int LED_LENGTH = 180;
         public static int BREATHE_MAGNITUDE = 5;
         public static LEDPattern RED_ALLIANCE_COLOR = LEDPattern.solid(Color.kRed);
         public static LEDPattern BLUE_ALLIANCE_COLOR = LEDPattern.solid(Color.kBlue);
@@ -42,7 +42,7 @@ public final class Constants {
         public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(Color.kGreen);
         public static LEDPattern INTAKE_COLOR = LEDPattern.solid(Color.kYellow);
         public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(Color.kAqua);
-        public static LEDPattern BREATHE_COLOR = LEDPattern.solid(Color.kWhite);
+        public static LEDPattern BREATHE_COLOR = LEDPattern.solid(Color.kDarkRed);
     }
 
     // TODO: Update the Rotary Ports
@@ -63,21 +63,21 @@ public final class Constants {
         public static double ELEVATOR_END_VALUE = 32.8;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
-        public static double ELEVATOR_TOZERO_VALUE = 6;
-        public static double ELEVATOR_L1_VALUE = 3;
+        public static double ELEVATOR_TOZERO_VALUE = 1;
+        public static double ELEVATOR_L1_VALUE = 3.5;
         public static double ELEVATOR_L2_VALUE = 4;
-        public static double ELEVATOR_L3_VALUE = 5;
-        public static double ELEVATOR_L4_VALUE = 6;
+        public static double ELEVATOR_L3_VALUE = 6.5;
+        public static double ELEVATOR_L4_VALUE = 8;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
-        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 3.5; //Elevator Ticks Per Meters
+        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 4.5; //Elevator Ticks Per Meters
  
     }
 
     public static class Intake {
         // Intake Motor Port
         public static int INTAKE_LEADER_MOTOR_PORT = 3;
-        public static double INTAKE_SPEED = 0.4;
-        public static double OUTTAKE_SPEED = 0.4;
+        public static double INTAKE_SPEED = 0.25;
+        public static double OUTTAKE_SPEED = 0.25;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
     }
@@ -85,10 +85,11 @@ public final class Constants {
     public static class AlgeaIntake {
         // Algea Intake Motor Port
         public static int ALGEA_LEADER_MOTOR_PORT = 3; // Shoud Be Same With Intake
-        public static double INTAKE_SPEED = 0.4;
+        public static double INTAKE_SPEED = 0.2;
         public static double OUTTAKE_SPEED = 0.4;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
+        public static double ALGEA_STATIC_VOLTAGES = 0.05;
     }
 
     public static class IntakeMover {
@@ -148,8 +149,7 @@ public final class Constants {
     public static class EnabledParts {
         // Hope Not To Use...
         public static boolean IS_LED_ENABLED = true;
-        public static boolean IS_OBJECT_SENSOR_ENABLED = false;
-        public static boolean IS_IM_STATIC_VOLTAGEKE_ENABLED = true;
+        public static boolean IS_OBJECT_SENSOR_ENABLED = true;
         public static boolean IS_ALGEA_INTAKE_ENABLED = true;
         public static boolean IS_INTAKE_MOVER_ENABLED = true;
         public static boolean IS_ELEVATOR_ENABLED = true;

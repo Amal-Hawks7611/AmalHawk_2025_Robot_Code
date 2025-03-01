@@ -6,25 +6,28 @@ import frc.robot.Constants.OI;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
-
 //ELEVATOR CODE. USED OCALPID INSTEAD OF WPILIB CONTROLL SYSTEMS(FEETFORWARD,CLOSE-LOOP) THAT MAKES NON-SENSE.
 public class ElevatorSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     public TalonFX followerMotor;
     public double simulationEncoder;
-    private StatusSignal<Angle> leaderMotorPosition;
+    public StatusSignal<Angle> leaderMotorPosition;
     private StatusSignal<Angle> followerMotorPosition;
+    public PowerDistribution pdp;
 
     public ElevatorSubsystem() {
         leaderMotor = new TalonFX(Elevator.ELEVATOR_LEADER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
         followerMotor = new TalonFX(Elevator.ELEVATOR_FOLLOWER_MOTOR_PORT, OI.RIO_CANBUS_STRING);
         leaderMotorPosition = leaderMotor.getPosition();
         followerMotorPosition = followerMotor.getPosition();
+        pdp = new PowerDistribution(2, ModuleType.kCTRE);
         simulationEncoder = 0;
         resetEncoders();
     }
@@ -97,5 +100,8 @@ public class ElevatorSubsystem extends SubsystemBase {
         SmartDashboard.putBoolean("IsElevatorProcessing", OI.IS_PROCESSING);
         SmartDashboard.putNumber("Elevator Leader Motor Value", getLeaderMotorEncoder());
         SmartDashboard.putNumber("Elevator Follower Motor Encoder", getFollowerMotorEncoder());
+        SmartDashboard.putNumber("PDP", pdp.getTotalCurrent());
+        SmartDashboard.putNumber("PDP 7", pdp.getCurrent(7));
+        SmartDashboard.putNumber("PDP 15", pdp.getCurrent(15));
     }
 }

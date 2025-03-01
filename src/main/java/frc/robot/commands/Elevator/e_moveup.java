@@ -22,7 +22,9 @@ public class e_moveup extends Command {
 
     @Override
     public void execute() {
-        elevatorSubsystem.manualControl(Elevator.ELEVATOR_SPEED);
+        if(elevatorSubsystem.leaderMotorPosition.refresh().getValueAsDouble() < Elevator.ELEVATOR_END_VALUE){
+            elevatorSubsystem.manualControl(Elevator.ELEVATOR_SPEED);
+        }
     }
 
     @Override
