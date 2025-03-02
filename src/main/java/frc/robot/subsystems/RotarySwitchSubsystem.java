@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.RotarySwitch;
 
@@ -33,6 +34,8 @@ public class RotarySwitchSubsystem extends SubsystemBase {
             }
             lastClockState = clkState;
         }
+
+        SmartDashboard.putNumber("RotarySwitch",totalTurns);
     }
 
     public int getTotalTurns() {

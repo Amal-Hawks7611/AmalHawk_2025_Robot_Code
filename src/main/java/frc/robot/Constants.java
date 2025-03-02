@@ -62,14 +62,14 @@ public final class Constants {
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         // TODO Encoder Values Will Be Updated
         public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = 32.8;
+        public static double ELEVATOR_END_VALUE = 34;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
         public static double ELEVATOR_TOZERO_VALUE = 1;
-        public static double ELEVATOR_L1_VALUE = 3.5;
-        public static double ELEVATOR_L2_VALUE = 4;
-        public static double ELEVATOR_L3_VALUE = 6.5;
-        public static double ELEVATOR_L4_VALUE = 8;
+        public static double ELEVATOR_L1_VALUE = 4;
+        public static double ELEVATOR_L2_VALUE = 8.20;
+        public static double ELEVATOR_L3_VALUE = 20.31;
+        public static double ELEVATOR_L4_VALUE = 34.9;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
         public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 4.5; //Elevator Ticks Per Meters
  
@@ -77,10 +77,10 @@ public final class Constants {
 
     public static class Intake {
         // Intake Motor Port
-        public static double INTAKE_REVERSE_VOLT = 0.08;
+        public static double INTAKE_REVERSE_SPEED = 0.3;
         public static int INTAKE_LEADER_MOTOR_PORT = 3;
         public static double INTAKE_SPEED = 0.25;
-        public static double OUTTAKE_SPEED = 0.25;
+        public static double OUTTAKE_SPEED = 0.45;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
     }
@@ -101,15 +101,15 @@ public final class Constants {
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         public static double IM_STATIC_VOLTAGE = 0.15;
         public static double IM_ALGEA_STATIC = 0.25;
-        public static double IM_CORAL_STATIC = 0.3;
+        public static double IM_CORAL_STATIC = 0.05;    
 
         // TODO Encoder Values Will Be Updated
         public static double INTAKE_PROCESSOR_VALUE = 24.2;
         public static double INTAKE_SOURCE_VALUE = 0;
         public static double INTAKE_ALGEA_VALUE = 24.2;
         public static double INTAKE_REEFSCAPE_VALUE = 2.5;
-        public static double INTAKE_CORAL_VALUE = 3.7;
-        public static double INTAKE_L4_VALUE = 4.3;
+        public static double INTAKE_CORAL_VALUE =3.7;
+        public static double INTAKE_L4_VALUE = 2.9;
     }
 
     public static class ObjectDetector {
@@ -124,16 +124,18 @@ public final class Constants {
         public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.button(7);
         public static Trigger INTAKE_MOVE_UP = DRIVER_CONTROLLER.button(6);
         public static Trigger INTAKE_MOVE_DOWN = DRIVER_CONTROLLER.button(5);
-        public static Trigger ALGEA_PROCESSOR = DRIVER_CONTROLLER.button(2);
-        public static Trigger ALGEA_INTAKE_MIDDLE = DRIVER_CONTROLLER.button(1);
-        public static Trigger ALGEA_INTAKE_DOWN = DRIVER_CONTROLLER.button(3);
-        public static Trigger L1 = DRIVER_CONTROLLER.povDown();
-        public static Trigger L2 = DRIVER_CONTROLLER.povLeft();
-        public static Trigger L3 = DRIVER_CONTROLLER.povUp();
-        public static Trigger L4 = DRIVER_CONTROLLER.povRight();
-        public static Trigger GET_SOURCE = DRIVER_CONTROLLER.button(5);
+
+        public static Trigger L1 = DRIVER_CONTROLLER.button(10);
+        public static Trigger L2 = DRIVER_CONTROLLER.x();
+        public static Trigger L3 = DRIVER_CONTROLLER.b();
+        public static Trigger L4 = DRIVER_CONTROLLER.y();
+
+        public static Trigger GET_SOURCE = DRIVER_CONTROLLER.a();
         public static Trigger LED_CYCLE = DRIVER_CONTROLLER.button(9);
+        public static Trigger ELEVATOR_TOZERO = DRIVER_CONTROLLER.povDown();
+
         public static int SWERVE_RIGHT_X_AXIS = 2;
+        public static Trigger RESET_GYRO = DRIVER_CONTROLLER.povUp();
     }
 
     public static class Test_Controlls {
@@ -142,9 +144,9 @@ public final class Constants {
         public static Trigger T_INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.button(6);
         public static Trigger T_INTAKE_MOVE_DOWN = Controlls.DRIVER_CONTROLLER.button(5);
         public static Trigger T_ELEVATOR_ZERO = Controlls.DRIVER_CONTROLLER.button(2);
-        public static Trigger T_ALGEA_INTAKE = Controlls.DRIVER_CONTROLLER.button(1);
+        public static Trigger T_ALGEA_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();
         public static Trigger T_ALGEA_OUTTAKE = Controlls.DRIVER_CONTROLLER.button(3);
-        public static Trigger T_CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();
+        public static Trigger T_CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.button(1);
         public static Trigger T_CORAL_OUTTAKE = Controlls.DRIVER_CONTROLLER.povRight();
         public static Trigger T_LED_CYCLE = Controlls.DRIVER_CONTROLLER.button(4);
         public static Trigger T_LED_MORSE = Controlls.DRIVER_CONTROLLER.button(9);

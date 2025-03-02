@@ -78,10 +78,10 @@ public class IntakeMoverSubsystem extends SubsystemBase {
 
     @Override
     public void periodic(){
-        if(!OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() > 9){leaderMotor.setVoltage(-IntakeMover.IM_STATIC_VOLTAGE);}
-        if(!OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() < 9){leaderMotor.setVoltage(IntakeMover.IM_STATIC_VOLTAGE);}
+        if(!OI.IS_ALGEA_INTAKING && !OI.IS_INTAKING && !OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() > 5){leaderMotor.setVoltage(-IntakeMover.IM_STATIC_VOLTAGE);}
+        if(!OI.IS_ALGEA_INTAKING && !OI.IS_INTAKING && !OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() < 5){leaderMotor.setVoltage(IntakeMover.IM_STATIC_VOLTAGE);}
         if(!OI.IS_INTAKE_MOVING && OI.IS_ALGEA_INTAKING){leaderMotor.setVoltage(-IntakeMover.IM_ALGEA_STATIC);}
-        if(!OI.IS_INTAKING && container.objectDetector.CheckObject()){leaderMotor.setVoltage(-IntakeMover.IM_CORAL_STATIC);}
+        if(!OI.IS_INTAKING && !isWithinTolerance(getLeaderMotorEncoder(), 1) && container.objectDetector.CheckObject()){leaderMotor.setVoltage(-IntakeMover.IM_CORAL_STATIC);}
         SmartDashboard.putBoolean("IsIntakeMoving", OI.IS_INTAKE_MOVING);
         SmartDashboard.putNumber("Intake Mover Leader Motor Value", getLeaderMotorEncoder());
     }

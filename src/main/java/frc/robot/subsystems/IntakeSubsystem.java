@@ -79,8 +79,9 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     @Override
     public void periodic(){
-        if(!OI.IS_INTAKING && container.objectDetector.CheckObject()){leaderMotor.setVoltage(Intake.INTAKE_REVERSE_VOLT);}
+        if(!OI.IS_INTAKING && container.objectDetector.CheckObject()){leaderMotor.set(4);}
         SmartDashboard.putBoolean("IsCoralIntaking", OI.IS_INTAKING);
         SmartDashboard.putNumber("Intake Leader Motor Value", getLeaderMotorEncoder());
+        SmartDashboard.putNumber("IntakeSPeed",leaderMotor.get());
     }
 }

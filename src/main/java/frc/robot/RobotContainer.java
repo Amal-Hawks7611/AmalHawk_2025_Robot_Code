@@ -11,11 +11,9 @@ import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import swervelib.SwerveInputStream;
 
 import java.io.File;
-import java.util.Map;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -41,6 +39,7 @@ import frc.robot.commands.Intake.Outtake;
 import frc.robot.commands.IntakeMover.*;
 import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
+import frc.robot.commands.Swerve.zerogyro;
 import frc.robot.commands.Trajectory.AutonPath;
 
 //A COOL ROBOTCONTAINER THAT CONTAINS NAMEDCOMMANDS FOR PATHPLANNER AND COMMAND GROUPS FOR TEU
@@ -80,6 +79,8 @@ public class RobotContainer {
         public final AlgeaIntake a_intake;
         public final AlgeaOuttake a_outtake;
 
+        public final zerogyro zerogyro;
+
         public final Intake c_intake;
         public final Outtake c_outtake;
 
@@ -110,10 +111,10 @@ public class RobotContainer {
      .allianceRelativeControl(false);
 
         SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                () -> -driverXbox.getLeftY()*0.8,
-                () -> -driverXbox.getLeftX()*0.8)
-            .withControllerRotationAxis(() -> driverXbox.getRawAxis(
-                2)*0.5)
+                () -> -driverXbox.getLeftY()*0.4,
+                () -> -driverXbox.getLeftX()*0.4)
+            .withControllerRotationAxis(() -> -driverXbox.getRawAxis(
+                2)*0.2)
             .deadband(Constants.OperatorConstants.DEADBAND)
             .scaleTranslation(0.8)
             .allianceRelativeControl(true);
@@ -187,6 +188,8 @@ public class RobotContainer {
                 a_intake = new AlgeaIntake(algeaIntakeSubsystem);
                 a_outtake = new AlgeaOuttake(algeaIntakeSubsystem);
 
+                zerogyro = new zerogyro(drivebase);
+
                 c_intake = new Intake(intakeSubsystem);
                 c_outtake = new Outtake(intakeSubsystem);
 
@@ -205,9 +208,9 @@ public class RobotContainer {
                                 new AlgeaIntake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
 
                 getSource = new SequentialCommandGroup(
-                                new source(intakeMoverSubsystem),
                                 new e_source(elevatorSubsystem),
-                                new Intake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
+                                new source(intakeMoverSubsystem),
+                                new Intake(intakeSubsystem));
 
                 AlgeaProcessor = new SequentialCommandGroup(
                                 new processor(intakeMoverSubsystem),
@@ -254,7 +257,7 @@ public class RobotContainer {
                         Test_Controlls.T_ALGEA_INTAKE.onTrue(a_intake);
                         Test_Controlls.T_ALGEA_OUTTAKE.onTrue(a_outtake);
 
-                        Test_Controlls.T_CORAL_INTAKE.onTrue(c_intake);
+                        Test_Controlls.T_CORAL_INTAKE.onTrue(getSource);
                         Test_Controlls.T_CORAL_OUTTAKE.onTrue(c_outtake);
 
                         Test_Controlls.T_ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
@@ -263,8 +266,8 @@ public class RobotContainer {
                         Test_Controlls.T_INTAKE_MOVE_DOWN.whileTrue(im_movedown);
                         Test_Controlls.T_INTAKE_MOVE_UP.whileTrue(im_moveup);
 
-                        Test_Controlls.T_INTAKE_MOVE_L1.onTrue(im_coral);
-                        Test_Controlls.T_ELEVATOR_ZERO.onTrue(e_l1);
+                        Test_Controlls.T_INTAKE_MOVE_L1.onTrue(im_algea);
+                        Test_Controlls.T_ELEVATOR_ZERO.onTrue(Coral_l4);
 
                         Test_Controlls.T_LED_CYCLE.whileTrue(led_cycle);
                         Test_Controlls.T_LED_MORSE.onTrue(led_morse);
@@ -274,12 +277,11 @@ public class RobotContainer {
                         Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
                         Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
 
-                        Controlls.ALGEA_PROCESSOR.onTrue(AlgeaProcessor);
-                        Controlls.ALGEA_INTAKE_MIDDLE.onTrue(intakeAlgeaMiddle);
-                        Controlls.ALGEA_INTAKE_DOWN.onTrue(intakeAlgeaDown);
-
+                        Controlls.ELEVATOR_TOZERO.onTrue(e_tozero);
                         Controlls.GET_SOURCE.onTrue(getSource);
 
+
+                        Controlls.RESET_GYRO.onChange(zerogyro);
                         Controlls.L4.onTrue(Coral_l4);
                         Controlls.L3.onTrue(Coral_l3);
                         Controlls.L2.onTrue(Coral_l2);
@@ -290,19 +292,7 @@ public class RobotContainer {
         }
 
         public Command getAutonomousCommand() {
-          if (EnabledParts.IS_ROTARY_SWITCH_ENABLED) {
-                        Map<Integer, String> autoModes = Map.of(
-                                1, "ALG",
-                                2, "ALG+Reef",
-                                3, "ALG+IkiCoralAtis",
-                                4, "ALG+UcCoralAtis"
-                        );
-
-                        String autoName = autoModes.getOrDefault(rotarySwitchSubsystem.getTotalTurns(), "None");
-                        return new PathPlannerAuto(autoName);
-                }else{
-                        return autoChooser.getSelected();
-                }
+                return autoChooser.getSelected();
         }
         
         public void setMotorBrake(boolean brake)
