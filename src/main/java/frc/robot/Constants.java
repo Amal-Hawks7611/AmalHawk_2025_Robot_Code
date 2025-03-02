@@ -57,7 +57,8 @@ public final class Constants {
     public static final class Elevator {
         public static int ELEVATOR_LEADER_MOTOR_PORT = 1;
         public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 2;
-        public static double ELEVATOR_SPEED = 0.2;
+        public static double ELEVATOR_SPEED = 0.25;
+        public static double ELEVATOR_DOWN_VOLTS = 0.05;
         public static double ELEVATOR_STATIC_VOLTS = 0.3;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         // TODO Encoder Values Will Be Updated

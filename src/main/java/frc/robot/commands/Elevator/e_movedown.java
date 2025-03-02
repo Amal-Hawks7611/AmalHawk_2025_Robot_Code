@@ -21,8 +21,8 @@ public class e_movedown extends Command {
 
     @Override
     public void execute() {
-        elevatorSubsystem.leaderMotor.set(-0.05);
-        elevatorSubsystem.followerMotor.set(-0.05);
+        elevatorSubsystem.leaderMotor.set(-Elevator.ELEVATOR_DOWN_VOLTS);
+        elevatorSubsystem.followerMotor.set(-Elevator.ELEVATOR_DOWN_VOLTS);
         Elevator.ELEVATOR_STATIC_VOLTS = 0;
     }
 
