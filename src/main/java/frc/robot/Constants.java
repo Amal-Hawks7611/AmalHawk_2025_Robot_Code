@@ -80,7 +80,7 @@ public final class Constants {
         public static double INTAKE_REVERSE_SPEED = 0.3;
         public static int INTAKE_LEADER_MOTOR_PORT = 3;
         public static double INTAKE_SPEED = 0.25;
-        public static double OUTTAKE_SPEED = 0.45;
+        public static double OUTTAKE_SPEED = 0.65;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
     }
