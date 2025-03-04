@@ -80,8 +80,8 @@ public final class Constants {
         // Intake Motor Port
         public static double INTAKE_REVERSE_SPEED = 0.3;
         public static int INTAKE_LEADER_MOTOR_PORT = 3;
-        public static double INTAKE_SPEED = 0.25;
-        public static double OUTTAKE_SPEED = 0.65;
+        public static double INTAKE_SPEED = 0.18;
+        public static double OUTTAKE_SPEED = 0.58;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
     }
@@ -93,7 +93,7 @@ public final class Constants {
         public static double OUTTAKE_SPEED = 0.4;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
-        public static double ALGEA_STATIC_VOLTAGES = 0.1;
+        public static double ALGEA_STATIC_VOLTAGES = 0.085;
     }
 
     public static class IntakeMover {
@@ -137,6 +137,9 @@ public final class Constants {
 
         public static int SWERVE_RIGHT_X_AXIS = 2;
         public static Trigger RESET_GYRO = DRIVER_CONTROLLER.povUp();
+
+        public static Trigger ALGEA_INTAKE = DRIVER_CONTROLLER.povLeft();
+        public static Trigger ALGEA_OUTTAKE = DRIVER_CONTROLLER.povRight();
     }
 
     public static class Test_Controlls {

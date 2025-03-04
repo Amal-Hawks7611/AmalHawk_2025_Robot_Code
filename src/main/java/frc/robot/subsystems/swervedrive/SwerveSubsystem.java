@@ -70,39 +70,39 @@ public class SwerveSubsystem extends SubsystemBase {
         1);
     RobotConfig config;
     try {
-          config = RobotConfig.fromGUISettings();
-          final boolean enableFeedforward = false;
-          AutoBuilder.configure(
-              this::getPose,
-              this::resetOdometry,
-              this::getRobotVelocity,
-              (speedsRobotRelative, moduleFeedForwards) -> {
-                if (enableFeedforward) {
-                  swerveDrive.drive(
-                      speedsRobotRelative,
-                      swerveDrive.kinematics.toSwerveModuleStates(speedsRobotRelative),
-                      moduleFeedForwards.linearForces());
-                } else {
-                  swerveDrive.setChassisSpeeds(speedsRobotRelative);
-                }
-              },
-              new PPHolonomicDriveController(
-                  DrivebaseConstants.transation,
-                  DrivebaseConstants.angle),
-              config,
-              // The robot configuration
-              () -> {
-                var alliance = DriverStation.getAlliance();
-                if (alliance.isPresent()) {
-                  return alliance.get() == DriverStation.Alliance.Red;
-                }
-                return false;
-              },
-              this);
-    
-      } catch (Exception e) {
-          e.printStackTrace();
-        }
+      config = RobotConfig.fromGUISettings();
+      final boolean enableFeedforward = false;
+      AutoBuilder.configure(
+          this::getPose,
+          this::resetOdometry,
+          this::getRobotVelocity,
+          (speedsRobotRelative, moduleFeedForwards) -> {
+            if (enableFeedforward) {
+              swerveDrive.drive(
+                  speedsRobotRelative,
+                  swerveDrive.kinematics.toSwerveModuleStates(speedsRobotRelative),
+                  moduleFeedForwards.linearForces());
+            } else {
+              swerveDrive.setChassisSpeeds(speedsRobotRelative);
+            }
+          },
+          new PPHolonomicDriveController(
+              DrivebaseConstants.transation,
+              DrivebaseConstants.angle),
+          config,
+          // The robot configuration
+          () -> {
+            var alliance = DriverStation.getAlliance();
+            if (alliance.isPresent()) {
+              return alliance.get() == DriverStation.Alliance.Red;
+            }
+            return false;
+          },
+          this);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   public SwerveSubsystem(SwerveDriveConfiguration driveCfg, SwerveControllerConfiguration controllerCfg) {

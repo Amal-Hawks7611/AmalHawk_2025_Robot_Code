@@ -104,12 +104,6 @@ public class RobotContainer {
     .scaleTranslation(0.8)
     .allianceRelativeControl(true);
 
-        SwerveInputStream driveDirectAngle = driveAngularVelocity.copy().withControllerHeadingAxis(driverXbox::getRightX,
-                                     driverXbox::getRightY)
-   .headingWhile(true);
-        SwerveInputStream driveRobotOriented = driveAngularVelocity.copy().robotRelative(true)
-     .allianceRelativeControl(false);
-
         SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
                 () -> -driverXbox.getLeftY()*0.4,
                 () -> -driverXbox.getLeftX()*0.4)
@@ -118,23 +112,6 @@ public class RobotContainer {
             .deadband(Constants.OperatorConstants.DEADBAND)
             .scaleTranslation(0.8)
             .allianceRelativeControl(true);
-        SwerveInputStream driveDirectAngleKeyboard     = driveAngularVelocityKeyboard.copy()
-                       .withControllerHeadingAxis(() ->
-                                                      Math.sin(
-                                                          driverXbox.getRawAxis(
-                                                              2) *
-                                                          Math.PI) *
-                                                      (Math.PI *
-                                                       2),
-                                                  () ->
-                                                      Math.cos(
-                                                          driverXbox.getRawAxis(
-                                                              2) *
-                                                          Math.PI) *
-                                                      (Math.PI *
-                                                       2))
-                       .headingWhile(true);
-
 
         public RobotContainer() {
                 DriverStation.silenceJoystickConnectionWarning(true);
@@ -200,12 +177,12 @@ public class RobotContainer {
                 intakeAlgeaMiddle = new SequentialCommandGroup(
                                 new algea(intakeMoverSubsystem),
                                 new e_algea(elevatorSubsystem, true), 
-                                new AlgeaIntake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
+                                new AlgeaIntake(algeaIntakeSubsystem));
 
                 intakeAlgeaDown = new SequentialCommandGroup(
                                 new algea(intakeMoverSubsystem),
                                 new e_algea(elevatorSubsystem, false), 
-                                new AlgeaIntake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
+                                new AlgeaIntake(algeaIntakeSubsystem));
 
                 getSource = new SequentialCommandGroup(
                                 new e_source(elevatorSubsystem),
@@ -215,24 +192,24 @@ public class RobotContainer {
                 AlgeaProcessor = new SequentialCommandGroup(
                                 new processor(intakeMoverSubsystem),
                                 new e_processor(elevatorSubsystem), 
-                                new AlgeaOuttake(algeaIntakeSubsystem), new e_tozeroo(elevatorSubsystem));
+                                new AlgeaOuttake(algeaIntakeSubsystem));
 
                 Coral_l1 = new SequentialCommandGroup(
                                 new reefscape(intakeMoverSubsystem),
                                 new e_level1(elevatorSubsystem),
-                                new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
+                                new Outtake(intakeSubsystem));
                 Coral_l2 = new SequentialCommandGroup(
                                 new korel(intakeMoverSubsystem), 
                                 new e_level2(elevatorSubsystem),
-                                new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
+                                new Outtake(intakeSubsystem));
                 Coral_l3 = new SequentialCommandGroup(
                                 new korel(intakeMoverSubsystem), 
                                 new e_level3(elevatorSubsystem),
-                                new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
+                                new Outtake(intakeSubsystem));
                 Coral_l4 = new SequentialCommandGroup(
                                 new l4(intakeMoverSubsystem), 
                                 new e_level4(elevatorSubsystem),
-                                new Outtake(intakeSubsystem), new e_tozeroo(elevatorSubsystem));
+                                new Outtake(intakeSubsystem));
 
                 //PathPlanner Autonomous Chooser
                 autoChooser = AutoBuilder.buildAutoChooser();
@@ -288,6 +265,9 @@ public class RobotContainer {
                         Controlls.L1.onTrue(Coral_l1);
 
                         Controlls.LED_CYCLE.whileTrue(led_cycle);
+
+                        Controlls.ALGEA_INTAKE.whileTrue(a_intake);
+                        Controlls.ALGEA_OUTTAKE.whileTrue(a_outtake);
                 }
         }
 
