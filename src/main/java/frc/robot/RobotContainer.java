@@ -7,7 +7,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ObjectDetectorSubsystem;
 import frc.robot.subsystems.RotarySwitchSubsystem;
 import frc.robot.subsystems.StatusLED;
-import frc.robot.subsystems.swervedrive.SwerveSubsystem;
+import frc.robot.subsystems.SwerveSubsystem;
 import swervelib.SwerveInputStream;
 
 import java.io.File;
@@ -41,6 +41,7 @@ import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
 import frc.robot.commands.Swerve.zerogyro;
 import frc.robot.commands.Trajectory.AutonPath;
+import frc.robot.commands.Vision.VisionAlignCommand;
 
 //A COOL ROBOTCONTAINER THAT CONTAINS NAMEDCOMMANDS FOR PATHPLANNER AND COMMAND GROUPS FOR TEU
 public class RobotContainer {
@@ -272,8 +273,10 @@ public class RobotContainer {
         }
 
         public Command getAutonomousCommand() {
-                return autoChooser.getSelected();
-        }
+            return new VisionAlignCommand(drivebase)
+            .beforeStarting(() -> drivebase.zeroGyroWithAlliance()) // Reset odometry if needed
+            .withTimeout(15.0);
+}
         
         public void setMotorBrake(boolean brake)
         {

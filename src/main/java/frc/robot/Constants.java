@@ -25,6 +25,12 @@ public final class Constants {
       //FIXME Tune PID Values
       public static final PIDConstants transation = new PIDConstants(0.1, 0.0, 0.05);
       public static final PIDConstants angle = new PIDConstants(5, 0.0, 0.05);
+      public static final double TRANSLATION_KP = 0.1;
+      public static final double TRANSLATION_KI = 0.0;
+      public static final double TRANSLATION_KD = 0.05;
+      public static final double ANGLE_KP = 5;
+      public static final double ANGLE_KI = 0.0;
+      public static final double ANGLE_KD = 0.05;
     }
   
     public static class OperatorConstants
