@@ -5,6 +5,7 @@ import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.LEDPattern;
+import edu.wpi.first.wpilibj.LEDPattern.GradientType;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -13,38 +14,36 @@ import swervelib.math.Matter;
 //ALL ROBOT SETTINGS ARE DEFINED HERE. IF YOU DON'T KNOW WHAT YOU ARE DOING, DON'T TOUCH ANYTHING!!
 public final class Constants {
     public static final double ROBOT_MASS = 104.72 * 0.453592;
-    public static final Matter CHASSIS    = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
-    public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
-    public static final double MAX_SPEED  = 3;
+    public static final Matter CHASSIS = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
+    public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
+    public static final double MAX_SPEED = 3;
     public static final double LIMELIGHT_KP = 0.5;
     public static final double LIMELIGHT_DRIVE_TIME = 0.2;
-    
-    public static final class DrivebaseConstants
-    {
-      public static final double WHEEL_LOCK_TIME = 10;
-      //FIXME Tune PID Values
-      public static final PIDConstants transation = new PIDConstants(0.1, 0.0, 0.05);
-      public static final PIDConstants angle = new PIDConstants(5, 0.0, 0.05);
+
+    public static final class DrivebaseConstants {
+        public static final double WHEEL_LOCK_TIME = 10;
+        // FIXME Tune PID Values
+        public static final PIDConstants transation = new PIDConstants(0.1, 0.0, 0.05);
+        public static final PIDConstants angle = new PIDConstants(5, 0.0, 0.05);
     }
-  
-    public static class OperatorConstants
-    {
-      public static final double DEADBAND        = 0.1;
-      public static final double LEFT_Y_DEADBAND = 0.1;
-      public static final double RIGHT_X_DEADBAND = 0.1;
-      public static final double TURN_CONSTANT    = 6;
+
+    public static class OperatorConstants {
+        public static final double DEADBAND = 0.1;
+        public static final double LEFT_Y_DEADBAND = 0.1;
+        public static final double RIGHT_X_DEADBAND = 0.1;
+        public static final double TURN_CONSTANT = 6;
     }
+
     public static final class LedSubsystem {
         public static int LED_PWM_PORT = 0;
         public static int LED_LENGTH = 180;
         public static int BREATHE_MAGNITUDE = 5;
-        public static LEDPattern RED_ALLIANCE_COLOR = LEDPattern.solid(Color.kRed);
-        public static LEDPattern BLUE_ALLIANCE_COLOR = LEDPattern.solid(Color.kBlue);
         public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(Color.kPurple);
         public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(Color.kGreen);
         public static LEDPattern INTAKE_COLOR = LEDPattern.solid(Color.kYellow);
         public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(Color.kAqua);
-        public static LEDPattern BREATHE_COLOR = LEDPattern.solid(Color.kDarkRed);
+        public static LEDPattern BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,Color.kOrange,
+      Color.kOrangeRed,Color.kRed);
     }
 
     // TODO: Update the Rotary Ports
@@ -72,8 +71,8 @@ public final class Constants {
         public static double ELEVATOR_L3_VALUE = 20.31;
         public static double ELEVATOR_L4_VALUE = 34.9;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
-        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 4.5; //Elevator Ticks Per Meters
- 
+        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 4.5; // Elevator Ticks Per Meters
+
     }
 
     public static class Intake {
@@ -102,14 +101,14 @@ public final class Constants {
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         public static double IM_STATIC_VOLTAGE = 0.15;
         public static double IM_ALGEA_STATIC = 0.25;
-        public static double IM_CORAL_STATIC = 0.05;    
+        public static double IM_CORAL_STATIC = 0.05;
 
         // TODO Encoder Values Will Be Updated
         public static double INTAKE_PROCESSOR_VALUE = 24.2;
         public static double INTAKE_SOURCE_VALUE = 0;
         public static double INTAKE_ALGEA_VALUE = 24.2;
         public static double INTAKE_REEFSCAPE_VALUE = 2.5;
-        public static double INTAKE_CORAL_VALUE =3.7;
+        public static double INTAKE_CORAL_VALUE = 3.7;
         public static double INTAKE_L4_VALUE = 2.9;
     }
 
@@ -119,8 +118,8 @@ public final class Constants {
 
     public static class Controlls {
         public static CommandXboxController DRIVER_CONTROLLER = new CommandXboxController(OI.DRIVER_CONTROLLER_PORT);
-              
-        //For TEU
+
+        // For TEU
         public static Trigger ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.button(8);
         public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.button(7);
         public static Trigger INTAKE_MOVE_UP = DRIVER_CONTROLLER.button(6);

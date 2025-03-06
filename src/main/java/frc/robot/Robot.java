@@ -6,9 +6,12 @@ package frc.robot;
 
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.LEDPattern.GradientType;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Controlls;
@@ -22,6 +25,7 @@ public class Robot extends TimedRobot {
   public static boolean doRejectUpdate;
   public static boolean isErrorWritten;
   public Timer disabledTimer;
+
   public Robot() {
     m_robotContainer = new RobotContainer();
     doRejectUpdate = false;
@@ -31,33 +35,39 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    if(Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.3 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.6)
+    if (Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.3 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.6)
       LedSubsystem.BREATHE_MAGNITUDE = 3;
-    if(Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.6 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.9){
+    if (Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.6 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.9) {
       LedSubsystem.BREATHE_MAGNITUDE = 2;
     }
-    if(Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.9){
+    if (Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.9) {
       LedSubsystem.BREATHE_MAGNITUDE = 1;
     }
   }
+
   @Override
-  public void robotInit() 
-  {   
-   if(!RobotBase.isSimulation()) {
-    if(DriverStation.getAlliance().get() == DriverStation.Alliance.Red){
-      int[] validIDs = {6,7,8,9,10,11};
-      LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
+  public void robotInit() {
+    m_robotContainer.drivebase.zeroGyro();
+    if (!RobotBase.isSimulation()) {
+      if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red) {
+        int[] validIDs = { 6, 7, 8, 9, 10, 11 };
+        LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
+      } else {
+        int[] validIDs = { 17, 18, 19, 20, 21, 22 };
+        LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
+      }
+      if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue) {
+        LedSubsystem.BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous, Color.kBlue,
+            Color.kDarkBlue, Color.kPurple);
+      }
     }
-    else{
-      int[] validIDs = {17,18,19,20,21,22};
-      LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
-    }}
-    //Limelight Local Port Brute Because Of FMS Connections
+    // Limelight Local Port Brute Because Of FMS Connections
     for (int port = 5800; port <= 5809; port++) {
-      PortForwarder.add(port, "limelight.local",port);
+      PortForwarder.add(port, "limelight.local", port);
     }
     disabledTimer = new Timer();
   }
+
   @Override
   public void disabledInit() {
     m_robotContainer.setMotorBrake(true);
@@ -67,8 +77,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    if (disabledTimer.hasElapsed(Constants.DrivebaseConstants.WHEEL_LOCK_TIME))
-    {
+    if (disabledTimer.hasElapsed(Constants.DrivebaseConstants.WHEEL_LOCK_TIME)) {
       m_robotContainer.setMotorBrake(false);
       disabledTimer.stop();
       disabledTimer.reset();
@@ -86,7 +95,8 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+  }
 
   @Override
   public void teleopInit() {
@@ -98,7 +108,8 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+  }
 
   @Override
   public void testInit() {
@@ -113,10 +124,11 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void simulationInit(){
+  public void simulationInit() {
     DriverStation.silenceJoystickConnectionWarning(true);
   }
 
   @Override
-  public void simulationPeriodic() {}
+  public void simulationPeriodic() {
+  }
 }
