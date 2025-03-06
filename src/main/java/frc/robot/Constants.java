@@ -63,11 +63,11 @@ public final class Constants {
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         // TODO Encoder Values Will Be Updated
         public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = 34;
+        public static double ELEVATOR_END_VALUE = 34.5;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
         public static double ELEVATOR_TOZERO_VALUE = 1;
-        public static double ELEVATOR_L1_VALUE = 4;
+        public static double ELEVATOR_L1_VALUE = 4.25;
         public static double ELEVATOR_L2_VALUE = 8.20;
         public static double ELEVATOR_L3_VALUE = 20.31;
         public static double ELEVATOR_L4_VALUE = 34.9;
@@ -80,7 +80,7 @@ public final class Constants {
         // Intake Motor Port
         public static double INTAKE_REVERSE_SPEED = 0.3;
         public static int INTAKE_LEADER_MOTOR_PORT = 3;
-        public static double INTAKE_SPEED = 0.18;
+        public static double INTAKE_SPEED = 0.13;
         public static double OUTTAKE_SPEED = 0.58;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
@@ -93,7 +93,7 @@ public final class Constants {
         public static double OUTTAKE_SPEED = 0.4;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
-        public static double ALGEA_STATIC_VOLTAGES = 0.085;
+        public static double ALGEA_STATIC_VOLTAGES = 0.050;
     }
 
     public static class IntakeMover {
@@ -138,8 +138,8 @@ public final class Constants {
         public static int SWERVE_RIGHT_X_AXIS = 2;
         public static Trigger RESET_GYRO = DRIVER_CONTROLLER.povUp();
 
-        public static Trigger ALGEA_INTAKE = DRIVER_CONTROLLER.povLeft();
-        public static Trigger ALGEA_OUTTAKE = DRIVER_CONTROLLER.povRight();
+        public static Trigger CORAL_INTAKE = DRIVER_CONTROLLER.povLeft();
+        public static Trigger CORAL_GERIAL = DRIVER_CONTROLLER.povRight();
     }
 
     public static class Test_Controlls {

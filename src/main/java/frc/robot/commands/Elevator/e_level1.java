@@ -2,6 +2,7 @@ package frc.robot.commands.Elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.Elevator;
+import frc.robot.Constants.Intake;
 import frc.robot.Constants.OI;
 import frc.robot.subsystems.ElevatorSubsystem;
 
@@ -17,6 +18,7 @@ public class e_level1 extends Command {
     public void initialize() {
         System.out.println("Elevator Is Moving To The Level1");
         OI.IS_PROCESSING = true;
+        Intake.OUTTAKE_SPEED = 0.25;
     }
 
     @Override

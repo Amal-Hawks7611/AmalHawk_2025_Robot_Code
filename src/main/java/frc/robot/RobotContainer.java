@@ -1,5 +1,8 @@
-package frc.robot;
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
+package frc.robot;
 import frc.robot.subsystems.AlgeaIntakeSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeMoverSubsystem;
@@ -8,27 +11,15 @@ import frc.robot.subsystems.ObjectDetectorSubsystem;
 import frc.robot.subsystems.RotarySwitchSubsystem;
 import frc.robot.subsystems.StatusLED;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
-import swervelib.SwerveInputStream;
-
-import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.LEDPattern;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.Controlls;
 import frc.robot.Constants.Test_Controlls;
-import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
 import frc.robot.commands.AlgeaIntake.AlgeaIntake;
@@ -36,247 +27,312 @@ import frc.robot.commands.AlgeaIntake.AlgeaOuttake;
 import frc.robot.commands.Elevator.*;
 import frc.robot.commands.Intake.Intake;
 import frc.robot.commands.Intake.Outtake;
+import frc.robot.commands.Intake.Gerial;
 import frc.robot.commands.IntakeMover.*;
 import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
-import frc.robot.commands.Swerve.zerogyro;
 import frc.robot.commands.Trajectory.AutonPath;
 
-//A COOL ROBOTCONTAINER THAT CONTAINS NAMEDCOMMANDS FOR PATHPLANNER AND COMMAND GROUPS FOR TEU
-public class RobotContainer {
-        private final SendableChooser<Command> autoChooser;
-        private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),"swerve"));
-        private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-        public final ObjectDetectorSubsystem objectDetector = new ObjectDetectorSubsystem();
-        public final IntakeMoverSubsystem intakeMoverSubsystem = new IntakeMoverSubsystem(this);
-        public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem(this);
-        public final AlgeaIntakeSubsystem algeaIntakeSubsystem = new AlgeaIntakeSubsystem();
-        public final StatusLED ledSubsystem = new StatusLED();
-        public final RotarySwitchSubsystem rotarySwitchSubsystem = new RotarySwitchSubsystem();
-        public final AutonPath otonom_path = new AutonPath();
-        public CommandXboxController driverXbox = Controlls.DRIVER_CONTROLLER;
-        public final e_movedown elevator_down;
-        public final e_moveup elevator_up;
-        public final e_tozeroo e_tozero;
-        public final e_level1 e_l1;
-        public final e_level2 e_l2;
-        public final e_level3 e_l3;
-        public final e_source e_source;
-        public final e_processor e_processor;
-        public final e_level4 e_l4;
-        public final e_algea e_algea_middle;
-        public final e_algea e_algea_down;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.OperatorConstants;
+import java.io.File;
+import swervelib.SwerveInputStream;
 
-        public final source im_source;
-        public final processor im_processor;
-        public final reefscape im_reefscape;
-        public final algea im_algea;
-        public final korel im_coral;
-        public final l4 im_l4;
-        public final movedown im_movedown;
-        public final moveup im_moveup;
+/**
+ * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
+ * little robot logic should actually be handled in the {@link Robot} periodic methods (other than the scheduler calls).
+ * Instead, the structure of the robot (including subsystems, commands, and trigger mappings) should be declared here.
+ */
+public class RobotContainer
+{
 
-        public final AlgeaIntake a_intake;
-        public final AlgeaOuttake a_outtake;
+    private final SendableChooser<Command> autoChooser;
+    public final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),"swerve"));
+    private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+    public final ObjectDetectorSubsystem objectDetector = new ObjectDetectorSubsystem();
+    public final IntakeMoverSubsystem intakeMoverSubsystem = new IntakeMoverSubsystem(this);
+    public final IntakeSubsystem intakeSubsystem = new IntakeSubsystem(this);
+    public final AlgeaIntakeSubsystem algeaIntakeSubsystem = new AlgeaIntakeSubsystem();
+    public final StatusLED ledSubsystem = new StatusLED();
+    public final RotarySwitchSubsystem rotarySwitchSubsystem = new RotarySwitchSubsystem();
+    public final AutonPath otonom_path = new AutonPath();
+    public CommandXboxController driverXbox = Controlls.DRIVER_CONTROLLER;
+    public final e_movedown elevator_down;
+    public final e_moveup elevator_up;
+    public final e_tozeroo e_tozero;
+    public final e_level1 e_l1;
+    public final e_level2 e_l2;
+    public final e_level3 e_l3;
+    public final e_source e_source;
+    public final e_processor e_processor;
+    public final e_level4 e_l4;
+    public final e_algea e_algea_middle;
+    public final e_algea e_algea_down;
 
-        public final zerogyro zerogyro;
+    public final source im_source;
+    public final processor im_processor;
+    public final reefscape im_reefscape;
+    public final algea im_algea;
+    public final korel im_coral;
+    public final l4 im_l4;
+    public final movedown im_movedown;
+    public final moveup im_moveup;
 
-        public final Intake c_intake;
-        public final Outtake c_outtake;
+    public final AlgeaIntake a_intake;
+    public final AlgeaOuttake a_outtake;
 
-        public final LEDStateCycler led_cycle;
-        public final LEDMorseScroller led_morse;
+    public final Command zerogyro;
 
-        public final Command intakeAlgeaMiddle;
-        public final Command intakeAlgeaDown;
-        public final Command getSource;
-        public final Command AlgeaProcessor;
-        public final Command Coral_l1;
-        public final Command Coral_l2;
-        public final Command Coral_l3;
-        public final Command Coral_l4;
+    public final Intake c_intake;
+    public final Outtake c_outtake;
+    public final Gerial c_Gerial;
 
-        SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
-        () -> driverXbox.getLeftY() * -1,
-        () -> driverXbox.getLeftX() * -1)
-    .withControllerRotationAxis(driverXbox::getRightX)
-    .deadband(Constants.OperatorConstants.DEADBAND)
-    .scaleTranslation(0.8)
-    .allianceRelativeControl(true);
+    public final LEDStateCycler led_cycle;
+    public final LEDMorseScroller led_morse;
 
-        SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                () -> -driverXbox.getLeftY()*0.4,
-                () -> -driverXbox.getLeftX()*0.4)
-            .withControllerRotationAxis(() -> -driverXbox.getRawAxis(
-                2)*0.2)
-            .deadband(Constants.OperatorConstants.DEADBAND)
-            .scaleTranslation(0.8)
-            .allianceRelativeControl(true);
+    public final Command intakeAlgeaMiddle;
+    public final Command intakeAlgeaDown;
+    public final Command getSource;
+    public final Command AlgeaProcessor;
+    public final Command Coral_l1;
+    public final Command Coral_l2;
+    public final Command Coral_l3;
+    public final Command Coral_l4;
+  /**
+   * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular velocity.
+   */
+  SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
+                                                                () -> driverXbox.getLeftY() * -1,
+                                                                () -> driverXbox.getLeftX() * -1)
+                                                            .withControllerRotationAxis(driverXbox::getRightX)
+                                                            .deadband(OperatorConstants.DEADBAND)
+                                                            .scaleTranslation(0.8)
+                                                            .allianceRelativeControl(true);
 
-        public RobotContainer() {
-                DriverStation.silenceJoystickConnectionWarning(true);
+  /**
+   * Clone's the angular velocity input stream and converts it to a fieldRelative input stream.
+   */
+  SwerveInputStream driveDirectAngle = driveAngularVelocity.copy().withControllerHeadingAxis(driverXbox::getRightX,
+                                                                                             driverXbox::getRightY)
+                                                           .headingWhile(true);
 
-                // Add Commands to the PathPlanner
-                NamedCommands.registerCommand("eProcessor", new e_processor(elevatorSubsystem));
-                NamedCommands.registerCommand("eAlgeaMiddle", new e_algea(elevatorSubsystem, true));
-                NamedCommands.registerCommand("eAlgeaDown", new e_algea(elevatorSubsystem, false));
-                NamedCommands.registerCommand("eSource", new e_source(elevatorSubsystem));
-                NamedCommands.registerCommand("eToZero", new e_tozeroo(elevatorSubsystem));
-                NamedCommands.registerCommand("eL1", new e_level1(elevatorSubsystem));
-                NamedCommands.registerCommand("eL2", new e_level2(elevatorSubsystem));
-                NamedCommands.registerCommand("eL3", new e_level3(elevatorSubsystem));
-                NamedCommands.registerCommand("eL4", new e_level4(elevatorSubsystem));
+  /**
+   * Clone's the angular velocity input stream and converts it to a robotRelative input stream.
+   */
+  SwerveInputStream driveRobotOriented = driveAngularVelocity.copy().robotRelative(true)
+                                                             .allianceRelativeControl(false);
 
-                NamedCommands.registerCommand("imProcessor", new processor(intakeMoverSubsystem));
-                NamedCommands.registerCommand("imSource", new source(intakeMoverSubsystem));
-                NamedCommands.registerCommand("imReefscape", new reefscape(intakeMoverSubsystem));
-                NamedCommands.registerCommand("imAlgea", new algea(intakeMoverSubsystem));
-                NamedCommands.registerCommand("imCoral", new korel(intakeMoverSubsystem));
-                NamedCommands.registerCommand("imL4", new l4(intakeMoverSubsystem));
+  SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
+                                                                        () -> -driverXbox.getLeftY(),
+                                                                        () -> -driverXbox.getLeftX())
+                                                                    .withControllerRotationAxis(() -> driverXbox.getRawAxis(
+                                                                        2))
+                                                                    .deadband(OperatorConstants.DEADBAND)
+                                                                    .scaleTranslation(0.8)
+                                                                    .allianceRelativeControl(true);
+  // Derive the heading axis with math!
+  SwerveInputStream driveDirectAngleKeyboard     = driveAngularVelocityKeyboard.copy()
+                                                                               .withControllerHeadingAxis(() ->
+                                                                                                              Math.sin(
+                                                                                                                  driverXbox.getRawAxis(
+                                                                                                                      2) *
+                                                                                                                  Math.PI) *
+                                                                                                              (Math.PI *
+                                                                                                               2),
+                                                                                                          () ->
+                                                                                                              Math.cos(
+                                                                                                                  driverXbox.getRawAxis(
+                                                                                                                      2) *
+                                                                                                                  Math.PI) *
+                                                                                                              (Math.PI *
+                                                                                                               2))
+                                                                               .headingWhile(true);
 
-                NamedCommands.registerCommand("aIntake", new AlgeaIntake(algeaIntakeSubsystem));
-                NamedCommands.registerCommand("aOuttake", new AlgeaOuttake(algeaIntakeSubsystem));
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
+  public RobotContainer()
+  {
+    // Configure the trigger bindings
+    configureBindings();
+    DriverStation.silenceJoystickConnectionWarning(true);
+    NamedCommands.registerCommand("test", Commands.print("I EXIST"));
 
-                NamedCommands.registerCommand("cIntake", new Intake(intakeSubsystem));
-                NamedCommands.registerCommand("cOuttake", new Outtake(intakeSubsystem));
+                    // Add Commands to the PathPlanner
+                    NamedCommands.registerCommand("eProcessor", new e_processor(elevatorSubsystem));
+                    NamedCommands.registerCommand("eAlgeaMiddle", new e_algea(elevatorSubsystem, true));
+                    NamedCommands.registerCommand("eAlgeaDown", new e_algea(elevatorSubsystem, false));
+                    NamedCommands.registerCommand("eSource", new e_source(elevatorSubsystem));
+                    NamedCommands.registerCommand("eToZero", new e_tozeroo(elevatorSubsystem));
+                    NamedCommands.registerCommand("eL1", new e_level1(elevatorSubsystem));
+                    NamedCommands.registerCommand("eL2", new e_level2(elevatorSubsystem));
+                    NamedCommands.registerCommand("eL3", new e_level3(elevatorSubsystem));
+                    NamedCommands.registerCommand("eL4", new e_level4(elevatorSubsystem));
+    
+                    NamedCommands.registerCommand("imProcessor", new processor(intakeMoverSubsystem));
+                    NamedCommands.registerCommand("imSource", new source(intakeMoverSubsystem));
+                    NamedCommands.registerCommand("imReefscape", new reefscape(intakeMoverSubsystem));
+                    NamedCommands.registerCommand("imAlgea", new algea(intakeMoverSubsystem));
+                    NamedCommands.registerCommand("imCoral", new korel(intakeMoverSubsystem));
+                    NamedCommands.registerCommand("imL4", new l4(intakeMoverSubsystem));
+    
+                    NamedCommands.registerCommand("aIntake", new AlgeaIntake(algeaIntakeSubsystem));
+                    NamedCommands.registerCommand("aOuttake", new AlgeaOuttake(algeaIntakeSubsystem));
+    
+                    NamedCommands.registerCommand("cIntake", new Intake(intakeSubsystem));
+                    NamedCommands.registerCommand("cOuttake", new Outtake(intakeSubsystem));
+    
+                    //Definate Commands
+                    elevator_down = new e_movedown(elevatorSubsystem);
+                    elevator_up = new e_moveup(elevatorSubsystem);
+                    e_processor = new e_processor(elevatorSubsystem);
+                    e_algea_middle = new e_algea(elevatorSubsystem, true);
+                    e_algea_down = new e_algea(elevatorSubsystem, false);
+                    e_source = new e_source(elevatorSubsystem);
+                    e_tozero = new e_tozeroo(elevatorSubsystem);
+                    e_l1 = new e_level1(elevatorSubsystem);
+                    e_l2 = new e_level2(elevatorSubsystem);
+                    e_l3 = new e_level3(elevatorSubsystem);
+                    e_l4 = new e_level4(elevatorSubsystem);
+    
+                    im_processor = new processor(intakeMoverSubsystem);
+                    im_source = new source(intakeMoverSubsystem);
+                    im_reefscape = new reefscape(intakeMoverSubsystem);
+                    im_algea = new algea(intakeMoverSubsystem);
+                    im_coral = new korel(intakeMoverSubsystem);
+                    im_l4 = new l4(intakeMoverSubsystem);
+                    im_moveup = new moveup(intakeMoverSubsystem);
+                    im_movedown = new movedown(intakeMoverSubsystem);
+    
+                    a_intake = new AlgeaIntake(algeaIntakeSubsystem);
+                    a_outtake = new AlgeaOuttake(algeaIntakeSubsystem);
+                    c_Gerial = new Gerial(intakeSubsystem);
+    
+                    zerogyro = new InstantCommand (()->drivebase.zeroGyro());
+    
+                    c_intake = new Intake(intakeSubsystem);
+                    c_outtake = new Outtake(intakeSubsystem);
+    
+                    led_cycle = new LEDStateCycler(ledSubsystem);
+                    led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
+    
+                    //Commands are fully autonomous for driver comfort and easy autonomous integration
+                    intakeAlgeaMiddle = new SequentialCommandGroup(
+                                    new algea(intakeMoverSubsystem),
+                                    new e_algea(elevatorSubsystem, true), 
+                                    new AlgeaIntake(algeaIntakeSubsystem));
+    
+                    intakeAlgeaDown = new SequentialCommandGroup(
+                                    new algea(intakeMoverSubsystem),
+                                    new e_algea(elevatorSubsystem, false), 
+                                    new AlgeaIntake(algeaIntakeSubsystem));
+    
+                    getSource = new SequentialCommandGroup(
+                                    new e_source(elevatorSubsystem),
+                                    new source(intakeMoverSubsystem),
+                                    new Intake(intakeSubsystem));
+    
+                    AlgeaProcessor = new SequentialCommandGroup(
+                                    new processor(intakeMoverSubsystem),
+                                    new e_processor(elevatorSubsystem), 
+                                    new AlgeaOuttake(algeaIntakeSubsystem));
+    
+                    Coral_l1 = new SequentialCommandGroup(
+                                    new reefscape(intakeMoverSubsystem),
+                                    new e_level1(elevatorSubsystem),
+                                    new Outtake(intakeSubsystem));
+                    Coral_l2 = new SequentialCommandGroup(
+                                    new korel(intakeMoverSubsystem), 
+                                    new e_level2(elevatorSubsystem),
+                                    new Outtake(intakeSubsystem));
+                    Coral_l3 = new SequentialCommandGroup(
+                                    new korel(intakeMoverSubsystem), 
+                                    new e_level3(elevatorSubsystem),
+                                    new Outtake(intakeSubsystem));
+                    Coral_l4 = new SequentialCommandGroup(
+                                    new l4(intakeMoverSubsystem), 
+                                    new e_level4(elevatorSubsystem),
+                                    new Outtake(intakeSubsystem));
+    
+                    //PathPlanner Autonomous Chooser
+                    autoChooser = AutoBuilder.buildAutoChooser();
+                    SmartDashboard.putData("Auto Chooser", autoChooser);
+                    configureBindings();
+  }
 
-                //Definate Commands
-                elevator_down = new e_movedown(elevatorSubsystem);
-                elevator_up = new e_moveup(elevatorSubsystem);
-                e_processor = new e_processor(elevatorSubsystem);
-                e_algea_middle = new e_algea(elevatorSubsystem, true);
-                e_algea_down = new e_algea(elevatorSubsystem, false);
-                e_source = new e_source(elevatorSubsystem);
-                e_tozero = new e_tozeroo(elevatorSubsystem);
-                e_l1 = new e_level1(elevatorSubsystem);
-                e_l2 = new e_level2(elevatorSubsystem);
-                e_l3 = new e_level3(elevatorSubsystem);
-                e_l4 = new e_level4(elevatorSubsystem);
+  /**
+   * Use this method to define your trigger->command mappings. Triggers can be created via the
+   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary predicate, or via the
+   * named factories in {@link edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for
+   * {@link CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller PS4}
+   * controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight joysticks}.
+   */
+  private void configureBindings()
+  {
+    Command driveRobotOrientedAngularVelocity  = drivebase.driveFieldOriented(driveAngularVelocityKeyboard);
+        drivebase.setDefaultCommand(driveRobotOrientedAngularVelocity);
+  }
 
-                im_processor = new processor(intakeMoverSubsystem);
-                im_source = new source(intakeMoverSubsystem);
-                im_reefscape = new reefscape(intakeMoverSubsystem);
-                im_algea = new algea(intakeMoverSubsystem);
-                im_coral = new korel(intakeMoverSubsystem);
-                im_l4 = new l4(intakeMoverSubsystem);
-                im_moveup = new moveup(intakeMoverSubsystem);
-                im_movedown = new movedown(intakeMoverSubsystem);
+  public void configureButtonBindings() {
+    //Configure Button Bindings For Test And TeleOp Modes
+    if(OI.IS_TEST){
+            Test_Controlls.T_ALGEA_INTAKE.onTrue(a_intake);
+            Test_Controlls.T_ALGEA_OUTTAKE.onTrue(a_outtake);
 
-                a_intake = new AlgeaIntake(algeaIntakeSubsystem);
-                a_outtake = new AlgeaOuttake(algeaIntakeSubsystem);
+            Test_Controlls.T_CORAL_INTAKE.onTrue(getSource);
+            Test_Controlls.T_CORAL_OUTTAKE.onTrue(c_outtake);
 
-                zerogyro = new zerogyro(drivebase);
+            Test_Controlls.T_ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
+            Test_Controlls.T_ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
 
-                c_intake = new Intake(intakeSubsystem);
-                c_outtake = new Outtake(intakeSubsystem);
+            Test_Controlls.T_INTAKE_MOVE_DOWN.whileTrue(im_movedown);
+            Test_Controlls.T_INTAKE_MOVE_UP.whileTrue(im_moveup);
 
-                led_cycle = new LEDStateCycler(ledSubsystem);
-                led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
+            Test_Controlls.T_INTAKE_MOVE_L1.onTrue(im_algea);
+            Test_Controlls.T_ELEVATOR_ZERO.onTrue(Coral_l4);
 
-                //Commands are fully autonomous for driver comfort and easy autonomous integration
-                intakeAlgeaMiddle = new SequentialCommandGroup(
-                                new algea(intakeMoverSubsystem),
-                                new e_algea(elevatorSubsystem, true), 
-                                new AlgeaIntake(algeaIntakeSubsystem));
+            Test_Controlls.T_LED_CYCLE.whileTrue(led_cycle);
+            Test_Controlls.T_LED_MORSE.onTrue(led_morse);
+    }else{                
+            Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
+            Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
+            Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
+            Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
 
-                intakeAlgeaDown = new SequentialCommandGroup(
-                                new algea(intakeMoverSubsystem),
-                                new e_algea(elevatorSubsystem, false), 
-                                new AlgeaIntake(algeaIntakeSubsystem));
-
-                getSource = new SequentialCommandGroup(
-                                new e_source(elevatorSubsystem),
-                                new source(intakeMoverSubsystem),
-                                new Intake(intakeSubsystem));
-
-                AlgeaProcessor = new SequentialCommandGroup(
-                                new processor(intakeMoverSubsystem),
-                                new e_processor(elevatorSubsystem), 
-                                new AlgeaOuttake(algeaIntakeSubsystem));
-
-                Coral_l1 = new SequentialCommandGroup(
-                                new reefscape(intakeMoverSubsystem),
-                                new e_level1(elevatorSubsystem),
-                                new Outtake(intakeSubsystem));
-                Coral_l2 = new SequentialCommandGroup(
-                                new korel(intakeMoverSubsystem), 
-                                new e_level2(elevatorSubsystem),
-                                new Outtake(intakeSubsystem));
-                Coral_l3 = new SequentialCommandGroup(
-                                new korel(intakeMoverSubsystem), 
-                                new e_level3(elevatorSubsystem),
-                                new Outtake(intakeSubsystem));
-                Coral_l4 = new SequentialCommandGroup(
-                                new l4(intakeMoverSubsystem), 
-                                new e_level4(elevatorSubsystem),
-                                new Outtake(intakeSubsystem));
-
-                //PathPlanner Autonomous Chooser
-                autoChooser = AutoBuilder.buildAutoChooser();
-                SmartDashboard.putData("Auto Chooser", autoChooser);
-                configureBindings();
-        }
-
-        private void configureBindings()
-        {
-        if(EnabledParts.IS_SWERVE_ENABLED){
-          Command driveRobotOrientedAngularVelocity  = drivebase.driveFieldOriented(driveAngularVelocityKeyboard);
-              drivebase.setDefaultCommand(driveRobotOrientedAngularVelocity);}
-           if(!RobotBase.isSimulation()){
-            if(DriverStation.getAlliance().get() == Alliance.Blue){
-                LedSubsystem.BREATHE_COLOR = LEDPattern.solid(Color.kDarkBlue);
-            }}
-        }
-
-        public void configureButtonBindings() {
-                //Configure Button Bindings For Test And TeleOp Modes
-                if(OI.IS_TEST){
-                        Test_Controlls.T_ALGEA_INTAKE.onTrue(a_intake);
-                        Test_Controlls.T_ALGEA_OUTTAKE.onTrue(a_outtake);
-
-                        Test_Controlls.T_CORAL_INTAKE.onTrue(getSource);
-                        Test_Controlls.T_CORAL_OUTTAKE.onTrue(c_outtake);
-
-                        Test_Controlls.T_ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
-                        Test_Controlls.T_ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
-
-                        Test_Controlls.T_INTAKE_MOVE_DOWN.whileTrue(im_movedown);
-                        Test_Controlls.T_INTAKE_MOVE_UP.whileTrue(im_moveup);
-
-                        Test_Controlls.T_INTAKE_MOVE_L1.onTrue(im_algea);
-                        Test_Controlls.T_ELEVATOR_ZERO.onTrue(Coral_l4);
-
-                        Test_Controlls.T_LED_CYCLE.whileTrue(led_cycle);
-                        Test_Controlls.T_LED_MORSE.onTrue(led_morse);
-                }else{                
-                        Controlls.ELEVATOR_MANUAL_DOWN.whileTrue(elevator_down);
-                        Controlls.ELEVATOR_MANUAL_UP.whileTrue(elevator_up);
-                        Controlls.INTAKE_MOVE_DOWN.whileTrue(im_movedown);
-                        Controlls.INTAKE_MOVE_UP.whileTrue(im_moveup);
-
-                        Controlls.ELEVATOR_TOZERO.onTrue(e_tozero);
-                        Controlls.GET_SOURCE.onTrue(getSource);
+            Controlls.ELEVATOR_TOZERO.onTrue(e_tozero);
+            Controlls.GET_SOURCE.onTrue(getSource);
 
 
-                        Controlls.RESET_GYRO.onChange(zerogyro);
-                        Controlls.L4.onTrue(Coral_l4);
-                        Controlls.L3.onTrue(Coral_l3);
-                        Controlls.L2.onTrue(Coral_l2);
-                        Controlls.L1.onTrue(Coral_l1);
+            Controlls.RESET_GYRO.onChange(zerogyro);
+            Controlls.L4.onTrue(Coral_l4);
+            Controlls.L3.onTrue(Coral_l3);
+            Controlls.L2.onTrue(Coral_l2);
+            Controlls.L1.onTrue(Coral_l1);
 
-                        Controlls.LED_CYCLE.whileTrue(led_cycle);
+            Controlls.LED_CYCLE.whileTrue(led_cycle);
 
-                        Controlls.ALGEA_INTAKE.whileTrue(a_intake);
-                        Controlls.ALGEA_OUTTAKE.whileTrue(a_outtake);
-                }
-        }
-
-        public Command getAutonomousCommand() {
-                return autoChooser.getSelected();
-        }
-        
-        public void setMotorBrake(boolean brake)
-        {
-    drivebase.setMotorBrake(brake);
+            Controlls.CORAL_INTAKE.onTrue(c_intake);
+            Controlls.CORAL_GERIAL.onTrue(c_Gerial);
+    }
 }
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand()
+  {
+    // An example command will be run in autonomous
+    return drivebase.getAutonomousCommand("New Auto");
+  }
+
+  public void setMotorBrake(boolean brake)
+  {
+    drivebase.setMotorBrake(brake);
+  }
 }

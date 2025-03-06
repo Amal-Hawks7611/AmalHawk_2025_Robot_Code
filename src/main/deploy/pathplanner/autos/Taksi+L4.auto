@@ -5,15 +5,9 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "eToZero"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "ORTA_B_M_M1"
+            "pathName": "Teksi"
           }
         },
         {
@@ -23,28 +17,22 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "imAlgea"
+                  "name": "imL4"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "eAlgeaMiddle"
+                  "name": "eL4"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "aIntake"
+                  "name": "cOuttake"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "eToZero"
           }
         }
       ]
