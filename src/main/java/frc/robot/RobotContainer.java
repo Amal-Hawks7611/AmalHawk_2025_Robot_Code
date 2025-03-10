@@ -32,11 +32,11 @@ import frc.robot.commands.Intake.Gerial;
 import frc.robot.commands.IntakeMover.*;
 import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
+import frc.robot.commands.Swerve.Limelight;
 import frc.robot.commands.Trajectory.AutonPath;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
@@ -97,6 +97,8 @@ public class RobotContainer {
   public final Command Coral_l2;
   public final Command Coral_l3;
   public final Command Coral_l4;
+
+  public final Limelight limelight;
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is controlled
    * by angular velocity.
@@ -157,7 +159,6 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     DriverStation.silenceJoystickConnectionWarning(true);
-    NamedCommands.registerCommand("test", Commands.print("I EXIST"));
 
     // Add Commands to the PathPlanner
     NamedCommands.registerCommand("eProcessor", new e_processor(elevatorSubsystem));
@@ -214,6 +215,7 @@ public class RobotContainer {
     c_intake = new Intake(intakeSubsystem);
     c_outtake = new Outtake(intakeSubsystem);
 
+    limelight=new Limelight(drivebase);
     led_cycle = new LEDStateCycler(ledSubsystem);
     led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
@@ -306,6 +308,8 @@ public class RobotContainer {
 
       Controlls.CORAL_INTAKE.onTrue(c_intake);
       Controlls.CORAL_GERIAL.onTrue(c_Gerial);
+
+      Controlls.LIMELIGHT_FOCUS.onTrue(limelight);
     }
   }
 

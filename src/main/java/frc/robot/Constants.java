@@ -18,7 +18,7 @@ public final class Constants {
     public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
     public static final double MAX_SPEED = 3;
     public static final double LIMELIGHT_KP = 0.5;
-    public static final double LIMELIGHT_DRIVE_TIME = 0.2;
+    public static final double LIMELIGHT_TX = 0.2;
 
     public static final class DrivebaseConstants {
         public static final double WHEEL_LOCK_TIME = 10;
@@ -42,8 +42,8 @@ public final class Constants {
         public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(Color.kGreen);
         public static LEDPattern INTAKE_COLOR = LEDPattern.solid(Color.kYellow);
         public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(Color.kAqua);
-        public static LEDPattern BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,Color.kOrange,
-      Color.kOrangeRed,Color.kRed);
+        public static LEDPattern BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,
+      Color.kOrangeRed,Color.kRed,Color.kDarkRed);
     }
 
     // TODO: Update the Rotary Ports
@@ -62,14 +62,14 @@ public final class Constants {
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         // TODO Encoder Values Will Be Updated
         public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = 34.5;
+        public static double ELEVATOR_END_VALUE = 34.65;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
         public static double ELEVATOR_TOZERO_VALUE = 1;
         public static double ELEVATOR_L1_VALUE = 4.25;
         public static double ELEVATOR_L2_VALUE = 8.20;
         public static double ELEVATOR_L3_VALUE = 20.31;
-        public static double ELEVATOR_L4_VALUE = 34.9;
+        public static double ELEVATOR_L4_VALUE = 34.65;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
         public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 4.5; // Elevator Ticks Per Meters
 
@@ -139,6 +139,8 @@ public final class Constants {
 
         public static Trigger CORAL_INTAKE = DRIVER_CONTROLLER.povLeft();
         public static Trigger CORAL_GERIAL = DRIVER_CONTROLLER.povRight();
+
+        public static Trigger LIMELIGHT_FOCUS = DRIVER_CONTROLLER.button(11);
     }
 
     public static class Test_Controlls {
