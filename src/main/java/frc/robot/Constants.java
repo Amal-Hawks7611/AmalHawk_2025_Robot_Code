@@ -99,7 +99,7 @@ public final class Constants {
         public static int IM_LEADER_MOTOR_PORT = 4;
         public static double INTAKE_MOVER_SPEED = 0.2;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
-        public static double IM_STATIC_VOLTAGE = 0.15;
+        public static double IM_STATIC_VOLTAGE = 0.15 ;
         public static double IM_ALGEA_STATIC = 0.25;
         public static double IM_CORAL_STATIC = 0.05;
 
@@ -131,7 +131,7 @@ public final class Constants {
         public static Trigger L4 = DRIVER_CONTROLLER.y();
 
         public static Trigger GET_SOURCE = DRIVER_CONTROLLER.a();
-        public static Trigger LED_CYCLE = DRIVER_CONTROLLER.button(9);
+        public static Trigger LED_CYCLE = DRIVER_CONTROLLER.button(14);
         public static Trigger ELEVATOR_TOZERO = DRIVER_CONTROLLER.povDown();
 
         public static int SWERVE_RIGHT_X_AXIS = 2;

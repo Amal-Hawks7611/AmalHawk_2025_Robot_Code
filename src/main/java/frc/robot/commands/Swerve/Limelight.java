@@ -28,10 +28,10 @@ public class Limelight extends Command {
         }
         else{
         if(LimelightHelpers.getTY("limelight")>Constants.LIMELIGHT_TX){
-            swerveSubsystem.drive(new Translation2d(Constants.LIMELIGHT_KP, 0),0,false);
+            swerveSubsystem.drive(new Translation2d(0, Constants.LIMELIGHT_KP),0,false);
         }
         else{
-            swerveSubsystem.drive(new Translation2d(-Constants.LIMELIGHT_KP, 0),0,false);
+            swerveSubsystem.drive(new Translation2d(0, -Constants.LIMELIGHT_KP),0,false);
         }
         }
     }

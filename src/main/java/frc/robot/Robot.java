@@ -49,13 +49,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_robotContainer.drivebase.zeroGyro();
     if (!RobotBase.isSimulation()) {
-      if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red) {
-        int[] validIDs = { 6, 7, 8, 9, 10, 11 };
-        LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
-      } else {
-        int[] validIDs = { 17, 18, 19, 20, 21, 22 };
-        LimelightHelpers.SetFiducialIDFiltersOverride("limelight", validIDs);
-      }
       if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue) {
         LedSubsystem.BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous, Color.kBlue,
             Color.kDarkBlue, Color.kPurple);
