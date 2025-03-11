@@ -65,7 +65,7 @@ public final class Constants {
         public static double ELEVATOR_END_VALUE = 34;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
-        public static double ELEVATOR_TOZERO_VALUE = 1;
+        public static double ELEVATOR_TOZERO_VALUE = 0.2;
         public static double ELEVATOR_L1_VALUE = 4.25;
         public static double ELEVATOR_L2_VALUE = 8.20;
         public static double ELEVATOR_L3_VALUE = 20.31;
