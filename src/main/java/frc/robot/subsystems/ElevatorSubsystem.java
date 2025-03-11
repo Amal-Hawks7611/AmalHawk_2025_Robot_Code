@@ -61,8 +61,14 @@ public class ElevatorSubsystem extends SubsystemBase {
                         OI.IS_PID_ENDED = true;
                 } else {
                     if (leaderPosition > setpoint) {
-                        leaderMotor.set(-speed*0.7);
-                        followerMotor.set(-speed*0.7);
+                        if(setpoint <= 1){
+                            leaderMotor.set(-Elevator.ELEVATOR_DOWN_VOLTS);
+                            followerMotor.set(-Elevator.ELEVATOR_DOWN_VOLTS);
+                        }
+                        else{
+                            leaderMotor.set(-speed*0.7);
+                            followerMotor.set(-speed*0.7);
+                        }
                         simulationEncoder -= 4355;
                     } else {
                         leaderMotor.set(speed);
