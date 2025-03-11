@@ -104,8 +104,8 @@ public class RobotContainer {
    * by angular velocity.
    */
   SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
-      () -> driverXbox.getLeftY() * -1,
-      () -> driverXbox.getLeftX() * -1)
+      () -> driverXbox.getLeftY() * -1 *0.8,
+      () -> driverXbox.getLeftX() * -1 * 0.8)
       .withControllerRotationAxis(driverXbox::getRightX)
       .deadband(OperatorConstants.DEADBAND)
       .scaleTranslation(0.8)
@@ -127,10 +127,10 @@ public class RobotContainer {
       .allianceRelativeControl(false);
 
   SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-      () -> -driverXbox.getLeftY(),
-      () -> -driverXbox.getLeftX())
+      () -> -driverXbox.getLeftY() * 0.8,
+      () -> -driverXbox.getLeftX() * 0.8)
       .withControllerRotationAxis(() -> driverXbox.getRawAxis(
-          2))
+          2) * 0.4)
       .deadband(OperatorConstants.DEADBAND)
       .scaleTranslation(0.8)
       .allianceRelativeControl(true);

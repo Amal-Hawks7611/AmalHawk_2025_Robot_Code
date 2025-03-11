@@ -17,8 +17,8 @@ public final class Constants {
     public static final Matter CHASSIS = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
     public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
     public static final double MAX_SPEED = 3;
-    public static final double LIMELIGHT_KP = 0.5;
-    public static final double LIMELIGHT_TX = 0.2;
+    public static final double LIMELIGHT_KP = 0.2;
+    public static final double LIMELIGHT_TX = 12;
 
     public static final class DrivebaseConstants {
         public static final double WHEEL_LOCK_TIME = 10;
@@ -62,14 +62,14 @@ public final class Constants {
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         // TODO Encoder Values Will Be Updated
         public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = 34.4;
+        public static double ELEVATOR_END_VALUE = 34;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
         public static double ELEVATOR_TOZERO_VALUE = 1;
         public static double ELEVATOR_L1_VALUE = 4.25;
         public static double ELEVATOR_L2_VALUE = 8.20;
         public static double ELEVATOR_L3_VALUE = 20.31;
-        public static double ELEVATOR_L4_VALUE = 34.4;
+        public static double ELEVATOR_L4_VALUE = 34;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
         public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 4.5;
 

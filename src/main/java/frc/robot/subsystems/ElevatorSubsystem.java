@@ -61,8 +61,8 @@ public class ElevatorSubsystem extends SubsystemBase {
                         OI.IS_PID_ENDED = true;
                 } else {
                     if (leaderPosition > setpoint) {
-                        leaderMotor.set(-speed);
-                        followerMotor.set(-speed);
+                        leaderMotor.set(-speed*0.7);
+                        followerMotor.set(-speed*0.7);
                         simulationEncoder -= 4355;
                     } else {
                         leaderMotor.set(speed);
@@ -78,7 +78,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         }
     }
 
-    private boolean isWithinTolerance(double value, double target) {
+    public boolean isWithinTolerance(double value, double target) {
         return value >= target - Elevator.OCAL_PID_TOLERANCE_VALUE && value <= target + Elevator.OCAL_PID_TOLERANCE_VALUE;
     }
 

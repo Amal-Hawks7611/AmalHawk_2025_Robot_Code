@@ -22,11 +22,12 @@ public class Limelight extends Command {
 
     @Override
     public void execute() {
-        if(LimelightHelpers.getTX("limelight") > Constants.LIMELIGHT_TX - 0.025 || LimelightHelpers.getTX("limelight") < Constants.LIMELIGHT_TX + 0.025){
+        System.out.println(LimelightHelpers.getTY("limelight"));
+        if(LimelightHelpers.getTY("limelight") >= Constants.LIMELIGHT_TX - 0.15 && LimelightHelpers.getTY("limelight") <= Constants.LIMELIGHT_TX + 0.15){
             this.end(false);
         }
         else{
-        if(LimelightHelpers.getTX("limelight")>Constants.LIMELIGHT_TX){
+        if(LimelightHelpers.getTY("limelight")>Constants.LIMELIGHT_TX){
             swerveSubsystem.drive(new Translation2d(Constants.LIMELIGHT_KP, 0),0,false);
         }
         else{

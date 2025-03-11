@@ -17,7 +17,6 @@ public class e_moveup extends Command {
     public void initialize() {
         System.out.println("Elevator Is Moving Up Manually");
         OI.IS_PROCESSING = true;
-
     }
 
     @Override
