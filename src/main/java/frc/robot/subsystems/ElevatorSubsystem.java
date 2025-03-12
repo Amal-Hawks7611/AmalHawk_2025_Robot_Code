@@ -62,8 +62,8 @@ public class ElevatorSubsystem extends SubsystemBase {
                 } else {
                     if (leaderPosition > setpoint) {
                         if(setpoint <= 1){
-                            leaderMotor.set(-Elevator.ELEVATOR_DOWN_VOLTS);
-                            followerMotor.set(-Elevator.ELEVATOR_DOWN_VOLTS);
+                            leaderMotor.set(-0.1);
+                            followerMotor.set(-0.1);
                         }
                         else{
                             leaderMotor.set(-speed*0.7);

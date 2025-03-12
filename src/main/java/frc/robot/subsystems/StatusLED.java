@@ -88,6 +88,8 @@ public class StatusLED extends SubsystemBase {
                 setIntake();
             } else if(OI.IS_ALGEA_INTAKING){
                 setAlgeaIntake();
+            } else if(OI.IS_FOCUSED){
+                setFocus();
             } else {
                 setDefault();
             }

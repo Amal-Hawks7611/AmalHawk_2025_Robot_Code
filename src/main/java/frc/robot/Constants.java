@@ -40,7 +40,7 @@ public final class Constants {
         public static int BREATHE_MAGNITUDE = 5;
         public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(Color.kPurple);
         public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(Color.kGreen);
-        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(Color.kYellow);
+        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(Color.kWhite);
         public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(Color.kAqua);
         public static LEDPattern BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,
       Color.kOrangeRed,Color.kRed,Color.kDarkRed);
@@ -184,5 +184,6 @@ public final class Constants {
         public static boolean IS_ALGEA_INTAKING = false;
         public static boolean IS_LED_CYCLING = false;
         public static boolean IS_LED_MORSE_SHOWING = false;
+        public static boolean IS_FOCUSED = false;
     }
 }

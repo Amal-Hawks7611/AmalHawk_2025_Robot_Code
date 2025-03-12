@@ -8,6 +8,7 @@ import frc.robot.subsystems.AlgeaIntakeSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeMoverSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ObjectDetectorSubsystem;
 import frc.robot.subsystems.RotarySwitchSubsystem;
 import frc.robot.subsystems.StatusLED;
@@ -32,7 +33,6 @@ import frc.robot.commands.Intake.Gerial;
 import frc.robot.commands.IntakeMover.*;
 import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
-import frc.robot.commands.Swerve.Limelight;
 import frc.robot.commands.Trajectory.AutonPath;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -47,6 +47,7 @@ public class RobotContainer {
 
   private final SendableChooser<Command> autoChooser;
   public final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
+  public final LimelightSubsystem limelight = new LimelightSubsystem();
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   public final ObjectDetectorSubsystem objectDetector = new ObjectDetectorSubsystem();
   public final IntakeMoverSubsystem intakeMoverSubsystem = new IntakeMoverSubsystem(this);
@@ -98,7 +99,6 @@ public class RobotContainer {
   public final Command Coral_l3;
   public final Command Coral_l4;
 
-  public final Limelight limelight;
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is controlled
    * by angular velocity.
@@ -215,7 +215,6 @@ public class RobotContainer {
     c_intake = new Intake(intakeSubsystem);
     c_outtake = new Outtake(intakeSubsystem);
 
-    limelight=new Limelight(drivebase);
     led_cycle = new LEDStateCycler(ledSubsystem);
     led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
@@ -308,8 +307,6 @@ public class RobotContainer {
 
       Controlls.CORAL_INTAKE.onTrue(c_intake);
       Controlls.CORAL_GERIAL.onTrue(c_Gerial);
-
-      Controlls.LIMELIGHT_FOCUS.onTrue(limelight);
     }
   }
 
