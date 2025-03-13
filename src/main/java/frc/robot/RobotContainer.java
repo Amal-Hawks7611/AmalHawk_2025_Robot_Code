@@ -33,6 +33,7 @@ import frc.robot.commands.Intake.Gerial;
 import frc.robot.commands.IntakeMover.*;
 import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
+import frc.robot.commands.Swerve.limelight;
 import frc.robot.commands.Trajectory.AutonPath;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -98,6 +99,8 @@ public class RobotContainer {
   public final Command Coral_l2;
   public final Command Coral_l3;
   public final Command Coral_l4;
+
+  public final limelight limelight_align;
 
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is controlled
@@ -218,6 +221,8 @@ public class RobotContainer {
     led_cycle = new LEDStateCycler(ledSubsystem);
     led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
+    limelight_align = new limelight(drivebase);
+
     // Commands are fully autonomous for driver comfort and easy autonomous
     // integration
     intakeAlgeaMiddle = new SequentialCommandGroup(
@@ -307,6 +312,8 @@ public class RobotContainer {
 
       Controlls.CORAL_INTAKE.onTrue(c_intake);
       Controlls.CORAL_GERIAL.onTrue(c_Gerial);
+
+      Controlls.LIMELIGHT_FOCUS.onTrue(limelight_align);
     }
   }
 

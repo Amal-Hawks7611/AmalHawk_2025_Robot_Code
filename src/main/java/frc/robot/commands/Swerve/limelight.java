@@ -4,18 +4,15 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
-import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.Constants.OI;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 
 public class limelight extends Command {
     public boolean finished;
     private final SwerveSubsystem swerveSubsystem;
-    private final LimelightSubsystem limelightSubsystem;
-    public limelight(SwerveSubsystem swerveSubsystem, LimelightSubsystem limelightSubsystem ) {
+    public limelight(SwerveSubsystem swerveSubsystem) {
         this.swerveSubsystem = swerveSubsystem;
-        this.limelightSubsystem = limelightSubsystem;
         addRequirements(swerveSubsystem);
-        addRequirements(limelightSubsystem);
     }
 
     @Override
@@ -27,7 +24,7 @@ public class limelight extends Command {
     @Override
     public void execute() {
         System.out.println(LimelightHelpers.getTY("limelight"));
-        if(limelightSubsystem.checkFocus()){
+        if(OI.IS_FOCUSED){
             this.end(false);
         }
         else{
