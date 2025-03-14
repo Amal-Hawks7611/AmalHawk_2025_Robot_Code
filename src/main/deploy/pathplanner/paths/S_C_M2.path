@@ -1,0 +1,70 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.11,
+        "y": 6.984
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.1383187857030634,
+        "y": 6.599978421215767
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.18,
+        "y": 6.701
+      },
+      "prevControl": {
+        "x": 1.8281036891220221,
+        "y": 6.847481305862098
+      },
+      "nextControl": {
+        "x": 2.410802319401094,
+        "y": 6.604925605080877
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.099,
+        "y": 6.07275
+      },
+      "prevControl": {
+        "x": 3.1061519245419253,
+        "y": 6.328078297260367
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "reversed": false,
+  "folder": "Sourceden_Donus_Kombinasyonlari",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -52.901
+  },
+  "useDefaultConstraints": true
+}

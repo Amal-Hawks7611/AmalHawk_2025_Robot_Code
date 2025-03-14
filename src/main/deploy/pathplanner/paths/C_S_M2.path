@@ -1,0 +1,70 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 5.8562,
+        "y": 4.188
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.106196182169217,
+        "y": 4.189381629767978
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.81525,
+        "y": 4.5815
+      },
+      "prevControl": {
+        "x": 5.561589269823622,
+        "y": 4.957642234607821
+      },
+      "nextControl": {
+        "x": 5.955029132920022,
+        "y": 4.374227729784887
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 4.63875,
+        "y": 5.1825
+      },
+      "prevControl": {
+        "x": 4.938811404509531,
+        "y": 5.00058984918478
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 1.0,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -52.901
+  },
+  "reversed": false,
+  "folder": "Source_Gidis_Kombinasyonları",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}
