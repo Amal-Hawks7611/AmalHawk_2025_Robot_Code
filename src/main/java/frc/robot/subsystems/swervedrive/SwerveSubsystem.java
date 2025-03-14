@@ -265,8 +265,8 @@ public class SwerveSubsystem extends SubsystemBase {
         // Track the current position of the robot
         //Translation2d currentPosition = swerveDrive.getPose().getTranslation();
         
-        // Drive the robot forward along the X-axis (positive X direction)
-        swerveDrive.drive(new Translation2d(speedInMetersPerSecond, 0), 0, false, false);
+        // Drive the robot forward along the Y-axis (positive Y direction)
+        swerveDrive.drive(new Translation2d(0, speedInMetersPerSecond), 0, false, false);
     }).until(() -> {
         // Check if the robot has traveled the desired distance
         return swerveDrive.getPose().getTranslation().getDistance(new Translation2d(0, 0)) >= targetDistance;
