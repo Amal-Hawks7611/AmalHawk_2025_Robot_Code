@@ -20,9 +20,13 @@ public final class Constants {
     public static final double LIMELIGHT_KP = 0.1;
     public static final double LIMELIGHT_TX = 12;
 
+    public static Color setBrightness(Color currentColor, double brightness) {
+        return new Color(currentColor.red * brightness, currentColor.green * brightness,
+                currentColor.blue * brightness);
+    }
+
     public static final class DrivebaseConstants {
         public static final double WHEEL_LOCK_TIME = 10;
-        // FIXME Tune PID Values
         public static final PIDConstants transation = new PIDConstants(0.1, 0.0, 0.05);
         public static final PIDConstants angle = new PIDConstants(5, 0.0, 0.05);
     }
@@ -38,15 +42,15 @@ public final class Constants {
         public static int LED_PWM_PORT = 0;
         public static int LED_LENGTH = 180;
         public static int BREATHE_MAGNITUDE = 5;
-        public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(Color.kPurple);
-        public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(Color.kGreen);
-        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(Color.kWhite);
-        public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(Color.kAqua);
+        public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(setBrightness(Color.kPurple, 0.69));
+        public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(setBrightness(Color.kGreen, 0.69));
+        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kWhite, 0.69));
+        public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kAqua, 0.69));
         public static LEDPattern BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,
-      Color.kOrangeRed,Color.kRed,Color.kDarkRed);
+                setBrightness(Color.kOrangeRed, 0.69), setBrightness(Color.kRed, 0.69),
+                setBrightness(Color.kDarkRed, 0.69));
     }
 
-    // TODO: Update the Rotary Ports
     public static final class RotarySwitch {
         public static int DT_CHANNEL = 3;
         public static int CLK_CHANNEL = 4;
@@ -60,7 +64,6 @@ public final class Constants {
         public static double ELEVATOR_DOWN_VOLTS = 0.05;
         public static double ELEVATOR_STATIC_VOLTS = 0.3;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
-        // TODO Encoder Values Will Be Updated
         public static double ELEVATOR_START_VALUE = 0; // Generally True
         public static double ELEVATOR_END_VALUE = 34;
         public static double ELEVATOR_SOURCE_VALUE = 0;
@@ -99,11 +102,10 @@ public final class Constants {
         public static int IM_LEADER_MOTOR_PORT = 4;
         public static double INTAKE_MOVER_SPEED = 0.2;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
-        public static double IM_STATIC_VOLTAGE = 0.15 ;
+        public static double IM_STATIC_VOLTAGE = 0.15;
         public static double IM_ALGEA_STATIC = 0.25;
         public static double IM_CORAL_STATIC = 0.05;
 
-        // TODO Encoder Values Will Be Updated
         public static double INTAKE_PROCESSOR_VALUE = 24.2;
         public static double INTAKE_SOURCE_VALUE = 0;
         public static double INTAKE_ALGEA_VALUE = 24.2;
@@ -141,6 +143,7 @@ public final class Constants {
         public static Trigger CORAL_GERIAL = DRIVER_CONTROLLER.povRight();
 
         public static Trigger LIMELIGHT_FOCUS = DRIVER_CONTROLLER.button(11);
+        public static Trigger LIMELIGHT_STOP = DRIVER_CONTROLLER.button(12);
     }
 
     public static class Test_Controlls {

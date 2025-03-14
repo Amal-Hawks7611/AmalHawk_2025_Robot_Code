@@ -10,6 +10,7 @@ import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 public class limelight extends Command {
     public boolean finished;
     private final SwerveSubsystem swerveSubsystem;
+
     public limelight(SwerveSubsystem swerveSubsystem) {
         this.swerveSubsystem = swerveSubsystem;
         addRequirements(swerveSubsystem);
@@ -24,18 +25,17 @@ public class limelight extends Command {
     @Override
     public void execute() {
         System.out.println(LimelightHelpers.getTY("limelight"));
-        if(OI.IS_FOCUSED){
+        if (OI.IS_FOCUSED) {
             this.end(false);
-        }
-        else{
-            swerveSubsystem.drive(new Translation2d(0,Constants.LIMELIGHT_KP), 0, false);
+        } else {
+            swerveSubsystem.drive(new Translation2d(0, Constants.LIMELIGHT_KP), 0, false);
         }
     }
 
     @Override
     public void end(boolean interrupted) {
         System.out.println("Hizalama Bitti");
-        swerveSubsystem.drive(new Translation2d(0,0),0,false);
+        swerveSubsystem.drive(new Translation2d(0, 0), 0, false);
         finished = true;
     }
 

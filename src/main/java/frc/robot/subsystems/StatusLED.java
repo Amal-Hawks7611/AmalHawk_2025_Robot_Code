@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.LEDPattern;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.LedSubsystem;
@@ -13,7 +14,7 @@ public class StatusLED extends SubsystemBase {
     public AddressableLED led;
     public AddressableLEDBuffer buffer;
 
-    //NOTHING SPECIAL, JUST A LED CODE INTAGRATED WITH CONSTANTS
+    // NOTHING SPECIAL, JUST A LED CODE INTAGRATED WITH CONSTANTS
     public StatusLED() {
         try {
             if (EnabledParts.IS_LED_ENABLED) {
@@ -36,6 +37,11 @@ public class StatusLED extends SubsystemBase {
         pattern.applyTo(buffer);
         led.setData(buffer);
         led.start();
+    }
+
+    public Color setBrightness(Color currentColor, double brightness) {
+        return new Color(currentColor.red * brightness, currentColor.green * brightness,
+                currentColor.blue * brightness);
     }
 
     public void setProcess() {
@@ -86,9 +92,9 @@ public class StatusLED extends SubsystemBase {
                 setFocus();
             } else if (OI.IS_INTAKING) {
                 setIntake();
-            } else if(OI.IS_ALGEA_INTAKING){
+            } else if (OI.IS_ALGEA_INTAKING) {
                 setAlgeaIntake();
-            } else if(OI.IS_FOCUSED){
+            } else if (OI.IS_FOCUSED) {
                 setFocus();
             } else {
                 setDefault();
