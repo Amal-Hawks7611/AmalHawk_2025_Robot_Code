@@ -187,6 +187,7 @@ public final class Constants {
         public static boolean IS_ALGEA_INTAKING = false;
         public static boolean IS_LED_CYCLING = false;
         public static boolean IS_LED_MORSE_SHOWING = false;
-        public static boolean IS_FOCUSED = false;
+        public static boolean IS_YFOCUSED = false;
+        public static boolean IS_XFOCUSED = false;
     }
 }

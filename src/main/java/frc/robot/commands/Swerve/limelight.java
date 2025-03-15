@@ -25,10 +25,16 @@ public class limelight extends Command {
     @Override
     public void execute() {
         System.out.println(LimelightHelpers.getTY("limelight"));
-        if (OI.IS_FOCUSED) {
+        System.out.println(LimelightHelpers.getTX("limelight"));
+        if (OI.IS_YFOCUSED) {
             this.end(false);
         } else {
             swerveSubsystem.drive(new Translation2d(0, Constants.LIMELIGHT_KP), 0, false);
+        }
+        if (OI.IS_XFOCUSED) {
+            this.end(false);
+        }else{
+            swerveSubsystem.drive(new translation2d(Constants.LIMELIGHT_KP, 0), 0, false);
         }
     }
 
