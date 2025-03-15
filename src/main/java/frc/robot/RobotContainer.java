@@ -224,7 +224,8 @@ public class RobotContainer {
 
         limelight_align = new limelight(drivebase);
         limelight_stop = new InstantCommand(() -> {
-            OI.IS_FOCUSED = true;
+            OI.IS_YFOCUSED = true;
+            OI.IS_XFOCUSED = true;
         });
 
         // Commands are fully autonomous for driver comfort and easy autonomous
