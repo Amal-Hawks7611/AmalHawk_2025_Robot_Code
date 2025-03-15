@@ -51,9 +51,9 @@ public class Robot extends TimedRobot {
     if (!RobotBase.isSimulation()) {
       if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue) {
         LedSubsystem.BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,
-            m_robotContainer.ledSubsystem.setBrightness(Color.kBlue, 0.69),
-            m_robotContainer.ledSubsystem.setBrightness(Color.kDarkBlue, 0.69),
-            m_robotContainer.ledSubsystem.setBrightness(Color.kPurple, 0.69));
+            m_robotContainer.ledSubsystem.setBrightness(Color.kBlue, 0.69*0.8),
+            m_robotContainer.ledSubsystem.setBrightness(Color.kDarkBlue, 0.69*0.8),
+            m_robotContainer.ledSubsystem.setBrightness(Color.kPurple, 0.69*0.8));
       }
     }
     // Limelight Local Port Brute Because Of FMS Connections

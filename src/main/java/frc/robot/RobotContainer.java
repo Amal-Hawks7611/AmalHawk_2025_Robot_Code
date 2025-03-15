@@ -318,7 +318,7 @@ public class RobotContainer {
             Controlls.CORAL_GERIAL.onTrue(c_Gerial);
 
             Controlls.LIMELIGHT_FOCUS.onTrue(limelight_align);
-            Controlls.LIMELIGHT_STOP.onChange(limelight_stop);
+            Controlls.LIMELIGHT_STOP.whileTrue(limelight_stop);
         }
     }
 

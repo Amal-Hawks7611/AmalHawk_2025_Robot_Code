@@ -42,13 +42,13 @@ public final class Constants {
         public static int LED_PWM_PORT = 0;
         public static int LED_LENGTH = 180;
         public static int BREATHE_MAGNITUDE = 5;
-        public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(setBrightness(Color.kPurple, 0.69));
-        public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(setBrightness(Color.kGreen, 0.69));
-        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kWhite, 0.69));
-        public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kAqua, 0.69));
+        public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(setBrightness(Color.kPurple, 0.69*0.8));
+        public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(setBrightness(Color.kGreen, 0.69*0.8));
+        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kWhite, 0.69*0.8));
+        public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kAqua, 0.69*0.8));
         public static LEDPattern BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,
-                setBrightness(Color.kOrangeRed, 0.69), setBrightness(Color.kRed, 0.69),
-                setBrightness(Color.kDarkRed, 0.69));
+                setBrightness(Color.kOrangeRed, 0.69*0.8), setBrightness(Color.kRed, 0.69*0.8),
+                setBrightness(Color.kDarkRed, 0.69*0.8));
     }
 
     public static final class RotarySwitch {
@@ -65,7 +65,7 @@ public final class Constants {
         public static double ELEVATOR_STATIC_VOLTS = 0.3;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = 34;
+        public static double ELEVATOR_END_VALUE = 35;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
         public static double ELEVATOR_TOZERO_VALUE = 0.2;
