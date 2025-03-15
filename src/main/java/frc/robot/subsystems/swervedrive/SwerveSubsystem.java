@@ -261,6 +261,8 @@ public class SwerveSubsystem extends SubsystemBase {
     // Define the target distance
     double targetDistance = distanceInMeters; // 50 cm = 0.5 meters
 
+    //Translation2d startingPosition = swerveDrive.getPose().getTranslation();
+
     return run(() -> {
         // Track the current position of the robot
         //Translation2d currentPosition = swerveDrive.getPose().getTranslation();
