@@ -131,10 +131,10 @@ public class RobotContainer {
             .allianceRelativeControl(false);
 
     SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-            () -> driverXbox.getLeftY() * 0.7,
-            () -> driverXbox.getLeftX() * 0.7)
+            () -> driverXbox.getLeftY() * 0.6,
+            () -> driverXbox.getLeftX() * 0.6)
             .withControllerRotationAxis(() -> -driverXbox.getRawAxis(
-                    2) * 0.3)
+                    2) * 0.2)
             .deadband(OperatorConstants.DEADBAND)
             .scaleTranslation(0.8)
             .allianceRelativeControl(true);
@@ -334,7 +334,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An example command will be run in autonomous
-        return drivebase.getAutonomousCommand("New Auto");
+        return autoChooser.getSelected();
     }
 
     public void setMotorBrake(boolean brake) {

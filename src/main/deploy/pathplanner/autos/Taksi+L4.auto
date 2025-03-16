@@ -11,6 +11,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "limelight"
+          }
+        },
+        {
           "type": "sequential",
           "data": {
             "commands": [

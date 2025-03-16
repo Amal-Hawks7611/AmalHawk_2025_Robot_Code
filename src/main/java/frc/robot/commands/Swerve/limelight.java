@@ -3,7 +3,6 @@ package frc.robot.commands.Swerve;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.LimelightHelpers;
 import frc.robot.Constants.OI;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 
@@ -24,7 +23,6 @@ public class limelight extends Command {
 
     @Override
     public void execute() {
-        System.out.println(LimelightHelpers.getTY("limelight"));
         if (OI.IS_FOCUSED) {
             this.end(false);
         } else {

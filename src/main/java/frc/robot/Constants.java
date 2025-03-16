@@ -83,7 +83,7 @@ public final class Constants {
         public static double INTAKE_REVERSE_SPEED = 0.3;
         public static int INTAKE_LEADER_MOTOR_PORT = 3;
         public static double INTAKE_SPEED = 0.13;
-        public static double OUTTAKE_SPEED = 0.58;
+        public static double OUTTAKE_SPEED = 0.6169;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
     }
@@ -93,7 +93,7 @@ public final class Constants {
         public static int ALGEA_LEADER_MOTOR_PORT = 3; // Shoud Be Same With Intake
         public static double INTAKE_SPEED = 0.2;
         public static double OUTTAKE_SPEED = 0.4;
-        public static double INTAKE_TIME = 0.5;
+        public static double INTAKE_TIME = 15;
         public static double OUTTAKE_TIME = 1;
         public static double ALGEA_STATIC_VOLTAGES = 0.050;
     }
