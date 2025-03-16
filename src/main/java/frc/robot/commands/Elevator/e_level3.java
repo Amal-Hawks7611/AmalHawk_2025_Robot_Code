@@ -18,7 +18,7 @@ public class e_level3 extends Command {
     public void initialize() {
         System.out.println("Elevator Is Moving To The Level3");
         OI.IS_PROCESSING = true;
-        Intake.OUTTAKE_SPEED = 0.45;
+        Intake.OUTTAKE_SPEED = 0.40;
 
     }
 

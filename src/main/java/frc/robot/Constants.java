@@ -17,7 +17,7 @@ public final class Constants {
     public static final Matter CHASSIS = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
     public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
     public static final double MAX_SPEED = 3;
-    public static final double LIMELIGHT_KP = 0.1;
+    public static final double LIMELIGHT_KP = 0.05;
     public static final double LIMELIGHT_TX = 12;
 
     public static Color setBrightness(Color currentColor, double brightness) {
@@ -65,14 +65,14 @@ public final class Constants {
         public static double ELEVATOR_STATIC_VOLTS = 0.3;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.15;
         public static double ELEVATOR_START_VALUE = 0; // Generally True
-        public static double ELEVATOR_END_VALUE = 35;
+        public static double ELEVATOR_END_VALUE = 34.5;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
         public static double ELEVATOR_TOZERO_VALUE = 0.2;
         public static double ELEVATOR_L1_VALUE = 4.25;
         public static double ELEVATOR_L2_VALUE = 8.20;
         public static double ELEVATOR_L3_VALUE = 20.31;
-        public static double ELEVATOR_L4_VALUE = 34;
+        public static double ELEVATOR_L4_VALUE = 34.5;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
         public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 4.5;
 
@@ -111,7 +111,7 @@ public final class Constants {
         public static double INTAKE_ALGEA_VALUE = 24.2;
         public static double INTAKE_REEFSCAPE_VALUE = 2.5;
         public static double INTAKE_CORAL_VALUE = 3.7;
-        public static double INTAKE_L4_VALUE = 2.9;
+        public static double INTAKE_L4_VALUE = 2;
     }
 
     public static class ObjectDetector {
@@ -144,6 +144,8 @@ public final class Constants {
 
         public static Trigger LIMELIGHT_FOCUS = DRIVER_CONTROLLER.button(11);
         public static Trigger LIMELIGHT_STOP = DRIVER_CONTROLLER.button(12);
+        public static Trigger ALGEA_INTAKE = DRIVER_CONTROLLER.button(13);
+        public static Trigger ALGEA_OUTTAKE = DRIVER_CONTROLLER.button(9);
     }
 
     public static class Test_Controlls {
@@ -187,7 +189,6 @@ public final class Constants {
         public static boolean IS_ALGEA_INTAKING = false;
         public static boolean IS_LED_CYCLING = false;
         public static boolean IS_LED_MORSE_SHOWING = false;
-        public static boolean IS_YFOCUSED = false;
-        public static boolean IS_XFOCUSED = false;
+        public static boolean IS_FOCUSED = false;
     }
 }

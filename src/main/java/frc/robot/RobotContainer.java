@@ -131,10 +131,10 @@ public class RobotContainer {
             .allianceRelativeControl(false);
 
     SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-            () -> driverXbox.getLeftY() * 0.8,
-            () -> driverXbox.getLeftX() * 0.8)
+            () -> driverXbox.getLeftY() * 0.7,
+            () -> driverXbox.getLeftX() * 0.7)
             .withControllerRotationAxis(() -> -driverXbox.getRawAxis(
-                    2) * 0.4)
+                    2) * 0.3)
             .deadband(OperatorConstants.DEADBAND)
             .scaleTranslation(0.8)
             .allianceRelativeControl(true);
@@ -188,6 +188,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("cIntake", new Intake(intakeSubsystem));
         NamedCommands.registerCommand("cOuttake", new Outtake(intakeSubsystem));
 
+        NamedCommands.registerCommand("limelight", new limelight(drivebase));
+
         // Definate Commands
         elevator_down = new e_movedown(elevatorSubsystem);
         elevator_up = new e_moveup(elevatorSubsystem);
@@ -224,8 +226,7 @@ public class RobotContainer {
 
         limelight_align = new limelight(drivebase);
         limelight_stop = new InstantCommand(() -> {
-            OI.IS_YFOCUSED = true;
-            OI.IS_XFOCUSED = true;
+            OI.IS_FOCUSED = true;
         });
 
         // Commands are fully autonomous for driver comfort and easy autonomous
@@ -320,6 +321,9 @@ public class RobotContainer {
 
             Controlls.LIMELIGHT_FOCUS.onTrue(limelight_align);
             Controlls.LIMELIGHT_STOP.whileTrue(limelight_stop);
+
+            Controlls.ALGEA_INTAKE.onTrue(a_intake);
+            Controlls.ALGEA_OUTTAKE.onTrue(a_outtake);
         }
     }
 
