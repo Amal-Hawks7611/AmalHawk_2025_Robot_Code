@@ -13,8 +13,8 @@ public class ObjectDetectorSubsystem extends SubsystemBase {
     }
 
     public boolean CheckObject() {
-        if(m_objectSensor.getValue() < 1000){return false;}
-        else{return true;}
+        if(m_objectSensor.getValue() < 1000){return true;}
+        else{return false;}
     }
 
     @Override
