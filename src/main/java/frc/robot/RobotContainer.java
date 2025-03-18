@@ -34,6 +34,7 @@ import frc.robot.commands.IntakeMover.*;
 import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
 import frc.robot.commands.Swerve.limelight;
+import frc.robot.commands.Swerve.miracsurpriz;
 import frc.robot.commands.Trajectory.AutonPath;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -89,6 +90,7 @@ public class RobotContainer {
     public final Gerial c_Gerial;
 
     public final LEDStateCycler led_cycle;
+    public final miracsurpriz miracsurpriz;
     public final LEDMorseScroller led_morse;
 
     public final Command intakeAlgeaMiddle;
@@ -222,6 +224,7 @@ public class RobotContainer {
         c_outtake = new Outtake(intakeSubsystem);
 
         led_cycle = new LEDStateCycler(ledSubsystem);
+        miracsurpriz = new miracsurpriz(led_cycle);
         led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
         limelight_align = new limelight(drivebase);
@@ -313,7 +316,7 @@ public class RobotContainer {
             Controlls.L2.onTrue(Coral_l2);
             Controlls.L1.onTrue(Coral_l1);
 
-            Controlls.LED_CYCLE.whileTrue(led_cycle);
+            Controlls.LED_CYCLE.whileTrue(miracsurpriz);
 
             Controlls.CORAL_INTAKE.onTrue(c_intake);
             Controlls.CORAL_GERIAL.onTrue(c_Gerial);
