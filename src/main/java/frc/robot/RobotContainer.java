@@ -265,8 +265,7 @@ public class RobotContainer {
                 new Outtake(intakeSubsystem));
         Coral_l4 = new SequentialCommandGroup(
                 new l4(intakeMoverSubsystem),
-                new e_level4(elevatorSubsystem),
-                new Outtake(intakeSubsystem));
+                new e_level4(elevatorSubsystem));
 
         // PathPlanner Autonomous Chooser
         autoChooser = AutoBuilder.buildAutoChooser();
