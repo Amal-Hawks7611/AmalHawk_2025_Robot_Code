@@ -72,9 +72,9 @@ public class miracsurpriz extends Command {
         double halfPeriod = period / 2.0;
         double modTime = elapsed % period;
         if (modTime < halfPeriod) {
-            motor.setControl(new com.ctre.phoenix6.controls.DutyCycleOut(0.03));
+            motor.setControl(new com.ctre.phoenix6.controls.DutyCycleOut(0.05));
         } else {
-            motor.setControl(new com.ctre.phoenix6.controls.DutyCycleOut(-0.03));
+            motor.setControl(new com.ctre.phoenix6.controls.DutyCycleOut(-0.05));
         }
     }
 
