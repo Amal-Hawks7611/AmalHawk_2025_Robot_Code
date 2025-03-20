@@ -316,7 +316,7 @@ public class RobotContainer {
             Controlls.L2.onTrue(Coral_l2);
             Controlls.L1.onTrue(Coral_l1);
 
-            Controlls.LED_CYCLE.whileTrue(miracsurpriz);
+            Controlls.LED_CYCLE.whileTrue(led_cycle);
 
             Controlls.CORAL_INTAKE.onTrue(c_intake);
             Controlls.CORAL_GERIAL.onTrue(c_Gerial);
