@@ -134,7 +134,7 @@ public final class Constants {
         public static Trigger L4 = DRIVER_CONTROLLER.triangle();
 
         public static Trigger GET_SOURCE = DRIVER_CONTROLLER.square();
-        public static Trigger LED_CYCLE = DRIVER_CONTROLLER.touchpad();
+        public static Trigger LED_CYCLE = DRIVER_CONTROLLER.button(14);
         public static Trigger ELEVATOR_TOZERO = DRIVER_CONTROLLER.povDown();
 
         public static int SWERVE_RIGHT_X_AXIS = 2;

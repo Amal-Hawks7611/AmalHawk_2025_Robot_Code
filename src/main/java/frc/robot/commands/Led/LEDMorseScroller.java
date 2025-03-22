@@ -18,8 +18,8 @@ public class LEDMorseScroller extends Command {
   private double lastShiftTime = 0.0;
   private int scrollOffset = 0;
   private final boolean[] paddedPattern;
-  private final Color backgroundColor = Color.kGreen;
-  private final Color symbolColor = Color.kRed;
+  private final Color backgroundColor = Color.kDarkBlue;
+  private final Color symbolColor = Color.kDarkRed;
 
   public LEDMorseScroller(StatusLED statusLED, int ledCount, String message) {
     this.statusLED = statusLED;
