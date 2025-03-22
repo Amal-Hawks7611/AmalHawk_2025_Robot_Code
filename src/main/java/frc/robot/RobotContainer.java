@@ -35,6 +35,7 @@ import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
 import frc.robot.commands.Swerve.limelight;
 import frc.robot.commands.Swerve.miracsurpriz;
+import frc.robot.commands.Swerve.righttest;
 import frc.robot.commands.Trajectory.AutonPath;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -104,6 +105,7 @@ public class RobotContainer {
 
     public final InstantCommand limelight_stop;
     public final limelight limelight_align;
+    public final righttest right_align;
 
     /**
      * Converts driver input into a field-relative ChassisSpeeds that is controlled
@@ -228,8 +230,10 @@ public class RobotContainer {
         led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
         limelight_align = new limelight(drivebase);
+        right_align = new righttest(drivebase, limelight_align);
         limelight_stop = new InstantCommand(() -> {
             OI.IS_FOCUSED = true;
+            right_align.end(false);
         });
 
         // Commands are fully autonomous for driver comfort and easy autonomous
@@ -321,7 +325,7 @@ public class RobotContainer {
             Controlls.CORAL_INTAKE.onTrue(c_intake);
             Controlls.CORAL_GERIAL.onTrue(c_Gerial);
 
-            Controlls.LIMELIGHT_FOCUS.onTrue(limelight_align);
+            Controlls.LIMELIGHT_FOCUS.onTrue(right_align);
             Controlls.LIMELIGHT_STOP.whileTrue(limelight_stop);
 
             Controlls.ALGEA_INTAKE.onTrue(a_intake);
