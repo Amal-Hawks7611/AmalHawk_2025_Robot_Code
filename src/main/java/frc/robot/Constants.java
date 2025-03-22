@@ -7,7 +7,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.LEDPattern.GradientType;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import swervelib.math.Matter;
 
@@ -119,21 +119,21 @@ public final class Constants {
     }
 
     public static class Controlls {
-        public static CommandXboxController DRIVER_CONTROLLER = new CommandXboxController(OI.DRIVER_CONTROLLER_PORT);
+        public static CommandPS5Controller DRIVER_CONTROLLER = new CommandPS5Controller(OI.DRIVER_CONTROLLER_PORT);
 
         // For TEU
-        public static Trigger ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.button(8);
-        public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.button(7);
-        public static Trigger INTAKE_MOVE_UP = DRIVER_CONTROLLER.button(6);
-        public static Trigger INTAKE_MOVE_DOWN = DRIVER_CONTROLLER.button(5);
+        public static Trigger ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.R2();
+        public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.L2();
+        public static Trigger INTAKE_MOVE_UP = DRIVER_CONTROLLER.R1();
+        public static Trigger INTAKE_MOVE_DOWN = DRIVER_CONTROLLER.L1();
 
-        public static Trigger L1 = DRIVER_CONTROLLER.button(10);
-        public static Trigger L2 = DRIVER_CONTROLLER.x();
-        public static Trigger L3 = DRIVER_CONTROLLER.b();
-        public static Trigger L4 = DRIVER_CONTROLLER.y();
+        public static Trigger L1 = DRIVER_CONTROLLER.options();
+        public static Trigger L2 = DRIVER_CONTROLLER.circle();
+        public static Trigger L3 = DRIVER_CONTROLLER.cross();
+        public static Trigger L4 = DRIVER_CONTROLLER.triangle();
 
-        public static Trigger GET_SOURCE = DRIVER_CONTROLLER.a();
-        public static Trigger LED_CYCLE = DRIVER_CONTROLLER.button(14);
+        public static Trigger GET_SOURCE = DRIVER_CONTROLLER.square();
+        public static Trigger LED_CYCLE = DRIVER_CONTROLLER.touchpad();
         public static Trigger ELEVATOR_TOZERO = DRIVER_CONTROLLER.povDown();
 
         public static int SWERVE_RIGHT_X_AXIS = 2;
@@ -142,24 +142,24 @@ public final class Constants {
         public static Trigger CORAL_INTAKE = DRIVER_CONTROLLER.povLeft();
         public static Trigger CORAL_GERIAL = DRIVER_CONTROLLER.povRight();
 
-        public static Trigger LIMELIGHT_FOCUS = DRIVER_CONTROLLER.button(11);
-        public static Trigger LIMELIGHT_STOP = DRIVER_CONTROLLER.button(12);
-        public static Trigger ALGEA_INTAKE = DRIVER_CONTROLLER.button(13);
-        public static Trigger ALGEA_OUTTAKE = DRIVER_CONTROLLER.button(9);
+        public static Trigger LIMELIGHT_FOCUS = DRIVER_CONTROLLER.L3();
+        public static Trigger LIMELIGHT_STOP = DRIVER_CONTROLLER.R3();
+        public static Trigger ALGEA_INTAKE = DRIVER_CONTROLLER.PS();
+        public static Trigger ALGEA_OUTTAKE = DRIVER_CONTROLLER.create();
     }
 
     public static class Test_Controlls {
-        public static Trigger T_ELEVATOR_MANUAL_UP = Controlls.DRIVER_CONTROLLER.button(8);
-        public static Trigger T_ELEVATOR_MANUAL_DOWN = Controlls.DRIVER_CONTROLLER.button(7);
-        public static Trigger T_INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.button(6);
-        public static Trigger T_INTAKE_MOVE_DOWN = Controlls.DRIVER_CONTROLLER.button(5);
-        public static Trigger T_ELEVATOR_ZERO = Controlls.DRIVER_CONTROLLER.button(2);
+        public static Trigger T_ELEVATOR_MANUAL_UP = Controlls.DRIVER_CONTROLLER.R2();
+        public static Trigger T_ELEVATOR_MANUAL_DOWN = Controlls.DRIVER_CONTROLLER.L2();
+        public static Trigger T_INTAKE_MOVE_UP = Controlls.DRIVER_CONTROLLER.R1();
+        public static Trigger T_INTAKE_MOVE_DOWN = Controlls.DRIVER_CONTROLLER.L1();
+        public static Trigger T_ELEVATOR_ZERO = Controlls.DRIVER_CONTROLLER.povDown();
         public static Trigger T_ALGEA_INTAKE = Controlls.DRIVER_CONTROLLER.povLeft();
-        public static Trigger T_ALGEA_OUTTAKE = Controlls.DRIVER_CONTROLLER.button(3);
-        public static Trigger T_CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.button(1);
+        public static Trigger T_ALGEA_OUTTAKE = Controlls.DRIVER_CONTROLLER.circle();
+        public static Trigger T_CORAL_INTAKE = Controlls.DRIVER_CONTROLLER.square();
         public static Trigger T_CORAL_OUTTAKE = Controlls.DRIVER_CONTROLLER.povRight();
-        public static Trigger T_LED_CYCLE = Controlls.DRIVER_CONTROLLER.button(4);
-        public static Trigger T_LED_MORSE = Controlls.DRIVER_CONTROLLER.button(9);
+        public static Trigger T_LED_CYCLE = Controlls.DRIVER_CONTROLLER.triangle();
+        public static Trigger T_LED_MORSE = Controlls.DRIVER_CONTROLLER.options();
         public static Trigger T_INTAKE_MOVE_L1 = Controlls.DRIVER_CONTROLLER.povUp();
     }
 

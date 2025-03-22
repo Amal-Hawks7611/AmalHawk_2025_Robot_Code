@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -95,6 +96,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Controlls.DRIVER_CONTROLLER.setRumble(GenericHID.RumbleType.kRightRumble, 1.0);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

@@ -40,7 +40,7 @@ import frc.robot.commands.Trajectory.AutonPath;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import frc.robot.Constants.OperatorConstants;
 import java.io.File;
 import swervelib.SwerveInputStream;
@@ -58,7 +58,7 @@ public class RobotContainer {
     public final StatusLED ledSubsystem = new StatusLED();
     public final RotarySwitchSubsystem rotarySwitchSubsystem = new RotarySwitchSubsystem();
     public final AutonPath otonom_path = new AutonPath();
-    public CommandXboxController driverXbox = Controlls.DRIVER_CONTROLLER;
+    public CommandPS5Controller driverPs5 = Controlls.DRIVER_CONTROLLER;
     public final e_movedown elevator_down;
     public final e_moveup elevator_up;
     public final e_tozeroo e_tozero;
@@ -110,9 +110,9 @@ public class RobotContainer {
      * by angular velocity.
      */
     SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
-            () -> driverXbox.getLeftY() * -1 * 0.8,
-            () -> driverXbox.getLeftX() * -1 * 0.8)
-            .withControllerRotationAxis(driverXbox::getRightX)
+            () -> driverPs5.getLeftY() * -1 * 0.8,
+            () -> driverPs5.getLeftX() * -1 * 0.8)
+            .withControllerRotationAxis(driverPs5::getRightX)
             .deadband(OperatorConstants.DEADBAND)
             .scaleTranslation(0.8)
             .allianceRelativeControl(true);
@@ -121,8 +121,8 @@ public class RobotContainer {
      * Clone's the angular velocity input stream and converts it to a fieldRelative
      * input stream.
      */
-    SwerveInputStream driveDirectAngle = driveAngularVelocity.copy().withControllerHeadingAxis(driverXbox::getRightX,
-            driverXbox::getRightY)
+    SwerveInputStream driveDirectAngle = driveAngularVelocity.copy().withControllerHeadingAxis(driverPs5::getRightX,
+            driverPs5::getRightY)
             .headingWhile(true);
 
     /**
@@ -133,9 +133,9 @@ public class RobotContainer {
             .allianceRelativeControl(false);
 
     SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-            () -> driverXbox.getLeftY() * 0.6,
-            () -> driverXbox.getLeftX() * 0.6)
-            .withControllerRotationAxis(() -> -driverXbox.getRawAxis(
+            () -> -driverPs5.getLeftY() * 0.6,
+            () -> -driverPs5.getLeftX() * 0.6)
+            .withControllerRotationAxis(() -> -driverPs5.getRawAxis(
                     2) * 0.2)
             .deadband(OperatorConstants.DEADBAND)
             .scaleTranslation(0.8)
@@ -143,14 +143,14 @@ public class RobotContainer {
     // Derive the heading axis with math!
     SwerveInputStream driveDirectAngleKeyboard = driveAngularVelocityKeyboard.copy()
             .withControllerHeadingAxis(() -> Math.sin(
-                    driverXbox.getRawAxis(
+                    driverPs5.getRawAxis(
                             2) *
                             Math.PI)
                     *
                     (Math.PI *
                             2),
                     () -> Math.cos(
-                            driverXbox.getRawAxis(
+                            driverPs5.getRawAxis(
                                     2) *
                                     Math.PI)
                             *
@@ -316,7 +316,7 @@ public class RobotContainer {
             Controlls.L2.onTrue(Coral_l2);
             Controlls.L1.onTrue(Coral_l1);
 
-            Controlls.LED_CYCLE.whileTrue(led_cycle);
+            Controlls.LED_CYCLE.toggleOnTrue(led_cycle);
 
             Controlls.CORAL_INTAKE.onTrue(c_intake);
             Controlls.CORAL_GERIAL.onTrue(c_Gerial);
