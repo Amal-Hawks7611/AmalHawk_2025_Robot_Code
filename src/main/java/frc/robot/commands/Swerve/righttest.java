@@ -39,7 +39,7 @@ public class righttest extends Command {
         }
         if (focus) {
             swerveSubsystem.drive(new Translation2d(0, -Constants.LIMELIGHT_KP), 0, false);
-            if (timer.hasElapsed(1.9533169)) {
+            if (timer.hasElapsed(Constants.LIMELIGHT_RIGHT_TIME)) {
                 timer.stop();
                 this.end(false);
             }
