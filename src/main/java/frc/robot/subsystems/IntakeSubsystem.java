@@ -83,7 +83,7 @@ public class IntakeSubsystem extends SubsystemBase {
     @Override
     public void periodic(){
         if(!OI.IS_INTAKING && container.objectDetector.CheckObject()){leaderMotor.set(4);}
-        if(container.objectDetector.CheckObject()){Controlls.OPERATOR_CONTROLLER.setRumble(RumbleType.kBothRumble, 1);}
+        if(container.objectDetector.CheckObject()){Controlls.OPERATOR_CONTROLLER.setRumble(RumbleType.kBothRumble, 0.7);}
         else{Controlls.OPERATOR_CONTROLLER.setRumble(RumbleType.kBothRumble, 0);}
         SmartDashboard.putBoolean("IsCoralIntaking", OI.IS_INTAKING);
         SmartDashboard.putNumber("Intake Leader Motor Value", getLeaderMotorEncoder());

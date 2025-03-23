@@ -42,6 +42,7 @@ import frc.robot.commands.Trajectory.AutonPath;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import frc.robot.Constants.OperatorConstants;
 import java.io.File;
@@ -243,8 +244,9 @@ public class RobotContainer {
         // integration
         intakeAlgeaMiddle = new SequentialCommandGroup(
                 new algea(intakeMoverSubsystem),
-                new e_algea(elevatorSubsystem, true),
-                new AlgeaIntake(algeaIntakeSubsystem));
+                new ParallelCommandGroup(
+                        new e_algea(elevatorSubsystem, true),
+                        new AlgeaIntake(algeaIntakeSubsystem)));
 
         intakeAlgeaDown = new SequentialCommandGroup(
                 new algea(intakeMoverSubsystem),
@@ -258,8 +260,7 @@ public class RobotContainer {
 
         AlgeaProcessor = new SequentialCommandGroup(
                 new processor(intakeMoverSubsystem),
-                new e_processor(elevatorSubsystem),
-                new AlgeaOuttake(algeaIntakeSubsystem));
+                new e_processor(elevatorSubsystem));
 
         Coral_l1 = new SequentialCommandGroup(
                 new reefscape(intakeMoverSubsystem),

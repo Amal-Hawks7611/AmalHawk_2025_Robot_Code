@@ -110,7 +110,7 @@ public final class Constants {
 
         public static double INTAKE_PROCESSOR_VALUE = 24.2;
         public static double INTAKE_SOURCE_VALUE = 0;
-        public static double INTAKE_ALGEA_VALUE = 24.2;
+        public static double INTAKE_ALGEA_VALUE = 17.5;
         public static double INTAKE_REEFSCAPE_VALUE = 2.5;
         public static double INTAKE_CORAL_VALUE = 3.7;
         public static double INTAKE_L4_VALUE = 4.07;
@@ -152,7 +152,7 @@ public final class Constants {
         //OPERATOR
         public static Trigger CORAL_INTAKE = OPERATOR_CONTROLLER.povLeft();
         public static Trigger CORAL_GERIAL = OPERATOR_CONTROLLER.povRight();
-        public static Trigger ADMIN = OPERATOR_CONTROLLER.button(11);
+        public static Trigger ADMIN = OPERATOR_CONTROLLER.button(9);
     }
 
     public static class Test_Controlls {
