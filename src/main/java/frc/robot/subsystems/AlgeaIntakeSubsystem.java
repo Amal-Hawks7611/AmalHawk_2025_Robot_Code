@@ -13,6 +13,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 //SAME WITH THE INTAKE. JUST ADDED FOR SPEED CONTROLLING.
 //I USED TIMER FOR ALGEA. BEACUSE WE CAN'T DETECT ALGEA WITH COLOR SENSOR!!!
+//USED STATIC VOLTAGE AND IT'S INCREASED WHEN ALGEA INTAKING. COOL AF.
 public class AlgeaIntakeSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     private StatusSignal<Angle> leaderMotorPosition;

@@ -48,6 +48,8 @@ import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 
+
+//YAGSL WITH A WORKING PATHPLANNER AND MORE STABILIZED DRIVE(SEEMS IMPOSSIBLE)
 public class SwerveSubsystem extends SubsystemBase {
   private final SwerveDrive swerveDrive;
 

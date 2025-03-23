@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.LEDPattern.GradientType;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import swervelib.math.Matter;
 
@@ -69,7 +70,7 @@ public final class Constants {
         public static double ELEVATOR_END_VALUE = 34.5;
         public static double ELEVATOR_SOURCE_VALUE = 0;
         public static double ELEVATOR_PROCESSOR_VALUE = 2;
-        public static double ELEVATOR_TOZERO_VALUE = 0.2;
+        public static double ELEVATOR_TOZERO_VALUE = 0;
         public static double ELEVATOR_L1_VALUE = 4.25;
         public static double ELEVATOR_L2_VALUE = 8.20;
         public static double ELEVATOR_L3_VALUE = 20.31;
@@ -121,7 +122,7 @@ public final class Constants {
 
     public static class Controlls {
         public static CommandPS5Controller DRIVER_CONTROLLER = new CommandPS5Controller(OI.DRIVER_CONTROLLER_PORT);
-
+        public static CommandXboxController OPERATOR_CONTROLLER = new CommandXboxController(OI.OPERATOR_CONTROLLER_PORT);
         // For TEU
         public static Trigger ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.R2();
         public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.L2();
@@ -140,13 +141,18 @@ public final class Constants {
         public static int SWERVE_RIGHT_X_AXIS = 2;
         public static Trigger RESET_GYRO = DRIVER_CONTROLLER.povUp();
 
-        public static Trigger CORAL_INTAKE = DRIVER_CONTROLLER.povLeft();
-        public static Trigger CORAL_GERIAL = DRIVER_CONTROLLER.povRight();
-
         public static Trigger LIMELIGHT_FOCUS = DRIVER_CONTROLLER.L3();
         public static Trigger LIMELIGHT_STOP = DRIVER_CONTROLLER.R3();
-        public static Trigger ALGEA_INTAKE = DRIVER_CONTROLLER.PS();
-        public static Trigger ALGEA_OUTTAKE = DRIVER_CONTROLLER.create();
+
+        public static Trigger ALGEA_INTAKE = DRIVER_CONTROLLER.povLeft();
+        public static Trigger ALGEA_OUTTAKE = DRIVER_CONTROLLER.povRight();
+        public static Trigger ALGEA_PROCESSOR = DRIVER_CONTROLLER.PS();
+        public static Trigger ALGEA_REMOVAL = DRIVER_CONTROLLER.create();
+
+        //OPERATOR
+        public static Trigger CORAL_INTAKE = OPERATOR_CONTROLLER.povLeft();
+        public static Trigger CORAL_GERIAL = OPERATOR_CONTROLLER.povRight();
+        public static Trigger ADMIN = OPERATOR_CONTROLLER.button(11);
     }
 
     public static class Test_Controlls {
@@ -179,6 +185,7 @@ public final class Constants {
     public static final class OI {
         // General Robot Constants
         public static int DRIVER_CONTROLLER_PORT = 0;
+        public static int OPERATOR_CONTROLLER_PORT = 1;
         public static String SWERVE_CANBUS_STRING = "arch";
         public static String RIO_CANBUS_STRING = "rio";
         public static boolean IS_TEST = false;

@@ -19,6 +19,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.Controlls;
 import frc.robot.Constants.Test_Controlls;
@@ -85,6 +86,7 @@ public class RobotContainer {
     public final AlgeaOuttake a_outtake;
 
     public final Command zerogyro;
+    public final Command admin;
 
     public final Intake c_intake;
     public final Outtake c_outtake;
@@ -221,6 +223,7 @@ public class RobotContainer {
         c_Gerial = new Gerial(intakeSubsystem);
 
         zerogyro = new InstantCommand(() -> drivebase.zeroGyro());
+        admin = new InstantCommand(() -> CommandScheduler.getInstance().cancelAll());
 
         c_intake = new Intake(intakeSubsystem);
         c_outtake = new Outtake(intakeSubsystem);
@@ -315,6 +318,8 @@ public class RobotContainer {
             Controlls.GET_SOURCE.onTrue(getSource);
 
             Controlls.RESET_GYRO.onChange(zerogyro);
+            Controlls.ADMIN.whileTrue(admin);
+
             Controlls.L4.onTrue(Coral_l4);
             Controlls.L3.onTrue(Coral_l3);
             Controlls.L2.onTrue(Coral_l2);
@@ -330,6 +335,8 @@ public class RobotContainer {
 
             Controlls.ALGEA_INTAKE.onTrue(a_intake);
             Controlls.ALGEA_OUTTAKE.onTrue(a_outtake);
+            Controlls.ALGEA_PROCESSOR.onTrue(AlgeaProcessor);
+            Controlls.ALGEA_REMOVAL.onTrue(intakeAlgeaMiddle);
         }
     }
 

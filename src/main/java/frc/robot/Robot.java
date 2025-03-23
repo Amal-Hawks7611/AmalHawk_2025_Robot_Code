@@ -6,7 +6,6 @@ package frc.robot;
 
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.LEDPattern;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -36,6 +35,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
+    //LED BREATHE CHANGES BY SWERVE SPEED
     if (Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.3 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.6)
       LedSubsystem.BREATHE_MAGNITUDE = 3;
     if (Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.6 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.9) {
@@ -49,6 +50,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_robotContainer.drivebase.zeroGyro();
+
+    //LED COLOR CHANGES BY ALLIANCE
     if (!RobotBase.isSimulation()) {
       if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue) {
         LedSubsystem.BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,
@@ -96,7 +99,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    Controlls.DRIVER_CONTROLLER.setRumble(GenericHID.RumbleType.kRightRumble, 1.0);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

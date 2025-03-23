@@ -14,6 +14,7 @@ import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 //INTAKE MOVER SUBSYSTEM INTAGRATED WITH OCALPID, IT WILL BE JUST GONE TO THE SPECIFIC ENCODER VALUE OR MOVED MANUALLY.
+//STATIC VOLTAGE IS HERE TOO. IT INCREASES WHEN IT DETECTS CORAL!
 public class IntakeMoverSubsystem extends SubsystemBase {
     public TalonFX leaderMotor;
     private StatusSignal<Angle> leaderMotorPosition;

@@ -17,6 +17,7 @@ public class e_tozeroo extends Command {
     public void initialize() {
         System.out.println("Elevator Is Moving To The Zero");
         OI.IS_PROCESSING = true;
+        Elevator.ELEVATOR_END_VALUE+=100;
 
     }
 
@@ -36,6 +37,7 @@ public class e_tozeroo extends Command {
         elevatorSubsystem.followerMotor.stopMotor();
         OI.IS_PID_ENDED = false;
         OI.IS_PROCESSING = false;
+        Elevator.ELEVATOR_END_VALUE-=100;
     }
 
     @Override
