@@ -75,7 +75,7 @@ public final class Constants {
         public static double ELEVATOR_L1_VALUE = 4.25;
         public static double ELEVATOR_L2_VALUE = 8.20;
         public static double ELEVATOR_L3_VALUE = 20.31;
-        public static double ELEVATOR_L4_VALUE = 34;
+        public static double ELEVATOR_L4_VALUE = 34.5;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
         public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 18.3;
 

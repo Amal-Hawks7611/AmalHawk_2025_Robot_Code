@@ -86,7 +86,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    Elevator.ELEVATOR_L4_VALUE = 34.5;
     IntakeMover.INTAKE_L4_VALUE = 5.1;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     m_robotContainer.setMotorBrake(true);
@@ -102,7 +101,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    Elevator.ELEVATOR_L4_VALUE = 34;
     IntakeMover.INTAKE_L4_VALUE = 2.9;
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
