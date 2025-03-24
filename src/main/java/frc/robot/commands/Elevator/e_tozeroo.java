@@ -7,9 +7,11 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 public class e_tozeroo extends Command {
     public final ElevatorSubsystem elevatorSubsystem;
+    public final boolean isalg;
 
-    public e_tozeroo(ElevatorSubsystem elevatroSubsystem) {
+    public e_tozeroo(ElevatorSubsystem elevatroSubsystem, boolean isalg) {
         this.elevatorSubsystem = elevatroSubsystem;
+        this.isalg = isalg;
         addRequirements(elevatorSubsystem);
     }
 
@@ -24,7 +26,8 @@ public class e_tozeroo extends Command {
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_TOZERO_VALUE);
+            if(isalg){elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGZERO_VALUE);}
+            else{elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_TOZERO_VALUE);}     
         }
         else{
             this.end(false);

@@ -69,14 +69,15 @@ public final class Constants {
         public static double ELEVATOR_START_VALUE = 0; // Generally True
         public static double ELEVATOR_END_VALUE = 34.5;
         public static double ELEVATOR_SOURCE_VALUE = 0;
-        public static double ELEVATOR_PROCESSOR_VALUE = 2;
+        public static double ELEVATOR_PROCESSOR_VALUE = 1.5;
         public static double ELEVATOR_TOZERO_VALUE = 0;
+        public static double ELEVATOR_ALGZERO_VALUE = 3;
         public static double ELEVATOR_L1_VALUE = 4.25;
         public static double ELEVATOR_L2_VALUE = 8.20;
         public static double ELEVATOR_L3_VALUE = 20.31;
-        public static double ELEVATOR_L4_VALUE = 34.5;
+        public static double ELEVATOR_L4_VALUE = 34;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
-        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 4.5;
+        public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 18.3;
 
     }
 
@@ -85,7 +86,7 @@ public final class Constants {
         public static double INTAKE_REVERSE_SPEED = 0.3;
         public static int INTAKE_LEADER_MOTOR_PORT = 3;
         public static double INTAKE_SPEED = 0.13;
-        public static double OUTTAKE_SPEED = 0.6169;
+        public static double OUTTAKE_SPEED = 0.58;
         public static double INTAKE_TIME = 0.5;
         public static double OUTTAKE_TIME = 1;
     }
@@ -108,12 +109,12 @@ public final class Constants {
         public static double IM_ALGEA_STATIC = 0.25;
         public static double IM_CORAL_STATIC = 0.05;
 
-        public static double INTAKE_PROCESSOR_VALUE = 24.2;
+        public static double INTAKE_PROCESSOR_VALUE = 25.5;
         public static double INTAKE_SOURCE_VALUE = 0;
         public static double INTAKE_ALGEA_VALUE = 17.5;
         public static double INTAKE_REEFSCAPE_VALUE = 2.5;
         public static double INTAKE_CORAL_VALUE = 3.7;
-        public static double INTAKE_L4_VALUE = 4.07;
+        public static double INTAKE_L4_VALUE = 2.9;
     }
 
     public static class ObjectDetector {

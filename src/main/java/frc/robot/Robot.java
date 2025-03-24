@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.Controlls;
 import frc.robot.Constants.Elevator;
+import frc.robot.Constants.IntakeMover;
 import frc.robot.Constants.LedSubsystem;
 import frc.robot.Constants.OI;
 
@@ -85,6 +86,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    Elevator.ELEVATOR_L4_VALUE = 34.5;
+    IntakeMover.INTAKE_L4_VALUE = 5.1;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     m_robotContainer.setMotorBrake(true);
     if (m_autonomousCommand != null) {
@@ -99,6 +102,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Elevator.ELEVATOR_L4_VALUE = 34;
+    IntakeMover.INTAKE_L4_VALUE = 2.9;
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

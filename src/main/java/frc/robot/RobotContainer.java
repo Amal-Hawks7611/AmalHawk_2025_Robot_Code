@@ -138,8 +138,8 @@ public class RobotContainer {
             .allianceRelativeControl(false);
 
     SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-            () -> -driverPs5.getLeftY() * 0.6,
-            () -> -driverPs5.getLeftX() * 0.6)
+            () -> driverPs5.getLeftY() * 0.6,
+            () -> driverPs5.getLeftX() * 0.6)
             .withControllerRotationAxis(() -> -driverPs5.getRawAxis(
                     2) * 0.2)
             .deadband(OperatorConstants.DEADBAND)
@@ -176,7 +176,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("eAlgeaMiddle", new e_algea(elevatorSubsystem, true));
         NamedCommands.registerCommand("eAlgeaDown", new e_algea(elevatorSubsystem, false));
         NamedCommands.registerCommand("eSource", new e_source(elevatorSubsystem));
-        NamedCommands.registerCommand("eToZero", new e_tozeroo(elevatorSubsystem));
+        NamedCommands.registerCommand("eToZero", new e_tozeroo(elevatorSubsystem, false));
         NamedCommands.registerCommand("eL1", new e_level1(elevatorSubsystem));
         NamedCommands.registerCommand("eL2", new e_level2(elevatorSubsystem));
         NamedCommands.registerCommand("eL3", new e_level3(elevatorSubsystem));
@@ -204,7 +204,7 @@ public class RobotContainer {
         e_algea_middle = new e_algea(elevatorSubsystem, true);
         e_algea_down = new e_algea(elevatorSubsystem, false);
         e_source = new e_source(elevatorSubsystem);
-        e_tozero = new e_tozeroo(elevatorSubsystem);
+        e_tozero = new e_tozeroo(elevatorSubsystem,false);
         e_l1 = new e_level1(elevatorSubsystem);
         e_l2 = new e_level2(elevatorSubsystem);
         e_l3 = new e_level3(elevatorSubsystem);
@@ -243,6 +243,7 @@ public class RobotContainer {
         // Commands are fully autonomous for driver comfort and easy autonomous
         // integration
         intakeAlgeaMiddle = new SequentialCommandGroup(
+                new e_tozeroo(elevatorSubsystem,true),
                 new algea(intakeMoverSubsystem),
                 new ParallelCommandGroup(
                         new e_algea(elevatorSubsystem, true),
@@ -258,7 +259,8 @@ public class RobotContainer {
                 new source(intakeMoverSubsystem),
                 new Intake(intakeSubsystem));
 
-        AlgeaProcessor = new SequentialCommandGroup(
+        AlgeaProcessor = new ParallelCommandGroup(
+                new AlgeaIntake(algeaIntakeSubsystem),
                 new processor(intakeMoverSubsystem),
                 new e_processor(elevatorSubsystem));
 
