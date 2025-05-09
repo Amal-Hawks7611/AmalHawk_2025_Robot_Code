@@ -7,16 +7,14 @@ import frc.robot.Constants;
 import frc.robot.Constants.OI;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 
-public class righttest extends Command {
+public class limelight2 extends Command {
     public boolean finished;
     private boolean focus;
     private final SwerveSubsystem swerveSubsystem;
-    private final limelight kamera;
     private final Timer timer = new Timer();
 
-    public righttest(SwerveSubsystem swerveSubsystem, limelight kamera) {
+    public limelight2(SwerveSubsystem swerveSubsystem, limelight kamera) {
         this.swerveSubsystem = swerveSubsystem;
-        this.kamera = kamera;
         addRequirements(swerveSubsystem);
     }
 
@@ -34,8 +32,6 @@ public class righttest extends Command {
         if (OI.IS_FOCUSED) {
             focus = true;
             timer.start();
-        } else if (!focus) {
-            kamera.schedule();
         }
         if (focus) {
             swerveSubsystem.drive(new Translation2d(0, -Constants.LIMELIGHT_KP), 0, false);
@@ -48,7 +44,7 @@ public class righttest extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("Sag Hizalama Bitti");
+        System.out.println("Limelight Hizalandı");
         swerveSubsystem.drive(new Translation2d(0, 0), 0, false);
         finished = true;
         focus = false;

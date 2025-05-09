@@ -34,9 +34,7 @@ import frc.robot.commands.Intake.Gerial;
 import frc.robot.commands.IntakeMover.*;
 import frc.robot.commands.Led.LEDMorseScroller;
 import frc.robot.commands.Led.LEDStateCycler;
-import frc.robot.commands.Swerve.limelight;
-import frc.robot.commands.Swerve.miracsurpriz;
-import frc.robot.commands.Swerve.righttest;
+import frc.robot.commands.Swerve.*;
 import frc.robot.commands.Trajectory.AutonPath;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -108,7 +106,8 @@ public class RobotContainer {
 
     public final InstantCommand limelight_stop;
     public final limelight limelight_align;
-    public final righttest right_align;
+    public final limelight2 limelight_2;
+    public final Command fully_align;
 
     /**
      * Converts driver input into a field-relative ChassisSpeeds that is controlled
@@ -196,6 +195,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("cOuttake", new Outtake(intakeSubsystem));
 
         NamedCommands.registerCommand("limelight", new limelight(drivebase));
+        NamedCommands.registerCommand("limelight2", new limelight2(drivebase, new limelight(drivebase)));
 
         // Definate Commands
         elevator_down = new e_movedown(elevatorSubsystem);
@@ -234,14 +234,20 @@ public class RobotContainer {
         led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
         limelight_align = new limelight(drivebase);
-        right_align = new righttest(drivebase, limelight_align);
+        limelight_2 = new limelight2(drivebase, limelight_align);
         limelight_stop = new InstantCommand(() -> {
             OI.IS_FOCUSED = true;
-            right_align.end(false);
+            limelight_2.end(false);
         });
 
         // Commands are fully autonomous for driver comfort and easy autonomous
         // integration
+
+        fully_align = new SequentialCommandGroup(
+                new limelight(drivebase),
+                new limelight2(drivebase, new limelight(drivebase))
+        );
+
         intakeAlgeaMiddle = new SequentialCommandGroup(
                 new e_tozeroo(elevatorSubsystem,true),
                 new algea(intakeMoverSubsystem),
@@ -333,7 +339,7 @@ public class RobotContainer {
             Controlls.CORAL_INTAKE.onTrue(c_intake);
             Controlls.CORAL_GERIAL.onTrue(c_Gerial);
 
-            Controlls.LIMELIGHT_FOCUS.onTrue(right_align);
+            Controlls.LIMELIGHT_FOCUS.onTrue(fully_align);
             Controlls.LIMELIGHT_STOP.whileTrue(limelight_stop);
 
             Controlls.ALGEA_INTAKE.onTrue(a_intake);

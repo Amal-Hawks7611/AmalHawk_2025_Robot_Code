@@ -20,7 +20,7 @@ public final class Constants {
     public static final double MAX_SPEED = 3;
     public static final double LIMELIGHT_KP = 0.05;
     public static final double LIMELIGHT_TX = 12;
-    public static final double LIMELIGHT_RIGHT_TIME = 1.9533169;
+    public static final double LIMELIGHT_RIGHT_TIME = 0.6161;
 
     public static Color setBrightness(Color currentColor, double brightness) {
         return new Color(currentColor.red * brightness, currentColor.green * brightness,
