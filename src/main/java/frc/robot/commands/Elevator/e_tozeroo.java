@@ -20,14 +20,15 @@ public class e_tozeroo extends Command {
         System.out.println("Elevator Is Moving To The Zero");
         OI.IS_PROCESSING = true;
         Elevator.ELEVATOR_END_VALUE+=100;
-
+        Elevator.PROCESS_START_POSITION = elevatorSubsystem.getLeaderMotorEncoder();
+        Elevator.CURRENT_DIRECTION = elevatorSubsystem.getLeaderMotorEncoder() < Elevator.ELEVATOR_TOZERO_VALUE;
     }
 
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            if(isalg){elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGZERO_VALUE);}
-            else{elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_TOZERO_VALUE);}     
+            if(isalg){elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_ALGZERO_VALUE);}
+            else{elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_TOZERO_VALUE);}     
         }
         else{
             this.end(false);

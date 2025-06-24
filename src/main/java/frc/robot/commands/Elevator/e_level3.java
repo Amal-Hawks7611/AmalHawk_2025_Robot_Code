@@ -19,13 +19,14 @@ public class e_level3 extends Command {
         System.out.println("Elevator Is Moving To The Level3");
         OI.IS_PROCESSING = true;
         Intake.OUTTAKE_SPEED = 0.40;
-
+        Elevator.PROCESS_START_POSITION = elevatorSubsystem.getLeaderMotorEncoder();
+        Elevator.CURRENT_DIRECTION = elevatorSubsystem.getLeaderMotorEncoder() < Elevator.ELEVATOR_L3_VALUE;
     }
 
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_L3_VALUE);
+            elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_L3_VALUE);
         }
         else{
             this.end(false);

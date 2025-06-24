@@ -17,7 +17,7 @@ public class e_level2 extends Command {
     public void initialize() {
         System.out.println("Elevator Is Moving To The Level2");
         OI.IS_PROCESSING = true;
-
+        
     }
 
     @Override

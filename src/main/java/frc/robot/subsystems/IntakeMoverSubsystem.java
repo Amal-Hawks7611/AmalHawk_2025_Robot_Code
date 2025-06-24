@@ -41,25 +41,37 @@ public class IntakeMoverSubsystem extends SubsystemBase {
 
     public void manualControl(double speed) {
         leaderMotor.set(speed);
-        simEncoder+=4355;
+    
+        double maxRPM = 6000;
+        double loopTimeSeconds = 0.02;
+    
+        double revolutionsPerSecond = (maxRPM / 60.0) * Math.abs(speed);
+        double revolutionsPerLoop = revolutionsPerSecond * loopTimeSeconds;
+    
+        simEncoder += speed > 0 ? revolutionsPerLoop : -revolutionsPerLoop;
     }
-
-    //OCALPID
+    
+    // OCALPID
     public void MoveIT(double speed, double setpoint) {
         if(EnabledParts.IS_INTAKE_MOVER_ENABLED){
             if (OI.IS_INTAKE_MOVING) {
-                double leaderPosition = getLeaderMotorEncoder();
+                double leaderPosition = getLeaderMotorEncoder(); 
                 if (isWithinTolerance(leaderPosition, setpoint)) {
                     stopMotors();
                     OI.IS_INTAKE_MOVING = false;
                 } else {
+                    double maxRPM = 6000;
+                    double loopTimeSeconds = 0.02;
+                    double revolutionsPerSecond = (maxRPM / 60.0) * Math.abs(speed);
+                    double revolutionsPerLoop = revolutionsPerSecond * loopTimeSeconds;
+    
                     if(leaderPosition > setpoint){
                         leaderMotor.set(-speed);
-                        simEncoder-=4355;
+                        simEncoder -= revolutionsPerLoop;
                     }
                     else{
                         leaderMotor.set(speed);
-                        simEncoder+=4355;
+                        simEncoder += revolutionsPerLoop;
                     }
                 }
             }
@@ -68,6 +80,7 @@ public class IntakeMoverSubsystem extends SubsystemBase {
             OI.IS_INTAKE_MOVING = false;
         }
     }
+    
     
     private boolean isWithinTolerance(double value, double target) {
         return value >= target - IntakeMover.OCAL_PID_TOLERANCE_VALUE && value <= target + IntakeMover.OCAL_PID_TOLERANCE_VALUE;

@@ -78,6 +78,14 @@ public final class Constants {
         public static double ELEVATOR_L4_VALUE = 34.5;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
         public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 18.3;
+        
+        public static double UP_SPEED = 0.3;
+        public static double MAX_UP_SPEED = 0.6;
+        public static double DOWN_SPEED = 0.06;
+        public static double MAX_DOWN_SPEED = 0.09;
+        public static boolean CURRENT_DIRECTION = true;
+        public static double PROCESS_START_POSITION = 0;
+        public static double PROCESS_SPEED = 0.3;
 
     }
 

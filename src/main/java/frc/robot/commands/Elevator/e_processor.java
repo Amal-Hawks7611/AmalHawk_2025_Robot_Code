@@ -17,13 +17,14 @@ public class e_processor extends Command {
     public void initialize() {
         System.out.println("Elevator Is Moving To The Processor");
         OI.IS_PROCESSING = true;
-
+        Elevator.PROCESS_START_POSITION = elevatorSubsystem.getLeaderMotorEncoder();
+        Elevator.CURRENT_DIRECTION = elevatorSubsystem.getLeaderMotorEncoder() < Elevator.ELEVATOR_PROCESSOR_VALUE;
     }
 
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
-            elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_PROCESSOR_VALUE);
+            elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_PROCESSOR_VALUE);
         }
         else{
             this.end(false);

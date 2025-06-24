@@ -18,14 +18,16 @@ public class e_algea extends Command {
     public void initialize() {
         System.out.println("Elevator Is Moving To The Algea");
         OI.IS_PROCESSING = true;
+        Elevator.PROCESS_START_POSITION = elevatorSubsystem.getLeaderMotorEncoder();
+        Elevator.CURRENT_DIRECTION = elevatorSubsystem.getLeaderMotorEncoder() < (!ismiddle ? Elevator.ELEVATOR_ALGEA_VALUE_DOWN:Elevator.ELEVATOR_ALGEA_VALUE_MIDDLE);
     }
 
     @Override
     public void execute() {
         if(!OI.IS_PID_ENDED){
             if(ismiddle){
-                elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGEA_VALUE_MIDDLE);
-            }else{elevatorSubsystem.OcalPID(Elevator.ELEVATOR_SPEED, Elevator.ELEVATOR_ALGEA_VALUE_DOWN);}
+                elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_ALGEA_VALUE_MIDDLE);
+            }else{elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_ALGEA_VALUE_DOWN);}
         }
         else{
             this.end(false);
