@@ -111,8 +111,8 @@ public class ElevatorSubsystem extends SubsystemBase {
         double g = setpoint;
         double p = Elevator.PROCESS_START_POSITION;
         double x = getLeaderMotorEncoder();
-
-        if (Math.abs(g - x) < Elevator.OCAL_PID_TOLERANCE_VALUE) {
+        if ((isWithinTolerance(x, Elevator.ELEVATOR_END_VALUE) && Elevator.CURRENT_DIRECTION)
+        || isWithinTolerance(x, setpoint) ) {
             Constants.OI.IS_PID_ENDED = true;
             leaderMotor.set(0);
             followerMotor.set(0);
@@ -139,7 +139,6 @@ public class ElevatorSubsystem extends SubsystemBase {
         }
 
         double output = Elevator.CURRENT_DIRECTION ? Elevator.PROCESS_SPEED : -Elevator.PROCESS_SPEED;
-        System.out.println(output);
         leaderMotor.set(output);
         followerMotor.set(output);
 
