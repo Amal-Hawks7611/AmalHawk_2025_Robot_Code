@@ -111,7 +111,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         double g = setpoint;
         double p = Elevator.PROCESS_START_POSITION;
         double x = getLeaderMotorEncoder();
-        if ((isWithinTolerance(x, Elevator.ELEVATOR_END_VALUE) && Elevator.CURRENT_DIRECTION)
+        if ((x > Elevator.ELEVATOR_END_VALUE && Elevator.CURRENT_DIRECTION)
         || isWithinTolerance(x, setpoint) ) {
             Constants.OI.IS_PID_ENDED = true;
             leaderMotor.set(0);
