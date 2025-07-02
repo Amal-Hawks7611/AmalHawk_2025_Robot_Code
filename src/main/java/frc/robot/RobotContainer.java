@@ -107,7 +107,10 @@ public class RobotContainer {
     public final InstantCommand limelight_stop;
     public final limelight limelight_align;
     public final limelight2 limelight_2;
+    public final limelight_withtruewheels limelight_go;
+    public final LimelightTurnCommand limelight_turn;
     public final Command fully_align;
+    public final Command fully_align_premium;
 
     /**
      * Converts driver input into a field-relative ChassisSpeeds that is controlled
@@ -235,6 +238,8 @@ public class RobotContainer {
 
         limelight_align = new limelight(drivebase);
         limelight_2 = new limelight2(drivebase, limelight_align);
+        limelight_go = new limelight_withtruewheels(drivebase);
+        limelight_turn = new LimelightTurnCommand(drivebase);
         limelight_stop = new InstantCommand(() -> {
             OI.IS_FOCUSED = true;
             limelight_2.end(false);
@@ -246,6 +251,13 @@ public class RobotContainer {
         fully_align = new SequentialCommandGroup(
                 new limelight(drivebase),
                 new limelight2(drivebase, new limelight(drivebase))
+        );
+
+        fully_align_premium = new SequentialCommandGroup(
+                new limelight(drivebase),
+                new limelight2(drivebase, new limelight(drivebase)),
+                new LimelightTurnCommand(drivebase),
+                new limelight_withtruewheels(drivebase)
         );
 
         intakeAlgeaMiddle = new SequentialCommandGroup(
@@ -328,6 +340,7 @@ public class RobotContainer {
 
             Controlls.RESET_GYRO.onChange(zerogyro);
             Controlls.ADMIN.whileTrue(admin);
+            Controlls.LIMELIGHT_PREMIUM.onTrue(fully_align_premium);
 
             Controlls.L4.onTrue(Coral_l4);
             Controlls.L3.onTrue(Coral_l3);

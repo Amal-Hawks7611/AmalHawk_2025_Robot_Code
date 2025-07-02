@@ -162,6 +162,7 @@ public final class Constants {
         public static Trigger CORAL_INTAKE = OPERATOR_CONTROLLER.povLeft();
         public static Trigger CORAL_GERIAL = OPERATOR_CONTROLLER.povRight();
         public static Trigger ADMIN = OPERATOR_CONTROLLER.button(9);
+        public static Trigger LIMELIGHT_PREMIUM = OPERATOR_CONTROLLER.y();
     }
 
     public static class Test_Controlls {
@@ -207,5 +208,7 @@ public final class Constants {
         public static boolean IS_LED_CYCLING = false;
         public static boolean IS_LED_MORSE_SHOWING = false;
         public static boolean IS_FOCUSED = false;
+        public static boolean IS_GONE = false;
+        public static double LIMELIGHT_SPEED = 0.4;
     }
 }

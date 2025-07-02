@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
 import frc.robot.Constants;
 import frc.robot.Constants.DrivebaseConstants;
+import frc.robot.Constants.OI;
 
 import java.io.File;
 import java.io.IOException;
@@ -136,8 +137,9 @@ public class SwerveSubsystem extends SubsystemBase {
     return AutoBuilder.pathfindToPose(
         pose,
         constraints,
-        edu.wpi.first.units.Units.MetersPerSecond.of(0));
-  }
+        edu.wpi.first.units.Units.MetersPerSecond.of(
+            swerveDrive.getMaximumChassisVelocity() * OI.LIMELIGHT_SPEED));
+}
 
   private Command driveWithSetpointGenerator(Supplier<ChassisSpeeds> robotRelativeChassisSpeed)
       throws IOException, ParseException {
