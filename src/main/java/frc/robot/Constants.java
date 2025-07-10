@@ -44,13 +44,13 @@ public final class Constants {
         public static int LED_PWM_PORT = 0;
         public static int LED_LENGTH = 180;
         public static int BREATHE_MAGNITUDE = 5;
-        public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(setBrightness(Color.kPurple, 0.69*0.8));
-        public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(setBrightness(Color.kGreen, 0.69*0.8));
-        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kWhite, 0.69*0.8));
-        public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kAqua, 0.69*0.8));
+        public static LEDPattern ELEVATOR_PROCESS_COLOR = LEDPattern.solid(setBrightness(Color.kPurple, 0.69 * 0.8));
+        public static LEDPattern TARGET_FOCUS_COLOR = LEDPattern.solid(setBrightness(Color.kGreen, 0.69 * 0.8));
+        public static LEDPattern INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kWhite, 0.69 * 0.8));
+        public static LEDPattern ALGEA_INTAKE_COLOR = LEDPattern.solid(setBrightness(Color.kAqua, 0.69 * 0.8));
         public static LEDPattern BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,
-                setBrightness(Color.kOrangeRed, 0.69*0.8), setBrightness(Color.kRed, 0.69*0.8),
-                setBrightness(Color.kDarkRed, 0.69*0.8));
+                setBrightness(Color.kOrangeRed, 0.69 * 0.8), setBrightness(Color.kRed, 0.69 * 0.8),
+                setBrightness(Color.kDarkRed, 0.69 * 0.8));
     }
 
     public static final class RotarySwitch {
@@ -65,7 +65,7 @@ public final class Constants {
         public static double ELEVATOR_SPEED = 0.25;
         public static double ELEVATOR_DOWN_VOLTS = 0.05;
         public static double ELEVATOR_STATIC_VOLTS = 0.3;
-        public static double OCAL_PID_TOLERANCE_VALUE = 0.25;//TODO Increase If System Doesn't Work
+        public static double OCAL_PID_TOLERANCE_VALUE = 0.25;// TODO Increase If System Doesn't Work
         public static double ELEVATOR_START_VALUE = 0; // Generally True
         public static double ELEVATOR_END_VALUE = 34.5;
         public static double ELEVATOR_SOURCE_VALUE = 0;
@@ -78,7 +78,7 @@ public final class Constants {
         public static double ELEVATOR_L4_VALUE = 34.5;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
         public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 18.3;
-        
+
         public static double UP_SPEED = 0.3;
         public static double MAX_UP_SPEED = 0.6;
         public static double DOWN_SPEED = 0.06;
@@ -131,7 +131,8 @@ public final class Constants {
 
     public static class Controlls {
         public static CommandPS5Controller DRIVER_CONTROLLER = new CommandPS5Controller(OI.DRIVER_CONTROLLER_PORT);
-        public static CommandXboxController OPERATOR_CONTROLLER = new CommandXboxController(OI.OPERATOR_CONTROLLER_PORT);
+        public static CommandXboxController OPERATOR_CONTROLLER = new CommandXboxController(
+                OI.OPERATOR_CONTROLLER_PORT);
         // For TEU
         public static Trigger ELEVATOR_MANUAL_UP = DRIVER_CONTROLLER.R2();
         public static Trigger ELEVATOR_MANUAL_DOWN = DRIVER_CONTROLLER.L2();
@@ -158,7 +159,7 @@ public final class Constants {
         public static Trigger ALGEA_PROCESSOR = DRIVER_CONTROLLER.PS();
         public static Trigger ALGEA_REMOVAL = DRIVER_CONTROLLER.create();
 
-        //OPERATOR
+        // OPERATOR
         public static Trigger CORAL_INTAKE = OPERATOR_CONTROLLER.povLeft();
         public static Trigger CORAL_GERIAL = OPERATOR_CONTROLLER.povRight();
         public static Trigger ADMIN = OPERATOR_CONTROLLER.button(9);

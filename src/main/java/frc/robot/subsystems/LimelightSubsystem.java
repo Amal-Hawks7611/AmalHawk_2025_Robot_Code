@@ -13,16 +13,18 @@ public class LimelightSubsystem extends SubsystemBase {
 
     public LimelightSubsystem() {
     }
-    public boolean checkFocus(){
+
+    public boolean checkFocus() {
         ty = LimelightHelpers.getTY("limelight");
-        if(ty != 0 && ty < 11 && ty>6){
+        if (ty != 0 && ty < 11 && ty > 6) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
+
     @Override
-    public void periodic(){
+    public void periodic() {
         OI.IS_FOCUSED = checkFocus();
         SmartDashboard.putBoolean("IsFocused", OI.IS_FOCUSED);
     }

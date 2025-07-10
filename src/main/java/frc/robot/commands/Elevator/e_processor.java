@@ -23,10 +23,9 @@ public class e_processor extends Command {
 
     @Override
     public void execute() {
-        if(!OI.IS_PID_ENDED){
+        if (!OI.IS_PID_ENDED) {
             elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_PROCESSOR_VALUE);
-        }
-        else{
+        } else {
             this.end(false);
         }
     }

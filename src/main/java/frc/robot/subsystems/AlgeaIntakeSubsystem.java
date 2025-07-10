@@ -40,28 +40,28 @@ public class AlgeaIntakeSubsystem extends SubsystemBase {
     }
 
     public void Intake() {
-        if(timer.hasElapsed(AlgeaIntake.INTAKE_TIME)){
+        if (timer.hasElapsed(AlgeaIntake.INTAKE_TIME)) {
             leaderMotor.stopMotor();
             OI.IS_ALGEA_INTAKING = false;
-        }
-        else{
+        } else {
             leaderMotor.set(AlgeaIntake.INTAKE_SPEED);
         }
     }
 
-    public void Shoot(){
-        if(timer.hasElapsed(AlgeaIntake.OUTTAKE_TIME)){
+    public void Shoot() {
+        if (timer.hasElapsed(AlgeaIntake.OUTTAKE_TIME)) {
             leaderMotor.stopMotor();
             OI.IS_ALGEA_INTAKING = false;
-        }
-        else{
+        } else {
             leaderMotor.set(-AlgeaIntake.OUTTAKE_SPEED);
         }
     }
 
     @Override
-    public void periodic(){
-        if(!OI.IS_ALGEA_INTAKING && !OI.IS_INTAKING) {leaderMotor.setVoltage(AlgeaIntake.ALGEA_STATIC_VOLTAGES);}
+    public void periodic() {
+        if (!OI.IS_ALGEA_INTAKING && !OI.IS_INTAKING) {
+            leaderMotor.setVoltage(AlgeaIntake.ALGEA_STATIC_VOLTAGES);
+        }
         SmartDashboard.putBoolean("IsAlgIntaking", OI.IS_ALGEA_INTAKING);
         SmartDashboard.putNumber("Algea Intake Leader Motor Value", getLeaderMotorEncoder());
     }

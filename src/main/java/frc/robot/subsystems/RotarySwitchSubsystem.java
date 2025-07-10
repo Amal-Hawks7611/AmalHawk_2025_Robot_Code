@@ -35,7 +35,7 @@ public class RotarySwitchSubsystem extends SubsystemBase {
             lastClockState = clkState;
         }
 
-        SmartDashboard.putNumber("RotarySwitch",totalTurns);
+        SmartDashboard.putNumber("RotarySwitch", totalTurns);
     }
 
     public int getTotalTurns() {

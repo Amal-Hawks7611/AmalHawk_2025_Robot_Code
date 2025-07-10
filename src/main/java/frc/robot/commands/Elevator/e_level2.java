@@ -19,15 +19,14 @@ public class e_level2 extends Command {
         OI.IS_PROCESSING = true;
         Elevator.PROCESS_START_POSITION = elevatorSubsystem.getLeaderMotorEncoder();
         Elevator.CURRENT_DIRECTION = elevatorSubsystem.getLeaderMotorEncoder() < Elevator.ELEVATOR_L2_VALUE;
-        
+
     }
 
     @Override
     public void execute() {
-        if(!OI.IS_PID_ENDED){
+        if (!OI.IS_PID_ENDED) {
             elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_L2_VALUE);
-        }
-        else{
+        } else {
             this.end(false);
         }
     }

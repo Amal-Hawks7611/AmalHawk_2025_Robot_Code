@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
 
-    //LED BREATHE CHANGES BY SWERVE SPEED
+    // LED BREATHE CHANGES BY SWERVE SPEED
     if (Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.3 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.6)
       LedSubsystem.BREATHE_MAGNITUDE = 3;
     if (Controlls.DRIVER_CONTROLLER.getLeftY() <= -0.6 && Controlls.DRIVER_CONTROLLER.getLeftY() >= -0.9) {
@@ -52,13 +52,13 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_robotContainer.drivebase.zeroGyro();
 
-    //LED COLOR CHANGES BY ALLIANCE
+    // LED COLOR CHANGES BY ALLIANCE
     if (!RobotBase.isSimulation()) {
       if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue) {
         LedSubsystem.BREATHE_COLOR = LEDPattern.gradient(GradientType.kDiscontinuous,
-            m_robotContainer.ledSubsystem.setBrightness(Color.kBlue, 0.69*0.8),
-            m_robotContainer.ledSubsystem.setBrightness(Color.kDarkBlue, 0.69*0.8),
-            m_robotContainer.ledSubsystem.setBrightness(Color.kPurple, 0.69*0.8));
+            m_robotContainer.ledSubsystem.setBrightness(Color.kBlue, 0.69 * 0.8),
+            m_robotContainer.ledSubsystem.setBrightness(Color.kDarkBlue, 0.69 * 0.8),
+            m_robotContainer.ledSubsystem.setBrightness(Color.kPurple, 0.69 * 0.8));
       }
     }
     // Limelight Local Port Brute Because Of FMS Connections

@@ -7,6 +7,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class Intake extends Command {
     public final IntakeSubsystem intakeSubsystem;
+
     public Intake(IntakeSubsystem intakeSubsystem) {
         this.intakeSubsystem = intakeSubsystem;
         addRequirements(intakeSubsystem);
@@ -23,9 +24,11 @@ public class Intake extends Command {
 
     @Override
     public void execute() {
-        if(EnabledParts.IS_INTAKE_ENABLED){
+        if (EnabledParts.IS_INTAKE_ENABLED) {
             intakeSubsystem.Intake();
-            if(!OI.IS_INTAKING){this.end(false);}  
+            if (!OI.IS_INTAKING) {
+                this.end(false);
+            }
         }
     }
 

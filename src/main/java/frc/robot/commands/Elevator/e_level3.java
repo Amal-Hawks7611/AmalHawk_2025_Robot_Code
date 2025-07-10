@@ -25,10 +25,9 @@ public class e_level3 extends Command {
 
     @Override
     public void execute() {
-        if(!OI.IS_PID_ENDED){
+        if (!OI.IS_PID_ENDED) {
             elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_L3_VALUE);
-        }
-        else{
+        } else {
             this.end(false);
         }
     }

@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
 import frc.robot.Constants.Elevator;
 import frc.robot.Constants.EnabledParts;
 import frc.robot.Constants.OI;
@@ -56,16 +55,16 @@ public class ElevatorSubsystem extends SubsystemBase {
     public void manualControl(double speed) {
         leaderMotor.set(speed);
         followerMotor.set(speed);
-    
+
         double maxRPM = 6000;
         double loopTimeSeconds = 0.02;
-    
+
         double revolutionsPerSecond = (maxRPM / 60.0) * Math.abs(speed);
         double revolutionsPerLoop = revolutionsPerSecond * loopTimeSeconds;
-    
+
         simulationEncoder += speed > 0 ? revolutionsPerLoop : -revolutionsPerLoop;
     }
-    
+
     // Different to the pid, ocalpid controlls distance instead of speed. Because
     // TalonFX already controlls speed
     public void OcalPID(double speed, double setpoint) {
@@ -111,9 +110,9 @@ public class ElevatorSubsystem extends SubsystemBase {
         double g = setpoint;
         double p = Elevator.PROCESS_START_POSITION;
         double x = getLeaderMotorEncoder();
-        if ((x > Elevator.ELEVATOR_END_VALUE && Elevator.CURRENT_DIRECTION)
-        || isWithinTolerance(x, setpoint) ) {
-            Constants.OI.IS_PID_ENDED = true;
+        if ((x > (Elevator.ELEVATOR_END_VALUE - Elevator.OCAL_PID_TOLERANCE_VALUE) && Elevator.CURRENT_DIRECTION)
+                || isWithinTolerance(x, setpoint)) {
+            OI.IS_PID_ENDED = true;
             leaderMotor.set(0);
             followerMotor.set(0);
             return;

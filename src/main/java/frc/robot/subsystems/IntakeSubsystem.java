@@ -39,54 +39,54 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void Intake() {
-        if(!EnabledParts.IS_OBJECT_SENSOR_ENABLED){
-            if(timer.hasElapsed(Intake.INTAKE_TIME)){
+        if (!EnabledParts.IS_OBJECT_SENSOR_ENABLED) {
+            if (timer.hasElapsed(Intake.INTAKE_TIME)) {
                 leaderMotor.stopMotor();
                 OI.IS_INTAKING = false;
-            }
-            else{
+            } else {
                 leaderMotor.set(-Intake.INTAKE_SPEED);
             }
-        }
-        else{
-            if(!container.objectDetector.CheckObject()){
+        } else {
+            if (!container.objectDetector.CheckObject()) {
                 leaderMotor.set(-Intake.INTAKE_SPEED);
-            }
-            else{
+            } else {
                 leaderMotor.stopMotor();
                 OI.IS_INTAKING = false;
             }
         }
     }
-    
-    public void Shoot(){
-        if(!EnabledParts.IS_OBJECT_SENSOR_ENABLED){
-            if(timer.hasElapsed(-Intake.OUTTAKE_TIME)){
+
+    public void Shoot() {
+        if (!EnabledParts.IS_OBJECT_SENSOR_ENABLED) {
+            if (timer.hasElapsed(-Intake.OUTTAKE_TIME)) {
                 leaderMotor.stopMotor();
                 OI.IS_INTAKING = false;
-            }
-            else{
+            } else {
                 leaderMotor.set(-Intake.OUTTAKE_SPEED);
             }
-        }
-        else{
-            if(container.objectDetector.CheckObject()){
+        } else {
+            if (container.objectDetector.CheckObject()) {
                 leaderMotor.set(-Intake.OUTTAKE_SPEED);
-            }
-            else{
+            } else {
                 leaderMotor.stopMotor();
                 OI.IS_INTAKING = false;
             }
         }
 
     }
+
     @Override
-    public void periodic(){
-        if(!OI.IS_INTAKING && container.objectDetector.CheckObject()){leaderMotor.set(4);}
-        if(container.objectDetector.CheckObject()){Controlls.OPERATOR_CONTROLLER.setRumble(RumbleType.kBothRumble, 0.7);}
-        else{Controlls.OPERATOR_CONTROLLER.setRumble(RumbleType.kBothRumble, 0);}
+    public void periodic() {
+        if (!OI.IS_INTAKING && container.objectDetector.CheckObject()) {
+            leaderMotor.set(4);
+        }
+        if (container.objectDetector.CheckObject()) {
+            Controlls.OPERATOR_CONTROLLER.setRumble(RumbleType.kBothRumble, 0.7);
+        } else {
+            Controlls.OPERATOR_CONTROLLER.setRumble(RumbleType.kBothRumble, 0);
+        }
         SmartDashboard.putBoolean("IsCoralIntaking", OI.IS_INTAKING);
         SmartDashboard.putNumber("Intake Leader Motor Value", getLeaderMotorEncoder());
-        SmartDashboard.putNumber("IntakeSPeed",leaderMotor.get());
+        SmartDashboard.putNumber("IntakeSPeed", leaderMotor.get());
     }
 }

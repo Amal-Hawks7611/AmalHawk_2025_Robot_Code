@@ -30,9 +30,12 @@ public class IntakeMoverSubsystem extends SubsystemBase {
     }
 
     public double getLeaderMotorEncoder() {
-        if(RobotBase.isSimulation()){return simEncoder;}
-        else{return leaderMotorPosition.refresh().getValueAsDouble();}
-        
+        if (RobotBase.isSimulation()) {
+            return simEncoder;
+        } else {
+            return leaderMotorPosition.refresh().getValueAsDouble();
+        }
+
     }
 
     public void resetEncoders() {
@@ -41,21 +44,21 @@ public class IntakeMoverSubsystem extends SubsystemBase {
 
     public void manualControl(double speed) {
         leaderMotor.set(speed);
-    
+
         double maxRPM = 6000;
         double loopTimeSeconds = 0.02;
-    
+
         double revolutionsPerSecond = (maxRPM / 60.0) * Math.abs(speed);
         double revolutionsPerLoop = revolutionsPerSecond * loopTimeSeconds;
-    
+
         simEncoder += speed > 0 ? revolutionsPerLoop : -revolutionsPerLoop;
     }
-    
+
     // OCALPID
     public void MoveIT(double speed, double setpoint) {
-        if(EnabledParts.IS_INTAKE_MOVER_ENABLED){
+        if (EnabledParts.IS_INTAKE_MOVER_ENABLED) {
             if (OI.IS_INTAKE_MOVING) {
-                double leaderPosition = getLeaderMotorEncoder(); 
+                double leaderPosition = getLeaderMotorEncoder();
                 if (isWithinTolerance(leaderPosition, setpoint)) {
                     stopMotors();
                     OI.IS_INTAKE_MOVING = false;
@@ -64,26 +67,24 @@ public class IntakeMoverSubsystem extends SubsystemBase {
                     double loopTimeSeconds = 0.02;
                     double revolutionsPerSecond = (maxRPM / 60.0) * Math.abs(speed);
                     double revolutionsPerLoop = revolutionsPerSecond * loopTimeSeconds;
-    
-                    if(leaderPosition > setpoint){
+
+                    if (leaderPosition > setpoint) {
                         leaderMotor.set(-speed);
                         simEncoder -= revolutionsPerLoop;
-                    }
-                    else{
+                    } else {
                         leaderMotor.set(speed);
                         simEncoder += revolutionsPerLoop;
                     }
                 }
             }
-        }
-        else{
+        } else {
             OI.IS_INTAKE_MOVING = false;
         }
     }
-    
-    
+
     private boolean isWithinTolerance(double value, double target) {
-        return value >= target - IntakeMover.OCAL_PID_TOLERANCE_VALUE && value <= target + IntakeMover.OCAL_PID_TOLERANCE_VALUE;
+        return value >= target - IntakeMover.OCAL_PID_TOLERANCE_VALUE
+                && value <= target + IntakeMover.OCAL_PID_TOLERANCE_VALUE;
     }
 
     private void stopMotors() {
@@ -91,11 +92,22 @@ public class IntakeMoverSubsystem extends SubsystemBase {
     }
 
     @Override
-    public void periodic(){
-        if(!OI.IS_ALGEA_INTAKING && !OI.IS_INTAKING && !OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() > 5){leaderMotor.setVoltage(-IntakeMover.IM_STATIC_VOLTAGE);}
-        if(!OI.IS_ALGEA_INTAKING && !OI.IS_INTAKING && !OI.IS_INTAKE_MOVING && leaderMotorPosition.refresh().getValueAsDouble() < 5){leaderMotor.setVoltage(IntakeMover.IM_STATIC_VOLTAGE);}
-        if(!OI.IS_INTAKE_MOVING && OI.IS_ALGEA_INTAKING){leaderMotor.setVoltage(-IntakeMover.IM_ALGEA_STATIC);}
-        if(!OI.IS_INTAKING && !isWithinTolerance(getLeaderMotorEncoder(), 1) && container.objectDetector.CheckObject()){leaderMotor.setVoltage(-IntakeMover.IM_CORAL_STATIC);}
+    public void periodic() {
+        if (!OI.IS_ALGEA_INTAKING && !OI.IS_INTAKING && !OI.IS_INTAKE_MOVING
+                && leaderMotorPosition.refresh().getValueAsDouble() > 5) {
+            leaderMotor.setVoltage(-IntakeMover.IM_STATIC_VOLTAGE);
+        }
+        if (!OI.IS_ALGEA_INTAKING && !OI.IS_INTAKING && !OI.IS_INTAKE_MOVING
+                && leaderMotorPosition.refresh().getValueAsDouble() < 5) {
+            leaderMotor.setVoltage(IntakeMover.IM_STATIC_VOLTAGE);
+        }
+        if (!OI.IS_INTAKE_MOVING && OI.IS_ALGEA_INTAKING) {
+            leaderMotor.setVoltage(-IntakeMover.IM_ALGEA_STATIC);
+        }
+        if (!OI.IS_INTAKING && !isWithinTolerance(getLeaderMotorEncoder(), 1)
+                && container.objectDetector.CheckObject()) {
+            leaderMotor.setVoltage(-IntakeMover.IM_CORAL_STATIC);
+        }
         SmartDashboard.putBoolean("IsIntakeMoving", OI.IS_INTAKE_MOVING);
         SmartDashboard.putNumber("Intake Mover Leader Motor Value", getLeaderMotorEncoder());
     }

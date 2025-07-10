@@ -25,9 +25,11 @@ public class Gerial extends Command {
 
     @Override
     public void execute() {
-        if(EnabledParts.IS_INTAKE_ENABLED){
+        if (EnabledParts.IS_INTAKE_ENABLED) {
             intakeSubsystem.Shoot();
-            if(!OI.IS_INTAKING){this.end(false);}
+            if (!OI.IS_INTAKING) {
+                this.end(false);
+            }
         }
     }
 

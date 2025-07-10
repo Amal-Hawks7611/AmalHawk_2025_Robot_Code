@@ -49,7 +49,6 @@ import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 
-
 //YAGSL WITH A WORKING PATHPLANNER AND MORE STABILIZED DRIVE(SEEMS IMPOSSIBLE)
 public class SwerveSubsystem extends SubsystemBase {
   private final SwerveDrive swerveDrive;
@@ -139,7 +138,7 @@ public class SwerveSubsystem extends SubsystemBase {
         constraints,
         edu.wpi.first.units.Units.MetersPerSecond.of(
             swerveDrive.getMaximumChassisVelocity() * OI.LIMELIGHT_SPEED));
-}
+  }
 
   private Command driveWithSetpointGenerator(Supplier<ChassisSpeeds> robotRelativeChassisSpeed)
       throws IOException, ParseException {

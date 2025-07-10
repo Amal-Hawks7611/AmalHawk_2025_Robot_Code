@@ -8,6 +8,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 public class e_algea extends Command {
     public final ElevatorSubsystem elevatorSubsystem;
     public final boolean ismiddle;
+
     public e_algea(ElevatorSubsystem elevatroSubsystem, boolean ismiddle) {
         this.elevatorSubsystem = elevatroSubsystem;
         this.ismiddle = ismiddle;
@@ -19,17 +20,20 @@ public class e_algea extends Command {
         System.out.println("Elevator Is Moving To The Algea");
         OI.IS_PROCESSING = true;
         Elevator.PROCESS_START_POSITION = elevatorSubsystem.getLeaderMotorEncoder();
-        Elevator.CURRENT_DIRECTION = elevatorSubsystem.getLeaderMotorEncoder() < (!ismiddle ? Elevator.ELEVATOR_ALGEA_VALUE_DOWN:Elevator.ELEVATOR_ALGEA_VALUE_MIDDLE);
+        Elevator.CURRENT_DIRECTION = elevatorSubsystem
+                .getLeaderMotorEncoder() < (!ismiddle ? Elevator.ELEVATOR_ALGEA_VALUE_DOWN
+                        : Elevator.ELEVATOR_ALGEA_VALUE_MIDDLE);
     }
 
     @Override
     public void execute() {
-        if(!OI.IS_PID_ENDED){
-            if(ismiddle){
+        if (!OI.IS_PID_ENDED) {
+            if (ismiddle) {
                 elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_ALGEA_VALUE_MIDDLE);
-            }else{elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_ALGEA_VALUE_DOWN);}
-        }
-        else{
+            } else {
+                elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_ALGEA_VALUE_DOWN);
+            }
+        } else {
             this.end(false);
         }
     }

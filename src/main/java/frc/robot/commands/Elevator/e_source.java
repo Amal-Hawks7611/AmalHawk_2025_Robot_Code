@@ -23,10 +23,9 @@ public class e_source extends Command {
 
     @Override
     public void execute() {
-        if(!OI.IS_PID_ENDED){
+        if (!OI.IS_PID_ENDED) {
             elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_SOURCE_VALUE);
-        }
-        else{
+        } else {
             this.end(false);
         }
     }

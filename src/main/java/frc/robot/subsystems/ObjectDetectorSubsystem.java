@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
 //SUBSYSTEM FOR MZ80 SENSOR.
 public class ObjectDetectorSubsystem extends SubsystemBase {
     public static AnalogInput m_objectSensor;
@@ -15,8 +14,11 @@ public class ObjectDetectorSubsystem extends SubsystemBase {
     }
 
     public boolean CheckObject() {
-        if(m_objectSensor.getValue() < 1000){return true;}
-        else{return false;}
+        if (m_objectSensor.getValue() < 1000) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -24,4 +26,3 @@ public class ObjectDetectorSubsystem extends SubsystemBase {
         SmartDashboard.putBoolean("ObjectSENSOR", CheckObject());
     }
 }
-

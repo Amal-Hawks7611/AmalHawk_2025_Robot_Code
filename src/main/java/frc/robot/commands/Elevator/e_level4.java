@@ -23,10 +23,9 @@ public class e_level4 extends Command {
 
     @Override
     public void execute() {
-        if(!OI.IS_PID_ENDED){
+        if (!OI.IS_PID_ENDED) {
             elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_L4_VALUE);
-        }
-        else{
+        } else {
             this.end(false);
         }
     }

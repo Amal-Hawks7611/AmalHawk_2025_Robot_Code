@@ -11,10 +11,12 @@ public class miracsurpriz extends Command {
     public int currentNoteIndex = 0;
     public double noteStartTime = 0;
     public LEDStateCycler led_cycle;
+
     // Not bilgilerini tutmak için iç sınıf
     private static class Note {
         public final double frequency; // Hertz (Hz) cinsinden nota frekansı
-        public final double duration;  // Notanın süresi (saniye cinsinden)
+        public final double duration; // Notanın süresi (saniye cinsinden)
+
         public Note(double frequency, double duration) {
             this.frequency = frequency;
             this.duration = duration;
@@ -25,24 +27,24 @@ public class miracsurpriz extends Command {
     // Örnek notalar (frekans değerleri Hz cinsindendir)
     // G4 = 392Hz, A4 = 440Hz, C5 = 523Hz, B4 = 494Hz, D5 = 587Hz
     private final Note[] notes = new Note[] {
-        new Note(392, 0.4), // G4
-        new Note(392, 0.4), // G4
-        new Note(440, 0.8), // A4
-        new Note(392, 0.8), // G4
-        new Note(523, 0.8), // C5
-        new Note(494, 1.6), // B4
+            new Note(392, 0.4), // G4
+            new Note(392, 0.4), // G4
+            new Note(440, 0.8), // A4
+            new Note(392, 0.8), // G4
+            new Note(523, 0.8), // C5
+            new Note(494, 1.6), // B4
 
-        new Note(392, 0.4), // G4
-        new Note(392, 0.4), // G4
-        new Note(440, 0.8), // A4
-        new Note(392, 0.8), // G4
-        new Note(587, 0.8), // D5
-        new Note(523, 1.6)  // C5
+            new Note(392, 0.4), // G4
+            new Note(392, 0.4), // G4
+            new Note(440, 0.8), // A4
+            new Note(392, 0.8), // G4
+            new Note(587, 0.8), // D5
+            new Note(523, 1.6) // C5
     };
 
     public miracsurpriz(LEDStateCycler led_cycle) {
         this.led_cycle = led_cycle;
-        this.motor = new TalonFX(4,"rio");
+        this.motor = new TalonFX(4, "rio");
     }
 
     @Override
