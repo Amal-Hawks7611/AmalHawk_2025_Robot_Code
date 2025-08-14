@@ -348,7 +348,6 @@ public class RobotContainer {
 
                         Controlls.RESET_GYRO.onChange(zerogyro);
                         Controlls.ADMIN.whileTrue(admin);
-                        Controlls.LIMELIGHT_PREMIUM.onTrue(fully_align_premium);
 
                         Controlls.L4.onTrue(Coral_l4);
                         Controlls.L3.onTrue(Coral_l3);

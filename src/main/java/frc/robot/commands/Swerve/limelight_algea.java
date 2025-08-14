@@ -4,15 +4,18 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.Constants.Controlls;
 import frc.robot.Constants.OI;
+import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
+import swervelib.SwerveInputStream;
 
 public class limelight_algea extends Command {
     public boolean finished;
     private boolean focus;
     private final SwerveSubsystem swerveSubsystem;
     private final Timer timer = new Timer();
-
+            SwerveInputStream driveAngularVelocityKeyboard;
     public limelight_algea(SwerveSubsystem swerveSubsystem) {
         this.swerveSubsystem = swerveSubsystem;
         addRequirements(swerveSubsystem);
@@ -22,6 +25,14 @@ public class limelight_algea extends Command {
     public void initialize() {
         finished = false;
         focus = false;
+        driveAngularVelocityKeyboard = SwerveInputStream.of(swerveSubsystem.getSwerveDrive(),
+                        () -> Controlls.DRIVER_CONTROLLER.getLeftY(),
+                        () -> Controlls.DRIVER_CONTROLLER.getLeftX())
+                        .withControllerRotationAxis(() -> -Controlls.DRIVER_CONTROLLER.getRawAxis(
+                                        2))
+                        .deadband(OperatorConstants.DEADBAND)
+                        .scaleTranslation(0.8)
+                        .allianceRelativeControl(true);
         System.out.println("Algea Hizalama Basladi");
         timer.reset();
         timer.stop();
@@ -44,8 +55,9 @@ public class limelight_algea extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("Limelight Hizalandı");
+        System.out.println("Algea Hizalandı");
         swerveSubsystem.drive(new Translation2d(0, 0), 0, false);
+        swerveSubsystem.setDefaultCommand(swerveSubsystem.driveFieldOriented(driveAngularVelocityKeyboard));
         finished = true;
         focus = false;
     }
