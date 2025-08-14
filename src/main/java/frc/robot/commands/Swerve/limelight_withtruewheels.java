@@ -27,8 +27,8 @@ public class limelight_withtruewheels extends Command {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
         double ty = table.getEntry("ty").getDouble(0.0);
 
-        double mountAngle = 25.0; // TODO WRITE
-        double limelightHeight = 20.0; // TODO WRITE
+        double mountAngle = -0; // TODO WRITE
+        double limelightHeight = 26.0; // TODO WRITE
         double targetHeight = 30.81;
         double totalAngle = mountAngle + ty;
         double distance = (targetHeight - limelightHeight) / Math.tan(Math.toRadians(totalAngle));
@@ -42,6 +42,7 @@ public class limelight_withtruewheels extends Command {
         if (OI.IS_GONE) {
             end(false);
         } else {
+            System.out.println(targetPose);
             swerveSubsystem.driveToPose(targetPose);
             double distance = swerveSubsystem.getPose().getTranslation().getDistance(targetPose.getTranslation());
             if (distance < 0.1)

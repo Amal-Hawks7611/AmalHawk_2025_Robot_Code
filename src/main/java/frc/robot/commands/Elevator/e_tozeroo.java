@@ -28,7 +28,7 @@ public class e_tozeroo extends Command {
     public void execute() {
         if (!OI.IS_PID_ENDED) {
             if (isalg) {
-                elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_ALGZERO_VALUE);
+                elevatorSubsystem.OcalPID(0.3,Elevator.ELEVATOR_ALGZERO_VALUE);
             } else {
                 elevatorSubsystem.OCAL_PID_PREMIUM(Elevator.ELEVATOR_TOZERO_VALUE);
             }

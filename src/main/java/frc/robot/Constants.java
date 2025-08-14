@@ -18,9 +18,10 @@ public final class Constants {
     public static final Matter CHASSIS = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
     public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
     public static final double MAX_SPEED = 3;
-    public static final double LIMELIGHT_KP = 0.05;
+    public static final double LIMELIGHT_KP = 0.2;
     public static final double LIMELIGHT_TX = 12;
     public static final double LIMELIGHT_RIGHT_TIME = 0.6161;
+    public static final double LIMELIGHT_ALGEA_TIME = 1.18;
 
     public static Color setBrightness(Color currentColor, double brightness) {
         return new Color(currentColor.red * brightness, currentColor.green * brightness,
@@ -29,8 +30,8 @@ public final class Constants {
 
     public static final class DrivebaseConstants {
         public static final double WHEEL_LOCK_TIME = 10;
-        public static final PIDConstants transation = new PIDConstants(8, 0.0, 0.05);
-        public static final PIDConstants angle = new PIDConstants(2, 0.0, 0.05);
+        public static final PIDConstants transation = new PIDConstants(12, 0.0, 0.05);
+        public static final PIDConstants angle = new PIDConstants(3, 0.0, 0.05);
     }
 
     public static class OperatorConstants {
@@ -81,8 +82,8 @@ public final class Constants {
 
         public static double UP_SPEED = 0.3;
         public static double MAX_UP_SPEED = 0.6;
-        public static double DOWN_SPEED = 0.06;
-        public static double MAX_DOWN_SPEED = 0.09;
+        public static double DOWN_SPEED = 0.12;
+        public static double MAX_DOWN_SPEED = 0.18;
         public static boolean CURRENT_DIRECTION = true;
         public static double PROCESS_START_POSITION = 0;
         public static double PROCESS_SPEED = 0.3;
@@ -164,6 +165,7 @@ public final class Constants {
         public static Trigger CORAL_GERIAL = OPERATOR_CONTROLLER.povRight();
         public static Trigger ADMIN = OPERATOR_CONTROLLER.button(9);
         public static Trigger LIMELIGHT_PREMIUM = OPERATOR_CONTROLLER.y();
+        public static Trigger ZERO_ALL = OPERATOR_CONTROLLER.x();
     }
 
     public static class Test_Controlls {

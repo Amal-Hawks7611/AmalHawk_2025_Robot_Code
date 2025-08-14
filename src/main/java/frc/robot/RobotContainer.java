@@ -112,6 +112,8 @@ public class RobotContainer {
         public final LimelightTurnCommand limelight_turn;
         public final Command fully_align;
         public final Command fully_align_premium;
+        public final Command algea_align;
+        public final InstantCommand zero_all;
 
         /**
          * Converts driver input into a field-relative ChassisSpeeds that is controlled
@@ -141,10 +143,10 @@ public class RobotContainer {
                         .allianceRelativeControl(false);
 
         SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                        () -> driverPs5.getLeftY() * 0.6,
-                        () -> driverPs5.getLeftX() * 0.6)
+                        () -> driverPs5.getLeftY(),
+                        () -> driverPs5.getLeftX())
                         .withControllerRotationAxis(() -> -driverPs5.getRawAxis(
-                                        2) * 0.2)
+                                        2))
                         .deadband(OperatorConstants.DEADBAND)
                         .scaleTranslation(0.8)
                         .allianceRelativeControl(true);
@@ -202,6 +204,10 @@ public class RobotContainer {
                 NamedCommands.registerCommand("limelight2", new limelight2(drivebase, new limelight(drivebase)));
 
                 // Definate Commands
+                zero_all = new InstantCommand(() -> {
+                        elevatorSubsystem.resetEncoders();
+                        intakeMoverSubsystem.resetEncoders();
+                });
                 elevator_down = new e_movedown(elevatorSubsystem);
                 elevator_up = new e_moveup(elevatorSubsystem);
                 e_processor = new e_processor(elevatorSubsystem);
@@ -250,16 +256,19 @@ public class RobotContainer {
                 // integration
 
                 fully_align = new SequentialCommandGroup(
-                                new limelight(drivebase),
-                                new limelight2(drivebase, new limelight(drivebase)));
+                                new limelight(drivebase));
 
+                algea_align = new SequentialCommandGroup(
+                                new limelight(drivebase),
+                                new limelight_algea(drivebase));
                 fully_align_premium = new SequentialCommandGroup(
                                 new LimelightTurnCommand(drivebase),
                                 new limelight(drivebase),
-                                new limelight2(drivebase, new limelight(drivebase)),
                                 new limelight_withtruewheels(drivebase));
 
                 intakeAlgeaMiddle = new SequentialCommandGroup(
+                                new limelight(drivebase),
+                                new limelight_algea(drivebase),
                                 new e_tozeroo(elevatorSubsystem, true),
                                 new algea(intakeMoverSubsystem),
                                 new ParallelCommandGroup(
@@ -358,6 +367,8 @@ public class RobotContainer {
                         Controlls.ALGEA_OUTTAKE.onTrue(a_outtake);
                         Controlls.ALGEA_PROCESSOR.onTrue(AlgeaProcessor);
                         Controlls.ALGEA_REMOVAL.onTrue(intakeAlgeaMiddle);
+
+                        Controlls.ZERO_ALL.onChange(zero_all);
                 }
         }
 

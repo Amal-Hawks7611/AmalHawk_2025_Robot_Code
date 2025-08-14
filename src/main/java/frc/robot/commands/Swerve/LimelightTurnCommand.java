@@ -29,7 +29,7 @@ public class LimelightTurnCommand extends Command {
     @Override
     public void execute() {
         double angleError = tx.getDouble(0.0);
-        double kP = 0.01; // TODO TUNE
+        double kP = 0.3; // TODO TUNE
         double rotationSpeed = kP * angleError;
         rotationSpeed = Math.max(Math.min(rotationSpeed, 0.3), -0.3);
         swerveSubsystem.drive(new Translation2d(0, 0), rotationSpeed, false);
