@@ -143,8 +143,8 @@ public class RobotContainer {
                         .allianceRelativeControl(false);
 
         SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
-                        () -> driverPs5.getLeftY(),
-                        () -> driverPs5.getLeftX())
+                        () -> -driverPs5.getLeftY(),
+                        () -> -driverPs5.getLeftX())
                         .withControllerRotationAxis(() -> -driverPs5.getRawAxis(
                                         2))
                         .deadband(OperatorConstants.DEADBAND)
@@ -273,7 +273,8 @@ public class RobotContainer {
                                 new algea(intakeMoverSubsystem),
                                 new ParallelCommandGroup(
                                                 new e_algea(elevatorSubsystem, true),
-                                                new AlgeaIntake(algeaIntakeSubsystem)));
+                                                new AlgeaIntake(algeaIntakeSubsystem)),
+                                new InstantCommand(() -> {a_intake.schedule();}));
 
                 intakeAlgeaDown = new SequentialCommandGroup(
                                 new algea(intakeMoverSubsystem),
