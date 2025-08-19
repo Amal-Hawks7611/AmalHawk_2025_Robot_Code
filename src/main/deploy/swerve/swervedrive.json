@@ -1,7 +1,7 @@
 {
   "imu": {
-    "type": "navx_spi",
-    "id": 0,
+    "type": "pigeon",
+    "id": 5,
     "canbus": null
   },
   "invertedIMU": false,
