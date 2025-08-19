@@ -273,8 +273,9 @@ public class RobotContainer {
                                 new algea(intakeMoverSubsystem),
                                 new ParallelCommandGroup(
                                                 new e_algea(elevatorSubsystem, true),
-                                                new AlgeaIntake(algeaIntakeSubsystem)),
-                                new InstantCommand(() -> {a_intake.schedule();}));
+                                                new InstantCommand(() -> {a_intake.schedule();})
+                                                )
+                                );
 
                 intakeAlgeaDown = new SequentialCommandGroup(
                                 new algea(intakeMoverSubsystem),
