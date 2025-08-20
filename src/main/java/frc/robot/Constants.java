@@ -61,8 +61,8 @@ public final class Constants {
     }
 
     public static final class Elevator {
-        public static int ELEVATOR_LEADER_MOTOR_PORT = 1;
-        public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 2;
+        public static int ELEVATOR_LEADER_MOTOR_PORT = 13;
+        public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 14;
         public static double ELEVATOR_SPEED = 0.25;
         public static double ELEVATOR_DOWN_VOLTS = 0.05;
         public static double ELEVATOR_STATIC_VOLTS = 0.3;
@@ -93,7 +93,7 @@ public final class Constants {
     public static class Intake {
         // Intake Motor Port
         public static double INTAKE_REVERSE_SPEED = 0.3;
-        public static int INTAKE_LEADER_MOTOR_PORT = 3;
+        public static int INTAKE_LEADER_MOTOR_PORT = 16;
         public static double INTAKE_SPEED = 0.13;
         public static double OUTTAKE_SPEED = 0.58;
         public static double INTAKE_TIME = 0.5;
@@ -102,7 +102,7 @@ public final class Constants {
 
     public static class AlgeaIntake {
         // Algea Intake Motor Port
-        public static int ALGEA_LEADER_MOTOR_PORT = 3; // Shoud Be Same With Intake
+        public static int ALGEA_LEADER_MOTOR_PORT = 16; // Shoud Be Same With Intake
         public static double INTAKE_SPEED = 0.2;
         public static double OUTTAKE_SPEED = 0.4;
         public static double INTAKE_TIME = 15;
@@ -111,7 +111,7 @@ public final class Constants {
     }
 
     public static class IntakeMover {
-        public static int IM_LEADER_MOTOR_PORT = 4;
+        public static int IM_LEADER_MOTOR_PORT = 15;
         public static double INTAKE_MOVER_SPEED = 0.15;
         public static double OCAL_PID_TOLERANCE_VALUE = 0.13;
         public static double IM_STATIC_VOLTAGE = 0.15;
@@ -199,7 +199,7 @@ public final class Constants {
         // General Robot Constants
         public static int DRIVER_CONTROLLER_PORT = 0;
         public static int OPERATOR_CONTROLLER_PORT = 1;
-        public static String SWERVE_CANBUS_STRING = "arch";
+        public static String SWERVE_CANBUS_STRING = "rio";
         public static String RIO_CANBUS_STRING = "rio";
         public static boolean IS_TEST = false;
         public static boolean IS_PROCESSING = false;
