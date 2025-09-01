@@ -78,7 +78,7 @@ public class IntakeSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         if (!OI.IS_INTAKING && container.objectDetector.CheckObject()) {
-            leaderMotor.set(4);
+            leaderMotor.set(4.3);
         }
         if (container.objectDetector.CheckObject()) {
             Controlls.OPERATOR_CONTROLLER.setRumble(RumbleType.kBothRumble, 0.7);

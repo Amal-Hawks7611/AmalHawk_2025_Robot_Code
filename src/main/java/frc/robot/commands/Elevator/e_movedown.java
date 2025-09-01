@@ -17,6 +17,7 @@ public class e_movedown extends Command {
     public void initialize() {
         System.out.println("Elevator Is Moving Down Manually");
         OI.IS_PROCESSING = true;
+        OI.IS_PID_ENDED = false;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class e_movedown extends Command {
     public void end(boolean interrupted) {
         elevatorSubsystem.leaderMotor.stopMotor();
         elevatorSubsystem.followerMotor.stopMotor();
-        OI.IS_PID_ENDED = false;
+        OI.IS_PID_ENDED = true;
         OI.IS_PROCESSING = false;
         Elevator.ELEVATOR_STATIC_VOLTS = 0.3;
     }

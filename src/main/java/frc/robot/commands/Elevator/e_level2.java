@@ -17,6 +17,7 @@ public class e_level2 extends Command {
     public void initialize() {
         System.out.println("Elevator Is Moving To The Level2");
         OI.IS_PROCESSING = true;
+        OI.IS_PID_ENDED = false;
         Elevator.PROCESS_START_POSITION = elevatorSubsystem.getLeaderMotorEncoder();
         Elevator.CURRENT_DIRECTION = elevatorSubsystem.getLeaderMotorEncoder() < Elevator.ELEVATOR_L2_VALUE;
 
@@ -35,7 +36,7 @@ public class e_level2 extends Command {
     public void end(boolean interrupted) {
         elevatorSubsystem.leaderMotor.stopMotor();
         elevatorSubsystem.followerMotor.stopMotor();
-        OI.IS_PID_ENDED = false;
+        OI.IS_PID_ENDED = true;
         OI.IS_PROCESSING = false;
     }
 

@@ -61,12 +61,12 @@ public final class Constants {
     }
 
     public static final class Elevator {
-        public static int ELEVATOR_LEADER_MOTOR_PORT = 13;
-        public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 14;
+        public static int ELEVATOR_LEADER_MOTOR_PORT = 14;
+        public static int ELEVATOR_FOLLOWER_MOTOR_PORT = 13;
         public static double ELEVATOR_SPEED = 0.25;
         public static double ELEVATOR_DOWN_VOLTS = 0.05;
         public static double ELEVATOR_STATIC_VOLTS = 0.3;
-        public static double OCAL_PID_TOLERANCE_VALUE = 0.25;// TODO Increase If System Doesn't Work
+        public static double OCAL_PID_TOLERANCE_VALUE = 0.30;// TODO Increase If System Doesn't Work
         public static double ELEVATOR_START_VALUE = 0; // Generally True
         public static double ELEVATOR_END_VALUE = 34.5;
         public static double ELEVATOR_SOURCE_VALUE = 0;
@@ -127,7 +127,7 @@ public final class Constants {
     }
 
     public static class ObjectDetector {
-        public static final int SENSOR_DIO_PORT = 1;
+        public static final int SENSOR_DIO_PORT = 2;
     }
 
     public static class Controlls {
