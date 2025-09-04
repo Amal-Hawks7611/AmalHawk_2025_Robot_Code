@@ -106,6 +106,7 @@ public class RobotContainer {
         public final Command Coral_l4;
 
         public final InstantCommand limelight_stop;
+        public final limelight_right_branch limelight_right_branch;
         public final limelight limelight_align;
         public final limelight2 limelight_2;
         public final limelight_withtruewheels limelight_go;
@@ -113,6 +114,7 @@ public class RobotContainer {
         public final Command fully_align;
         public final Command fully_align_premium;
         public final Command algea_align;
+
         public final InstantCommand zero_all;
 
         /**
@@ -200,8 +202,8 @@ public class RobotContainer {
                 NamedCommands.registerCommand("cIntake", new Intake(intakeSubsystem));
                 NamedCommands.registerCommand("cOuttake", new Outtake(intakeSubsystem));
 
-                NamedCommands.registerCommand("limelight", new limelight(drivebase));
-                NamedCommands.registerCommand("limelight2", new limelight2(drivebase, new limelight(drivebase)));
+                NamedCommands.registerCommand("limelight", new limelight(drivebase,this));
+                NamedCommands.registerCommand("limelight2", new limelight2(drivebase, new limelight(drivebase,this)));
 
                 // Definate Commands
                 zero_all = new InstantCommand(() -> {
@@ -243,31 +245,33 @@ public class RobotContainer {
                 miracsurpriz = new miracsurpriz(led_cycle);
                 led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
-                limelight_align = new limelight(drivebase);
+                limelight_align = new limelight(drivebase,this);
+                limelight_right_branch = new limelight_right_branch(drivebase);
                 limelight_2 = new limelight2(drivebase, limelight_align);
                 limelight_go = new limelight_withtruewheels(drivebase);
                 limelight_turn = new LimelightTurnCommand(drivebase);
                 limelight_stop = new InstantCommand(() -> {
-                        OI.IS_FOCUSED = true;
+                        limelight_align.end(false);
                         limelight_2.end(false);
+                        limelight_right_branch.end(false);
                 });
 
                 // Commands are fully autonomous for driver comfort and easy autonomous
                 // integration
 
                 fully_align = new SequentialCommandGroup(
-                                new limelight(drivebase));
+                                new limelight(drivebase,this));
 
                 algea_align = new SequentialCommandGroup(
-                                new limelight(drivebase),
+                                new limelight(drivebase,this),
                                 new limelight_algea(drivebase));
                 fully_align_premium = new SequentialCommandGroup(
                                 new LimelightTurnCommand(drivebase),
-                                new limelight(drivebase),
+                                new limelight(drivebase,this),
                                 new limelight_withtruewheels(drivebase));
 
                 intakeAlgeaMiddle = new SequentialCommandGroup(
-                                new limelight(drivebase),
+                                new limelight(drivebase,this),
                                 new limelight_algea(drivebase),
                                 new e_tozeroo(elevatorSubsystem, true),
                                 new algea(intakeMoverSubsystem),
