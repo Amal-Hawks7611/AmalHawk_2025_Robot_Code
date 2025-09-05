@@ -22,12 +22,16 @@ public class limelight extends Command {
     public void initialize() {
         finished = false;
         System.out.println("Hizalama Basladi");
+        if (OI.IS_FOCUSED) {
+            this.end(false);
+            robotContainer.limelight_right_branch.schedule();
+        }
     }
 
     @Override
     public void execute() {
-        if (OI.IS_FOCUSED) {
-            robotContainer.limelight_right_branch.schedule();
+        if(OI.IS_FOCUSED){
+            this.end(false);
         } else {
             swerveSubsystem.drive(new Translation2d(0, Constants.LIMELIGHT_KP), 0, false);
         }

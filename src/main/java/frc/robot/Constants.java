@@ -22,7 +22,7 @@ public final class Constants {
     public static final double LIMELIGHT_TX = 12;
     public static final double LIMELIGHT_RIGHT_TIME = 0.6161;
     public static final double LIMELIGHT_ALGEA_TIME = 1.18;
-    public static final double LIMELIGHT_RIGHT_BRANCH_TIME = 1.9533169;
+    public static final double LIMELIGHT_RIGHT_BRANCH_TIME = 1.6533169;
 
     public static Color setBrightness(Color currentColor, double brightness) {
         return new Color(currentColor.red * brightness, currentColor.green * brightness,

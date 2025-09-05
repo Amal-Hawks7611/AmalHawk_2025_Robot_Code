@@ -250,11 +250,6 @@ public class RobotContainer {
                 limelight_2 = new limelight2(drivebase, limelight_align);
                 limelight_go = new limelight_withtruewheels(drivebase);
                 limelight_turn = new LimelightTurnCommand(drivebase);
-                limelight_stop = new InstantCommand(() -> {
-                        limelight_align.end(false);
-                        limelight_2.end(false);
-                        limelight_right_branch.end(false);
-                });
 
                 // Commands are fully autonomous for driver comfort and easy autonomous
                 // integration
@@ -269,6 +264,10 @@ public class RobotContainer {
                                 new LimelightTurnCommand(drivebase),
                                 new limelight(drivebase,this),
                                 new limelight_withtruewheels(drivebase));
+
+                limelight_stop = new InstantCommand(() -> {
+                                        fully_align.cancel();
+                                });
 
                 intakeAlgeaMiddle = new SequentialCommandGroup(
                                 new limelight(drivebase,this),
@@ -366,7 +365,7 @@ public class RobotContainer {
                         Controlls.CORAL_GERIAL.onTrue(c_Gerial);
 
                         Controlls.LIMELIGHT_FOCUS.onTrue(fully_align);
-                        Controlls.LIMELIGHT_STOP.whileTrue(limelight_stop);
+                        Controlls.LIMELIGHT_STOP.onChange(limelight_stop);
 
                         Controlls.ALGEA_INTAKE.onTrue(a_intake);
                         Controlls.ALGEA_OUTTAKE.onTrue(a_outtake);
