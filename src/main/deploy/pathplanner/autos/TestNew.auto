@@ -43,8 +43,26 @@
                 "data": {
                   "name": "cOuttake"
                 }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.75
+                }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "t_C_S_M2"
           }
         }
       ]

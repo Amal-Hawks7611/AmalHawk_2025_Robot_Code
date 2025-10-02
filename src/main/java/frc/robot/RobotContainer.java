@@ -44,6 +44,8 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import frc.robot.Constants.OperatorConstants;
 import java.io.File;
+import java.util.stream.IntStream;
+
 import swervelib.SwerveInputStream;
 
 public class RobotContainer {
@@ -377,7 +379,7 @@ public class RobotContainer {
         }
 
         /**
-         * Use this to pass the autonomous command to the main {@link Robot} class.
+         *          * Use this to pass the autonomous command to the main {@link Robot} class.
          *
          * @return the command to run in autonomous
          */

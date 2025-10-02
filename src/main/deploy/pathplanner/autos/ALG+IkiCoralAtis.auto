@@ -13,44 +13,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SAG_B_M_M3"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "imAlgea"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "eAlgeaMiddle"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "aIntake"
-                }
-              }
-            ]
+            "pathName": "ORTA_B_M_M2"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "eToZero"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "A_C_M3"
+            "name": "limelight"
           }
         },
         {
@@ -66,13 +35,25 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "eL3"
+                  "name": "eL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imL4"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "cOuttake"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.75
                 }
               }
             ]
@@ -87,7 +68,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "C_S_M3"
+            "pathName": "C_S_M2"
           }
         },
         {
@@ -124,7 +105,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "S_C_M3"
+            "pathName": "S_C_M2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "limelight"
           }
         },
         {
@@ -140,13 +127,25 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "eL3"
+                  "name": "eL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imL4"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "cOuttake"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
                 }
               }
             ]
