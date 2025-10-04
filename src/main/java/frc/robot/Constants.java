@@ -18,10 +18,10 @@ public final class Constants {
     public static final Matter CHASSIS = new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
     public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
     public static final double MAX_SPEED = 3;
-    public static final double LIMELIGHT_KP = 0.3;
+    public static final double LIMELIGHT_KP = 0.2;
     public static final double LIMELIGHT_TX = 12;
-    public static final double LIMELIGHT_RIGHT_TIME = 0.6161;
-    public static final double LIMELIGHT_ALGEA_TIME = 1.18;
+    public static final double LIMELIGHT_RIGHT_TIME = 0.09;
+    public static final double LIMELIGHT_ALGEA_TIME = 0.76;
     public static final double LIMELIGHT_RIGHT_BRANCH_TIME = 1.6533169;
 
     public static Color setBrightness(Color currentColor, double brightness) {
@@ -77,7 +77,7 @@ public final class Constants {
         public static double ELEVATOR_L1_VALUE = 4.15;
         public static double ELEVATOR_L2_VALUE = 8.10;
         public static double ELEVATOR_L3_VALUE = 20.21;
-        public static double ELEVATOR_L4_VALUE = 34.5;
+        public static double ELEVATOR_L4_VALUE = 35;
         public static double ELEVATOR_ALGEA_VALUE_DOWN = 2.5;
         public static double ELEVATOR_ALGEA_VALUE_MIDDLE = 18.3;
 
@@ -125,6 +125,7 @@ public final class Constants {
         public static double INTAKE_REEFSCAPE_VALUE = 2.5;
         public static double INTAKE_CORAL_VALUE = 3.7;
         public static double INTAKE_L4_VALUE = 2.9;
+        public static double INTAKE_L4_2_VALUE = 11;
     }
 
     public static class ObjectDetector {

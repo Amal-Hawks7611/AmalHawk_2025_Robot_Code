@@ -35,7 +35,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "imL4"
+                  "name": "imL4_2"
                 }
               },
               {
@@ -45,6 +45,24 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.75
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "eToZero"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "imSource"
           }
         }
       ]

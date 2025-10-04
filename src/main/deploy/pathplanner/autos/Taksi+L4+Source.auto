@@ -5,52 +5,15 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "eToZero"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "SAG_B_M_M3"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "imAlgea"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "eAlgeaMiddle"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "aIntake"
-                }
-              }
-            ]
+            "pathName": "Teksi"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "eToZero"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "A_C_M3"
+            "name": "limelight"
           }
         },
         {
@@ -66,13 +29,25 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "eL1"
+                  "name": "eL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "imL4"
                 }
               },
               {
                 "type": "named",
                 "data": {
                   "name": "cOuttake"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.75
                 }
               }
             ]
@@ -82,6 +57,12 @@
           "type": "named",
           "data": {
             "name": "eToZero"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "C_S_M2"
           }
         }
       ]

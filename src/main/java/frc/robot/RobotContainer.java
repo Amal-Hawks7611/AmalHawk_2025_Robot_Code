@@ -106,6 +106,7 @@ public class RobotContainer {
         public final Command Coral_l2;
         public final Command Coral_l3;
         public final Command Coral_l4;
+        public final Command Coral_l4_2;
 
         public final InstantCommand limelight_stop;
         public final limelight_right_branch limelight_right_branch;
@@ -197,6 +198,7 @@ public class RobotContainer {
                 NamedCommands.registerCommand("imAlgea", new algea(intakeMoverSubsystem));
                 NamedCommands.registerCommand("imCoral", new korel(intakeMoverSubsystem));
                 NamedCommands.registerCommand("imL4", new l4(intakeMoverSubsystem));
+                NamedCommands.registerCommand("imL4_2", new l4_2(intakeMoverSubsystem));
 
                 NamedCommands.registerCommand("aIntake", new AlgeaIntake(algeaIntakeSubsystem));
                 NamedCommands.registerCommand("aOuttake", new AlgeaOuttake(algeaIntakeSubsystem));
@@ -204,8 +206,8 @@ public class RobotContainer {
                 NamedCommands.registerCommand("cIntake", new Intake(intakeSubsystem));
                 NamedCommands.registerCommand("cOuttake", new Outtake(intakeSubsystem));
 
-                NamedCommands.registerCommand("limelight", new limelight(drivebase,this));
-                NamedCommands.registerCommand("limelight2", new limelight2(drivebase, new limelight(drivebase,this)));
+                NamedCommands.registerCommand("limelight", new limelight(drivebase, this));
+                NamedCommands.registerCommand("limelight2", new limelight2(drivebase, new limelight(drivebase, this)));
 
                 // Definate Commands
                 zero_all = new InstantCommand(() -> {
@@ -247,7 +249,7 @@ public class RobotContainer {
                 miracsurpriz = new miracsurpriz(led_cycle);
                 led_morse = new LEDMorseScroller(ledSubsystem, LedSubsystem.LED_LENGTH, "    AMAL HAWKS ZWABOBUM");
 
-                limelight_align = new limelight(drivebase,this);
+                limelight_align = new limelight(drivebase, this);
                 limelight_right_branch = new limelight_right_branch(drivebase);
                 limelight_2 = new limelight2(drivebase, limelight_align);
                 limelight_go = new limelight_withtruewheels(drivebase);
@@ -257,30 +259,32 @@ public class RobotContainer {
                 // integration
 
                 fully_align = new SequentialCommandGroup(
-                                new limelight(drivebase,this));
+                                new limelight(drivebase, this), new limelight2(drivebase, limelight_align));
 
                 algea_align = new SequentialCommandGroup(
-                                new limelight(drivebase,this),
+                                new limelight(drivebase, this),
+                                new limelight2(drivebase, limelight_align),
                                 new limelight_algea(drivebase));
                 fully_align_premium = new SequentialCommandGroup(
                                 new LimelightTurnCommand(drivebase),
-                                new limelight(drivebase,this),
+                                new limelight(drivebase, this),
                                 new limelight_withtruewheels(drivebase));
 
                 limelight_stop = new InstantCommand(() -> {
-                                        fully_align.cancel();
-                                });
+                        fully_align.cancel();
+                });
 
                 intakeAlgeaMiddle = new SequentialCommandGroup(
-                                new limelight(drivebase,this),
+                                new limelight(drivebase, this),
+                                new limelight2(drivebase, limelight_align),
                                 new limelight_algea(drivebase),
                                 new e_tozeroo(elevatorSubsystem, true),
                                 new algea(intakeMoverSubsystem),
                                 new ParallelCommandGroup(
                                                 new e_algea(elevatorSubsystem, true),
-                                                new InstantCommand(() -> {a_intake.schedule();})
-                                                )
-                                );
+                                                new InstantCommand(() -> {
+                                                        a_intake.schedule();
+                                                })));
 
                 intakeAlgeaDown = new SequentialCommandGroup(
                                 new algea(intakeMoverSubsystem),
@@ -312,7 +316,7 @@ public class RobotContainer {
                 Coral_l4 = new SequentialCommandGroup(
                                 new l4(intakeMoverSubsystem),
                                 new e_level4(elevatorSubsystem));
-
+                Coral_l4_2 = new l4_2(intakeMoverSubsystem);
                 // PathPlanner Autonomous Chooser
                 autoChooser = AutoBuilder.buildAutoChooser();
                 SmartDashboard.putData("Auto Chooser", autoChooser);
@@ -340,7 +344,7 @@ public class RobotContainer {
                         Test_Controlls.T_INTAKE_MOVE_UP.whileTrue(im_moveup);
 
                         Test_Controlls.T_INTAKE_MOVE_L1.onTrue(im_algea);
-                        Test_Controlls.T_ELEVATOR_ZERO.onTrue(Coral_l4);
+                        Test_Controlls.T_ELEVATOR_ZERO.onTrue(Coral_l4_2);
 
                         Test_Controlls.T_LED_CYCLE.whileTrue(led_cycle);
                         Test_Controlls.T_LED_MORSE.onTrue(led_morse);
@@ -379,7 +383,7 @@ public class RobotContainer {
         }
 
         /**
-         *          * Use this to pass the autonomous command to the main {@link Robot} class.
+         * * Use this to pass the autonomous command to the main {@link Robot} class.
          *
          * @return the command to run in autonomous
          */
